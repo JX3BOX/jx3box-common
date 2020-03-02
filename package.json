@@ -1,0 +1,13 @@
+{
+    "name": "jx3box-config",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JX3BOX/jx3box-config.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    }
+}
