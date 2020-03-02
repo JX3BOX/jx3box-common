@@ -1,6 +1,6 @@
 {
-    "name": "jx3box-config",
-    "version": "1.0.0",
+    "name": "@JX3BOX/jx3box-config",
+    "version": "1.0.1",
     "description": "",
     "main": "main.js",
     "repository": {
