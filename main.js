@@ -9,13 +9,15 @@ const JX3BOX = {
     __iconPath: this.__ossRoot + "icon/",
 
     // SSO服务
-    __ssoRoot: "https://sso.jx3box.com/",
+    __sso: "https://sso.jx3box.com/",
     // APP服务
-    __nodeRoot: "https://node.jx3box.com/",
-    // 成就服务
-    __helperUrl: "https://helper.jx3box.com/",
+    __node: "https://node.jx3box.com/",
     // 边缘支撑服务（爬虫、官方接口）
     __spider: "https://spider.jx3box.com/",
+    // 代理服务
+    __sg: "https://sg.jx3box.com/",
+    // 成就服务
+    __helperUrl: "https://helper.jx3box.com/",
     // 搜索服务
     __searchRoot: "https://search.jx3box.com/",
 
