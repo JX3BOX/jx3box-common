@@ -6,7 +6,7 @@ const JX3BOX = {
     // OSS MIRROR
     __ossMirror: "https://console.cnyixun.com/",
     // 图标目录
-    __iconPath: this.__ossRoot + "icon/",
+    __iconPath: "https://oss.jx3box.com/icon/",
 
     // SSO服务
     __sso: "https://sso.jx3box.com/",
@@ -15,6 +15,7 @@ const JX3BOX = {
     // 边缘支撑服务（爬虫、官方接口）
     __spider: "https://spider.jx3box.com/",
     // 代理服务
+    __proxy: "https://proxy.jx3box.com/",
     __sg: "https://sg.jx3box.com/",
     // 成就服务
     __helperUrl: "https://helper.jx3box.com/",
