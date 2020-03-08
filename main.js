@@ -8,7 +8,8 @@ const JX3BOX = {
     // OSS MIRROR
     __ossMirror: "https://console.cnyixun.com/",
     // OSS 图片处理样式
-    suffix_avatar: "?x-oss-process=image/auto-orient,1/resize,m_fill,w_68,h_68",
+    suffix_s_avatar: "?x-oss-process=image/auto-orient,1/resize,m_fill,w_68,h_68",
+    default_avatar: "image/common/avatar.png",
 
     // SSO服务
     __sso: "https://sso.jx3box.com/",
