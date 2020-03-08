@@ -2,14 +2,16 @@ const JX3BOX = {
     // 根目录
     __Root: "https://www.jx3box.com/",
 
-
     // OSS
     __ossRoot: "https://oss.jx3box.com/",
     // OSS MIRROR
     __ossMirror: "https://console.cnyixun.com/",
+
     // OSS 图片处理样式
-    suffix_s_avatar: "?x-oss-process=image/auto-orient,1/resize,m_fill,w_68,h_68",
     default_avatar: "image/common/avatar.png",
+    avatar_suffix_s: "?x-oss-process=style/avatar_s",
+    avatar_suffix_m: "?x-oss-process=style/avatar_m",
+    avatar_suffix_l: "?x-oss-process=style/avatar_l",
 
     // SSO服务
     __sso: "https://sso.jx3box.com/",
