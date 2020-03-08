@@ -1,12 +1,14 @@
 const JX3BOX = {
     // 根目录
     __Root: "https://www.jx3box.com/",
+
+
     // OSS
     __ossRoot: "https://oss.jx3box.com/",
     // OSS MIRROR
     __ossMirror: "https://console.cnyixun.com/",
-    // 图标目录
-    __iconPath: "https://oss.jx3box.com/icon/",
+    // OSS 图片处理样式
+    suffix_avatar: "?x-oss-process=image/auto-orient,1/resize,m_fill,w_68,h_68",
 
     // SSO服务
     __sso: "https://sso.jx3box.com/",
@@ -40,6 +42,7 @@ const JX3BOX = {
         post: "茶馆交流",
         page: "系统页面"
     },
+
 
 };
 
