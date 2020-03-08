@@ -10,6 +10,8 @@ const JX3BOX = {
 
     // SSO服务
     __sso: "https://sso.jx3box.com/",
+    // 后端服务
+    __server: "https://server.jx3box.com/",
     // APP服务
     __node: "https://node.jx3box.com/",
     // 边缘支撑服务（爬虫、官方接口）
@@ -21,6 +23,8 @@ const JX3BOX = {
     __helperUrl: "https://helper.jx3box.com/",
     // 搜索服务
     __searchRoot: "https://search.jx3box.com/",
+    // 新版
+    __v2: "https://v2.jx3box.com/",
 
     // 文章类型映射
     __postType: {
@@ -35,7 +39,8 @@ const JX3BOX = {
         help: "帮助文档",
         post: "茶馆交流",
         page: "系统页面"
-    }
+    },
+
 };
 
 module.exports = { JX3BOX };
