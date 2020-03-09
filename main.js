@@ -1,36 +1,40 @@
 const JX3BOX = {
     // 根目录
     __Root: "https://www.jx3box.com/",
+    __Mirror: "https://mirror.jx3box.com/",
 
+
+    /*资源类*/
     // OSS
     __ossRoot: "https://oss.jx3box.com/",
-    // OSS MIRROR
     __ossMirror: "https://console.cnyixun.com/",
+    // OSS SUB PATH
+    __iconPath : "https://console.cnyixun.com/icon/",
+    __cssPath : "https://console.cnyixun.com/static/css/",
+    __jsPath : "https://console.cnyixun.com/static/js/",
 
-    // OSS 图片处理样式
-    default_avatar: "image/common/avatar.png",
-    avatar_suffix_s: "?x-oss-process=style/avatar_s",
-    avatar_suffix_m: "?x-oss-process=style/avatar_m",
-    avatar_suffix_l: "?x-oss-process=style/avatar_l",
 
-    // SSO服务
-    __sso: "https://sso.jx3box.com/",
-    // 后端服务
+    /*服务类*/
+    // 后端服务（主库）
     __server: "https://server.jx3box.com/",
-    // APP服务
+    // 核心应用服务（资源查询、处理）
     __node: "https://node.jx3box.com/",
     // 边缘支撑服务（爬虫、官方接口）
     __spider: "https://spider.jx3box.com/",
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
-    __sg: "https://sg.jx3box.com/",
     // 成就服务
     __helperUrl: "https://helper.jx3box.com/",
+
+
+    /*栏目类*/
     // 搜索服务
     __searchRoot: "https://search.jx3box.com/",
     // 新版
     __v2: "https://v2.jx3box.com/",
 
+
+    /*预设*/
     // 文章类型映射
     __postType: {
         posts: "论坛",
@@ -45,6 +49,12 @@ const JX3BOX = {
         post: "茶馆交流",
         page: "系统页面"
     },
+
+    // OSS 图片处理样式
+    default_avatar: "image/common/avatar.png",
+    avatar_suffix_s: "?x-oss-process=style/avatar_s",
+    avatar_suffix_m: "?x-oss-process=style/avatar_m",
+    avatar_suffix_l: "?x-oss-process=style/avatar_l",
 
 
 };
