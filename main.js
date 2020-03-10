@@ -11,6 +11,7 @@ const JX3BOX = {
     
     __iconPath : "https://console.cnyixun.com/icon/",
     __imgPath : "https://console.cnyixun.com/img/", //旧
+    __emtionPath : 'https://console.cnyixun.com/emotion/',
 
     __dataPath : "https://cdn.jx3box.com/data/",
     __imagePath : "https://cdn.jx3box.com/image/",
@@ -60,6 +61,11 @@ const JX3BOX = {
     avatar_suffix_s: "?x-oss-process=style/avatar_s",
     avatar_suffix_m: "?x-oss-process=style/avatar_m",
     avatar_suffix_l: "?x-oss-process=style/avatar_l",
+
+    // 旧版兼容
+    __restRoot : 'https://www.jx3box.com/wp-json/',
+    __apiRoot : 'https://www.jx3box.com/wp-json/api/',  //自定义
+    __restPost : 'https://www.jx3box.com/wp-json/wp/v2/',  //文章接口，例如 macro/1  posts/2
 
 
 };
