@@ -8,10 +8,15 @@ const JX3BOX = {
     // OSS
     __ossRoot: "https://oss.jx3box.com/",
     __ossMirror: "https://console.cnyixun.com/",
-    // OSS SUB PATH
+    
     __iconPath : "https://console.cnyixun.com/icon/",
-    __cssPath : "https://console.cnyixun.com/static/css/",
-    __jsPath : "https://console.cnyixun.com/static/js/",
+    __imgPath : "https://console.cnyixun.com/img/", //旧
+
+    __dataPath : "https://cdn.jx3box.com/data/",
+    __imagePath : "https://cdn.jx3box.com/image/",
+
+    __cssPath : "https://static.jx3box.com/css/",
+    __jsPath : "https://static.jx3box.com/js/",
 
 
     /*服务类*/
