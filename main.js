@@ -1,31 +1,43 @@
 const JX3BOX = {
-    // 根目录
+    /*域&根*/
     __Root: "https://www.jx3box.com/",
+    __Domain: "https://www.jx3box.com",
 
 
     /*资源类*/
-    // OSS
+    //oss/jx3box
     __ossRoot: "https://oss.jx3box.com/",
     __ossMirror: "https://console.cnyixun.com/",
     
+    //oss/jx3box/icon
     __iconPath : "https://console.cnyixun.com/icon/",
+    //oss/jx3box/emotion
     __emtionPath : 'https://console.cnyixun.com/emotion/',
 
+    //oss/jx3box/img
     __imgPath : "https://console.cnyixun.com/img/", //旧
+    //oss/jx3box/image
     __imagePath : "https://console.cnyixun.com/image/",
+
+    //oss/jx3box/data
     __dataPath : "https://cdn.jx3box.com/data/",
 
-    __cssPath : "https://static.jx3box.com/css/",
-    __jsPath : "https://static.jx3box.com/js/",
-    __Mirror: "https://mirror.jx3box.com/", //旧
+    //oss/jx3box-static/css
+    __cssPath : "https://static.jx3box.com/css/",//旧
+    //oss/jx3box-static/js
+    __jsPath : "https://static.jx3box.com/js/",//旧
+    //oss/jx3box-static/~wp-content|admin|includes
+    __mirror: "https://mirror.jx3box.com/",
+    //oss/jx3box-static/$project
+    __static : "https://static.jx3box.com/",
 
 
     /*服务类*/
-    // 后端服务（主库）
+    // 公开API服务（主库）
     __api: "https://api.jx3box.com/",
     // 核心应用服务（资源查询、处理）
     __node: "https://node.jx3box.com/",
-    // 边缘支撑服务（爬虫、官方接口）
+    // 边缘支撑服务（爬虫、统计）
     __spider: "https://spider.jx3box.com/",
     // Lavarel服务（成就、消息）
     __helperUrl: "https://helper.jx3box.com/",
@@ -35,11 +47,11 @@ const JX3BOX = {
 
     /*栏目类*/
     // 搜索服务
-    __searchRoot: "https://search.jx3box.com/",
+    __search: "https://search.jx3box.com/",
     // 新版
     __v2: "https://v2.jx3box.com/",
     //百科
-    __wiki : "https://xn--3-4g8a959k.com",
+    __wiki : "https://xn--3-4g8a959k.com/",
 
 
     /*预设*/
