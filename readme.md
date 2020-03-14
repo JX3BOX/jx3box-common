@@ -7,5 +7,5 @@
 ## Step.2 Import
 + 路径常量
 ```
-const {JX3BOX} = require('@jx3box/jx3box-common');
+const {JX3BOX,SEO} = require('@jx3box/jx3box-common');
 ```
