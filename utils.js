@@ -1,5 +1,5 @@
 module.exports = {
     resolveImagePath : function (url){
-        return url.replace(JX3BOX.__ossRoot,JX3BOX.__ossMirror)
+        return url.replace('oss.jx3box.com','console.cnyixun.com')
     }
 }
