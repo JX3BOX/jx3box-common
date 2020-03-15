@@ -20,15 +20,20 @@ const JX3BOX = {
 
     //oss/jx3box/data
     __dataPath: "https://cdn.jx3box.com/data/",
+    __dataMirror : "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-oss@master/data/",
 
+    //oss/jx3box-static/$path
+    __static: "https://static.jx3box.com/", //旧
     //oss/jx3box-static/css
     __cssPath: "https://static.jx3box.com/css/", //旧
     //oss/jx3box-static/js
     __jsPath: "https://static.jx3box.com/js/", //旧
     //oss/jx3box-static/~wp-content|admin|includes
-    __mirror: "https://mirror.jx3box.com/",
-    //oss/jx3box-static/$project
-    __static: "https://static.jx3box.com/",
+    __mirror: "https://mirror.jx3box.com/", //旧
+    __wpstatic:"https://cdn.jsdelivr.net/gh/iRuxu/jx3box-mirror/",  //旧
+    //oss/jx3box-www/project ~~repo@gh-pages/
+    __staticPath : "https://cdn.jsdelivr.net/gh/JX3BOX/",
+    
 
     /*🌸服务类*/
     // 公开API服务（主库）
