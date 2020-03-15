@@ -67,7 +67,7 @@ const JX3BOX = {
     },
 
     //🌸OSS 图片处理样式
-    default_avatar: "image/common/avatar.png",
+    default_avatar: "https://console.cnyixun.com/image/common/avatar.png",
     avatar_suffix_s: "?x-oss-process=style/avatar_s",
     avatar_suffix_m: "?x-oss-process=style/avatar_m",
     avatar_suffix_l: "?x-oss-process=style/avatar_l",
