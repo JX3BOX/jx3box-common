@@ -1,9 +1,9 @@
 const JX3BOX = {
-    /*域&根*/
+    /*🌸域&根*/
     __Root: "https://www.jx3box.com/",
-    __Domain: "https://www.jx3box.com",
+    __Domain: "www.jx3box.com",
 
-    /*资源类*/
+    /*🌸资源类*/
     //oss/jx3box
     __ossRoot: "https://oss.jx3box.com/",
     __ossMirror: "https://console.cnyixun.com/",
@@ -30,7 +30,7 @@ const JX3BOX = {
     //oss/jx3box-static/$project
     __static: "https://static.jx3box.com/",
 
-    /*服务类*/
+    /*🌸服务类*/
     // 公开API服务（主库）
     __api: "https://api.jx3box.com/",
     // 核心应用服务（资源查询、处理）
@@ -42,7 +42,7 @@ const JX3BOX = {
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
 
-    /*栏目类*/
+    /*🌸栏目类*/
     // 搜索服务
     __search: "https://search.jx3box.com/",
     // 新版
@@ -50,7 +50,7 @@ const JX3BOX = {
     //百科
     __wiki: "https://xn--3-4g8a959k.com/",
 
-    /*预设*/
+    /*🌸预设*/
     // 文章类型映射
     __postType: {
         posts: "论坛",
@@ -66,26 +66,21 @@ const JX3BOX = {
         page: "系统页面"
     },
 
-    // OSS 图片处理样式
+    //🌸OSS 图片处理样式
     default_avatar: "image/common/avatar.png",
     avatar_suffix_s: "?x-oss-process=style/avatar_s",
     avatar_suffix_m: "?x-oss-process=style/avatar_m",
     avatar_suffix_l: "?x-oss-process=style/avatar_l",
 
-    // WP API
+    //🌸WP API
     __restRoot: "https://www.jx3box.com/wp-json/",
     __apiRoot: "https://www.jx3box.com/wp-json/api/", //自定义
     __restPost: "https://www.jx3box.com/wp-json/wp/v2/" //文章接口，例如 macro/1  posts/2
 };
 
-const SEO = {
-    title: "&raquo; JX3BOX - 一站式剑网3资源工具站",
-    keys:
-        "jx3box,剑三魔盒,剑三宏,剑三插件,剑三辅助,副本攻略,副本解包,团队监控,捏脸数据,剑3数据库,成就百科,剑三成就,剑3,剑网3,剑三box,剑三百科",
-    desc:
-        "JX3BOX - 剑三魔盒是一个以剑网3游戏为主的专业攻略资源站，这里干货满满，大神多多，为你的武侠江湖之路助力。剑三魔盒，玩家贴心的小助手。"
-};
 
+
+const SEO = require("./seo");
 const Utils = require("./utils");
 
 module.exports = { JX3BOX, SEO, Utils };
