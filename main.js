@@ -1,6 +1,8 @@
 const JX3BOX = {
     /*🌸域&根*/
     __Root: "https://www.jx3box.com/",
+    __Mirror: "https://mirror.jx3box.com/",
+    __v2: "https://v2.jx3box.com/",
     __Domain: "www.jx3box.com",
 
     /*🌸资源类*/
@@ -22,17 +24,22 @@ const JX3BOX = {
     __dataPath: "https://cdn.jx3box.com/data/",
     __dataMirror : "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-oss@master/data/",
 
-    //oss/jx3box-static/$path
-    __static: "https://static.jx3box.com/", //旧
+    /*🌸前端类*/
+    
+    //oss/jx3box-static/~wp-content|admin|includes
+    __wpstatic:"https://cdn.jsdelivr.net/gh/iRuxu/jx3box-mirror/",
+    __static:"https://static.jx3box.com/",
+
     //oss/jx3box-static/css
     __cssPath: "https://static.jx3box.com/css/", //旧
     //oss/jx3box-static/js
     __jsPath: "https://static.jx3box.com/js/", //旧
-    //oss/jx3box-static/~wp-content|admin|includes
-    __mirror: "https://mirror.jx3box.com/", //旧
-    __wpstatic:"https://cdn.jsdelivr.net/gh/iRuxu/jx3box-mirror/",  //旧
-    //oss/jx3box-www/project ~~repo@gh-pages/
-    __staticPath : "https://cdn.jsdelivr.net/gh/JX3BOX/",
+
+    //oss/jx3box-www/project 
+    __staticPath : {
+        jsdelivr : "https://cdn.jsdelivr.net/gh/JX3BOX/",   // repo@gh-pages/ + ~
+        mirror: "https://mirror.jx3box.com/",    // oss/jx3box-www/repo/ + ~
+    },
     
 
     /*🌸服务类*/
@@ -47,13 +54,13 @@ const JX3BOX = {
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
 
+
     /*🌸栏目类*/
     // 搜索服务
     __search: "https://search.jx3box.com/",
-    // 新版
-    __v2: "https://v2.jx3box.com/",
     //百科
     __wiki: "https://xn--3-4g8a959k.com/",
+
 
     /*🌸预设*/
     // 文章类型映射
