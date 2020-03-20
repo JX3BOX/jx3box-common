@@ -92,7 +92,7 @@ const JX3BOX = {
 
 
 
-const SEO = require("./seo");
-const Utils = require("./utils");
+const SEO = require("./js/seo");
+const Utils = require("./js/utils");
 
 module.exports = { JX3BOX, SEO, Utils };
