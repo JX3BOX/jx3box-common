@@ -54,10 +54,17 @@ const JX3BOX = {
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
     //WP JSON
-    __restRoot: "https://www.jx3box.com/wp-json/",
-    __apiRoot: "https://www.jx3box.com/wp-json/api/", //自定义
-    __restPost: "https://www.jx3box.com/wp-json/wp/v2/", //文章接口，例如 macro/1  posts/2
-
+    __wpRest : {
+        root :"https://www.jx3box.com/wp-json/",
+        api: "https://www.jx3box.com/wp-json/api/", //自定义
+        classic: "https://www.jx3box.com/wp-json/wp/v2/", 
+    },
+    //JWT
+    __JWT:{
+        apply:"https://www.jx3box.com/wp-json/jwt-auth/v1/token",
+        validate:"https://www.jx3box.com/wp-json/jwt-auth/v1/token/validate",
+    },
+    
 
     /*🌸栏目类*/
     // 搜索服务

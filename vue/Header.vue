@@ -290,9 +290,16 @@ export default {
         }
     },
     mounted: function() {
-
+        // 面板
         this.isPhone = window.innerWidth < 720 ? true : false
+        const vm = this;
+        jQuery("body").on("click", function(e) {
+            for (let _key in vm.fold) {
+                vm.fold[_key] = true;
+            }
+        });
 
+        // 消息
         let condition = encodeURIComponent("where[user_id]");
         if (Number(this.uid)) {
             axios({
@@ -305,12 +312,12 @@ export default {
                 }
             });
         }
-        const vm = this;
-        jQuery("body").on("click", function(e) {
-            for (let _key in vm.fold) {
-                vm.fold[_key] = true;
-            }
-        });
+
+        // 用户
+        axios.get(`${JX3BOX.__wpRest.classic}users/me`).then((res) => {
+            console.log(res)
+        })
+        
         
     }
 };
@@ -326,7 +333,6 @@ export default {
     background-color: @bg-black;
     color: #fff;
 }
-
 .c-header-inner {
     // padding: 16px;
     .clearfix;
@@ -348,6 +354,7 @@ export default {
         .color(#fff);
         font-family: Consolas;
         .fz(20px, @logo-size);
+        // font-style: italic;
     }
 
     transition:background-color 0.1s ease-in;
@@ -420,7 +427,7 @@ export default {
         .w(auto);
 
         margin-left: @logo-size + 20px;
-        margin-right: 133px;
+        margin-right: 140px;
     }
 }
 
@@ -449,6 +456,7 @@ export default {
             .db;
             .fz(14px,@logo-size);
             color:#fff;
+            // font-weight:300;
             &:hover{
                 background-color: lighten(@color-link,20%);
             }
@@ -473,7 +481,8 @@ export default {
 //用户相关
 .c-header-user {
     .fz(14px);
-    .fr;
+    .pa;
+    .rt(10px,0);
 
     .u-dropdown {
         border-bottom: 0 solid transparent;
@@ -554,12 +563,6 @@ export default {
         }
     }
 }
-@media screen and (max-width: @mobile) {
-    .c-header-user {
-        .pa;
-        .rt(0);
-    }
-}
 
 //消息面板
 .c-header-msg {
@@ -572,7 +575,7 @@ export default {
         .db;
         .h(100%);
         margin-top: 4px;
-        padding: 6px 8px 6px 10px;
+        padding: 6px 10px;
         &:hover {
             .tm(0.7);
         }
