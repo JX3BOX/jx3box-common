@@ -29,5 +29,19 @@ module.exports = {
         }else{
             return ''
         }
+    },
+
+    showAvatar : function (url,size='s'){
+        let default_avatar = "https://console.cnyixun.com/image/common/avatar.png"
+        const styleMap = {
+            s : "?x-oss-process=style/avatar_s",
+            m : "?x-oss-process=style/avatar_m",
+            l : "?x-oss-process=style/avatar_l"
+        }
+
+        return !url ?
+            (default_avatar + styleMap[size]) :
+            (url + styleMap[size])
+
     }
 }

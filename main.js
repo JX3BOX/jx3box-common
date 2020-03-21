@@ -53,17 +53,22 @@ const JX3BOX = {
     __helperUrl: "https://helper.jx3box.com/",
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
+    //WP JSON
+    __restRoot: "https://www.jx3box.com/wp-json/",
+    __apiRoot: "https://www.jx3box.com/wp-json/api/", //自定义
+    __restPost: "https://www.jx3box.com/wp-json/wp/v2/", //文章接口，例如 macro/1  posts/2
 
 
     /*🌸栏目类*/
     // 搜索服务
     __search: "https://search.jx3box.com/",
     //百科
-    __wiki: "https://xn--3-4g8a959k.com/",
+    __wiki: "https://wiki.jx3box.com/", 
+    __jx3: "https://xn--3-4g8a959k.com/",
 
 
     /*🌸预设*/
-    // 文章类型映射
+    // 文章类型映射 旧
     __postType: {
         posts: "论坛",
         macro: "剑三宏库",
@@ -78,16 +83,65 @@ const JX3BOX = {
         page: "系统页面"
     },
 
-    //🌸OSS 图片处理样式
-    default_avatar: "https://console.cnyixun.com/image/common/avatar.png",
-    avatar_suffix_s: "?x-oss-process=style/avatar_s",
-    avatar_suffix_m: "?x-oss-process=style/avatar_m",
-    avatar_suffix_l: "?x-oss-process=style/avatar_l",
+    //栏目入口
+    __channel : {
+        macro : {
+            name : '宏库',
+            path : "https://www.jx3box.com/macro"
+        },
+        jx3dat : {
+            name : '插件',
+            path : "https://www.jx3box.com/jx3dat"
+        },
+        fb : {
+            name : '副本',
+            path : "https://www.jx3box.com/fb"
+        },
+        bps : {
+            name : '职业',
+            path : "https://www.jx3box.com/bps"
+        },
+        cj : {
+            name : '成就',
+            path : "https://www.jx3box.com/cj"
+        },
+        pvx : {
+            name : '休闲',
+            path : "https://www.jx3box.com/share"
+        },
+        bbs : {
+            name : '茶馆',
+            path : "https://www.jx3box.com/bbs"
+        },
+        app : {
+            name : '应用',
+            path : "https://www.jx3box.com/app"
+        }
+    },
 
-    //🌸WP API
-    __restRoot: "https://www.jx3box.com/wp-json/",
-    __apiRoot: "https://www.jx3box.com/wp-json/api/", //自定义
-    __restPost: "https://www.jx3box.com/wp-json/wp/v2/" //文章接口，例如 macro/1  posts/2
+    //用户面板
+    __user_msg:"https://www.jx3box.com/msg",
+    __user_dashboard:"https://www.jx3box.com/dashboard",
+    __user_cmt:"https://www.jx3box.com/cmt",
+    __user_fav:"https://www.jx3box.com/fav",
+    __user_setting:"https://www.jx3box.com/setting",
+    __user_logout:"https://www.jx3box.com/logout",
+    __user_login:"https://www.jx3box.com/login",
+
+
+    //发布地址
+    __post_macro:"https://www.jx3box.com/post/?pt=macro",
+    __post_jx3dat:"https://www.jx3box.com/post/?pt=jx3dat",
+    __post_fb:"https://www.jx3box.com/post/?pt=fb",
+    __post_bps:"https://www.jx3box.com/post/?pt=bps",
+    __post_cj:"https://www.jx3box.com/post/?pt=cj",
+    __post_share:"https://www.jx3box.com/post/?pt=share",
+    __post_tool:"https://www.jx3box.com/post/?pt=tool",
+    __post_bbs:"https://www.jx3box.com/post/?pt=bbs",
+
+    //🌸默认头像
+    default_avatar: "https://console.cnyixun.com/image/common/avatar.png",
+
 };
 
 
