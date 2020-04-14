@@ -27,13 +27,13 @@
                 </div>
             </div>
 
-            <div class="c-header-nav">
+            <nav class="c-header-nav">
                 <ul>
                     <li v-for="(item,type) in nav" :key="'nav-'+type">
                         <a :href="item.path" :class="{on:isFocus(type)}">{{item.name}}</a>
                     </li>
                 </ul>
-            </div> 
+            </nav> 
 
             <!-- user -->
             <div class="c-header-user" id="c-header-user">

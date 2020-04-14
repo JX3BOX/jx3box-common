@@ -1,44 +1,54 @@
 const JX3BOX = {
-    /*🌸域&根*/
-    __Root: "https://www.jx3box.com/",
-    __Mirror: "https://mirror.jx3box.com/",
-    __v2: "https://v2.jx3box.com/",
+
     __Domain: "www.jx3box.com",
 
-    /*🌸资源类*/
-    //oss/jx3box
+
+    /*🌸域&根*/
+    __Root: "https://www.jx3box.com/",
+    __v2: "https://v2.jx3box.com/",
+
+
+    /*🌸资源域*/
     __ossRoot: "https://oss.jx3box.com/",
     __ossMirror: "https://console.cnyixun.com/",
+    __ossCloudflare: "https://jx3box.imkog.com/",
+    __ossGithub: "https://cdn.jx3box.com/",
+
+
+    /*🌸图像类*/
+    //oss/jx3box/img
+    __imgPath: "https://console.cnyixun.com/img/",
+    __imgPath_BAK: "https://cdn.jx3box.com/img/",
+
+    //oss/jx3box/image
+    __imagePath: "https://console.cnyixun.com/image/",
+    __imagePath_BAK: "https://cdn.jx3box.com/image/",
 
     //oss/jx3box/icon
     __iconPath: "https://console.cnyixun.com/icon/",
+    __iconPath_BAK: "https://icon.jx3box.com/icon/",
+
     //oss/jx3box/emotion
     __emtionPath: "https://console.cnyixun.com/emotion/",
-
-    //oss/jx3box/img
-    __imgPath: "https://console.cnyixun.com/img/", //旧
-    //oss/jx3box/image
-    __imagePath: "https://console.cnyixun.com/image/",
-
-    //oss/jx3box/data
-    __dataPath: "https://cdn.jx3box.com/data/",
-    __dataMirror : "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-oss@master/data/",
+    __emtionPath_BAK: "https://jx3box.imkog.com/emotion/",
 
     /*🌸前端类*/
+    //oss/jx3box/data
+    __dataPath: "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-oss/data/",
+    __dataPath_BAK: "https://cdn.jx3box.com/data/",
     
-    //oss/jx3box-static/~wp-content|admin|includes
-    __wpstatic:"https://cdn.jsdelivr.net/gh/iRuxu/jx3box-mirror/",
-    __static:"https://static.jx3box.com/",
+    //oss/jx3box/static/wp_mirror/wp-content|admin|includes
+    __wpmirrorPath:"https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-mirror/",
+    __wpmirrorPath_BAK:"https://mirror.jx3box.com/",
 
-    //oss/jx3box-static/css
-    __cssPath: "https://static.jx3box.com/css/", //旧
-    //oss/jx3box-static/js
-    __jsPath: "https://static.jx3box.com/js/", //旧
+    //oss/jx3box/static/wp_static/css|js
+    __wpstaticPath: "https://cdn.jsdelivr.net/gh/iRuxu/jx3box-static/dist/",
+    __wpstaticPath_BAK: "https://static.jx3box.com/dist/", 
 
     //oss/jx3box-www/project 
     __staticPath : {
         jsdelivr : "https://cdn.jsdelivr.net/gh/JX3BOX/",   // repo@gh-pages/ + ~
-        mirror: "https://mirror.jx3box.com/",    // oss/jx3box-www/repo/ + ~
+        oss: "https://oss.jx3box.com/static/",    // oss/static/repo/ + ~
     },
     
 
@@ -49,20 +59,15 @@ const JX3BOX = {
     __node: "https://node.jx3box.com/",
     // 边缘支撑服务（爬虫、统计）
     __spider: "https://spider.jx3box.com/",
-    // Lavarel服务（成就、消息）
+    // Lavarel服务（成就、消息、评论）
     __helperUrl: "https://helper.jx3box.com/",
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
-    //WP JSON
+    //WP JSON（未来会废弃）
     __wpRest : {
         root :"https://www.jx3box.com/wp-json/",
         api: "https://www.jx3box.com/wp-json/api/", //自定义
         classic: "https://www.jx3box.com/wp-json/wp/v2/", 
-    },
-    //JWT
-    __JWT:{
-        apply:"https://www.jx3box.com/wp-json/jwt-auth/v1/token",
-        validate:"https://www.jx3box.com/wp-json/jwt-auth/v1/token/validate",
     },
     
 
@@ -90,6 +95,7 @@ const JX3BOX = {
         page: "系统页面"
     },
 
+    /*🌸目录*/
     //栏目入口
     __channel : {
         macro : {
