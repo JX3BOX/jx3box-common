@@ -3,6 +3,7 @@
 @font:'https://console.cnyixun.com/img/font/';
 
 @color:#3d454d;
+@primary:#409EFF;
 
 @bg-black:#24292e;
 @bg-gray:#f6f8fa;
@@ -37,3 +38,21 @@
 @phone:767px;    //手机
 @ip5:374px;     //iphone5超小屏
 
+body{
+    margin:0;
+    padding:0;
+    font-family: -apple-system, "Microsoft YaHei", Trebuchet MS, Calibri,
+        BlinkMacSystemFont, Segoe UI, Helvetica Neue, Helvetica, sans-serif;
+    text-rendering: optimizelegibility;
+}
+a{
+    text-decoration:none;
+}
+.underline(@color:@color-link){
+    &:hover{
+        box-shadow:0 1px 0 @color;
+    }
+}
+svg{
+    outline:none;
+}

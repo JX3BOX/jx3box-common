@@ -1,10 +1,10 @@
 {
-    "name": "@jx3box/jx3box-common",
-    "version": "1.0.32",
-    "description": "JX3BOX公共基础模块",
-    "main": "main.js",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/JX3BOX/jx3box-common.git"
-    }
+  "name": "@jx3box/jx3box-common",
+  "version": "1.0.33",
+  "description": "JX3BOX公共基础模块",
+  "main": "main.js",
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/JX3BOX/jx3box-common.git"
+  }
 }

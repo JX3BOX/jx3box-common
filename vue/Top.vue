@@ -6,7 +6,7 @@
                 svg-inline
                 src="../img/logo.svg"
             />
-            JX3BOX
+            {{logo_title}}
         </a>
         <hr />
         <p>{{data_title}}</p>
@@ -17,7 +17,7 @@
 const { JX3BOX } = require('../main');
 export default {
     name: "Top",
-    props:['data_title'],
+    props:['logo_title','data_title'],
     data: function() {
         return {
             homepage: JX3BOX.__Root,

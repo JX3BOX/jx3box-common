@@ -1,8 +1,7 @@
 <template>
     <footer class="m-bottom">
-        &copy;
-        <a :href="about" target="_blank">About JX3BOX</a>
-        <a class="u-feedback" :href="feedback" target="_blank">❤ 反馈建议</a>
+        <a :href="homepage" target="_blank">&copy; JX3BOX.COM</a>
+        <a class="u-feedback" :href="feedback" target="_blank">❤ Help</a>
     </footer>
 </template>
 
@@ -12,7 +11,7 @@ export default {
     name: "Bottom",
     data: function() {
         return {
-            about: JX3BOX.about,
+            homepage: JX3BOX.__Root,
             feedback: JX3BOX.feedback,
         };
     },
@@ -28,6 +27,7 @@ export default {
     font-size: 12px;
     color: @gray;
     margin-top: @space;
+    font-family: verdana,'Trebuchet MS',Tahoma;
 
     a {
         color: @gray;
