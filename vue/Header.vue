@@ -200,7 +200,7 @@
 </template>
 
 <script>
-const { JX3BOX } = require("@jx3box/jx3box-common");
+const { JX3BOX } = require('../main');
 const axios = require("axios");
 const moment = require("moment");
 
@@ -324,36 +324,42 @@ export default {
 </script>
 
 <style lang="less">
+@import '../css/var.less';
+
 .c-header {
-    .pf;
-    .lt(0, 0);
-    .z(500);
-    .w(100%);
-    .h(@header-height);
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 500;
+    width:100%;
+    height:@header-height;
     background-color: @bg-black;
     color: #fff;
 }
 .c-header-inner {
     // padding: 16px;
-    .clearfix;
+    *zoom:1;
+    &:after{content:"";display:table;clear:both;}
 }
 
 //logo
 .c-header-logo {
-    .db;
-    .fl;
+    display:block;
+    float:left;
     padding:16px 10px 16px 10px;
 
     .u-pic {
-        .size(@logo-size);
+        width:@logo-size;
+        height:@logo-size;
         margin-right: 5px;
-        .fl;
+        float:left;
         fill: #fff;
     }
     .u-txt {
-        .color(#fff);
+        color:#fff;
         font-family: Consolas;
-        .fz(20px, @logo-size);
+        font-size:20px;
+        line-height: @logo-size;
         // font-style: italic;
     }
 
@@ -370,20 +376,20 @@ export default {
             margin: 0;
         }
         .u-txt {
-            .none;
+            display:none;
         }
-        .mr(0);
+        margin-right:0;
     }
 }
 
 //搜索
 .c-header-search {
-    .fl;
-    .w(304px);
+    float:left;
+    width:304px;
     padding:16px 0;
 
     .u-form {
-        .pr;
+        position: relative;
     }
 
     .u-text {
@@ -394,9 +400,10 @@ export default {
         height: @logo-size;
         box-sizing: border-box;
         border-radius: 3px;
-        .fz(14px, @logo-size);
+        font-size:14px;
+        line-height: @logo-size;
         padding: 0.625em 0.4375em;
-        .w(100%);
+        width: 100%;
 
         &:focus {
             background-color: #fff;
@@ -408,10 +415,12 @@ export default {
 
     .u-btn {
         border: 0;
-        .pa;
-        .rt(8px, 6px);
-        .db;
-        .size(19px, 20px);
+        position: absolute;
+        right:8px;
+        top:6px;
+        display: block;
+        width: 19px;
+        height: 20px;;
         padding: 0;
         &,
         &:hover {
@@ -424,7 +433,7 @@ export default {
 @media screen and (max-width: @phone) {
     .c-header-search {
         float: none;
-        .w(auto);
+        width: auto;
 
         margin-left: @logo-size + 20px;
         margin-right: 140px;
@@ -443,18 +452,16 @@ export default {
         padding:0;
     }
     ul li {
-        .lh(@logo-size);//.bold;
-        .fl;
-        // margin-right:10px;
-        // padding:0 10px;
+        line-height: @logo-size;
+        float: left;
         padding:0;
         margin:0;
         list-style:none;
 
         a{
-            // .color(#fff,@color-blue);
-            .db;
-            .fz(14px,@logo-size);
+            display: block;
+            font-size: 14px;
+            line-height: @logo-size;
             color:#fff;
             // font-weight:300;
             &:hover{
@@ -467,22 +474,24 @@ export default {
             transition:0.1s ease-in;
         }
         &.current-menu-item a{
-            color:@color-blue;.bold;
+            color:@color-blue;
+            font-weight: bold;
             border-bottom:2px solid @color-blue;
         }
     }
 }
 @media screen and (max-width:@ipad){
     .c-header-nav{
-        .none;
+        display: none;
     }
 }
 
 //用户相关
 .c-header-user {
-    .fz(14px);
-    .pa;
-    .rt(10px,0);
+    font-size: 14px;
+    position: absolute;
+    right:10px;
+    top:0;
 
     .u-dropdown {
         border-bottom: 0 solid transparent;
@@ -498,7 +507,8 @@ export default {
     }
 
     .u-avatar {
-        .size(24px);
+        width: 24px;
+        height:24px;
     }
 
     .u-menu {
@@ -542,9 +552,12 @@ export default {
         }
 
         a {
-            .db;
-            .lh(21px);
-            .color(#454545, #fff);
+            display: block;
+            line-height: 21px;
+            color:#454545;
+            &:hover{
+                color:#fff;
+            }
             outline: none;
             text-decoration: none;
             overflow: hidden;
@@ -566,48 +579,53 @@ export default {
 
 //消息面板
 .c-header-msg {
-    .fl;
-    .pr;
-    .h(32px);
+    float: left;
+    position: relative;
+    height: 32px;
     padding:16px 0;
 
     .u-msg {
-        .db;
-        .h(100%);
+        display: block;
+        height: 100%;
         margin-top: 4px;
         padding: 6px 10px;
         &:hover {
-            .tm(0.7);
+            opacity:0.7;
         }
-        .pointer;
+        cursor: pointer;
     }
     .u-icon-msg {
-        .size(15px, 16px);
-        .db;
+        width: 15px;
+        height: 16px;
+        display: block;
         // margin-top: 9px;
         svg {
-            .size(100%);
+            width: 100%;
+            height: 100%;
         }
     }
     .u-pop {
-        .size(10px);
+        width: 10px;
+        height: 10px;
         color: #fff;
         background-image: linear-gradient(#54a3ff, #006eed);
         background-clip: padding-box;
         border: 2px solid #24292e;
         border-radius: 50%;
-        .pa;
-        .rt(2px, 0);
+        position: absolute;
+        right: 2px;
+        top: 0;
     }
     .u-list {
         // .none;
-        .pa;
-        .rt(-2px, 100%);
+        position: absolute;
+        right: -2px;
+        top: 100%;
         margin-top: -6px;
         z-index: 100;
         background-color: #fff;
         box-sizing: content-box;
-        .w(300px);
+        width: 300px;
         min-height: 80px;
         max-height: 210px;
         border-radius: 4px;
@@ -620,7 +638,8 @@ export default {
             padding: 0;
             margin: 0;
             list-style: none;
-            .clearfix;
+            *zoom:1;
+            &:after{content:"";display:table;clear:both;}
         }
 
         // overflow-y:auto;
@@ -640,9 +659,10 @@ export default {
         // }
 
         li {
-            .mb(5px);
+            margin-bottom:5px;
             padding-bottom: 10px;
-            .clearfix;
+            *zoom:1;
+            &:after{content:"";display:table;clear:both;}
             border-bottom: 1px solid #eee;
 
             &.isdone {
@@ -651,18 +671,22 @@ export default {
         }
 
         span {
-            .db;
-            .nobreak;
-            .fz(13px);
-            .lh(1.6);
+            display: block;
+            white-space:nowrap;
+            word-wrap:normal;
+            word-break:keep-all;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            font-style: 13px;
+            line-height: 1.6;
             &.u-read {
                 color: #999;
             }
         }
 
         em {
-            .fr;
-            .fz(12px);
+            float:right;
+            font-size: 12px;
             &.u-unread {
                 // color:@color-link;
                 cursor: pointer;
@@ -678,12 +702,12 @@ export default {
                 color: #999;
             }
             padding: 1px 5px;
-            .r(2px);
+            border-radius:2px;
         }
         .markall {
             border: 1px solid #ddd;
-            .r(2px);
-            .pointer;
+            border-radius:2px;
+            cursor: pointer;
             &:hover {
                 color: #666;
                 border-color: #ccc;
@@ -691,11 +715,11 @@ export default {
         }
 
         time {
-            .fz(12px);
+            font-size: 12px;
             color: #999;
-            .db;
-            .mt(3px);
-            .fl;
+            display: block;
+            margin-top: 3px;
+            float: left;
         }
 
         .u-misc {
@@ -704,13 +728,15 @@ export default {
 
         .u-more,
         .u-feedback {
-            .fz(12px);
-            .underline(@color-link);
+            font-size: 12px;
+            &:hover{
+                box-shadow:0 1px 0 @color-link;
+            }
             //.fl;
         }
 
         .u-all {
-            .fr;
+            float: right;
         }
 
         &:before {
@@ -737,64 +763,65 @@ export default {
     }
     &.on {
         .u-list {
-            .db;
+            display: block;
         }
     }
     .u-null {
         padding: 20px 0;
-        .x;
+        text-align: center;
     }
 }
 
 //操作面板
 .c-header-panel {
-    .fl;
-    .pr;
-    .h(32px);
+    float: left;
+    position: relative;
+    height: 32px;
     padding: 16px+6px 10px 10px 10px;
     user-select: none;
-    .pointer;
+    cursor: pointer;
 
     .u-add {
         fill: #fff;
-        .y;
+        vertical-align: middle;
         margin-right: 4px;
     }
 
     &.on {
         .u-menu {
-            .db;
+            display: block;
         }
     }
 
     &:hover {
         .u-add,
         .u-dropdown {
-            .tm(0.7);
+            opacity: 0.7;
         }
     }
 }
 
 //登录、用户信息
 .c-header-info{
-    .fl;
+    float: left;
     padding:16px 0;
 
     .c-header-login{
 
         transition: .4s;
         border:1px solid @border-hr;
-        .r(3px);
-        .clearfix;
+        border-radius:3px;
+        *zoom:1;
+        &:after{content:"";display:table;clear:both;}
 
-        .u-default,.u-extend{.fl;}
+        .u-default,.u-extend{float: left;}
 
         // .u-default{
         //     border-right:1px solid #eee;
         // }
         .u-default a{
-            .db;
-            .lh(@logo-size - 2px);
+            display: block;
+            line-height:@logo-size - 2px;
             padding:0 8px;
             color: #fff;
             &:hover{
@@ -805,48 +832,64 @@ export default {
         .u-extend{
             //background-color: hsla(0,0%,100%,.125);
             background-color: #fafafa;
-            .h(@logo-size - 2px);
+            height:@logo-size - 2px;
             padding-left:5px;
 
             .c-passport{
-                .clearfix;
+                *zoom:1;
+                &:after{content:"";display:table;clear:both;}
                 padding:(@logo-size - 24px - 2px) / 2 0;
             }
 
             a{
-                .fl;
-                .db;
+                float: left;
+                display: block;
                 margin-right:5px;
             }
 
             img{
-                .y;
-                .size(24px,auto) !important;
+                vertical-align: middle;
+                width:24px !important;
+                height:auto;
             }
 
-            .none;
+            display: none;
         }
 
     }
 
     .c-header-profile{
-        .pointer;
-        .pr;
+        cursor: pointer;
+        position: relative;
         padding:6px 5px 2px 6px;
 
         .u-menu{
             margin-top:8px;
         }
         .u-name{
-            .lh(30px);
+            line-height:30px;
             padding:0 16px;
-            .nobreak;
-            b{.bold;.db;.fl;.nobreak;max-width:60px;}
-            span{color:#666;letter-spacing:0.5px;.ml(3px);}
+            white-space:nowrap;
+            word-wrap:normal;
+            word-break:keep-all;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            b{
+                
+            font-weight: bold;display: block;float: left;
+
+            white-space:nowrap;
+            word-wrap:normal;
+            word-break:keep-all;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            
+            max-width:60px;}
+            span{color:#666;letter-spacing:0.5px;margin-left: 3px;}
             cursor:default;
         }
         .u-avatar{
-            .y;
+            vertical-align: middle;
             margin-right:2px;
         }
 
@@ -856,7 +899,7 @@ export default {
         }
 
         &.on{
-            .u-menu{.db;}
+            .u-menu{display: block;}
         }
         .u-hr{
             border-top: 1px solid @border-hr;
@@ -864,7 +907,7 @@ export default {
 
         &:hover{
             .u-dropdown{
-                .tm(0.7);
+                opacity: 0.7;
             }
         }
     }

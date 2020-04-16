@@ -5,7 +5,12 @@
 `npm install @jx3box/jx3box-common`  
 
 ## Step.2 Import
-+ 路径常量
++ 路径常量、工具等
+```javascript
+const {JX3BOX , Utils} = require('@jx3box/jx3box-common');
 ```
-const {JX3BOX} = require('@jx3box/jx3box-common');
++ 公共模块
+```javascript
+import JX3BOX_UI from '@jx3box/jx3box-common/vue'
+Vue.use(JX3BOX_UI);
 ```

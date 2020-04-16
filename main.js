@@ -6,6 +6,7 @@ const JX3BOX = {
     /*🌸域&根*/
     __Root: "https://www.jx3box.com/",
     __v2: "https://v2.jx3box.com/",
+    __cloud: "https://cloud.jx3box.com/",   //OSS CDN分发
 
 
     /*🌸资源域*/
@@ -48,7 +49,7 @@ const JX3BOX = {
     //oss/jx3box-www/project 
     __staticPath : {
         jsdelivr : "https://cdn.jsdelivr.net/gh/JX3BOX/",   // repo@gh-pages/ + ~
-        oss: "https://oss.jx3box.com/static/",    // oss/static/repo/ + ~
+        mirror: "https://cloud.jx3box.com/",    // oss/jx3box-www/repo/ + ~
     },
     
 
@@ -152,8 +153,10 @@ const JX3BOX = {
     __post_tool:"https://www.jx3box.com/post/?pt=tool",
     __post_bbs:"https://www.jx3box.com/post/?pt=bbs",
 
-    //🌸默认头像
+    //🌸固定链接
     default_avatar: "https://console.cnyixun.com/image/common/avatar.png",
+    feedback : "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4",
+    about : "https://www.jx3box.com/about",
 
 };
 
