@@ -1,4 +1,5 @@
 const dict = require('../includes/dict.js');
+const {default_avatar} = require('./jx3box.js');
 
 module.exports = {
     resolveImagePath : function (str){
@@ -32,16 +33,16 @@ module.exports = {
     },
 
     showAvatar : function (url,size='s'){
-        let default_avatar = "https://console.cnyixun.com/image/common/avatar.png"
+
         const styleMap = {
             s : "?x-oss-process=style/avatar_s",
             m : "?x-oss-process=style/avatar_m",
             l : "?x-oss-process=style/avatar_l"
         }
 
-        return !url ?
-            (default_avatar + styleMap[size]) :
-            (url + styleMap[size])
+        let avatar = !url ? default_avatar : url.replace(/oss\.jx3box\.com/g,'console.cnyixun.com')
+
+        return avatar + styleMap[size]
 
     }
 }

@@ -9,7 +9,7 @@
 ```javascript
 const {JX3BOX , Utils} = require('@jx3box/jx3box-common');
 ```
-+ 公共模块
++ VUE公共模块
 ```javascript
 import JX3BOX_UI from '@jx3box/jx3box-common/vue'
 Vue.use(JX3BOX_UI);
