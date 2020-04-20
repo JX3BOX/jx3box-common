@@ -8,7 +8,13 @@ const {User} = require('@jx3box/jx3box-common');
 ```
 
 ## Usage
-### 1.获取用户信息 `User.getInfo()`
+### 1.判断用户是否登录 `User.isLogin()`
+```javascript
+let status = User.isLogin()
+// => true 或 false
+```
+
+### 2.获取用户信息 `User.getInfo()`
 ```javascript
 let profile = User.getInfo()
 // => 返回一个用户信息对象
@@ -24,9 +30,8 @@ let group = User.getInfo().group    //用户用户组ID,未登录用户为0,登�
 + `bio` 签名
 + `avatar_origin` 原头像
 
-**未登录用户**
 
-### 2.获取JWT令牌 `User.getToken()`
+### 3.获取JWT令牌 `User.getToken()`
 ```javascript
 let token = User.getToken()
 ```
@@ -58,7 +63,7 @@ axios
     });
 ```
 
-### 3.获取UUID `User.getUUID()`
+### 4.获取UUID `User.getUUID()`
 ```javascript
 let uuid = User.getUUID()
 ```
@@ -66,7 +71,7 @@ let uuid = User.getUUID()
 用户不主动清除将会保持不变（即设备ID），无需登录即可读取
 
 
-### 4.重置销毁 `User.destory()`
+### 5.重置销毁 `User.destory()`
 对于token失效或无效，总是返回错误码***9999***，当遇到9999时，可能由于卡在令牌失效的边界区，本地静态前端缓存并未做检测，此时提交请求可能出现失败，如遇到此情况应总是设定清除本地用户缓存信息，并引导用户重新登录。
 
 注意为了让用户登录后重新返回当前提交页面，需要携带`redirect=callback`以指定回调。
@@ -93,4 +98,10 @@ let uuid = User.getUUID()
         //网络异常
     }
 }); 
+```
+
+### 6.跳转登录并转回 `User.toLogin()`
+```javascript
+User.toLogin()  //无参数时自动跳回当前调用页面
+User.toLogin($url) //登录后跳转至指定页面
 ```
