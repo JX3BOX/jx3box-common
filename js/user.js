@@ -47,7 +47,7 @@ class User {
     }
 
     // 销毁登录状态
-    destory() {
+    destroy() {
         // for非鉴权接口
         localStorage.removeItem("created_at");
         localStorage.setItem("logged_in", "false");

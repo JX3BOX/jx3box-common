@@ -101,8 +101,22 @@ const JX3BOX = {
     /*🌸链接*/
     // 栏目链接
     __Links : {
-        login : 'https://v2.jx3box.com/account/login',
-        about : "https://v2.jx3box.com/about",
+        account : {
+            login : 'https://www.jx3box.com/account/login',
+            register : 'https://www.jx3box.com/account/register',
+        },
+        dashboard : {
+            home : "https://www.jx3box.com/dashboard",
+            msg : "https://www.jx3box.com/dashboard/msg",
+            post : "https://www.jx3box.com/dashboard/post",
+            work : "https://www.jx3box.com/dashboard/work",
+            feed : "https://www.jx3box.com/dashboard/feed",
+            fav : "https://www.jx3box.com/dashboard/fav",
+            setting : "https://www.jx3box.com/dashboard/setting",
+        },
+        
+        about : "https://www.jx3box.com/about",
+
         search : 'https://search.jx3box.com/',
         wiki: "https://wiki.jx3box.com/", 
         jx3: "https://xn--3-4g8a959k.com/",

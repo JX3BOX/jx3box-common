@@ -16,6 +16,8 @@ hr{
 // 面包屑
 @bread-height:48px;
 .c-breadcrumb {
+    .pf;top:@header-height;
+    .z(500);.w(100%);
     .h(@bread-height);
     // background-color: @bg-light;
     background-color: #fff;
@@ -41,9 +43,9 @@ hr{
         fill: @bg-black;
     }
     
-    .pr;
     .u-publish {
-        .pa;.rt(10px,4px);
+        .pa;.rt(8px,8px);
+        padding: 8px 18px;
     }
 }
 @media screen and (max-width:@ipad){
@@ -86,6 +88,11 @@ hr{
     .ml(@aside-left);
     .pr;
     min-height: calc(100vh - @header-height - @bread-height);
+    margin-top:@bread-height;
+    padding-right:@aside-right;
+}
+.c-main.without-right{
+    padding-right:0;
 }
 
 // 右侧边

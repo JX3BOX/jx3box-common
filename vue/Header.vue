@@ -12,7 +12,7 @@
                 <div class="c-search">
                     <form
                         class="u-form"
-                        :action="JX3BOX.__search"
+                        :action="JX3BOX.__Links.search"
                         :target="isPhone ? '_self' : '_blank'"
                     >
                         <input
@@ -27,6 +27,7 @@
                 </div>
             </div>
 
+            <!-- nav -->
             <nav class="c-header-nav">
                 <ul>
                     <li v-for="(item,type) in nav" :key="'nav-'+type">
@@ -38,61 +39,26 @@
             <!-- user -->
             <div class="c-header-user" id="c-header-user">
                 <!-- user msg -->
-                <div class="c-header-msg" id="c-header-msg">
+                <div v-if="logged_in == true" class="c-header-msg" id="c-header-msg">
                     <i class="u-pop" style="display:none;" v-show="pop"></i>
                     <a
                         class="u-msg"
                         @click="expandList($event, 'msg')"
-                        :href="JX3BOX.__user_msg"
+                        :href="JX3BOX.__Links.dashboard.msg"
                         ><i class="u-icon u-icon-msg"
                             >
                             <img svg-inline src="../img/msg.svg"/>
                             </i
                     ></a>
-                    <div
-                        class="u-list"
-                        style="display:none;"
-                        v-show="!fold.msg"
-                    >
-                        <ul v-if="msgs.length">
-                            <li v-for="(msg, i) in msgs" :key="'user-msg-' + i">
-                                <span
-                                    :class="msg.read ? 'u-read' : 'u-unread'"
-                                    >{{ msg.content }}</span
-                                >
-                                <em
-                                    :class="msg.read ? 'u-read' : 'u-unread'"
-                                    @click="markthis($event, msg)"
-                                >
-                                    {{ msg.read ? "已读" : "未读" }}
-                                </em>
-                                <time>{{ msg.created | formatDatetime }}</time>
-                            </li>
-                        </ul>
-                        <div v-else class="u-null">暂无消息</div>
-
-                        <div class="u-misc">
-                            <em
-                                class="u-all u-read"
-                                :class="{ markall: pop }"
-                                @click="markall($event)"
-                            >
-                                {{ pop ? "全部标记" : "全部已读" }}
-                            </em>
-                            <a class="u-more" :href="JX3BOX.__user_msg"
-                                >查看更多 &raquo;</a
-                            >
-                        </div>
-                    </div>
                 </div>
 
                 <!-- user panel -->
-                <div
+                <div v-if="logged_in == true"
                     class="c-header-panel"
                     id="c-header-panel"
                     @click="expandList($event, 'panel')"
                 >
-                    <svg
+                    <a class="u-post" :href="JX3BOX.__Links.dashboard.post"><svg
                         class="u-add"
                         viewBox="0 0 12 16"
                         version="1.1"
@@ -104,44 +70,13 @@
                             fill-rule="evenodd"
                             d="M12 9H7v5H5V9H0V7h5V2h2v5h5v2z"
                         ></path>
-                    </svg>
-                    <span class="u-dropdown"></span>
-                    <ul
-                        class="u-menu"
-                        style="display:none;"
-                        v-show="!fold.panel"
-                    >
-                        <li>
-                            <a :href="JX3BOX.__post_macro">+ 剑三宏</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_jx3dat">+ 插件数据</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_fb">+ 副本攻略</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_bps">+ 职业攻略</a>
-                        </li>
-                        <hr />
-                        <li>
-                            <a :href="JX3BOX.__post_cj">+ 成就攻略</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_share">+ 捏脸数据</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_tool">+ 教程工具</a>
-                        </li>
-                        <li>
-                            <a :href="JX3BOX.__post_bbs">+ 交流讨论</a>
-                        </li>
-                    </ul>
+                    </svg></a>
                 </div>
 
                 <!-- user info -->
                 <div class="c-header-info">
-                    <div
+
+                    <div v-if="logged_in == true"
                         class="c-header-profile"
                         id="c-header-profile"
                         @click="expandList($event, 'info')"
@@ -159,40 +94,28 @@
                         >
                             <li>
                                 <a
-                                    :href="JX3BOX.__user_dashboard"
-                                    >我的作品</a
+                                    :href="JX3BOX.__Links.dashboard.home"
+                                    >个人中心</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    :href="JX3BOX.__user_cmt"
-                                    >我的评论</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    :href="JX3BOX.__user_fav"
-                                    >我的收藏</a
-                                >
-                            </li>
-                            <hr />
-                            <li>
-                                <a
-                                    :href="JX3BOX.__user_setting"
+                                    :href="JX3BOX.__Links.dashboard.setting"
                                     >设置</a>
                             </li>
                             <li>
-                                <a :href="JX3BOX.__user_logout"
+                                <a @click="logout()"
                                     >登出</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="c-header-login none">
-                        <div class="u-default">
-                            <a :href="JX3BOX.__user_login">登录</a>
-                        </div>
+                    <div v-if="logged_in == false" class="c-header-login">
+                        <a class="u-register u-default" :href="register_url">注册</a>
+                        <em>|</em>
+                        <a class="u-login u-default" :href="login_url">登录</a>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -200,47 +123,8 @@
 </template>
 
 <script>
-const { JX3BOX } = require('../main');
 const axios = require("axios");
-const moment = require("moment");
-
-const MSG_API = JX3BOX.__helperUrl + "api/messages";
-const MARK_API = JX3BOX.__helperUrl + "api/messages/read";
-//栏目入口
-    // __channel : {
-    //     macro : {
-    //         name : '宏库',
-    //         path : "https://www.jx3box.com/macro"
-    //     },
-    //     jx3dat : {
-    //         name : '插件',
-    //         path : "https://www.jx3box.com/jx3dat"
-    //     },
-    //     fb : {
-    //         name : '副本',
-    //         path : "https://www.jx3box.com/fb"
-    //     },
-    //     bps : {
-    //         name : '职业',
-    //         path : "https://www.jx3box.com/bps"
-    //     },
-    //     cj : {
-    //         name : '成就',
-    //         path : "https://www.jx3box.com/cj"
-    //     },
-    //     pvx : {
-    //         name : '休闲',
-    //         path : "https://www.jx3box.com/share"
-    //     },
-    //     bbs : {
-    //         name : '茶馆',
-    //         path : "https://www.jx3box.com/bbs"
-    //     },
-    //     app : {
-    //         name : '应用',
-    //         path : "https://www.jx3box.com/app"
-    //     }
-    // },
+const { JX3BOX,User } = require('../main');
 export default {
     name: "Header",
     data: function() {
@@ -248,11 +132,41 @@ export default {
             JX3BOX,
             isPhone : false,
 
-            uid: 8, //TODO:修改ID
-            user:{},
-
             //nav
-            nav:JX3BOX.__channel,
+            nav:{
+                macro : {
+                    name : '宏库',
+                    path : "https://www.jx3box.com/macro"
+                },
+                jx3dat : {
+                    name : '插件',
+                    path : "https://www.jx3box.com/jx3dat"
+                },
+                fb : {
+                    name : '副本',
+                    path : "https://www.jx3box.com/fb"
+                },
+                bps : {
+                    name : '职业',
+                    path : "https://www.jx3box.com/bps"
+                },
+                cj : {
+                    name : '成就',
+                    path : "https://www.jx3box.com/cj"
+                },
+                pvx : {
+                    name : '休闲',
+                    path : "https://www.jx3box.com/share"
+                },
+                bbs : {
+                    name : '茶馆',
+                    path : "https://www.jx3box.com/bbs"
+                },
+                app : {
+                    name : '应用',
+                    path : "https://www.jx3box.com/app"
+                }
+            },
 
             //user
             msgs: [],
@@ -262,20 +176,25 @@ export default {
                 panel: true,
                 info: true
             },
+            logged_in : true,
+            user:{},
         };
     },
+    computed : {
+        login_url : function (){
+            return JX3BOX.__Links.account.login + '?redirect=' + location.href
+        },
+        register_url : function (){
+            return JX3BOX.__Links.account.register + '?redirect=' + location.href
+        }
+    },
     methods: {
+        // 导航焦点
         isFocus:function (type){
             return location.pathname.includes(type)
         },
+        // 菜单
         expandList: function(e, current) {
-            if (current == "msg") {
-                if (this.isPhone) {
-                    return;
-                } else {
-                    e.preventDefault();
-                }
-            }
 
             e.stopPropagation();
 
@@ -287,35 +206,36 @@ export default {
                 }
             }
         },
-        markthis: function(e, msg) {
-            e.stopPropagation();
-            axios({
-                method: "put",
-                url: MARK_API,
-                data: {
-                    user_id: this.uid,
-                    ids: [msg.ID]
+        closeExpandList : function (){
+            this.isPhone = window.innerWidth < 720 ? true : false
+            const vm = this;
+            jQuery("body").on("click", function(e) {
+                for (let _key in vm.fold) {
+                    vm.fold[_key] = true;
                 }
-            }).then(res => {
-                msg.read = 1;
             });
         },
-        markall: function(e) {
-            e.stopPropagation();
-            axios({
-                method: "put",
-                url: MARK_API,
-                data: {
-                    user_id: this.uid,
-                    ids: []
-                }
-            }).then(res => {
-                this.pop = false;
-                this.msgs.forEach(function(msg) {
-                    msg.read = 1;
+        // 消息
+        checkMSG : function (){
+            let condition = encodeURIComponent("where[user_id]");
+            if (Number(this.user.uid)) {
+                axios({
+                    method: "get",
+                    url: MSG_API + "?" + condition + "=" + this.uid + "&length=3"
+                }).then(res => {
+                    this.msgs = res.data.data.messages;
+                    if (res.data.data.unread_count) {
+                        this.pop = true;
+                    }
                 });
-            });
-        }
+            }
+        },
+        // 注销
+        logout : function (){
+            User.destroy()
+            this.logged_in = false
+            this.user = User.getInfo()
+        },
     },
     filters: {
         formatDatetime: function(timestamp) {
@@ -324,35 +244,12 @@ export default {
         }
     },
     mounted: function() {
-        // 面板
-        this.isPhone = window.innerWidth < 720 ? true : false
-        const vm = this;
-        jQuery("body").on("click", function(e) {
-            for (let _key in vm.fold) {
-                vm.fold[_key] = true;
-            }
-        });
-
-        // 消息
-        let condition = encodeURIComponent("where[user_id]");
-        if (Number(this.uid)) {
-            axios({
-                method: "get",
-                url: MSG_API + "?" + condition + "=" + this.uid + "&length=3"
-            }).then(res => {
-                this.msgs = res.data.data.messages;
-                if (res.data.data.unread_count) {
-                    this.pop = true;
-                }
-            });
+        this.closeExpandList()
+        this.logged_in = User.isLogin()
+        this.user = User.getInfo()
+        if(this.logged_in){
+            this.checkMSG()
         }
-
-        // 用户
-        axios.get(`${JX3BOX.__wpRest.classic}users/me`).then((res) => {
-            console.log(res)
-        })
-        
-        
     }
 };
 </script>
@@ -397,10 +294,10 @@ export default {
         // font-style: italic;
     }
 
-    transition:background-color 0.1s ease-in;
-    &:hover{
-        background-color: @color-link;
-    }
+    // transition:background-color 0.1s ease-in;
+    // &:hover{
+    //     background-color: @color-link;
+    // }
 
     margin-right: 10px;
 }
@@ -499,19 +396,31 @@ export default {
             color:#fff;
             // font-weight:300;
             &:hover{
-                background-color: lighten(@color-link,20%);
+                background-color: darken(@primary,10%);
             }
             &.on{
-                background-color: @color-link;
+                // background-color: @primary;
+                .pr;
+                &:after{
+                    content:'';
+                    .db;
+                    border-bottom:3px solid @primary;
+                    .pa;.lb(0);
+                    .w(100%);
+                }
+                &:hover{
+                    background-color: @primary;
+                }
+                
             }
             padding:16px 15px;
             transition:0.1s ease-in;
         }
-        &.current-menu-item a{
-            color:@color-blue;
-            font-weight: bold;
-            border-bottom:2px solid @color-blue;
-        }
+        // &.current-menu-item a{
+        //     color:@color-blue;
+        //     font-weight: bold;
+        //     border-bottom:2px solid @color-blue;
+        // }
     }
 }
 @media screen and (max-width:@ipad){
@@ -843,24 +752,32 @@ export default {
     .c-header-login{
 
         transition: .4s;
-        border:1px solid @border-hr;
-        border-radius:3px;
         *zoom:1;
         &:after{content:"";display:table;clear:both;}
+        border:1px solid @border-hr;
+        border-radius:3px;
 
         .u-default,.u-extend{float: left;}
 
         // .u-default{
         //     border-right:1px solid #eee;
         // }
-        .u-default a{
+        .u-default{
             display: block;
             line-height:@logo-size - 2px;
             padding:0 8px;
             color: #fff;
+            
             &:hover{
                 color: hsla(0,0%,100%,.75);
             }
+        }
+
+        em{
+            color:#a4acb5;
+            .fl;
+            font-style:normal;
+            .lh(30px);
         }
 
         .u-extend{
@@ -888,6 +805,11 @@ export default {
             }
 
             display: none;
+        }
+
+        .u-register{
+            // background-color: @primary;
+            // .mr(10px);
         }
 
     }
@@ -944,6 +866,7 @@ export default {
                 opacity: 0.7;
             }
         }
+
     }
 }
 
