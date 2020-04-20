@@ -1,10 +1,10 @@
 const { showAvatar } = require("./utils");
-const {__Links} = require('./jx3box');
+const {__Links,default_avatar} = require('./jx3box');
 
 class User {
     constructor() {
         // TOKEN有效期
-        this.expires = 7200000;
+        this.expires = 43200000;
         this.created_at = 0;
         // 登录状态
         this.logged_in = false;
@@ -17,7 +17,7 @@ class User {
             name: "未登录",
             avatar: showAvatar(null,'s'),
             bio: "凭栏望千里，煮酒论江湖。",
-            avatar_origin : ''
+            avatar_origin : default_avatar
         };
     }
 
@@ -57,7 +57,8 @@ class User {
     }
 
     // 跳转至登录
-    redirect(url){
+    toLogin(url){
+        url = url || location.href
         location.href = __Links.login + '?redirect=' + url
     }
 

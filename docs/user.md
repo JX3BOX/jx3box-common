@@ -85,7 +85,8 @@ let uuid = User.getUUID()
 
             //3.跳转至登录页携带redirect
             //如果使用异步保存，请在回调中执行
-            User.redirect(url)
+            User.toLogin(url) 
+            //不指定url时则自动跳回当前所在页面
 
         }
     }else{

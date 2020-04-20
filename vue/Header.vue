@@ -206,7 +206,41 @@ const moment = require("moment");
 
 const MSG_API = JX3BOX.__helperUrl + "api/messages";
 const MARK_API = JX3BOX.__helperUrl + "api/messages/read";
-
+//栏目入口
+    // __channel : {
+    //     macro : {
+    //         name : '宏库',
+    //         path : "https://www.jx3box.com/macro"
+    //     },
+    //     jx3dat : {
+    //         name : '插件',
+    //         path : "https://www.jx3box.com/jx3dat"
+    //     },
+    //     fb : {
+    //         name : '副本',
+    //         path : "https://www.jx3box.com/fb"
+    //     },
+    //     bps : {
+    //         name : '职业',
+    //         path : "https://www.jx3box.com/bps"
+    //     },
+    //     cj : {
+    //         name : '成就',
+    //         path : "https://www.jx3box.com/cj"
+    //     },
+    //     pvx : {
+    //         name : '休闲',
+    //         path : "https://www.jx3box.com/share"
+    //     },
+    //     bbs : {
+    //         name : '茶馆',
+    //         path : "https://www.jx3box.com/bbs"
+    //     },
+    //     app : {
+    //         name : '应用',
+    //         path : "https://www.jx3box.com/app"
+    //     }
+    // },
 export default {
     name: "Header",
     data: function() {
