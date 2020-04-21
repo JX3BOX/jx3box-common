@@ -46,6 +46,42 @@ class User {
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
+    // 保存用户资料
+    _save(data){
+        localStorage.setItem("created_at", Date.now());
+        localStorage.setItem("logged_in", true);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+            "profile",
+            JSON.stringify({
+                uid: data.uid,
+                group: data.group,
+                name: data.name,
+                avatar: data.avatar,
+                bio: data.bio,
+            })
+        );
+    }
+
+    // 更新用户资料
+    update(data){
+        //设置本地基本信息缓存
+        try {
+            this._save(data)
+        } catch (err) {
+            //如果localstorage不存在或已满
+            if (localStorage) {
+                localStorage.clear();
+                this._save(data)
+            } else {
+                alert(
+                    "老古董!!!你的浏览器版本太低,无法使用本站,请更换chrome等浏览器"
+                );
+                console.error('localStorage不可用')
+            }
+        }
+    }
+
     // 销毁登录状态
     destroy() {
         // for非鉴权接口
