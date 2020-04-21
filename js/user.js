@@ -65,21 +65,21 @@ class User {
 
     // 更新用户资料
     update(data){
-        //设置本地基本信息缓存
-        try {
-            this._save(data)
-        } catch (err) {
-            //如果localstorage不存在或已满
-            if (localStorage) {
-                localStorage.clear();
+        return new Promise((resolve,reject)=>{
+            try {
                 this._save(data)
-            } else {
-                alert(
-                    "老古董!!!你的浏览器版本太低,无法使用本站,请更换chrome等浏览器"
-                );
-                console.error('localStorage不可用')
+                resolve(this)
+            } catch (err) {
+                //如果localstorage不存在或已满
+                if (localStorage) {
+                    localStorage.clear();
+                    this._save(data)
+                    resolve(value)
+                } else {
+                    reject(new Error('localStorage不可用'))
+                }
             }
-        }
+        })
     }
 
     // 销毁登录状态
