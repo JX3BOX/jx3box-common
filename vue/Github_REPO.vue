@@ -2,7 +2,7 @@
     <div class="c-github-repo">
         <a class="u-repo" :href="html_url" target="_blank">
             <i class="i-github"
-                ><img svg-inline src="../assets/img/github.svg"
+                ><img svg-inline src="../img/github.svg"
             /></i>
             <span class="u-name">{{ full_name }}</span>
             <em class="u-join">Contribute</em>

@@ -7,7 +7,8 @@ const components = {
     Top,
     Bottom,
     Header,
-    Github_REPO
+    Github_REPO,
+    RightSideMsg
 }
 
 const install = function (Vue, Option) {
