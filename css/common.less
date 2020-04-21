@@ -81,29 +81,81 @@ hr{
     &::-webkit-scrollbar-button,&::-webkit-scrollbar-corner,&::-webkit-resizer {
         display: none;
     }
+    
 }
 
 // 主体
 .c-main{
     .ml(@aside-left);
+    .mr(@aside-right);
     .pr;
     min-height: calc(100vh - @header-height - @bread-height);
     margin-top:@bread-height;
-    padding-right:@aside-right;
 }
 .c-main.without-right{
-    padding-right:0;
+    .mr(0) !important;
 }
 
 // 右侧边
 @aside-right:280px;
 .c-sidebar-right{
     .pa;
-    .rt(0);
+    .lt(100%,0);
     .w(@aside-right);
     background-color:#fff;
     border-left:1px solid #eee;
     height:100%;
 }
 
-@light-blue:#409EFF;
+// 笔记本<1440 缩小双边栏
+@media screen and (max-width:@notebook){
+    .c-sidebar-left{
+        .w(@aside-left - 40px);
+    }
+    .c-sidebar-right{
+        .w(@aside-right - 20px);
+    }
+    .c-main{
+        .ml(@aside-left - 40px);
+        .mr(@aside-right - 20px);
+    }
+}
+
+// 平板横屏
+@media screen and (max-width:@ipad){
+    .c-sidebar-left{
+        .w(@aside-left - 60px);
+    }
+    .c-sidebar-right{
+        .ps;
+        .w(auto);
+        border-left:none;
+    }
+    .c-main{
+        .ml(@aside-left - 60px);
+        .mr(0);
+    }
+}
+
+//平板横屏与手机
+@media screen and (max-width:@ipad-y){
+    .c-sidebar-left{
+        .pf;
+        .z(500);
+        transition: 0.2s ease-in-out;
+        transform:translateX(-100%);
+        &.isopen{
+            transform:translateX(0);
+            box-shadow: 0 5px 5px rgba(0,0,0,.2);
+        }
+    }
+    .c-main{
+        .ml(0);
+    }
+    .c-breadcrumb {
+        .u-channel-logo{
+            .none;
+        }
+        padding-left:40px;
+    }
+}
