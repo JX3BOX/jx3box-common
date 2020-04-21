@@ -31,6 +31,7 @@
         .pa;.lt(0);
         padding:10px;
         .h(29px);
+        .none;
 
         svg{
             fill:@color;
@@ -39,6 +40,11 @@
             &.isopen{
                 fill:@primary;
             }
+        }
+    }
+    @media screen and (max-width:@ipad-y){
+        .c-sidebar-left-toggle{
+            .db;
         }
     }
 </style>
