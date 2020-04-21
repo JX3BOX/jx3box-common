@@ -1,11 +1,13 @@
 import Top from './Top.vue'
 import Bottom from './Bottom.vue'
 import Header from './Header.vue'
+import Github_REPO from './Github_REPO.vue'
 
 const components = {
     Top,
     Bottom,
-    Header
+    Header,
+    Github_REPO
 }
 
 const install = function (Vue, Option) {

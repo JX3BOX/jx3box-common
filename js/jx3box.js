@@ -102,20 +102,20 @@ const JX3BOX = {
     // 栏目链接
     __Links : {
         account : {
-            login : 'https://www.jx3box.com/account/login',
-            register : 'https://www.jx3box.com/account/register',
+            login : 'https://www.jx3box.com/account/login/',
+            register : 'https://www.jx3box.com/account/register/',
         },
         dashboard : {
-            home : "https://www.jx3box.com/dashboard",
-            msg : "https://www.jx3box.com/dashboard/msg",
-            post : "https://www.jx3box.com/dashboard/post",
-            work : "https://www.jx3box.com/dashboard/work",
-            feed : "https://www.jx3box.com/dashboard/feed",
-            fav : "https://www.jx3box.com/dashboard/fav",
-            setting : "https://www.jx3box.com/dashboard/setting",
+            home : "https://www.jx3box.com/dashboard/",
+            msg : "https://www.jx3box.com/dashboard/msg/",
+            post : "https://www.jx3box.com/dashboard/post/",
+            work : "https://www.jx3box.com/dashboard/work/",
+            feed : "https://www.jx3box.com/dashboard/feed/",
+            fav : "https://www.jx3box.com/dashboard/fav/",
+            setting : "https://www.jx3box.com/dashboard/setting/",
         },
         
-        about : "https://www.jx3box.com/about",
+        about : "https://www.jx3box.com/about/",
 
         search : 'https://search.jx3box.com/',
         wiki: "https://wiki.jx3box.com/", 
