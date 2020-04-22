@@ -54,7 +54,9 @@ const JX3BOX = {
     
 
     /*🌸接口*/
-    // 公开API服务（主库）
+    // 主库API服务
+    __server: "https://server.jx3box.com/",
+    // 公开API服务
     __api: "https://api.jx3box.com/",
     // 核心应用服务（资源查询、处理）
     __node: "https://node.jx3box.com/",
@@ -102,20 +104,20 @@ const JX3BOX = {
     // 栏目链接
     __Links : {
         account : {
-            login : 'https://www.jx3box.com/account/login/',
-            register : 'https://www.jx3box.com/account/register/',
+            login : 'https://www.jx3box.com/account/login',
+            register : 'https://www.jx3box.com/account/register',
         },
         dashboard : {
-            home : "https://www.jx3box.com/dashboard/",
-            msg : "https://www.jx3box.com/dashboard/msg/",
-            post : "https://www.jx3box.com/dashboard/post/",
-            work : "https://www.jx3box.com/dashboard/work/",
-            feed : "https://www.jx3box.com/dashboard/feed/",
-            fav : "https://www.jx3box.com/dashboard/fav/",
-            setting : "https://www.jx3box.com/dashboard/setting/",
+            home : "https://www.jx3box.com/dashboard",
+            msg : "https://www.jx3box.com/dashboard/msg",
+            post : "https://www.jx3box.com/dashboard/post",
+            work : "https://www.jx3box.com/dashboard/work",
+            feed : "https://www.jx3box.com/dashboard/feed",
+            fav : "https://www.jx3box.com/dashboard/fav",
+            setting : "https://www.jx3box.com/dashboard/setting",
         },
         
-        about : "https://www.jx3box.com/about/",
+        about : "https://www.jx3box.com/about",
 
         search : 'https://search.jx3box.com/',
         wiki: "https://wiki.jx3box.com/", 
