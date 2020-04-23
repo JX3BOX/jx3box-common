@@ -1,7 +1,7 @@
 <template>
     <footer class="m-bottom">
         <a :href="homepage" target="_blank">&copy; JX3BOX.COM</a>
-        <a class="u-feedback" :href="feedback" target="_blank" title="需要帮助? ❤Angela~ I need healing!">❤ Help</a>
+        <a class="u-feedback" :href="feedback" target="_blank">❤ Help</a>
     </footer>
 </template>
 

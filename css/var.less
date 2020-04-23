@@ -1,37 +1,26 @@
+// 图片路径
 @url:'https://console.cnyixun.com/img/';
 @image:'https://console.cnyixun.com/image/';
 @font:'https://console.cnyixun.com/img/font/';
 
+// 颜色
 @color:#3d454d;
 @primary:#409EFF;
-
 @bg-black:#24292e;
 @bg-gray:#f6f8fa;
 @bg-light:#fafbfc;
-@bg-blue:#2E97DE;
-@bg-or:#e36209;
-
-@border-hr:#e1e4e8;
-@border-hover:#17e0c2;
-@border-active:#39d45d;
-
-@color-cyan:#17e0c2;
-@color-cl:#1abc9c;
-@color-blue:#00b9eb;
-@color-yellow:#ffff00;
 @color-link:#0366d6;
-@color-gray:#586069;
-@color-pp:#6f42c1;
+@border-hr:#e1e4e8;
 
+// 头部
 @header-height:64px;
 @logo-size:32px;
-@sidebar-width:350px;
-@sub-sidebar-width:240px;
-@max-content-width:1180px;  //pc中央区
-
-@mobile:1279px;
-@spc:1680px;        //低于1920 pc
-@xspc:1536px;
+@bread-height:48px;
+// 左侧边
+@aside-left:320px;
+// 右侧边
+@aside-right:280px;
+// 适配
 @notebook:1439px;   //笔记本电脑
 @ipad:1024px;     //平板
 @ipad-y:1023px;         //竖屏
@@ -47,6 +36,12 @@ body{
 }
 a{
     text-decoration:none;
+}
+hr{
+    margin-top: 22px;
+    margin-bottom: 22px;
+    border: 0;
+    border-top: 1px solid #eee;
 }
 .underline(@color:@color-link){
     &:hover{

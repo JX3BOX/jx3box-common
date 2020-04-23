@@ -1,17 +1,32 @@
-import Top from './Top.vue'
-import Bottom from './Bottom.vue'
 import Header from './Header.vue'
-import Github_REPO from './Github_REPO.vue'
+import Breadcrumb from './Breadcrumb.vue'
+
+import Footer from './Footer.vue'
+import Bottom from './Bottom.vue'
+
+import RightSidebar from './RightSidebar.vue'
 import RightSideMsg from './RightSideMsg.vue'
-import LeftSideToggle from './LeftSideToggle.vue'
+import Github_REPO from './Github_REPO.vue'
+
+import LeftSidebar from './LeftSidebar.vue'
+
+import Main from './Main.vue'
+
 
 const components = {
-    Top,
-    Bottom,
     Header,
-    Github_REPO,
+    Breadcrumb,
+
+    Footer,
+    Bottom,
+    
+    RightSidebar,
     RightSideMsg,
-    LeftSideToggle
+    Github_REPO,
+
+    LeftSidebar,
+
+    Main
 }
 
 const install = function (Vue, Option) {

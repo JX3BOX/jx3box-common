@@ -255,7 +255,11 @@ export default {
 </script>
 
 <style lang="less">
-@import '../css/var.less';
+
+body{
+    padding-top:@header-height;
+    color:@color;
+}
 
 .c-header {
     position: fixed;
@@ -869,5 +873,4 @@ export default {
 
     }
 }
-
 </style>

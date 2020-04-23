@@ -1,7 +1,9 @@
 <template>
     <div class="c-sidebar-right-msg">
         <i class="u-icon"><img svg-inline src="../img/ac.svg"/></i>
-        <div class="u-msg" v-html="msg"></div>
+        <div class="u-msg">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -32,9 +34,9 @@
     .u-icon {
         .db;
         .fl;
-        .size(16px @aiconh);
+        .size(16px,@aiconh);
         svg {
-            .size(100%);
+            .size(16px);
         }
         .pa;
         .lt(10px, 50%);
