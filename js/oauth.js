@@ -15,7 +15,6 @@ const OAuth = {
         authorize_uri : "https://api.weibo.com/oauth2/authorize",
         callback : "https://www.jx3box.com/wp-json/qqworld-passport/v1/module/weibo/"
     }
-
 }
 
 module.exports = OAuth

@@ -25,9 +25,8 @@ class User {
     check() {
         if (this.isLogin()) {
             let profile = JSON.parse(localStorage.getItem("profile"));
-            // 头像处理
             profile.avatar_origin = profile.avatar
-            profile.avatar = showAvatar(profile.avatar_origin,'s');
+            profile.avatar = showAvatar(profile.avatar,'s');
             this.profile = profile;
         } else {
             this.profile = this.anonymous;
