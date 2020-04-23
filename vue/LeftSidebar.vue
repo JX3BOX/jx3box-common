@@ -56,7 +56,7 @@
 }
 
 // 平板横屏
-@media screen and (max-width:@ipad){
+@media screen and (max-width:@mininote){
     .c-sidebar-left{
         .w(@aside-left - 60px);
     }

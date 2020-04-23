@@ -37,7 +37,7 @@
 }
 
 // 平板横屏
-@media screen and (max-width:@ipad){
+@media screen and (max-width:@mininote){
     .c-sidebar-right{
         .ps;
         .w(auto);

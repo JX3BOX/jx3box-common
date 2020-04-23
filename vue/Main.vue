@@ -46,7 +46,7 @@ a{
 }
 
 // 平板横屏
-@media screen and (max-width:@ipad){
+@media screen and (max-width:@mininote){
     .c-main{
         .ml(@aside-left - 60px);
         .mr(0);
