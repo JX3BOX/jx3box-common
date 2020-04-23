@@ -9,7 +9,13 @@ const OAuth = {
         client_id : "101765136",
         authorize_uri : "https://graph.qq.com/oauth2.0/authorize",
         callback : "https://www.jx3box.com/wp-json/qqworld-passport/v1/module/qq"
+    },
+    weibo : {
+        client_id : "601200765",
+        authorize_uri : "https://api.weibo.com/oauth2/authorize",
+        callback : "https://www.jx3box.com/wp-json/qqworld-passport/v1/module/weibo/"
     }
+
 }
 
 module.exports = OAuth
