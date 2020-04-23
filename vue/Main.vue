@@ -30,7 +30,7 @@ a{
     .mr(@aside-right);
     .pr;
     min-height: calc(100vh - @header-height - @bread-height);
-    margin-top:@bread-height;
+    margin-top:@header-height + @bread-height;
 }
 .c-main.without-right{
     .mr(0) !important;

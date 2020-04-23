@@ -30,6 +30,7 @@ export default {
 @pink:#f39;
 .c-footer{
     padding:10px;
+    margin:10px;
     .fz(13px);
     .clearfix;
     background-color: @bg-light;
