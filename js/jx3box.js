@@ -102,6 +102,8 @@ const JX3BOX = {
         account : {
             login : 'https://v2.jx3box.com/account/login',
             register : 'https://v2.jx3box.com/account/register',
+            email_verify : 'https://v2.jx3box.com/account/email_verify',
+            login_callback : 'https://v2.jx3box.com/account/login_callback',
         },
         dashboard : {
             home : "https://v2.jx3box.com/dashboard",
