@@ -6,14 +6,14 @@ const OAuth = {
         callback : `${__server}oauth/github/callback`
     },
     qq : {
-        client_id : "101765136",
+        client_id : "101870778",
         authorize_uri : "https://graph.qq.com/oauth2.0/authorize",
-        callback : "https://www.jx3box.com/wp-json/qqworld-passport/v1/module/qq"
+        callback : `${__server}oauth/qq/callback`
     },
     weibo : {
-        client_id : "601200765",
+        client_id : "4076650110",
         authorize_uri : "https://api.weibo.com/oauth2/authorize",
-        callback : "https://www.jx3box.com/wp-json/qqworld-passport/v1/module/weibo/"
+        callback : `${__server}oauth/weibo/callback`
     }
 }
 

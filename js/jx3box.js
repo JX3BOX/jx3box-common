@@ -114,12 +114,11 @@ const JX3BOX = {
             fav : "https://v2.jx3box.com/dashboard/fav",
             setting : "https://v2.jx3box.com/dashboard/setting",
         },
-        
-        about : "https://v2.jx3box.com/about",
 
+        about : "https://v2.jx3box.com/about",  //关于,版权,团队,联系
         search : 'https://search.jx3box.com/',
-        wiki: "https://wiki.jx3box.com/", 
-        jx3: "https://xn--3-4g8a959k.com/",
+        wiki: "https://wiki.jx3box.com/", //游戏内嵌页
+        jx3: "https://xn--3-4g8a959k.com/", //剑三大事件
     },
 
     // 其它链接
