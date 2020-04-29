@@ -20,7 +20,6 @@ class User {
             avatar_origin : default_avatar
         };
 
-        this.check()
     }
 
     // 检查当前状态
@@ -40,7 +39,7 @@ class User {
 
     // 更新指定缓存字段
     refresh(key,val){
-        localStorage.setItem(key,val);
+        return localStorage.setItem(key,val);
     }
 
     // 判断是否已登录
