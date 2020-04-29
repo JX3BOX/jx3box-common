@@ -54,11 +54,11 @@ const JX3BOX = {
     
 
     /*🌸接口*/
-    // 主站服务（栏目服务）
+    // nodejs
     __server: "https://server.jx3box.com/",
-    // 公开服务（应用服务）
+    // go
     __api: "https://api.jx3box.com/",
-    // Lavarel服务（成就、消息、评论）
+    // php
     __helperUrl: "https://helper.jx3box.com/",
     // 代理服务
     __proxy: "https://proxy.jx3box.com/",
@@ -116,7 +116,11 @@ const JX3BOX = {
             setting : "https://v2.jx3box.com/dashboard/setting",
         },
 
+
+        author : "https://v2.jx3box.com/author/", 
         about : "https://v2.jx3box.com/about",  //关于,版权,团队,联系
+
+
         search : 'https://search.jx3box.com/',
         wiki: "https://wiki.jx3box.com/", //游戏内嵌页
         jx3: "https://xn--3-4g8a959k.com/", //剑三大事件

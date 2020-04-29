@@ -2,7 +2,6 @@
 
 ## 获取code
 GET https://server.jx3box.com/oauth/jx3box/authorize  
-params schema
 ```
 client_id=<your_id>
 redirect_uri=<your_callback>
@@ -12,7 +11,6 @@ redirect_uri=<your_callback>
 
 ## 获取token
 GET https://server.jx3box.com/oauth/jx3box/access_token  
-params schema
 ```
 client_id=<your_id>
 client_secret=<your_key>
@@ -23,7 +21,6 @@ code=<given_code>
 
 ## 获取资料
 GET https://server.jx3box.com/user/info  
-params schema
 ```
 uid=<user_uid>
 ```
