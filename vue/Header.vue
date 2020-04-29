@@ -125,6 +125,7 @@
 <script>
 const axios = require("axios");
 const { JX3BOX,User } = require('../main');
+const MSG_API = JX3BOX.__helperUrl + 'api/messages'
 export default {
     name: "Header",
     data: function() {

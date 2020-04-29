@@ -19,19 +19,28 @@ class User {
             bio: "凭栏望千里，煮酒论江湖。",
             avatar_origin : default_avatar
         };
+
+        this.check()
     }
 
     // 检查当前状态
     check() {
         if (this.isLogin()) {
-            let profile = JSON.parse(localStorage.getItem("profile"));
-            profile.avatar_origin = profile.avatar
-            profile.avatar = showAvatar(profile.avatar,'s');
-            this.profile = profile;
+            this.profile.uid = localStorage.getItem("uid");
+            this.profile.group = localStorage.getItem("group");
+            this.profile.name = localStorage.getItem("name");
+            this.profile.avatar_origin = localStorage.getItem("avatar");
+            this.profile.avatar = showAvatar(this.profile.avatar_origin,'s')
+            this.profile.bio = localStorage.getItem("bio");
         } else {
             this.profile = this.anonymous;
         }
         return this;
+    }
+
+    // 更新指定缓存字段
+    refresh(key,val){
+        localStorage.setItem(key,val);
     }
 
     // 判断是否已登录
@@ -50,16 +59,11 @@ class User {
         localStorage.setItem("created_at", Date.now());
         localStorage.setItem("logged_in", true);
         localStorage.setItem("token", data.token);
-        localStorage.setItem(
-            "profile",
-            JSON.stringify({
-                uid: data.uid,
-                group: data.group,
-                name: data.name,
-                avatar: data.avatar,
-                bio: data.bio,
-            })
-        );
+        localStorage.setItem("uid", data.uid);
+        localStorage.setItem("group", data.group);
+        localStorage.setItem("name", data.name);
+        localStorage.setItem("avatar", data.avatar);
+        localStorage.setItem("bio", data.bio);
     }
 
     // 更新用户资料
@@ -86,7 +90,6 @@ class User {
         // for非鉴权接口
         localStorage.removeItem("created_at");
         localStorage.setItem("logged_in", "false");
-        localStorage.setItem("profile", this.anonymous);
         // for鉴权接口
         localStorage.removeItem("token");
     }
