@@ -46,7 +46,7 @@ export default {
     border-bottom: 1px solid @border-hr;
 
     .u-menu{
-        .pa;.lt(0);
+        .pa;.lt(0,2px);
         padding:10px;
         .none;
 
