@@ -108,12 +108,11 @@ const JX3BOX = {
         },
         dashboard : {
             home : "https://v2.jx3box.com/dashboard",
-            msg : "https://v2.jx3box.com/dashboard/msg",
-            post : "https://v2.jx3box.com/dashboard/post",
-            work : "https://v2.jx3box.com/dashboard/work",
-            feed : "https://v2.jx3box.com/dashboard/feed",
-            fav : "https://v2.jx3box.com/dashboard/fav",
-            setting : "https://v2.jx3box.com/dashboard/setting",
+            msg : "https://v2.jx3box.com/dashboard/#/msg",
+            work : "https://v2.jx3box.com/dashboard/#/work",
+            feed : "https://v2.jx3box.com/dashboard/#/feed",
+            fav : "https://v2.jx3box.com/dashboard/#/fav",
+            connect : "https://v2.jx3box.com/dashboard/#/connect",
         },
 
 
