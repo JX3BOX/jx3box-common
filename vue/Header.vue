@@ -58,7 +58,7 @@
                     id="c-header-panel"
                     @click="expandList($event, 'panel')"
                 >
-                    <a class="u-post" :href="JX3BOX.__Links.dashboard.post"><svg
+                    <a class="u-post" :href="JX3BOX.__Links.dashboard.publish"><svg
                         class="u-add"
                         viewBox="0 0 12 16"
                         version="1.1"
@@ -100,7 +100,7 @@
                             </li>
                             <li>
                                 <a
-                                    :href="JX3BOX.__Links.dashboard.setting"
+                                    :href="JX3BOX.__Links.dashboard.profile"
                                     >设置</a>
                             </li>
                             <li>
@@ -222,7 +222,7 @@ export default {
             if (Number(this.user.uid)) {
                 axios({
                     method: "get",
-                    url: MSG_API + "?" + condition + "=" + this.uid + "&length=3"
+                    url: MSG_API + "?" + condition + "=" + this.user.uid + "&length=3"
                 }).then(res => {
                     this.msgs = res.data.data.messages;
                     if (res.data.data.unread_count) {
