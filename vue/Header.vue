@@ -475,7 +475,6 @@ body{
         position: absolute;
         top: 100%;
         width: 160px;
-        z-index: 100;
 
         &:before {
             content: "";

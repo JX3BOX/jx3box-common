@@ -26,11 +26,11 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage.getItem("uid");
-            this.profile.group = localStorage.getItem("group");
+            this.profile.group = localStorage.getItem("group") || 1;
             this.profile.name = localStorage.getItem("name");
-            this.profile.avatar_origin = localStorage.getItem("avatar");
+            this.profile.avatar_origin = localStorage.getItem("avatar") || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin,'s')
-            this.profile.bio = localStorage.getItem("bio");
+            this.profile.bio = localStorage.getItem("bio") || '';
         } else {
             this.profile = this.anonymous;
         }

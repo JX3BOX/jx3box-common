@@ -31,7 +31,7 @@ export default {
 <style lang="less">
 .c-breadcrumb {
     .pf;top:@header-height;
-    .z(500);.w(100%);
+    .z(499);.w(100%);
     .h(@bread-height);
     // background-color: @bg-light;
     background-color: #fff;
