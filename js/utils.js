@@ -1,5 +1,5 @@
-const dict = require('../includes/dict.js');
-const {default_avatar} = require('./jx3box.js');
+const dict = require('../includes/dict');
+const {default_avatar} = require('./jx3box');
 
 module.exports = {
     resolveImagePath : function (str){
