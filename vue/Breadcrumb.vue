@@ -1,6 +1,6 @@
 <template>
     <div class="c-breadcrumb">
-        <div class="u-menu" @click="toggleLeftSide">
+        <div class="u-menu" @click.stop="toggleLeftSide">
             <img class="u-toggle" :class="{isopen:open}" svg-inline src="../img/menu.svg" />
         </div>
         <slot></slot>
@@ -19,11 +19,16 @@ export default {
     computed: {},
     methods: {
         toggleLeftSide : function (){
-                this.open = !this.open
-                jQuery('.c-sidebar-left').toggleClass('isopen')
-            }
+            this.open = !this.open
+            jQuery('.c-sidebar-left').toggleClass('isopen')
+        }
     },
     mounted: function() {
+        const vm = this
+        jQuery("body").on("click", function(e) {
+            vm.open = false
+            jQuery('.c-sidebar-left').removeClass('isopen')
+        });
     },
 };
 </script>
@@ -43,16 +48,15 @@ export default {
     .u-menu{
         .pa;.lt(0);
         padding:10px;
-        .h(29px);
         .none;
 
-        .u-toggle{
-            fill:@color;
+        svg{
             .h(29px);
+            fill:@color;
+        }
 
-            &.isopen{
-                fill:@primary;
-            }
+        .isopen{
+            fill:@primary;
         }
     }
 
@@ -65,6 +69,14 @@ export default {
             color: @color;
         }
         .mr(30px);
+        &:hover{
+            .u-title{
+                color:@color-link;
+            }
+            .u-channel-logo{
+                fill:@color-link;
+            }
+        }
     }
     .u-channel-logo {
         .fl;
