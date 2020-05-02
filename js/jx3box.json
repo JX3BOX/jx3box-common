@@ -10,6 +10,8 @@
     "__server": "https://server.jx3box.com/",
     "__api": "https://api.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
+    "__node": "https://node.jx3box.com/",
+    "__spider": "https://spider.jx3box.com/",
     "__proxy": "https://proxy.jx3box.com/",
 
 
