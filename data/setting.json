@@ -1,4 +1,0 @@
-{
-    "accept": "image/jpeg,image/gif,image/png,image/bmp,text/plain,text/csv,text/jx3dat,text/dat,application/pdf,application/zip,application/rar,application/x-7z-compressed,application/msword,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream",
-    "ext":["jpg","gif","png","bmp","txt","csv","jx3dat","dat","pdf","zip","rar","7z","doc","docx","xls","xlsx","ttf"]
-}
