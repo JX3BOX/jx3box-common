@@ -46,7 +46,7 @@ module.exports = {
 
     },
 
-    dataPath :function (version="latest"){
-        return __dataPath + '@' + version + '/data/'
+    dataPath :function (path,version="latest"){
+        return __dataPath + '@' + version + '/data/' + path
     }
 }
