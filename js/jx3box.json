@@ -25,6 +25,9 @@
         "mirror": "https://console.cnyixun.com/static/"
     },
 
+    "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data",
+    "__dataPath_BAK": "https://data.jx3box.com/data/",
+
     "__imgPath": "https://console.cnyixun.com/img/",
     "__imgPath_BAK": "https://cdn.jx3box.com/img/",
 
@@ -37,9 +40,6 @@
     "__emtionPath": "https://console.cnyixun.com/emotion/",
     "__emtionPath_BAK": "https://jx3box.imkog.com/emotion/",
 
-    "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-oss/data/",
-    "__dataPath_BAK": "https://cdn.jx3box.com/data/",
-    
     "__wpmirrorPath":"https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-mirror/",
     "__wpmirrorPath_BAK":"https://mirror.jx3box.com/",
 

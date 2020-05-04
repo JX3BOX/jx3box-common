@@ -1,5 +1,5 @@
 const dict = require('../includes/dict');
-const {default_avatar} = require('./jx3box');
+const {default_avatar,__dataPath} = require('./jx3box');
 
 module.exports = {
     resolveImagePath : function (str){
@@ -44,5 +44,9 @@ module.exports = {
 
         return avatar + styleMap[size]
 
+    },
+
+    dataPath :function (version="latest"){
+        return __dataPath + '@' + version + '/data/'
     }
 }
