@@ -4,7 +4,6 @@
 
     "__Root": "https://www.jx3box.com/",
     "__v2": "https://v2.jx3box.com/",
-    "__cloud": "https://cloud.jx3box.com/",
 
 
     "__server": "https://server.jx3box.com/",
@@ -89,7 +88,8 @@
             "feed" : "https://v2.jx3box.com/dashboard/#/feed",
             "fav" : "https://v2.jx3box.com/dashboard/#/fav",
             "profile" : "https://v2.jx3box.com/dashboard/#/profile",
-            "connect" : "https://v2.jx3box.com/dashboard/#/connect"
+            "connect" : "https://v2.jx3box.com/dashboard/#/connect",
+            "publish" : "https://v2.jx3box.com/dashboard/publish"
         },
 
 
