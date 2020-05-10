@@ -4,6 +4,7 @@
 
     "__Root": "https://www.jx3box.com/",
     "__v2": "https://v2.jx3box.com/",
+    "__Github": "https://github.jx3box.com/",
 
 
     "__server": "https://server.jx3box.com/",
@@ -17,33 +18,15 @@
     "__ossRoot": "https://oss.jx3box.com/",
     "__ossMirror": "https://console.cnyixun.com/",
     "__ossCloudflare": "https://jx3box.imkog.com/",
-    "__ossGithub": "https://cdn.jx3box.com/",
+
 
     "__staticPath" : {
         "jsdelivr" : "https://cdn.jsdelivr.net/gh/JX3BOX/",
         "mirror": "https://console.cnyixun.com/static/"
     },
-
     "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data",
-    "__dataPath_BAK": "https://data.jx3box.com/data/",
+    "__imgPath": "https://img.jx3box.com/",
 
-    "__imgPath": "https://console.cnyixun.com/img/",
-    "__imgPath_BAK": "https://cdn.jx3box.com/img/",
-
-    "__imagePath": "https://console.cnyixun.com/image/",
-    "__imagePath_BAK": "https://cdn.jx3box.com/image/",
-
-    "__iconPath": "https://console.cnyixun.com/icon/",
-    "__iconPath_BAK": "https://icon.jx3box.com/icon/",
-
-    "__emtionPath": "https://console.cnyixun.com/emotion/",
-    "__emtionPath_BAK": "https://jx3box.imkog.com/emotion/",
-
-    "__wpmirrorPath":"https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-mirror/",
-    "__wpmirrorPath_BAK":"https://mirror.jx3box.com/",
-
-    "__wpstaticPath": "https://cdn.jsdelivr.net/gh/iRuxu/jx3box-static/dist/",
-    "__wpstaticPath_BAK": "https://static.jx3box.com/dist/", 
 
     "__postType": {
         "posts": "论坛",
