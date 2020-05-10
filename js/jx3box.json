@@ -26,10 +26,10 @@
     },
     "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data",
     "__imgPath": "https://img.jx3box.com/",
+    "__iconPath": "https://icon.jx3box.com/",
 
 
     "__postType": {
-        "posts": "论坛",
         "macro": "剑三宏库",
         "jx3dat": "插件数据",
         "fb": "副本攻略",
@@ -38,8 +38,7 @@
         "share": "捏脸分享",
         "tool": "教程工具",
         "help": "帮助文档",
-        "post": "茶馆交流",
-        "page": "系统页面"
+        "post": "茶馆交流"
     },
 
     "__userGroup":{
@@ -82,7 +81,8 @@
 
         "search" : "https://search.jx3box.com/",
         "wiki": "https://wiki.jx3box.com/",
-        "jx3": "https://xn--3-4g8a959k.com/"
+        "jx3": "https://xn--3-4g8a959k.com/",
+        "git": "https://git.jx3box.com/"
     },
 
     "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
