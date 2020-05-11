@@ -22,31 +22,35 @@ const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
     "__Domain": "www.jx3box.com",   
 
     // 访问路径
-    "__Root": "https://www.jx3box.com/",        //旧版
-    "__v2": "https://v2.jx3box.com/",           //新版·DNS解析为cdn+ecs+github
-    "__Github": "https://github.jx3box.com/",   //github镜像
+    "__Root": "https://www.jx3box.com/",            //旧版
+    "__v2": "https://v2.jx3box.com/",               //新版·DNS解析为cdn+ecs+github
+    "__Github": "https://github.jx3box.com/",       //github镜像
 
     // 后端服务
-    "__server": "https://server.jx3box.com/",
-    "__api": "https://api.jx3box.com/",
-    "__helperUrl": "https://helper.jx3box.com/",
-    "__node": "https://node.jx3box.com/",
-    "__spider": "https://spider.jx3box.com/",
-    "__proxy": "https://proxy.jx3box.com/",
+    "__server": "https://server.jx3box.com/",       //用户,发布
+    "__api": "https://api.jx3box.com/",             //评论,搜索,百科
+    "__helperUrl": "https://helper.jx3box.com/",    //消息,成就,中台
+    "__git": "https://git.jx3box.com/",             //插件
+    "__node": "https://node.jx3box.com/",           //核心应用
+    "__spider": "https://spider.jx3box.com/",       //边缘应用
+    "__proxy": "https://proxy.jx3box.com/",         //日本代理
+    "__fn": "https://fn.jx3box.com/",               //文章
 
     // OSS镜像
-    "__ossRoot": "https://oss.jx3box.com/",
-    "__ossMirror": "https://console.cnyixun.com/",
-    "__ossCloudflare": "https://jx3box.imkog.com/",
+    "__ossRoot": "https://oss.jx3box.com/",         //上传节点
+    "__ossMirror": "https://console.cnyixun.com/",  //国内CDN
+    "__ossCloudflare": "https://jx3box.imkog.com/", //国外CDN
 
-    // 前端资源镜像
-    "__staticPath" : {
-        "jsdelivr" : "https://cdn.jsdelivr.net/gh/JX3BOX/",
-        "mirror": "https://console.cnyixun.com/static/"
+    // 前端资源
+    "__staticPath" : {                              
+        "jsdelivr" : "https://cdn.jsdelivr.net/gh/JX3BOX/",         //css+js·jsdelivr
+        "mirror": "https://console.cnyixun.com/static/"             //css+js·oss cdn
     },
-    "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data",
-    "__imgPath": "https://img.jx3box.com/",     //jx3box-oss图片
-    "__iconPath": "https://icon.jx3box.com/",   //jx3-icon游戏美术资源
+    "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data", //json·jsdelivr 
+
+    // 图片资源
+    "__imgPath": "https://img.jx3box.com/",         //jx3box-oss图片·github
+    "__iconPath": "https://icon.jx3box.com/",       //jx3-icon游戏美术资源·github
 
     // 文章类型
     "__postType": {

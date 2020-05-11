@@ -10,6 +10,7 @@
     "__server": "https://server.jx3box.com/",
     "__api": "https://api.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
+    "__git": "https://git.jx3box.com/",
     "__node": "https://node.jx3box.com/",
     "__spider": "https://spider.jx3box.com/",
     "__proxy": "https://proxy.jx3box.com/",
@@ -25,6 +26,7 @@
         "mirror": "https://console.cnyixun.com/static/"
     },
     "__dataPath": "https://cdn.jsdelivr.net/gh/JX3BOX/jx3box-data",
+    
     "__imgPath": "https://img.jx3box.com/",
     "__iconPath": "https://icon.jx3box.com/",
 
