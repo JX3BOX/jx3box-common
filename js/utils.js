@@ -33,5 +33,17 @@ module.exports = {
 
     dataPath :function (path,version="latest"){
         return __dataPath + '@' + version + '/data/' + path
+    },
+
+    getQuery : function (key){
+        let val = ''
+		let params = new URLSearchParams(location.search);
+		let isRewrite = !params.get(key)
+		if(!isRewrite){
+			val = params.get(key)
+		}else{
+			val = location.pathname.slice(1).split('/').pop()
+		}
+		return val
     }
 }
