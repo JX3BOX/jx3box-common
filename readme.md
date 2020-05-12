@@ -30,7 +30,8 @@ const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
     "__server": "https://server.jx3box.com/",       //用户,发布
     "__api": "https://api.jx3box.com/",             //评论,搜索,百科
     "__helperUrl": "https://helper.jx3box.com/",    //消息,成就,中台
-    "__git": "https://git.jx3box.com/",             //插件
+    "__git": "https://git.jx3box.com/",             //插件gitea
+    "__hub": "https://hub.jx3box.com/",             //插件hub源
     "__node": "https://node.jx3box.com/",           //核心应用
     "__spider": "https://spider.jx3box.com/",       //边缘应用
     "__proxy": "https://proxy.jx3box.com/",         //日本代理

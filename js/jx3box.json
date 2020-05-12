@@ -11,6 +11,7 @@
     "__api": "https://api.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
     "__git": "https://git.jx3box.com/",
+    "__hub": "https://hub.jx3box.com/",
     "__node": "https://node.jx3box.com/",
     "__spider": "https://spider.jx3box.com/",
     "__proxy": "https://proxy.jx3box.com/",
