@@ -25,8 +25,8 @@ jobs:
         endpoint: "oss-cn-hangzhou.aliyuncs.com"
         access-key-id: ${{secrets.AccessKey_ID}}
         access-key-secret: ${{secrets.Access_Key_Secret}}
-    - run: ossutil cp -rf lib oss://jx3box-www/jx3box-common/lib
-    - run: ossutil cp -rf lib oss://jx3box/static/jx3box-common/lib
+    - run: ossutil cp -rf lib oss://jx3box-www/common/lib
+    - run: ossutil cp -rf lib oss://jx3box/static/common/lib
 
   publish-npm:
     # needs: build
