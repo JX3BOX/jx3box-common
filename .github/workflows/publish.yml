@@ -16,6 +16,17 @@ jobs:
   #         node-version: 12
   #     - run: npm ci
   #     - run: npm test
+  deploy-oss:
+    runs-on: ubuntu-latest
+    steps:
+    - name: OSS
+      uses: manyuanrong/setup-ossutil@v1.0
+      with:
+        endpoint: "oss-cn-hangzhou.aliyuncs.com"
+        access-key-id: ${{secrets.AccessKey_ID}}
+        access-key-secret: ${{secrets.Access_Key_Secret}}
+    - run: ossutil cp -rf lib oss://jx3box-www/jx3box-common/lib
+    - run: ossutil cp -rf lib oss://jx3box/static/jx3box-common/lib
 
   publish-npm:
     # needs: build
