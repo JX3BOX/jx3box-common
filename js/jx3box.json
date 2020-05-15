@@ -23,6 +23,7 @@
 
     "__staticPath" : {
         "origin": "https://jx3box.github.io/",
+        "github": "https://jx3box.github.io/",
         "jsdelivr" : "https://cdn.jsdelivr.net/gh/JX3BOX/",
         "mirror": "https://console.cnyixun.com/static/"
     },
