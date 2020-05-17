@@ -95,7 +95,7 @@ class User {
 
     // 跳转至登录
     toLogin(url){
-        url = encodeURIComponent(url) || encodeURIComponent(location.href)
+        url = url ? encodeURIComponent(url) : encodeURIComponent(location.href)
         location.href = __Links.account.login + '?redirect=' + url
     }
 
