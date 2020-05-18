@@ -1,4 +1,4 @@
-const {default_avatar} = require('./jx3box');
+const {default_avatar,__Links} = require('./jx3box');
 
 module.exports = {
     resolveImagePath : function (str){
@@ -30,5 +30,13 @@ module.exports = {
         return avatar + styleMap[size]
 
     },
+
+    authorLink: function(uid) {
+        return __Links.author + "?uid=" + uid;
+    },
+
+    editLink : function (type,id){
+        return __Links.dashboard.publish + '#/' + type + '/' + id
+    }
     
 }
