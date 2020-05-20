@@ -41,7 +41,7 @@ module.exports = {
         return __Links.dashboard.publish + "#/" + type + "/" + id;
     },
 
-    getQuery: function (key) {
+    getRewrite: function (key) {
         let val = "";
         let params = new URLSearchParams(location.search);
         let isRewrite = !params.get(key);
