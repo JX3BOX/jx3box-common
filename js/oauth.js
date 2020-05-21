@@ -11,7 +11,7 @@ const OAuth = {
         callback : `${__server}oauth/qq/callback`
     },
     weibo : {
-        client_id : "4076650110",
+        client_id : "601200765",
         authorize_uri : "https://api.weibo.com/oauth2/authorize",
         callback : `${__server}oauth/weibo/callback`
     }
