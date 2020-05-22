@@ -13,7 +13,8 @@ const OAuth = {
     weibo : {
         client_id : "601200765",
         authorize_uri : "https://api.weibo.com/oauth2/authorize",
-        callback : `${__server}oauth/weibo/callback`
+        // callback : `${__server}oauth/weibo/callback`
+        callback : `https://www.jx3box.com/wp-json/qqworld-passport/v1/module/weibo/`
     }
 }
 
