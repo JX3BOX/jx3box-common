@@ -33,6 +33,12 @@ module.exports = {
         return avatar + styleMap[size];
     },
 
+    showMinibanner : function (url){
+        url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
+        url = url + '?x-oss-process=style/mini_banner'
+        return url
+    },
+
     authorLink: function (uid) {
         return __Links.author + "?uid=" + uid;
     },
