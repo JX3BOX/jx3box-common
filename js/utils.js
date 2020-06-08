@@ -1,4 +1,4 @@
-const { default_avatar, __Links } = require("./jx3box");
+const { default_avatar, __Links, __Root } = require("./jx3box");
 
 module.exports = {
     resolveImagePath: function (str) {
@@ -33,10 +33,10 @@ module.exports = {
         return avatar + styleMap[size];
     },
 
-    showMinibanner : function (url){
-        url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-        url = url + '?x-oss-process=style/mini_banner'
-        return url
+    showMinibanner: function (url) {
+        url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+        url = url + "?x-oss-process=style/mini_banner";
+        return url;
     },
 
     authorLink: function (uid) {
@@ -47,8 +47,12 @@ module.exports = {
         return __Links.dashboard.publish + "#/" + type + "/" + id;
     },
 
-    publishLink : function (type){
+    publishLink: function (type) {
         return __Links.dashboard.publish + "#/" + type;
+    },
+
+    postLink: function (type, pid) {
+        return __Root + type + "/?pid=" + pid;
     },
 
     getRewrite: function (key) {
@@ -62,5 +66,9 @@ module.exports = {
             val = arr[1];
         }
         return val;
+    },
+
+    buildTarget: function (edge = 1025) {
+        return window.innerWidth < edge ? "_self" : "_blank";
     },
 };
