@@ -43,12 +43,31 @@
         "bps": "职业攻略",
         "cj": "成就百科",
         "share": "捏脸分享",
-        "house": "家园蓝图",
+        "house": "家园分享",
         "tool": "教程工具",
         "help": "帮助文档",
         "system": "系统公告",
         "post": "茶馆交流",
         "memory": "回忆录"
+    },
+
+    "__cmsType": {
+        "macro": "剑三宏库",
+        "jx3dat": "插件数据",
+        "fb": "副本攻略",
+        "bps": "职业攻略",
+        "share": "捏脸分享",
+        "house": "家园分享",
+        "tool": "教程工具",
+        "help": "帮助文档",
+        "system": "系统公告",
+        "post": "茶馆交流",
+        "memory": "回忆录"
+    },
+
+    "__wikiType": {
+        "cj": "成就百科",
+        "item":"物品百科"
     },
 
     "__userGroup":{
@@ -83,7 +102,6 @@
             "connect" : "https://v2.jx3box.com/dashboard/#/connect",
             "publish" : "https://v2.jx3box.com/dashboard/publish"
         },
-
 
         "author" : "https://v2.jx3box.com/author/", 
         "about" : "https://v2.jx3box.com/about/",
