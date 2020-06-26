@@ -4,7 +4,7 @@ const {__Links,default_avatar} = require('./jx3box');
 class User {
     constructor() {
         // TOKEN有效期
-        this.expires = 14400000;
+        this.expires = 2592000000;
         this.created_at = 0;
         // 登录状态
         this.logged_in = false;

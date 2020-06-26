@@ -18,7 +18,6 @@
     "__spider": "https://spider.jx3box.com/",
     "__proxy": "https://proxy.jx3box.com/",
 
-
     "__ossRoot": "https://oss.jx3box.com/",
     "__ossMirror": "https://console.cnyixun.com/",
     "__ossCloudflare": "https://jx3box.imkog.com/",
@@ -45,7 +44,7 @@
         "tool": "教程工具",
         "house": "家园分享",
         "share": "捏脸分享",
-        "bbs": "茶馆"
+        "bbs": "茶馆交流"
     },
 
     "__cmsType": {
@@ -56,7 +55,7 @@
         "tool": "教程工具",
         "house": "家园分享",
         "share": "捏脸分享",
-        "bbs": "茶馆"
+        "bbs": "茶馆交流"
     },
 
     "__wikiType": {
@@ -80,25 +79,25 @@
 
     "__Links" : {
         "account" : {
-            "login" : "https://v2.jx3box.com/account/login",
-            "register" : "https://v2.jx3box.com/account/register",
-            "email_verify" : "https://v2.jx3box.com/account/email_verify",
-            "login_callback" : "https://v2.jx3box.com/account/login_callback",
+            "login" : "https://www.jx3box.com/account/login",
+            "register" : "https://www.jx3box.com/account/register",
+            "email_verify" : "https://www.jx3box.com/account/email_verify",
+            "login_callback" : "https://www.jx3box.com/account/login_callback",
             "oauth_server" : "https://server.jx3box.com/oauth/jx3box/authorize"
         },
         "dashboard" : {
-            "home" : "https://v2.jx3box.com/dashboard",
-            "work" : "https://v2.jx3box.com/dashboard/#/work",
-            "msg" : "https://v2.jx3box.com/dashboard/#/msg",
-            "feed" : "https://v2.jx3box.com/dashboard/#/feed",
-            "fav" : "https://v2.jx3box.com/dashboard/#/fav",
-            "profile" : "https://v2.jx3box.com/dashboard/#/profile",
-            "connect" : "https://v2.jx3box.com/dashboard/#/connect",
-            "publish" : "https://v2.jx3box.com/dashboard/publish"
+            "home" : "https://www.jx3box.com/dashboard",
+            "work" : "https://www.jx3box.com/dashboard/#/work",
+            "msg" : "https://www.jx3box.com/dashboard/#/msg",
+            "feed" : "https://www.jx3box.com/dashboard/#/feed",
+            "fav" : "https://www.jx3box.com/dashboard/#/fav",
+            "profile" : "https://www.jx3box.com/dashboard/#/profile",
+            "connect" : "https://www.jx3box.com/dashboard/#/connect",
+            "publish" : "https://www.jx3box.com/dashboard/publish"
         },
 
-        "author" : "https://v2.jx3box.com/author/", 
-        "about" : "https://v2.jx3box.com/about/",
+        "author" : "https://www.jx3box.com/author/", 
+        "about" : "https://www.jx3box.com/about/",
 
 
         "search" : "https://search.jx3box.com/",
