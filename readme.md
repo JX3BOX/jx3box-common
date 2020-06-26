@@ -16,7 +16,7 @@ const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
 ```
 
 ## JX3BOX模块说明
-```json
+```javascript
 {
     // 主域名
     "__Domain": "www.jx3box.com",   

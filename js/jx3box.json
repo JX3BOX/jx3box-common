@@ -79,25 +79,24 @@
 
     "__Links" : {
         "account" : {
-            "login" : "https://www.jx3box.com/account/login",
-            "register" : "https://www.jx3box.com/account/register",
-            "email_verify" : "https://www.jx3box.com/account/email_verify",
-            "login_callback" : "https://www.jx3box.com/account/login_callback",
-            "oauth_server" : "https://server.jx3box.com/oauth/jx3box/authorize"
+            "login" : "/account/login",
+            "register" : "/account/register",
+            "email_verify" : "/account/email_verify",
+            "login_callback" : "/account/login_callback"
         },
         "dashboard" : {
-            "home" : "https://www.jx3box.com/dashboard",
-            "work" : "https://www.jx3box.com/dashboard/#/work",
-            "msg" : "https://www.jx3box.com/dashboard/#/msg",
-            "feed" : "https://www.jx3box.com/dashboard/#/feed",
-            "fav" : "https://www.jx3box.com/dashboard/#/fav",
-            "profile" : "https://www.jx3box.com/dashboard/#/profile",
-            "connect" : "https://www.jx3box.com/dashboard/#/connect",
-            "publish" : "https://www.jx3box.com/dashboard/publish"
+            "home" : "/dashboard",
+            "work" : "/dashboard/#/work",
+            "msg" : "/dashboard/#/msg",
+            "feed" : "/dashboard/#/feed",
+            "fav" : "/dashboard/#/fav",
+            "profile" : "/dashboard/#/profile",
+            "connect" : "/dashboard/#/connect",
+            "publish" : "/dashboard/publish"
         },
 
-        "author" : "https://www.jx3box.com/author/", 
-        "about" : "https://www.jx3box.com/about/",
+        "author" : "/author/", 
+        "about" : "/about/",
 
 
         "search" : "https://search.jx3box.com/",
