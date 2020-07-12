@@ -5,7 +5,6 @@
     "__Root": "https://www.jx3box.com/",
     "__v2": "https://v2.jx3box.com/",
 
-
     "__server": "https://server.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
 
@@ -34,7 +33,6 @@
     "__imgPath": "https://img.jx3box.com/",
     "__iconPath": "https://icon.jx3box.com/",
 
-
     "__postType": {
         "macro": "剑三宏库",
         "jx3dat": "插件数据",
@@ -46,7 +44,7 @@
         "bbs": "茶馆交流"
     },
 
-    "__wikiType": {
+    "__otherType": {
         "cj": "成就百科",
         "item":"物品百科",
         "emotion":"趣图表情",
@@ -85,17 +83,11 @@
             "profile" : "/dashboard/#/profile",
             "connect" : "/dashboard/#/connect",
             "publish" : "/dashboard/publish"
-        },
-
-        "author" : "/author/", 
-        "about" : "/about/",
-
-
-        "search" : "https://search.jx3box.com/",
-        "wiki": "https://wiki.jx3box.com/",
-        "jx3": "https://xn--3-4g8a959k.com/"
+        }
     },
 
+    "__jx3": "https://xn--3-4g8a959k.com/",
+    "__search": "https://search.jx3box.com/",
     "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
     "feedback" : "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"
 

@@ -1,4 +1,4 @@
-const { default_avatar, __Links, __Root } = require("./jx3box");
+const { default_avatar, __Root } = require("./jx3box");
 
 module.exports = {
     resolveImagePath: function (str) {
@@ -39,16 +39,16 @@ module.exports = {
         return url;
     },
 
-    authorLink: function (uid) {
-        return __Links.author + "?uid=" + uid;
-    },
-
     editLink: function (type, id) {
-        return __Links.dashboard.publish + "#/" + type + "/" + id;
+        return __Root + 'dashboard/publish/#/' + type + "/" + id;
     },
 
     publishLink: function (type) {
-        return __Links.dashboard.publish + "#/" + type;
+        return __Root + 'dashboard/publish/#/' + type;
+    },
+
+    authorLink: function (uid) {
+        return __Root + 'author' + "/?uid=" + uid;
     },
 
     postLink: function (type, pid) {
