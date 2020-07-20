@@ -1,0 +1,8 @@
+{
+    "cms": {
+        "newbie": "新手易用",
+        "advanced": "进阶推荐",
+        "recommended": "编辑精选",
+        "geek": "骨灰必备"
+    }
+}
