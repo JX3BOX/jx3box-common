@@ -1,6 +1,6 @@
-import JX3BOX from "./js/jx3box";
-import SEO from "./js/seo";
-import Utils from "./js/utils";
-import User from "./js/user";
+const JX3BOX = require('./js/jx3box');
+const SEO = require('./js/seo');
+const Utils = require('./js/utils');
+const User = require('./js/user');
 
-export { JX3BOX, SEO, Utils, User };
+module.exports = { JX3BOX, SEO, Utils, User }
