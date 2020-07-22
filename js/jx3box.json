@@ -7,6 +7,7 @@
 
     "__server": "https://server.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
+    "__bb": "https://bb.jx3box.com/",
 
     "__next": "https://next.jx3box.com/",
     "__api": "https://api.jx3box.com/",
