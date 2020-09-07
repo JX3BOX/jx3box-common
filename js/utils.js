@@ -31,8 +31,8 @@ module.exports = {
 
         let avatar = ''
         if(url){
-            avatar = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-            avatar = str.replace(/http:/g, "https:")
+            avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
+            avatar = url.replace(/http:/g, "https:")
         }else{
             avatar = default_avatar
         }
