@@ -2,9 +2,12 @@ const { default_avatar, __Root } = require("./jx3box");
 
 module.exports = {
     resolveImagePath: function (str) {
-        return str && str.length
-            ? str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-            : "";
+        if(str && str.length){
+            str = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
+            str = str.replace(/http:/g, "https:")
+        }else{
+            return ""
+        }
     },
 
     checkImageLoad: function (jq) {
@@ -26,9 +29,13 @@ module.exports = {
             l: "?x-oss-process=style/avatar_l",
         };
 
-        let avatar = !url
-            ? default_avatar
-            : url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+        let avatar = ''
+        if(url){
+            avatar = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
+            avatar = str.replace(/http:/g, "https:")
+        }else{
+            avatar = default_avatar
+        }
 
         return avatar + styleMap[size];
     },
