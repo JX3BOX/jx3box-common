@@ -5,6 +5,7 @@ module.exports = {
         if(str && str.length){
             str = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
             str = str.replace(/http:/g, "https:")
+            return str
         }else{
             return ""
         }
