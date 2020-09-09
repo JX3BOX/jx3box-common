@@ -1,9 +1,9 @@
 {
     "__Domain": "www.jx3box.com",
 
-
     "__Root": "https://www.jx3box.com/",
     "__v2": "https://v2.jx3box.com/",
+    "__Github": "https://github.jx3box.com/",
 
     "__server": "https://server.jx3box.com/",
     "__helperUrl": "https://helper.jx3box.com/",
@@ -58,8 +58,8 @@
         "0" : "游客",
         "1" : "普通用户",
         "8" : "已验证用户",
-        "16" : "VIP会员",
-        "32" : "签约作者",
+        "16" : "签约作者",
+        "32" : "VIP会员",
         "64" : "管理员"
     },
 
