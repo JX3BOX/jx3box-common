@@ -8,11 +8,7 @@ npm install @jx3box/jx3box-common
 
 ## Step.2 Import
 ```javascript
-const {JX3BOX , Utils} = require('@jx3box/jx3box-common');
-```
-或
-```javascript
-const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
+import {JX3BOX , Utils} from '@jx3box/jx3box-common';
 ```
 
 ## JX3BOX模块说明
@@ -82,15 +78,16 @@ const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
     "__userGroup":{
         "0" : "游客",
         "1" : "普通用户",
-        "8" : "已验证用户",
-        "16" : "签约作者",
-        "32" : "VIP会员",
-        "64" : "管理员"
+        "8" : "邮箱已验证",
+        "16" : "手机已绑定",
+        "32" : "签约作者",
+        "64" : "管理员",
+        "128" : "超级管理员"
     },
 
     // 用户等级
     "__userLevel" : {
-        "0" : "稻香萌新"
+        "1" : "稻香萌新"
     },
 
     // 常用链接
@@ -114,9 +111,9 @@ const JX3BOX = require('@jx3box/jx3box-common/js/jx3box');
     },
 
     // 其它
-    "__jx3": "https://xn--3-4g8a959k.com/",
-    "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
-    "feedback" : "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"
+    "__jx3": "https://xn--3-4g8a959k.com/",     //剑网3.com
+    "default_avatar": "https://img.jx3box.com/image/common/logo2.png",        //默认头像
+    "feedback" : "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"   //反馈邮件地址
 
 }
 

@@ -114,5 +114,38 @@ class User {
     getUUID() {
         return localStorage.getItem("device_id");
     }
+
+    // 判断是否邮箱验证
+    isEmailMember(){
+        return this.isLogin() && this.profile.group >= 8
+    }
+
+    // 判断是否绑定手机
+    isPhoneMember(){
+        return this.isLogin() && this.profile.group >= 16
+    }
+
+    // 判断是否为签约作者
+    isSuperAuthor(){
+        return this.isLogin() && this.profile.group >= 32
+    }
+
+    // 判断是否为管理员
+    isAdmin(){
+        return this.isLogin() && this.profile.group >= 64
+    }
+
+    // 判断是否为超级管理员
+    isSuperAdmin(){
+        return this.isLogin() && this.profile.group >= 128
+    }
+
+    // TODO:判断是否为VIP
+    isVIP(){
+        return new Promise((resolve,reject)=>{
+            resolve()
+            reject()
+        })
+    }
 }
 module.exports = new User();
