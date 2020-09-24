@@ -42,9 +42,13 @@ module.exports = {
     },
 
     showMinibanner: function (url) {
-        url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
-        url = url + "?x-oss-process=style/mini_banner";
-        return url;
+        if(url){
+            url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            url = url + "?x-oss-process=style/mini_banner";
+            return url;
+        }else{
+            return ''
+        }
     },
 
     editLink: function (type, id) {
