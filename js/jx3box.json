@@ -32,6 +32,7 @@
     "__dataPath": "https://data.jx3box.com/",
     "__imgPath": "https://img.jx3box.com/",
     "__iconPath": "https://icon.jx3box.com/",
+    "__luaPath": "https://lua.jx3box.com/",
 
     "__postType": {
         "macro": "剑三宏库",
