@@ -1,0 +1,31 @@
+{
+    "github": {
+        "id": "5fbf7a66cd7d3d0f5153",
+        "authorize_uri": "https://github.com/login/oauth/authorize",
+        "tokenURL": "https://github.com/login/oauth/access_token",
+        "resourceURL": "https://api.github.com/user",
+        "callback": "oauth/github/callback"
+    },
+    "qq": {
+        "id": "101870778",
+        "authorize_uri": "https://graph.qq.com/oauth2.0/authorize",
+        "tokenURL": "https://graph.qq.com/oauth2.0/token",
+        "resourceURL": "https://graph.qq.com/oauth2.0/me",
+        "profileURL": "https://graph.qq.com/user/get_user_info",
+        "callback": "oauth/qq/callback"
+    },
+    "weibo": {
+        "id": "4076650110",
+        "authorize_uri": "https://api.weibo.com/oauth2/authorize",
+        "tokenURL": "https://api.weibo.com/oauth2/access_token",
+        "resourceURL": "https://api.weibo.com/2/users/show.json",
+        "callback": "oauth/weibo/callback"
+    },
+    "wechat": {
+        "id": "wx7804c72000d28202",
+        "authorize_uri": "https://open.weixin.qq.com/connect/qrconnect",
+        "tokenURL": "https://api.weixin.qq.com/sns/oauth2/access_token",
+        "resourceURL": "https://api.weixin.qq.com/sns/userinfo",
+        "callback": "oauth/wechat/callback"
+    }
+}

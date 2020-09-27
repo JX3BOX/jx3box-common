@@ -16,7 +16,7 @@ class User {
             group: 0,
             name: "未登录",
             avatar: showAvatar(null,'s'),
-            bio: "凭栏望千里，煮酒论江湖。",
+            // bio: "凭栏望千里，煮酒论江湖。",
             avatar_origin : default_avatar
         };
 
@@ -30,7 +30,7 @@ class User {
             this.profile.name = localStorage.getItem("name");
             this.profile.avatar_origin = localStorage.getItem("avatar") || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin,'s')
-            this.profile.bio = localStorage.getItem("bio") || '';
+            // this.profile.bio = localStorage.getItem("bio") || '';
         } else {
             this.profile = this.anonymous;
         }
@@ -62,7 +62,7 @@ class User {
         localStorage.setItem("group", data.group);
         localStorage.setItem("name", data.name);
         localStorage.setItem("avatar", data.avatar);
-        localStorage.setItem("bio", data.bio);
+        // localStorage.setItem("bio", data.bio);
     }
 
     // 更新用户资料
