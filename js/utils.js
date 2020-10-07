@@ -33,7 +33,7 @@ module.exports = {
         let avatar = ''
         if(url){
             avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-            avatar = url.replace(/http:/g, "https:")
+            avatar = avatar.replace(/http:/g, "https:")
         }else{
             avatar = default_avatar
         }
