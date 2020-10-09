@@ -10,6 +10,7 @@
     "__bb": "https://bb.jx3box.com/",
 
     "__next": "https://next.jx3box.com/",
+    "__pay": "https://pay.jx3box.com/",
     "__api": "https://api.jx3box.com/",
     "__git": "https://git.jx3box.com/",
     "__hub": "https://hub.jx3box.com/",
@@ -61,7 +62,8 @@
         "16": "手机已绑定",
         "32": "签约作者",
         "64": "管理员",
-        "128": "超级管理员"
+        "128": "超级管理员",
+        "256": "系统管理员"
     },
 
     "__userLevel": {
