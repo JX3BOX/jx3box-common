@@ -1,6 +1,10 @@
-const { showAvatar } = require("./utils");
-const { __Links, default_avatar } = require("./jx3box");
-import { $server } from "./axios";
+const axios = require('axios');
+const {showAvatar} = require('./utils');;
+const { __Links, default_avatar,__server } = require('./jx3box.json');
+const $server = axios.create({
+    withCredentials: true,
+    baseURL: __server,
+});
 
 class User {
     constructor() {
@@ -155,4 +159,5 @@ class User {
         });
     }
 }
-module.exports = new User();
+
+module.exports = new User()

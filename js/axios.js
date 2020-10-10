@@ -67,4 +67,4 @@ const $server = axios.create({
 });
 installNextInterceptors($server);
 
-export { $, axios, $next, $pay, $server };
+export { $, axios, $next, $pay, $server }
