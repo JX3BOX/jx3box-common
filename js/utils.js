@@ -1,13 +1,13 @@
-const { default_avatar, __Root } = require("./jx3box");
+const { default_avatar, __Root, __sourceType } = require("./jx3box");
 
 module.exports = {
     resolveImagePath: function (str) {
-        if(str && str.length){
-            str = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-            str = str.replace(/http:/g, "https:")
-            return str
-        }else{
-            return ""
+        if (str && str.length) {
+            str = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            str = str.replace(/http:/g, "https:");
+            return str;
+        } else {
+            return "";
         }
     },
 
@@ -30,37 +30,37 @@ module.exports = {
             l: "?x-oss-process=style/avatar_l",
         };
 
-        let avatar = ''
-        if(url){
-            avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com")
-            avatar = avatar.replace(/http:/g, "https:")
-        }else{
-            avatar = default_avatar
+        let avatar = "";
+        if (url) {
+            avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            avatar = avatar.replace(/http:/g, "https:");
+        } else {
+            avatar = default_avatar;
         }
 
         return avatar + styleMap[size];
     },
 
     showMinibanner: function (url) {
-        if(url){
+        if (url) {
             url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
             url = url + "?x-oss-process=style/mini_banner";
             return url;
-        }else{
-            return ''
+        } else {
+            return "";
         }
     },
 
     editLink: function (type, id) {
-        return __Root + 'dashboard/publish/#/' + type + "/" + id;
+        return __Root + "dashboard/publish/#/" + type + "/" + id;
     },
 
     publishLink: function (type) {
-        return __Root + 'dashboard/publish/#/' + type;
+        return __Root + "dashboard/publish/#/" + type;
     },
 
     authorLink: function (uid) {
-        return __Root + 'author' + "/?uid=" + uid;
+        return __Root + "author" + "/?uid=" + uid;
     },
 
     postLink: function (type, pid) {
@@ -83,4 +83,20 @@ module.exports = {
     buildTarget: function (edge = 1025) {
         return window.innerWidth < edge ? "_self" : "_blank";
     },
+
+    getLink : function (type,id,level){
+        if (__sourceType.cms_types.includes(type)) {
+            return __Root + type + "/?pid=" + id;
+        } else if (__sourceType.wiki_types.includes(type)) {
+            return __Root + type + "/#/view/" + id;
+        } else if (__sourceType.exam_types.includes(type)) {
+            return __Root + "exam" + "/#/" + type + "/" + id;
+        } else if(__sourceType.db_types.includes(type)){
+            return __Root + 'app/database/?type=' + type + '&query=' + id + '&level=' + level
+        }else if(__sourceType.team_types.includes(type)){
+            return __Root + 'team/#/' + type + '/view/' + id 
+        }else{
+            return __Root
+        }
+    }
 };

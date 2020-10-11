@@ -49,10 +49,27 @@
     "__otherType": {
         "cj": "成就百科",
         "item": "物品百科",
-        "emotion": "趣图表情",
         "wiki": "剑三百科",
         "question": "剑三题目",
         "paper": "剑三试卷"
+    },
+
+    "__sourceType": {
+        "cms_types": [
+            "macro",
+            "jx3dat",
+            "fb",
+            "bps",
+            "tool",
+            "house",
+            "share",
+            "bbs",
+            "wiki"
+        ],
+        "wiki_types": ["cj", "item"],
+        "exam_types": ["question", "paper"],
+        "db_types": ["skill", "buff", "npc", "doodad"],
+        "team_types": ["org", "role"]
     },
 
     "__userGroup": {
