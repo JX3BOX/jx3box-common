@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "5.2.5",
+    "version": "5.2.6",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -11,6 +11,7 @@
         "axios": "^0.20.0",
         "element-ui": "^2.13.2",
         "localforage": "^1.7.3",
+        "moment": "^2.29.1",
         "vue": "^2.6.12"
     }
 }
