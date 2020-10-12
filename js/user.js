@@ -147,7 +147,7 @@ class User {
     }
 
     // 判断是否为系统管理员
-    isSuperAdmin() {
+    isSystemAdmin() {
         return this.isLogin() && this.profile.group >= 256;
     }
 
