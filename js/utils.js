@@ -51,6 +51,18 @@ module.exports = {
         }
     },
 
+    getThumbnail : function (url,size = 88,replace = false){
+
+        if(!url) return ''
+
+        if (replace) {
+            url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            url = url.replace(/http:/g, "https:");
+        }
+
+        return url + `?x-oss-process=image/auto-orient,1/resize,m_fill,w_${size},h_${size}`;
+    },
+
     editLink: function (type, id) {
         return __Root + "dashboard/publish/#/" + type + "/" + id;
     },
