@@ -1,9 +1,13 @@
-const axios = require('axios');
-const {showAvatar} = require('./utils');;
-const { __Links, default_avatar,__server } = require('./jx3box.json');
+const axios = require("axios");
+const { showAvatar } = require("./utils");
+const { __Links, default_avatar, __server, __pay } = require("./jx3box.json");
 const $server = axios.create({
     withCredentials: true,
     baseURL: __server,
+});
+const $next = axios.create({
+    withCredentials: true,
+    baseURL: __pay,
 });
 
 class User {
@@ -20,10 +24,12 @@ class User {
             uid: 0,
             group: 0,
             name: "未登录",
+            status: 0,
+            bind_wx: 0,
             avatar: showAvatar(null, "s"),
-            // bio: "凭栏望千里，煮酒论江湖。",
             avatar_origin: default_avatar,
         };
+        this.check();
     }
 
     // 检查当前状态
@@ -32,10 +38,11 @@ class User {
             this.profile.uid = localStorage.getItem("uid");
             this.profile.group = localStorage.getItem("group") || 1;
             this.profile.name = localStorage.getItem("name");
+            this.profile.status = localStorage.getItem("status");
+            this.profile.bind_wx = localStorage.getItem("bind_wx");
             this.profile.avatar_origin =
                 localStorage.getItem("avatar") || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
-            // this.profile.bio = localStorage.getItem("bio") || '';
         } else {
             this.profile = this.anonymous;
         }
@@ -66,8 +73,9 @@ class User {
         localStorage.setItem("uid", data.uid);
         localStorage.setItem("group", data.group);
         localStorage.setItem("name", data.name);
+        localStorage.setItem("status", data.status);
+        localStorage.setItem("bind_wx", data.bind_wx);
         localStorage.setItem("avatar", data.avatar);
-        // localStorage.setItem("bio", data.bio);
     }
 
     // 更新用户资料
@@ -95,7 +103,7 @@ class User {
             localStorage.removeItem("created_at");
             localStorage.setItem("logged_in", "false");
             localStorage.removeItem("token");
-            return res
+            return res;
         });
     }
 
@@ -107,7 +115,6 @@ class User {
 
     // 获取用户基础缓存信息
     getInfo() {
-        this.check();
         return this.profile;
     }
 
@@ -151,13 +158,28 @@ class User {
         return this.isLogin() && this.profile.group >= 256;
     }
 
-    // TODO:判断是否为VIP
+    // 是否绑定微信
+    hasBindwx() {
+        return this.profile.bind_wx;
+    }
+
+    // 判断是否为VIP
     isVIP() {
-        return new Promise((resolve, reject) => {
-            resolve();
-            reject();
+        return $next.get("api/vip/i").then((res) => {
+            if (!res.data.code) {
+                let isVIP = res.data.data.was_vip;
+                if (isVIP) {
+                    let isExpired =
+                        new Date(res.data.data.expire_date) - new Date() > 0;
+                    return isExpired
+                } else {
+                    return false;
+                }
+            } else {
+                reject(res.data.msg);
+            }
         });
     }
 }
 
-module.exports = new User()
+module.exports = new User();
