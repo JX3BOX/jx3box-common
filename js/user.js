@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { showAvatar } = require("./utils");
 const { __Links, default_avatar, __server, __pay } = require("./jx3box.json");
+
 const $server = axios.create({
     withCredentials: true,
     baseURL: __server,
@@ -29,19 +30,17 @@ class User {
             avatar: showAvatar(null, "s"),
             avatar_origin: default_avatar,
         };
-        this.check();
     }
 
     // 检查当前状态
     check() {
         if (this.isLogin()) {
-            this.profile.uid = localStorage.getItem("uid");
-            this.profile.group = localStorage.getItem("group") || 1;
-            this.profile.name = localStorage.getItem("name");
-            this.profile.status = localStorage.getItem("status");
-            this.profile.bind_wx = localStorage.getItem("bind_wx");
-            this.profile.avatar_origin =
-                localStorage.getItem("avatar") || default_avatar;
+            this.profile.uid = localStorage && localStorage.getItem("uid");
+            this.profile.group = localStorage && localStorage.getItem("group") || 1;
+            this.profile.name = localStorage && localStorage.getItem("name");
+            this.profile.status = localStorage && localStorage.getItem("status");
+            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin = localStorage && localStorage.getItem("avatar") || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
         } else {
             this.profile = this.anonymous;
@@ -115,6 +114,7 @@ class User {
 
     // 获取用户基础缓存信息
     getInfo() {
+        this.check();
         return this.profile;
     }
 
@@ -160,7 +160,7 @@ class User {
 
     // 是否绑定微信
     hasBindwx() {
-        return this.profile.bind_wx;
+        return localStorage.getItem("bind_wx");
     }
 
     // 判断是否为VIP
