@@ -65,6 +65,17 @@
         "mark": "HOT",
         "status": true
     },
+    "tool": {
+        "uuid": "tool",
+        "href": "/tool",
+        "img": "/box/tool.svg",
+        "name": "工具教程",
+        "abbr": "工具",
+        "hasMark": false,
+        "markcls": "ishot",
+        "mark": "HOT",
+        "status": true
+    },
     "house": {
         "uuid": "house",
         "href": "/house",
@@ -87,26 +98,15 @@
         "mark": "HOT",
         "status": true
     },
-    "tool": {
-        "uuid": "tool",
-        "href": "/tool",
-        "img": "/box/tool.svg",
-        "name": "工具教程",
-        "abbr": "工具",
+    "wiki": {
+        "uuid": "wiki",
+        "href": "/wiki",
+        "img": "/box/wiki.svg",
+        "name": "剑三百科",
+        "abbr": "百科",
         "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
-        "status": true
-    },
-    "bbs": {
-        "uuid": "bbs",
-        "href": "/bbs",
-        "img": "/box/bbs.svg",
-        "name": "茶馆交流",
-        "abbr": "茶馆",
-        "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
+        "markcls": "isnew",
+        "mark": "NEW",
         "status": true
     },
     "emotion": {
@@ -120,15 +120,15 @@
         "mark": "ING",
         "status": false
     },
-    "wiki": {
-        "uuid": "wiki",
-        "href": "/wiki",
-        "img": "/box/wiki.svg",
-        "name": "剑三百科",
-        "abbr": "百科",
+    "bbs": {
+        "uuid": "bbs",
+        "href": "/bbs",
+        "img": "/box/bbs.svg",
+        "name": "茶馆交流",
+        "abbr": "茶馆",
         "hasMark": false,
-        "markcls": "isnew",
-        "mark": "NEW",
+        "markcls": "ishot",
+        "mark": "HOT",
         "status": true
     },
     "database": {
@@ -175,6 +175,28 @@
         "mark": "HOT",
         "status": true
     },
+    "translator": {
+        "uuid": "translator",
+        "href": "/app/translator",
+        "img": "/box/translator.svg",
+        "name": "繁体转换",
+        "abbr": "繁体",
+        "hasMark": false,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
+    "exam": {
+        "uuid": "exam",
+        "href": "/exam",
+        "img": "/box/100.svg",
+        "name": "趣味题库",
+        "abbr": "题库",
+        "hasMark": false,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
     "servers": {
         "uuid": "servers",
         "href": "/app/servers",
@@ -196,17 +218,6 @@
         "markcls": "ishot",
         "mark": "HOT",
         "status": true
-    },
-    "shop": {
-        "uuid": "shop",
-        "href": "/shop",
-        "img": "/box/shop.svg",
-        "name": "交易行",
-        "abbr": "交易行",
-        "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
-        "status": false
     },
     "facedata": {
         "uuid": "facedata",
@@ -239,17 +250,6 @@
         "hasMark": true,
         "markcls": "ishot",
         "mark": "HOT",
-        "status": true
-    },
-    "fbrank": {
-        "uuid": "fbrank",
-        "href": "/rank",
-        "img": "/box/rank2_on.svg",
-        "name": "秘境百强",
-        "abbr": "百强榜",
-        "hasMark": true,
-        "markcls": "isnew",
-        "mark": "NEW",
         "status": true
     },
     "fbdata": {
@@ -285,16 +285,16 @@
         "mark": "HOT",
         "status": true
     },
-    "dbm": {
-        "uuid": "dbm",
-        "href": "/dbm",
-        "img": "/box/jx3datbuilder.svg",
-        "name": "数据构建",
-        "abbr": "云数据",
-        "hasMark": false,
-        "markcls": "isdoing",
-        "mark": "ING",
-        "status": false
+    "fbrank": {
+        "uuid": "fbrank",
+        "href": "/rank",
+        "img": "/box/rank2_on.svg",
+        "name": "秘境百强",
+        "abbr": "百强榜",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
     },
     "team": {
         "uuid": "team",
@@ -307,27 +307,16 @@
         "mark": "NEW",
         "status": true
     },
-    "exam": {
-        "uuid": "exam",
-        "href": "/exam",
-        "img": "/box/100.svg",
-        "name": "趣味题库",
-        "abbr": "题库",
+    "dbm": {
+        "uuid": "dbm",
+        "href": "/dbm",
+        "img": "/box/jx3datbuilder.svg",
+        "name": "数据构建",
+        "abbr": "云数据",
         "hasMark": false,
-        "markcls": "isnew",
-        "mark": "NEW",
-        "status": true
-    },
-    "translator": {
-        "uuid": "translator",
-        "href": "/app/translator",
-        "img": "/box/translator.svg",
-        "name": "繁体转换",
-        "abbr": "繁体",
-        "hasMark": false,
-        "markcls": "isnew",
-        "mark": "NEW",
-        "status": true
+        "markcls": "isdoing",
+        "mark": "ING",
+        "status": false
     },
     "j3pz": {
         "uuid": "j3pz",
