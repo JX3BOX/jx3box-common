@@ -53,7 +53,7 @@ function installNextInterceptors(target) {
 
 const $next = axios.create({
     withCredentials: true,
-    baseURL: process.env.NODE_ENV === 'production' ?  __next : '/',
+    baseURL: process.env.NODE_ENV === "production" ? __next : "/",
 });
 installNextInterceptors($next);
 const $pay = axios.create({
@@ -67,4 +67,4 @@ const $server = axios.create({
 });
 installNextInterceptors($server);
 
-export { $, axios, $next, $pay, $server }
+export { $, axios, $next, $pay, $server };
