@@ -6,9 +6,6 @@ Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 const broadcast = new Vue();
 
-const $ = axios.create({
-    withCredentials: true,
-});
 function installInterceptors(target) {
     target["interceptors"]["response"].use(
         function (response) {
@@ -25,8 +22,6 @@ function installInterceptors(target) {
         }
     );
 }
-installInterceptors(axios);
-installInterceptors($);
 
 function installNextInterceptors(target) {
     target["interceptors"]["response"].use(
@@ -67,4 +62,11 @@ const $server = axios.create({
 });
 installNextInterceptors($server);
 
-export { $, axios, $next, $pay, $server };
+export {
+    axios,
+    $next,
+    $pay,
+    $server,
+    installInterceptors,
+    installNextInterceptors,
+};
