@@ -6,11 +6,11 @@ function getStat(type, id) {
 }
 
 // 同一个ip的同一篇文章的同一个动作10分钟内不重复统计
-function postStat(type, id) {
+function postStat(type, id,action = 'views') {
     return $next.get("api/summary-any/" + type + "-" + id, {
         params: {
             type: type,
-            actions: "views",
+            actions: action,
         },
     });
 }
