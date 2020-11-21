@@ -60,7 +60,7 @@
         "img": "/box/item.svg",
         "name": "物品百科",
         "abbr": "物品",
-        "hasMark": false,
+        "hasMark": true,
         "markcls": "ishot",
         "mark": "HOT",
         "status": true
