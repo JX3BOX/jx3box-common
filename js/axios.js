@@ -53,12 +53,12 @@ const $next = axios.create({
 installNextInterceptors($next);
 const $pay = axios.create({
     withCredentials: true,
-    baseURL: __pay,
+    baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
 });
 installNextInterceptors($pay);
 const $server = axios.create({
     withCredentials: true,
-    baseURL: __server,
+    baseURL: process.env.NODE_ENV === "production" ? __server : "/",
 });
 installNextInterceptors($server);
 
