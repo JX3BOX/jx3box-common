@@ -1,4 +1,4 @@
-const { default_avatar, __Root, __sourceType } = require("./jx3box");
+const { default_avatar, __Root, __sourceType, __postType, __otherType } = require("./jx3box");
 
 module.exports = {
     resolveImagePath: function (str) {
@@ -96,6 +96,7 @@ module.exports = {
         return window.innerWidth < edge ? "_self" : "_blank";
     },
 
+    // 根据帖子类型+ID获取对应帖子着陆页
     getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
             return __Root + type + "/?pid=" + id;
@@ -112,5 +113,12 @@ module.exports = {
         } else {
             return __Root
         }
+    },
+
+    // 根据帖子类型获取对应展示名称
+    getTypeLabel: function (type) {
+        if (__postType[type]) return __postType[type];
+        if (__otherType[type]) return __otherType[type];
+        return type;
     }
 };
