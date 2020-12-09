@@ -66,7 +66,7 @@
             "bbs",
             "wiki"
         ],
-        "wiki_types": ["cj", "item"],
+        "wiki_types": ["cj", "achievement", "item", "item_plan"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role"]

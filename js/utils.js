@@ -96,18 +96,20 @@ module.exports = {
         return window.innerWidth < edge ? "_self" : "_blank";
     },
 
-    getLink : function (type,id,level){
+    getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
             return __Root + type + "/?pid=" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
+            if (type === 'item_plan') return __Root + "item/#/plan_view/" + id;
+            if (type === 'achievement') type = 'cj';
             return __Root + type + "/#/view/" + id;
         } else if (__sourceType.exam_types.includes(type)) {
             return __Root + "exam" + "/#/" + type + "/" + id;
-        } else if(__sourceType.db_types.includes(type)){
+        } else if (__sourceType.db_types.includes(type)) {
             return __Root + 'app/database/?type=' + type + '&query=' + id + '&level=' + level
-        }else if(__sourceType.team_types.includes(type)){
-            return __Root + 'team/#/' + type + '/view/' + id 
-        }else{
+        } else if (__sourceType.team_types.includes(type)) {
+            return __Root + 'team/#/' + type + '/view/' + id
+        } else {
             return __Root
         }
     }
