@@ -48,7 +48,9 @@
 
     "__otherType": {
         "cj": "成就百科",
+        "achievement": "成就百科",
         "item": "物品百科",
+        "item_plan": "物品清单",
         "wiki": "剑三百科",
         "question": "剑三题目",
         "paper": "剑三试卷"
@@ -66,7 +68,7 @@
             "bbs",
             "wiki"
         ],
-        "wiki_types": ["cj", "item"],
+        "wiki_types": ["cj", "achievement", "item", "item_plan"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role"]

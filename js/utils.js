@@ -1,4 +1,4 @@
-const { default_avatar, __Root, __sourceType } = require("./jx3box");
+const { default_avatar, __Root, __sourceType, __postType, __otherType } = require("./jx3box");
 const tvmap = {
     douyu :'https://www.douyu.com/',
     bilibili :  'https://live.bilibili.com/',
@@ -101,23 +101,36 @@ module.exports = {
         return window.innerWidth < edge ? "_self" : "_blank";
     },
 
-    getLink : function (type,id,level){
+    // 根据帖子类型+ID获取对应帖子着陆页
+    getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
             return __Root + type + "/?pid=" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
+            if (type === 'item_plan') return __Root + "item/#/plan_view/" + id;
+            if (type === 'achievement') type = 'cj';
             return __Root + type + "/#/view/" + id;
         } else if (__sourceType.exam_types.includes(type)) {
             return __Root + "exam" + "/#/" + type + "/" + id;
-        } else if(__sourceType.db_types.includes(type)){
+        } else if (__sourceType.db_types.includes(type)) {
             return __Root + 'app/database/?type=' + type + '&query=' + id + '&level=' + level
-        }else if(__sourceType.team_types.includes(type)){
-            return __Root + 'team/#/' + type + '/view/' + id 
-        }else{
+        } else if (__sourceType.team_types.includes(type)) {
+            return __Root + 'team/#/' + type + '/view/' + id
+        } else {
             return __Root
         }
     },
 
+    
+    // 根据帖子类型获取对应展示名称
+    getTypeLabel: function (type) {
+        if (__postType[type]) return __postType[type];
+        if (__otherType[type]) return __otherType[type];
+        return type;
+    },
+
+    // 直播平台
     getTVlink : function (tv_type,tv_id){
         return tvmap[tv_type] + tv_id
-    }
+    },
+    
 };
