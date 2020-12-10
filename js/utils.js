@@ -1,4 +1,9 @@
 const { default_avatar, __Root, __sourceType } = require("./jx3box");
+const tvmap = {
+    douyu :'https://www.douyu.com/',
+    bilibili :  'https://live.bilibili.com/',
+    huya : 'https://www.huya.com/'
+}
 
 module.exports = {
     resolveImagePath: function (str) {
@@ -110,5 +115,9 @@ module.exports = {
         }else{
             return __Root
         }
+    },
+
+    getTVlink : function (tv_type,tv_id){
+        return tvmap[tv_type] + tv_id
     }
 };
