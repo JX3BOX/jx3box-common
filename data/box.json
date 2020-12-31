@@ -98,17 +98,6 @@
         "mark": "NEW",
         "status": true
     },
-    "emotion": {
-        "uuid": "emotion",
-        "href": "/emotion",
-        "img": "/box/pig.svg",
-        "name": "沙雕表情",
-        "abbr": "表情",
-        "hasMark": false,
-        "markcls": "isdoing",
-        "mark": "ING",
-        "status": false
-    },
     "bbs": {
         "uuid": "bbs",
         "href": "/bbs",
