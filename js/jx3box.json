@@ -53,7 +53,8 @@
         "item_plan": "物品清单",
         "wiki": "剑三百科",
         "question": "剑三题目",
-        "paper": "剑三试卷"
+        "paper": "剑三试卷",
+        "collection":"剑三小册"
     },
 
     "__sourceType": {
