@@ -277,12 +277,12 @@
     "team": {
         "uuid": "team",
         "href": "/team",
-        "img": "/box/team_on.svg",
+        "img": "/box/team.svg",
         "name": "团队管理",
         "abbr": "团队",
         "hasMark": true,
-        "markcls": "isnew",
-        "mark": "NEW",
+        "markcls": "ishot",
+        "mark": "HOT",
         "status": true
     },
     "dbm": {
@@ -330,10 +330,10 @@
         "mark": "NEW",
         "status": true
     },
-    "minami": {
-        "uuid": "minami",
-        "href": "http://minamistudio.online/jx3simulator/index.html",
-        "img": "/box/minami.svg",
+    "xls": {
+        "uuid": "xls",
+        "href": "https://www.jx3box.com/bps/?pid=20321#/",
+        "img": "/box/xls.svg",
         "name": "DPS模拟",
         "abbr": "DPS",
         "hasMark": false,
