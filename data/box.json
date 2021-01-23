@@ -269,7 +269,7 @@
         "img": "/box/rank2_on.svg",
         "name": "秘境百强",
         "abbr": "百强榜",
-        "hasMark": true,
+        "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
         "status": true
@@ -295,6 +295,17 @@
         "markcls": "isdoing",
         "mark": "ING",
         "status": false
+    },
+    "collection": {
+        "uuid": "collection",
+        "href": "/collection",
+        "img": "/box/collection.svg",
+        "name": "剑三小册",
+        "abbr": "小册",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
     },
     "j3pz": {
         "uuid": "j3pz",
@@ -372,6 +383,17 @@
         "hasMark": false,
         "markcls": "ishot",
         "mark": "HOT",
+        "status": true
+    },
+    "wbl": {
+        "uuid": "wbl",
+        "href": "https://jx3.seasunwbl.com",
+        "img": "/box/wbl.png",
+        "name": "万宝楼",
+        "abbr": "万宝楼",
+        "hasMark": true,
+        "markcls": "isnew",
+        "mark": "NEW",
         "status": true
     }
 }
