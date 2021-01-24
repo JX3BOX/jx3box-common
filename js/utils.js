@@ -116,6 +116,10 @@ module.exports = {
         }
     },
 
+    getAppType : function (){
+        return location.pathname.slice(1).split("/")[0];
+    },
+
     getQuery : function (key){
         let params = new URLSearchParams(location.search);
         return params.get(key)
