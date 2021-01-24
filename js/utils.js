@@ -97,6 +97,30 @@ module.exports = {
         return val;
     },
 
+    getPID : function (){
+        let params = new URLSearchParams(location.search);
+        let pid = params.get("pid")
+        if(pid && !isNaN(pid)){
+            return pid
+        }else{
+            return 0
+        }
+    },
+
+    getAppID : function (){
+        let arr = location.pathname.slice(1).split("/");
+        if(arr.length && !isNaN(arr[1])){
+            return arr[1]
+        }else{
+            return 0
+        }
+    },
+
+    getQuery : function (key){
+        let params = new URLSearchParams(location.search);
+        return params.get(key)
+    },
+
     buildTarget: function (edge = 1025) {
         return window.innerWidth < edge ? "_self" : "_blank";
     },
@@ -119,7 +143,6 @@ module.exports = {
             return __Root
         }
     },
-
     
     // 根据帖子类型获取对应展示名称
     getTypeLabel: function (type) {
