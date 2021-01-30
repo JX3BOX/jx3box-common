@@ -77,11 +77,11 @@ module.exports = {
     },
 
     authorLink: function (uid) {
-        return __Root + "author" + "/?uid=" + uid;
+        return __Root + "author" + "/" + uid;
     },
 
     postLink: function (type, pid) {
-        return __Root + type + "/?pid=" + pid;
+        return __Root + type + "/" + pid;
     },
 
     getRewrite: function (key) {
@@ -132,7 +132,7 @@ module.exports = {
     // 根据帖子类型+ID获取对应帖子着陆页
     getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
-            return __Root + type + "/?pid=" + id;
+            return __Root + type + "/" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === 'item_plan') return __Root + "item/#/plan_view/" + id;
             if (type === 'achievement') type = 'cj';

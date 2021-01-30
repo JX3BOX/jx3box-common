@@ -300,7 +300,7 @@
         "uuid": "collection",
         "href": "/collection",
         "img": "/box/collection.svg",
-        "name": "剑三小册",
+        "name": "文集小册",
         "abbr": "小册",
         "hasMark": true,
         "markcls": "isnew",

@@ -56,12 +56,12 @@ class User {
     // 判断是否已登录
     isLogin() {
         this.created_at =
-            localStorage.getItem("created_at") == null
+            !localStorage.getItem("created_at")
                 ? -Infinity
                 : localStorage.getItem("created_at");
         this.logged_in =
             localStorage.getItem("logged_in") == "true" ? true : false;
-        return this.logged_in && Date.now() - this.created_at < this.expires;
+        return this.logged_in && (Date.now() - this.created_at < this.expires);
     }
 
     // 保存用户资料
