@@ -159,5 +159,20 @@ module.exports = {
     getTVlink : function (tv_type,tv_id){
         return tvmap[tv_type] + tv_id
     },
-    
+
+    // 将时间戳转为字符串格式
+    ts2str(timestamp, opt = {polished: true, separator: '-'}) {
+        let dt = new Date(parseInt(timestamp) * 1000);
+        let year = dt.getFullYear();
+        let month = dt.getMonth() + 1;
+        let date = dt.getDate();
+        let str = opt.polished ?
+            `${year}${opt.separator}${polish(month)}${opt.separator}${polish(date)}` :
+            `${year}${opt.separator}${month}${opt.separator}${date}`;
+        return str;
+
+        function polish(val) {
+            return val < 10 ? ('0' + val) : val
+        }
+    }
 };
