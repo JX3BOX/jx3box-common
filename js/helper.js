@@ -10,7 +10,7 @@ const $http = axios.create({
 installInterceptors($http);
 
 // 百科攻略
-let wiki_post = {
+let WikiPost = {
     // 获取最新攻略
     newest(type, id) {
         if (!id) return;
@@ -64,7 +64,7 @@ let wiki_post = {
     },
 
     // 我的百科攻略列表
-    my_list(params) {
+    myList(params) {
         return $http({
             method: "GET",
             url: `/api/my/wiki/posts`,
@@ -73,8 +73,8 @@ let wiki_post = {
         });
     },
 
-    // 删除百科攻略
-    my_remove(post_id) {
+    // 删除我的百科攻略
+    myRemove(post_id) {
         if (!post_id) return null;
         return $http({
             method: "PUT",
@@ -84,6 +84,51 @@ let wiki_post = {
     },
 }
 
+// 百科评论
+let WikiComment = {
+    // 百科评论列表
+    list(type, id) {
+        if (!id) return;
+        return $http({
+            method: "GET",
+            url: `/api/wiki/comments`,
+            headers: {Accept: "application/prs.helper.v2+json"},
+            params: {type: type, source_id: id},
+        })
+    },
+
+    // 创建百科评论
+    save(params) {
+        return $http({
+            method: "POST",
+            url: `/api/wiki/comment`,
+            headers: {Accept: "application/prs.helper.v2+json"},
+            data: qs.stringify({comment: params}),
+        })
+    },
+
+    // 我的百科评论列表
+    myList(params) {
+        return $http({
+            method: "GET",
+            url: `/api/my/wiki/comments`,
+            headers: {Accept: "application/prs.helper.v2+json"},
+            params: params,
+        });
+    },
+
+    // 删除我的百科评论
+    myRemove(comment_id) {
+        if (!comment_id) return null;
+        return $http({
+            method: "PUT",
+            url: `/api/my/wiki/comment/${comment_id}/remove`,
+            headers: {Accept: "application/prs.helper.v2+json"},
+        });
+    }
+}
+
 export {
-    wiki_post,
+    WikiPost,
+    WikiComment,
 };
