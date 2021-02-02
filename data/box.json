@@ -87,11 +87,11 @@
         "mark": "HOT",
         "status": true
     },
-    "wiki": {
-        "uuid": "wiki",
-        "href": "/wiki",
+    "knowledge": {
+        "uuid": "knowledge",
+        "href": "/knowledge",
         "img": "/box/wiki.svg",
-        "name": "剑三百科",
+        "name": "通识百科",
         "abbr": "百科",
         "hasMark": false,
         "markcls": "isnew",
