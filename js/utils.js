@@ -142,7 +142,7 @@ module.exports = {
         } else if (__sourceType.db_types.includes(type)) {
             return __Root + 'app/database/?type=' + type + '&query=' + id + '&level=' + level
         } else if (__sourceType.team_types.includes(type)) {
-            return __Root + 'team/#/' + type + '/view/' + id
+            return __Root + 'team/' + type + '/' + id
         } else {
             return __Root
         }
