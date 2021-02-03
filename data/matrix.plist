@@ -148,17 +148,17 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>wiki</string>
+		<string>knowledge</string>
 		<key>title</key>
-		<string>剑三百科</string>
+		<string>通识百科</string>
 		<key>pic</key>
-		<string>wiki</string>
+		<string>knowledge</string>
 		<key>genre</key>
 		<string>实用工具</string>
 		<key>isStandalone</key>
 		<false/>
 		<key>goto</key>
-		<string>/wiki</string>
+		<string>/knowledge</string>
 		<key>tag</key>
 		<string></string>
 	</dict>

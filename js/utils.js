@@ -1,4 +1,12 @@
-const { default_avatar, __Root, __sourceType, __postType, __otherType } = require("./jx3box");
+const {
+    default_avatar,
+    __Root,
+    __sourceType,
+    __postType,
+    __otherType,
+    __imgPath,
+    __iconPath,
+} = require("./jx3box");
 const tvmap = {
     douyu :'https://www.douyu.com/',
     bilibili :  'https://live.bilibili.com/',
@@ -159,5 +167,29 @@ module.exports = {
     getTVlink : function (tv_type,tv_id){
         return tvmap[tv_type] + tv_id
     },
-    
+
+    // 将时间戳转为字符串格式
+    ts2str(timestamp, opt = {polished: true, separator: '-'}) {
+        let dt = new Date(parseInt(timestamp) * 1000);
+        let year = dt.getFullYear();
+        let month = dt.getMonth() + 1;
+        let date = dt.getDate();
+        let str = opt.polished ?
+            `${year}${opt.separator}${polish(month)}${opt.separator}${polish(date)}` :
+            `${year}${opt.separator}${month}${opt.separator}${date}`;
+        return str;
+
+        function polish(val) {
+            return val < 10 ? ('0' + val) : val
+        }
+    },
+
+    // 剑三图标链接
+    iconLink(icon_id) {
+        if (isNaN(parseInt(icon_id))) {
+            return `${__imgPath}image/common/nullicon.png`;
+        } else {
+            return `${__iconPath}icon/${icon_id}.png`;
+        }
+    },
 };

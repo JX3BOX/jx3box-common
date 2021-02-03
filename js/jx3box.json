@@ -51,7 +51,7 @@
         "achievement": "成就百科",
         "item": "物品百科",
         "item_plan": "物品清单",
-        "wiki": "剑三百科",
+        "knowledge": "通识百科",
         "question": "剑三题目",
         "paper": "剑三试卷",
         "collection":"剑三小册"
@@ -66,10 +66,9 @@
             "tool",
             "house",
             "share",
-            "bbs",
-            "wiki"
+            "bbs"
         ],
-        "wiki_types": ["cj", "achievement", "item", "item_plan","collection"],
+        "wiki_types": ["cj", "achievement", "item", "item_plan","collection","knowledge"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role"]
