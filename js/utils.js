@@ -1,4 +1,12 @@
-const { default_avatar, __Root, __sourceType, __postType, __otherType } = require("./jx3box");
+const {
+    default_avatar,
+    __Root,
+    __sourceType,
+    __postType,
+    __otherType,
+    __imgPath,
+    __iconPath,
+} = require("./jx3box");
 const tvmap = {
     douyu :'https://www.douyu.com/',
     bilibili :  'https://live.bilibili.com/',
@@ -174,5 +182,14 @@ module.exports = {
         function polish(val) {
             return val < 10 ? ('0' + val) : val
         }
-    }
+    },
+
+    // 剑三图标链接
+    iconLink(icon_id) {
+        if (isNaN(parseInt(icon_id))) {
+            return `${__imgPath}image/common/nullicon.png`;
+        } else {
+            return `${__iconPath}icon/${icon_id}.png`;
+        }
+    },
 };
