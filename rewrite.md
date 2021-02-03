@@ -28,10 +28,10 @@ rewrite ^/share/(\d+)\/?$    /share/ last;
 rewrite ^/wp-json/qqworld-passport/v1/module/weibo/(.*) https://server.jx3box.com/oauth/weibo/callback$1 permanent;
 
 
-
-------------
-
-//团队栏目
+<!-- 团队栏目 -->
 location /team {
     try_files $uri $uri/ /team/index.html;
 }
+
+<!-- 百科栏目 -->
+rewrite ^/wiki(.*) https://www.jx3box.com/knowledge$1 permanent;
