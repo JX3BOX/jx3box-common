@@ -7,15 +7,6 @@ on: [push]
 #     types: [created]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 12
-  #     - run: npm ci
-  #     - run: npm test
 
   publish-npm:
     # needs: build
@@ -45,6 +36,14 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
   
       - name: OSS
         uses: manyuanrong/setup-ossutil@v2.0
