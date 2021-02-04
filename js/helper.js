@@ -12,13 +12,13 @@ installInterceptors($http);
 // 百科攻略
 let WikiPost = {
     // 获取最新攻略
-    newest(type, id) {
+    newest(type, id, supply = 1) {
         if (!id) return;
         return $http({
             method: "GET",
             url: `/api/wiki/post`,
             headers: {Accept: "application/prs.helper.v2+json"},
-            params: {type: type, source_id: id},
+            params: {type: type, source_id: id, supply: supply},
         })
     },
 
