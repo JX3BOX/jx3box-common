@@ -171,6 +171,7 @@
         "uuid": "translator",
         "href": "/app/translator",
         "img": "/box/translator.svg",
+        "hover": "/box/translator_on.svg",
         "name": "繁体转换",
         "abbr": "繁体",
         "hasMark": false,
