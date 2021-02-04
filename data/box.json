@@ -65,27 +65,16 @@
         "mark": "HOT",
         "status": true
     },
-    "tool": {
-        "uuid": "tool",
-        "href": "/tool",
-        "img": "/box/tool.svg",
-        "name": "工具教程",
-        "abbr": "工具",
+    "quest": {
+        "uuid": "quest",
+        "href": "/quest",
+        "img": "/box/quest.svg",
+        "name": "任务百科",
+        "abbr": "任务",
         "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
-        "status": true
-    },
-    "share": {
-        "uuid": "share",
-        "href": "/share",
-        "img": "/box/face.svg",
-        "name": "捏脸分享",
-        "abbr": "捏脸",
-        "hasMark": false,
-        "markcls": "ishot",
-        "mark": "HOT",
-        "status": true
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": false
     },
     "knowledge": {
         "uuid": "knowledge",
@@ -96,6 +85,17 @@
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
+        "status": true
+    },
+    "tool": {
+        "uuid": "tool",
+        "href": "/tool",
+        "img": "/box/tool.svg",
+        "name": "工具教程",
+        "abbr": "工具",
+        "hasMark": false,
+        "markcls": "ishot",
+        "mark": "HOT",
         "status": true
     },
     "bbs": {
@@ -164,17 +164,6 @@
         "mark": "NEW",
         "status": true
     },
-    "exam": {
-        "uuid": "exam",
-        "href": "/exam",
-        "img": "/box/100.svg",
-        "name": "趣味题库",
-        "abbr": "题库",
-        "hasMark": false,
-        "markcls": "isnew",
-        "mark": "NEW",
-        "status": true
-    },
     "servers": {
         "uuid": "servers",
         "href": "/app/servers",
@@ -230,6 +219,39 @@
         "mark": "HOT",
         "status": true
     },
+    "team": {
+        "uuid": "team",
+        "href": "/team",
+        "img": "/box/team.svg",
+        "name": "团队管理",
+        "abbr": "团队",
+        "hasMark": true,
+        "markcls": "ishot",
+        "mark": "HOT",
+        "status": true
+    },
+    "fbrank": {
+        "uuid": "fbrank",
+        "href": "/rank",
+        "img": "/box/rank2_on.svg",
+        "name": "秘境百强",
+        "abbr": "百强榜",
+        "hasMark": false,
+        "markcls": "isnew",
+        "mark": "NEW",
+        "status": true
+    },
+    "dbm": {
+        "uuid": "dbm",
+        "href": "/dbm",
+        "img": "/box/jx3datbuilder.svg",
+        "name": "数据构建",
+        "abbr": "云数据",
+        "hasMark": false,
+        "markcls": "isdoing",
+        "mark": "ING",
+        "status": false
+    },
     "fbdata": {
         "uuid": "fbdata",
         "href": "/fb/#/skill",
@@ -263,38 +285,16 @@
         "mark": "HOT",
         "status": true
     },
-    "fbrank": {
-        "uuid": "fbrank",
-        "href": "/rank",
-        "img": "/box/rank2_on.svg",
-        "name": "秘境百强",
-        "abbr": "百强榜",
+    "exam": {
+        "uuid": "exam",
+        "href": "/exam",
+        "img": "/box/100.svg",
+        "name": "趣味题库",
+        "abbr": "题库",
         "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
         "status": true
-    },
-    "team": {
-        "uuid": "team",
-        "href": "/team",
-        "img": "/box/team.svg",
-        "name": "团队管理",
-        "abbr": "团队",
-        "hasMark": true,
-        "markcls": "ishot",
-        "mark": "HOT",
-        "status": true
-    },
-    "dbm": {
-        "uuid": "dbm",
-        "href": "/dbm",
-        "img": "/box/jx3datbuilder.svg",
-        "name": "数据构建",
-        "abbr": "云数据",
-        "hasMark": false,
-        "markcls": "isdoing",
-        "mark": "ING",
-        "status": false
     },
     "collection": {
         "uuid": "collection",
@@ -305,6 +305,17 @@
         "hasMark": true,
         "markcls": "isnew",
         "mark": "NEW",
+        "status": true
+    },
+    "share": {
+        "uuid": "share",
+        "href": "/share",
+        "img": "/box/face.svg",
+        "name": "捏脸分享",
+        "abbr": "捏脸",
+        "hasMark": false,
+        "markcls": "ishot",
+        "mark": "HOT",
         "status": true
     },
     "j3pz": {
@@ -391,7 +402,7 @@
         "img": "/box/wbl.png",
         "name": "万宝楼",
         "abbr": "万宝楼",
-        "hasMark": true,
+        "hasMark": false,
         "markcls": "isnew",
         "mark": "NEW",
         "status": true
