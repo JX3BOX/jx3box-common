@@ -128,7 +128,15 @@ let WikiComment = {
     }
 }
 
+// 面包屑
+function getBread(channel){
+    return $http.get('api/breadcrumb/' + channel,{
+        headers: {Accept: "application/prs.helper.v2+json"},
+    })
+}
+
 export {
     WikiPost,
     WikiComment,
+    getBread
 };
