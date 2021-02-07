@@ -50,7 +50,7 @@
         "achievement": "成就",
         "item": "物品",
         "knowledge": "通识",
-        "quest":"任务"
+        "quest": "任务"
     },
 
     "__otherType": {
@@ -61,8 +61,8 @@
         "knowledge": "通识百科",
         "question": "剑三题目",
         "paper": "剑三试卷",
-        "collection":"剑三小册",
-        "quest":"任务百科"
+        "collection": "剑三小册",
+        "quest": "任务百科"
     },
 
     "__sourceType": {
@@ -76,7 +76,16 @@
             "share",
             "bbs"
         ],
-        "wiki_types": ["cj", "achievement", "item", "item_plan","collection","knowledge","quest"],
+        "wiki_types": [
+            "cj",
+            "achievement",
+            "item",
+            "item_plan",
+            "collection",
+            "wiki",
+            "knowledge",
+            "quest"
+        ],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role"]
