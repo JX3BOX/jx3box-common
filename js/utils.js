@@ -144,6 +144,7 @@ module.exports = {
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === 'item_plan') return __Root + "item/#/plan_view/" + id;
             if (type === 'achievement') type = 'cj';
+            if (type === 'wiki') type = 'knowledge';
             return __Root + type + "/#/view/" + id;
         } else if (__sourceType.exam_types.includes(type)) {
             return __Root + "exam" + "/#/" + type + "/" + id;
