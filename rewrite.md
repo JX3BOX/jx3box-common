@@ -8,6 +8,7 @@ rewrite ^/jx3dat/(\d+)\/?$    /jx3dat/ last;
 rewrite ^/fb/(\d+)\/?$    /fb/ last;
 #rewrite ^/bps/(\d+)\/?$    /bps/?pid=$1 permanent;
 rewrite ^/bps/(\d+)\/?$    /bps/ last;
+rewrite ^/rank/race/(\d+)\/?$    /rank/race/$1 last;
 #tool
 #rewrite ^/tool/(\d+)\/?$    /tool/?pid=$1 permanent;
 rewrite ^/tool/(\d+)\/?$    /tool/ last;
@@ -31,9 +32,6 @@ rewrite ^/wp-json/qqworld-passport/v1/module/weibo/(.*) https://server.jx3box.co
 <!-- 团队栏目 -->
 location /team {
     try_files $uri $uri/ /team/index.html;
-}
-location /rank/race {
-    try_files $uri $uri/ /rank/race/index.html;
 }
 
 <!-- 百科栏目 -->
