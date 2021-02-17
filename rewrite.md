@@ -32,6 +32,9 @@ rewrite ^/wp-json/qqworld-passport/v1/module/weibo/(.*) https://server.jx3box.co
 location /team {
     try_files $uri $uri/ /team/index.html;
 }
+location /rank/race {
+    try_files $uri $uri/ /rank/race/index.html;
+}
 
 <!-- 百科栏目 -->
 rewrite ^/wiki(.*) https://www.jx3box.com/knowledge$1 permanent;

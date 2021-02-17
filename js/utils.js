@@ -152,6 +152,8 @@ module.exports = {
             return __Root + 'app/database/?type=' + type + '&query=' + id + '&level=' + level
         } else if (__sourceType.team_types.includes(type)) {
             return __Root + 'team/' + type + '/' + id
+        } else if(type == 'rank'){
+            return __Root + 'rank/race/' + id
         } else {
             return __Root
         }
