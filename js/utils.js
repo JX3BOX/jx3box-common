@@ -153,12 +153,10 @@ module.exports = {
         } else if (__sourceType.team_types.includes(type)) {
             return __Root + 'team/' + type + '/' + id
         } else if(type == 'rank'){
-            let event_id = type
-            let achieve_id = id
-            let server = level
+            let event_id = id
+            let achieve_id = level
             let url = __Root + 'rank/race/' + event_id
             if(achieve_id) url += '#/rank/' + achieve_id
-            if(server) url += '/' + server
             return  url
         } else {
             return __Root
