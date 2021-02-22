@@ -6,10 +6,7 @@ const $server = axios.create({
     withCredentials: true,
     baseURL: __server,
 });
-const $next = axios.create({
-    withCredentials: true,
-    baseURL: __pay,
-});
+import { $pay } from "./axios";
 
 class User {
     constructor() {
@@ -36,11 +33,16 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group = localStorage && localStorage.getItem("group") || 1;
+            this.profile.group =
+                (localStorage && localStorage.getItem("group")) || 1;
             this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status = localStorage && localStorage.getItem("status");
-            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin = localStorage && localStorage.getItem("avatar") || default_avatar;
+            this.profile.status =
+                localStorage && localStorage.getItem("status");
+            this.profile.bind_wx =
+                localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin =
+                (localStorage && localStorage.getItem("avatar")) ||
+                default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
         } else {
             this.profile = this.anonymous;
@@ -55,13 +57,12 @@ class User {
 
     // 判断是否已登录
     isLogin() {
-        this.created_at =
-            !localStorage.getItem("created_at")
-                ? -Infinity
-                : localStorage.getItem("created_at");
+        this.created_at = !localStorage.getItem("created_at")
+            ? -Infinity
+            : localStorage.getItem("created_at");
         this.logged_in =
             localStorage.getItem("logged_in") == "true" ? true : false;
-        return this.logged_in && (Date.now() - this.created_at < this.expires);
+        return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
     // 保存用户资料
@@ -171,7 +172,7 @@ class User {
                 if (isVIP) {
                     let isExpired =
                         new Date(res.data.data.expire_date) - new Date() > 0;
-                    return isExpired
+                    return isExpired;
                 } else {
                     return false;
                 }
