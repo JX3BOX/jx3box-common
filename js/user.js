@@ -1,7 +1,7 @@
-const { showAvatar } = require("./utils");
-const { __Links, default_avatar } = require("./jx3box.json");
-const { $pay } = require("./axios");
-const { $server } = require("./server");
+import { showAvatar } from "./utils";
+import { __Links, default_avatar } from "./jx3box.json";
+import { $pay } from "./axios";
+import { $server } from "./server";
 
 class User {
     constructor() {
@@ -178,4 +178,4 @@ class User {
     }
 }
 
-module.exports = new User();
+export default new User()
