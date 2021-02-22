@@ -8,10 +8,18 @@ function getAsset() {
 
 function isVIP() {
     return $pay.get("api/vip/i").then((res) => {
-        let expire_date = new Date(res.data.data.expire_date);
-        let today_data = new Date()
-        let isExpired = (today_data - expire_date) > 0
-        return !isExpired
+        if (!res.data.code) {
+            let isVIP = res.data.data.was_vip;
+            if (isVIP) {
+                let isExpired =
+                    new Date(res.data.data.expire_date) - new Date() > 0;
+                return isExpired
+            } else {
+                return false;
+            }
+        } else {
+            reject(res.data.msg);
+        }
     });
 }
 

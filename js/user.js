@@ -143,17 +143,17 @@ class User {
         return this.isLogin() && this.profile.group >= 32;
     }
 
-    // 判断是否为管理员
+    // 判断是否为管理员|编辑
     isAdmin() {
         return this.isLogin() && this.profile.group >= 64;
     }
 
-    // 判断是否为超级管理员
+    // 判断是否为管理员|运营
     isSuperAdmin() {
         return this.isLogin() && this.profile.group >= 128;
     }
 
-    // 判断是否为系统管理员
+    // 判断是否为管理员|开发
     isSystemAdmin() {
         return this.isLogin() && this.profile.group >= 256;
     }
@@ -165,7 +165,7 @@ class User {
 
     // 判断是否为VIP
     isVIP() {
-        return $next.get("api/vip/i").then((res) => {
+        return $pay.get("api/vip/i").then((res) => {
             if (!res.data.code) {
                 let isVIP = res.data.data.was_vip;
                 if (isVIP) {
