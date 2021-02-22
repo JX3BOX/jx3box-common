@@ -1,12 +1,7 @@
-const axios = require("axios");
 const { showAvatar } = require("./utils");
-const { __Links, default_avatar, __server, __pay } = require("./jx3box.json");
-
-const $server = axios.create({
-    withCredentials: true,
-    baseURL: __server,
-});
-import { $pay } from "./axios";
+const { __Links, default_avatar } = require("./jx3box.json");
+const { $pay } = require("./axios");
+const { $server } = require("./server");
 
 class User {
     constructor() {
