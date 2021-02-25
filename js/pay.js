@@ -5,7 +5,7 @@ Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 const broadcast = new Vue();
 import { __pay } from "./jx3box.json";
-import User from './user'
+// import User from './user'
 
 // $pay
 function installNextInterceptors(target) {
@@ -14,16 +14,16 @@ function installNextInterceptors(target) {
             if (response.data.code) {
                 console.log(response.data.code)
                 // 自动重新登录
-                if(response.data.code == 401){
-                    User.destroy().then(() => {
-                        User.toLogin()
-                    })
-                }else{
+                // if(response.data.code == 401){
+                //     User.destroy().then(() => {
+                //         User.toLogin()
+                //     })
+                // }else{
                     broadcast.$message.error(
                         `[${response.data.code}]${response.data.msg}`
                     );
                     return Promise.reject(response);
-                }
+                // }
             }
             return response;
         },
@@ -60,7 +60,7 @@ function getAsset() {
 function hasVIP(data){
     let isPRE = data.was_vip;
     if (isPRE) {
-        let isExpired = new Date(res.data.data.expire_date) - new Date() > 0;
+        let isExpired = new Date(data.expire_date) - new Date() > 0;
         return isExpired
     } else {
         return false;
@@ -69,7 +69,7 @@ function hasVIP(data){
 function hasPRO(data){
     let isPRO = data.was_pro;
     if (isPRO) {
-        let isExpired = new Date(res.data.data.pro_expire_date) - new Date() > 0;
+        let isExpired = new Date(data.pro_expire_date) - new Date() > 0;
         return isExpired
     } else {
         return false;
