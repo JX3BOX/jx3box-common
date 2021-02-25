@@ -1,6 +1,6 @@
 import { showAvatar } from "./utils";
 import { __Links, default_avatar } from "./jx3box.json";
-import { $pay } from "./axios";
+import { $pay,hasVIP,hasPRO } from "./pay";
 import { $server } from "./server";
 
 class User {
@@ -163,14 +163,18 @@ class User {
     isVIP() {
         return $pay.get("api/vip/i").then((res) => {
             if (!res.data.code) {
-                let isVIP = res.data.data.was_vip;
-                if (isVIP) {
-                    let isExpired =
-                        new Date(res.data.data.expire_date) - new Date() > 0;
-                    return isExpired;
-                } else {
-                    return false;
-                }
+                return hasPRO(res.data.data) || hasVIP(res.data.data) 
+            } else {
+                reject(res.data.msg);
+            }
+        });
+    }
+
+    // 判断是否为PRO
+    isPRO(){
+        return $pay.get("api/vip/i").then((res) => {
+            if (!res.data.code) {
+                return hasPRO(res.data.data)
             } else {
                 reject(res.data.msg);
             }
