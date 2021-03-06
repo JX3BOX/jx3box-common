@@ -12,7 +12,6 @@ function installNextInterceptors(target) {
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code) {
-                console.log(response.data.code)
                 // 自动重新登录
                 // if(response.data.code == 401){
                 //     User.destroy().then(() => {
