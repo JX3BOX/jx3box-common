@@ -1,0 +1,10 @@
+{
+    "Member": 1,
+    "EmailMember": 8,
+    "PhoneMember": 16,
+    "SuperAuthor": 32,
+    "Editor": 64,
+    "Admin": 128,
+    "Developer": 256,
+    "SuperAdmin": 512
+}
