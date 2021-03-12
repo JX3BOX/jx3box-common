@@ -1,0 +1,64 @@
+{
+    "default":{
+        "name": "default",
+        "style":"square",
+        "files": {
+            "xs": {
+                "w": 48,
+                "width": 60,
+                "file": "default-xs.gif"
+            },
+            "s": {
+                "w": 68,
+                "width": 84,
+                "file": "default-s.gif"
+            },
+            "m": {
+                "w": 108,
+                "width": 136,
+                "file": "default-m.png"
+            },
+            "l": {
+                "w": 180,
+                "width": 224,
+                "file": "default-l.png"
+            },
+            "xl": {
+                "w": 240,
+                "width": 300,
+                "file": "default-xl.png"
+            }
+        }
+    },
+    "flower_1":{
+        "name": "flower_1",
+        "style":"circle",
+        "files": {
+            "xs": {
+                "w": 48,
+                "width": 60,
+                "file": "flower_1-xs.png"
+            },
+            "s": {
+                "w": 68,
+                "width": 84,
+                "file": "flower_1-s.png"
+            },
+            "m": {
+                "w": 108,
+                "width": 136,
+                "file": "flower_1-m.png"
+            },
+            "l": {
+                "w": 180,
+                "width": 224,
+                "file": "flower_1-l.png"
+            },
+            "xl": {
+                "w": 240,
+                "width": 300,
+                "file": "flower_1-xl.png"
+            }
+        }
+    }
+}
