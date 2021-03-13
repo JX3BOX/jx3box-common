@@ -6,8 +6,11 @@
     "__Github": "https://github.jx3box.com/",
 
     "__server": "https://server.jx3box.com/",
-    "__helperUrl": "https://helper.jx3box.com/",
-    "__bb": "https://bb.jx3box.com/",
+    "__uc": "https://uc.jx3box.com/",
+    "__cms": "https://cms.jx3box.com/",
+    "__node": "https://node.jx3box.com/",
+    "__spider": "https://spider.jx3box.com/",
+    "__proxy": "https://proxy.jx3box.com/",
 
     "__next": "https://next.jx3box.com/",
     "__pay": "https://pay.jx3box.com/",
@@ -15,13 +18,13 @@
     "__git": "https://git.jx3box.com/",
     "__hub": "https://hub.jx3box.com/",
 
-    "__node": "https://node.jx3box.com/",
-    "__spider": "https://spider.jx3box.com/",
-    "__proxy": "https://proxy.jx3box.com/",
+    "__helperUrl": "https://helper.jx3box.com/",
+    "__os": "https://os.jx3box.com/",
+
+    "__jx3":"https://xn--3-4g8a959k.com",
 
     "__ossRoot": "https://oss.jx3box.com/",
     "__ossMirror": "https://console.cnyixun.com/",
-    "__ossCloudflare": "https://jx3box.imkog.com/",
 
     "__staticPath": {
         "origin": "https://oss.jx3box.com/static/",
@@ -46,13 +49,6 @@
         "bbs": "茶馆交流"
     },
 
-    "__wikiType": {
-        "achievement": "成就",
-        "item": "物品",
-        "knowledge": "通识",
-        "quest": "任务"
-    },
-
     "__otherType": {
         "cj": "成就百科",
         "achievement": "成就百科",
@@ -63,6 +59,13 @@
         "paper": "剑三试卷",
         "collection": "剑三小册",
         "quest": "任务百科"
+    },
+
+    "__wikiType": {
+        "achievement": "成就",
+        "item": "物品",
+        "knowledge": "通识",
+        "quest": "任务"
     },
 
     "__sourceType": {
@@ -93,14 +96,14 @@
 
     "__userGroup": {
         "0": "游客",
-        "1": "正式会员",
-        "8": "正式会员",
-        "16": "正式会员",
+        "1": "正式成员",
+        "8": "正式成员",
+        "16": "正式成员",
         "32": "签约作者",
-        "64": "管理员",
-        "128": "运营组",
+        "64": "编辑",
+        "128": "管理员",
         "256": "开发组",
-        "512": "系统组"
+        "512": "超级管理"
     },
 
     "__userLevel": {
@@ -126,7 +129,6 @@
         }
     },
 
-    "__jx3": "https://xn--3-4g8a959k.com/",
     "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
     "feedback": "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"
 }

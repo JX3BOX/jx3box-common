@@ -18,10 +18,10 @@ function installNextInterceptors(target) {
                 //         User.toLogin()
                 //     })
                 // }else{
-                    broadcast.$message.error(
-                        `[${response.data.code}]${response.data.msg}`
-                    );
-                    return Promise.reject(response);
+                broadcast.$message.error(
+                    `[${response.data.code}]${response.data.msg}`
+                );
+                return Promise.reject(response);
                 // }
             }
             return response;
@@ -44,7 +44,6 @@ const $pay = axios.create({
 });
 installNextInterceptors($pay);
 
-
 // 用户资产
 function getAsset() {
     return $pay.get("api/vip/i").then((res) => {
@@ -52,35 +51,33 @@ function getAsset() {
     });
 }
 
-
 // VIP相关
 // =============================================
 // 判断函数
-function hasVIP(data){
+function hasVIP(data) {
     let isPRE = data.was_vip;
     if (isPRE) {
         let isExpired = new Date(data.expire_date) - new Date() > 0;
-        return isExpired
+        return isExpired;
     } else {
         return false;
     }
 }
-function hasPRO(data){
+function hasPRO(data) {
     let isPRO = data.was_pro;
     if (isPRO) {
         let isExpired = new Date(data.pro_expire_date) - new Date() > 0;
-        return isExpired
+        return isExpired;
     } else {
         return false;
     }
 }
-
 
 // 是否为PRE
 function isPRE() {
     return $pay.get("api/vip/i").then((res) => {
         if (!res.data.code) {
-            return hasVIP(res.data.data)
+            return hasVIP(res.data.data);
         } else {
             reject(res.data.msg);
         }
@@ -91,7 +88,7 @@ function isPRE() {
 function isPRO() {
     return $pay.get("api/vip/i").then((res) => {
         if (!res.data.code) {
-            return hasPRO(res.data.data)
+            return hasPRO(res.data.data);
         } else {
             reject(res.data.msg);
         }
@@ -102,11 +99,11 @@ function isPRO() {
 function isVIP() {
     return $pay.get("api/vip/i").then((res) => {
         if (!res.data.code) {
-            return hasPRO(res.data.data) || hasVIP(res.data.data) 
+            return hasPRO(res.data.data) || hasVIP(res.data.data);
         } else {
             reject(res.data.msg);
         }
     });
 }
 
-export { $pay, getAsset, hasVIP,hasPRO,isPRE,isPRO,isVIP };
+export { $pay, getAsset, hasVIP, hasPRO, isPRE, isPRO, isVIP };
