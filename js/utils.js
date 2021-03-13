@@ -75,7 +75,7 @@ module.exports = {
     // 海报
     // 为空时不会处理
     // 默认使用mini_banner（cms通用168*88海报），可在oss定制其它预设样式
-    showMiniBanner: function (url, style = "mini_banner", replace = true) {
+    showBanner: function (url, style = "mini_banner", replace = true) {
         if (!url) return "";
 
         url = url.replace(/http:/g, "https:");
@@ -112,6 +112,8 @@ module.exports = {
         return url;
     },
 
+    // 快捷过滤器（根据应用类型+ID获取对应帖子着陆页或链接）
+
     iconLink(icon_id) {
         if (!icon_id || isNaN(parseInt(icon_id))) {
             return `${__imgPath}image/common/nullicon.png`;
@@ -119,8 +121,6 @@ module.exports = {
             return `${__iconPath}icon/${icon_id}.png`;
         }
     },
-
-    // 链接过滤器（根据应用类型+ID获取对应帖子着陆页）
 
     editLink: function (type, id) {
         return __Root + "dashboard/publish/#/" + type + "/" + id;
@@ -165,7 +165,7 @@ module.exports = {
         } else if (type == "namespace") {
             return __jx3 + id;
         } else {
-            return __Root;
+            return __Root + `${type}/${id}`;
         }
     },
 
@@ -173,7 +173,7 @@ module.exports = {
         return __Root + "author" + "/" + uid;
     },
 
-    getTVlink: function (tv_type, tv_id) {
+    tvLink: function (tv_type, tv_id) {
         return tvmap[tv_type] + tv_id;
     },
 

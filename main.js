@@ -1,4 +1,4 @@
-const JX3BOX = require('./js/jx3box');
-const SEO = require('./js/seo');
+const JX3BOX = require("./data/jx3box");
+const SEO = require("./data/seo");
 
-module.exports = { JX3BOX, SEO }
+module.exports = { JX3BOX, SEO };

@@ -1,24 +1,20 @@
-import { $next } from "./axios";
-const cms_types = [
-    "macro",
-    "jx3dat",
-    "fb",
-    "bps",
-    "tool",
-    "house",
-    "share",
-    "bbs",
-];
+import axios from "axios";
+import { __sourceType } from "../data/jx3box.json";
+const { cms_types } = __sourceType;
 
 // 30秒缓存
 function getStat(type, id) {
-    let api = cms_types.includes(type) ? ("api/summary-any/" + id + "/stat") : ("api/summary-any/" + type + "-" + id + "/stat")
+    let api = cms_types.includes(type)
+        ? "api/summary-any/" + id + "/stat"
+        : "api/summary-any/" + type + "-" + id + "/stat";
     return $next.get(api);
 }
 
 // 同一个ip的同一篇文章的同一个动作10分钟内不重复统计
 function postStat(type, id, action = "views") {
-    let api = cms_types.includes(type) ? ("api/summary-any/" + id) : ("api/summary-any/" + type + "-" + id)
+    let api = cms_types.includes(type)
+        ? "api/summary-any/" + id
+        : "api/summary-any/" + type + "-" + id;
     return $next.get(api, {
         params: {
             type: type,
