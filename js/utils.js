@@ -7,7 +7,7 @@ const {
     __imgPath,
     __iconPath,
     __jx3,
-} = require("./jx3box");
+} = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {

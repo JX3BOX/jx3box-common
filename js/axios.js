@@ -1,33 +1,34 @@
-import axios from "axios";
-import { __next, __pay, __server } from "./jx3box.json";
 import Vue from "vue";
 import { Message, Notification } from "element-ui";
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
-const broadcast = new Vue();
+const POP = new Vue();
 
+import axios from "axios";
+function PopNextworkError(err){
+    if (err.response && err.response.data) {
+        POP.$message.error(`${err.response.data.msg}`);
+    } else {
+        POP.$message.error("网络请求异常");
+    }
+    console.log(err);
+    return Promise.reject(err);
+}
 function installInterceptors(target) {
     target["interceptors"]["response"].use(
         function (response) {
             return response;
         },
         function (err) {
-            if (err.response && err.response.data) {
-                broadcast.$message.error(`${err.response.data.msg}`);
-            } else {
-                broadcast.$message.error("网络请求异常");
-            }
-            console.log(err);
-            return Promise.reject(err);
+            return PopNextworkError(err)
         }
     );
 }
-
 function installNextInterceptors(target) {
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code) {
-                broadcast.$message.error(
+                POP.$message.error(
                     `[${response.data.code}]${response.data.msg}`
                 );
                 return Promise.reject(response);
@@ -35,38 +36,32 @@ function installNextInterceptors(target) {
             return response;
         },
         function (err) {
-            if (err.response && err.response.data) {
-                broadcast.$message.error(`${err.response.data.msg}`);
-            } else {
-                broadcast.$message.error("网络请求异常");
+            return PopNextworkError(err)
+        }
+    );
+}
+function installHelperInterceptors(target) {
+    target["interceptors"]["response"].use(
+        function (response) {
+            if (response.data.code == 200) {
+                return response;
+            }else{
+                POP.$message.error(
+                    `[${response.data.code}]${response.data.message}`
+                );
+                return Promise.reject(response);
             }
-            console.log(err);
-            return Promise.reject(err);
+        },
+        function (err) {
+            return PopNextworkError(err)
         }
     );
 }
 
-const $next = axios.create({
-    withCredentials: true,
-    baseURL: process.env.NODE_ENV === "production" ? __next : "/",
-});
-installNextInterceptors($next);
-const $pay = axios.create({
-    withCredentials: true,
-    baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
-});
-installNextInterceptors($pay);
-const $server = axios.create({
-    withCredentials: true,
-    baseURL: process.env.NODE_ENV === "production" ? __server : "/",
-});
-installNextInterceptors($server);
-
 export {
     axios,
-    $next,
-    $pay,
-    $server,
+    POP,
     installInterceptors,
     installNextInterceptors,
+    installHelperInterceptors,
 };

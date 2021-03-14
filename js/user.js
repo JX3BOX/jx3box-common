@@ -1,11 +1,10 @@
 import { showAvatar } from "./utils";
-import { __Links, default_avatar,__server,__pay } from "../data/jx3box.json";
-import axios from axios;
+import { __Links, default_avatar, __server, __pay } from "../data/jx3box.json";
+import { axios, POP } from "./axios";
 const $pay = axios.create({
     withCredentials: true,
     baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
 });
-import POP from './pop'
 
 class User {
     constructor() {
@@ -102,7 +101,7 @@ class User {
             localStorage.removeItem("created_at");
             localStorage.setItem("logged_in", "false");
             localStorage.removeItem("token");
-        })
+        });
     }
 
     // 跳转至登录
@@ -179,47 +178,56 @@ class User {
 
     // 判断是否为VIP
     isVIP() {
-        if(!this.isLogin()){
-            return new Promise((resolve,reject)=>{
-                resolve(false)
-            })
-        }else{
-            return $pay.get("api/vip/i").then((res) => {
-                if (!res.data.code) {
-                    return this._isPRO(res.data.data) || this._isVIP(res.data.data);
-                } else {
-                    POP.$notify.error({
-                        title: '错误',
-                        message: `[${res.data.code}]${res.data.msg}`
-                    });
-                }
-            }).catch((err) => {
-                POP.$message.error('请求异常');
-                console.log(err)
-            })
+        if (!this.isLogin()) {
+            return new Promise((resolve, reject) => {
+                resolve(false);
+            });
+        } else {
+            return $pay
+                .get("api/vip/i")
+                .then((res) => {
+                    if (!res.data.code) {
+                        return (
+                            this._isPRO(res.data.data) ||
+                            this._isVIP(res.data.data)
+                        );
+                    } else {
+                        POP.$notify.error({
+                            title: "错误",
+                            message: `[${res.data.code}]${res.data.msg}`,
+                        });
+                    }
+                })
+                .catch((err) => {
+                    POP.$message.error("请求异常");
+                    console.log(err);
+                });
         }
     }
 
     // 判断是否为PRO
     isPRO() {
-        if(!this.isLogin()){
-            return new Promise((resolve,reject)=>{
-                resolve(false)
-            })
-        }else{
-            return $pay.get("api/vip/i").then((res) => {
-                if (!res.data.code) {
-                    return this._isPRO(res.data.data);
-                } else {
-                    POP.$notify.error({
-                        title: '错误',
-                        message: `[${res.data.code}]${res.data.msg}`
-                    });
-                }
-            }).catch((err) => {
-                POP.$message.error('请求异常');
-                console.log(err)
-            })
+        if (!this.isLogin()) {
+            return new Promise((resolve, reject) => {
+                resolve(false);
+            });
+        } else {
+            return $pay
+                .get("api/vip/i")
+                .then((res) => {
+                    if (!res.data.code) {
+                        return this._isPRO(res.data.data);
+                    } else {
+                        POP.$notify.error({
+                            title: "错误",
+                            message: `[${res.data.code}]${res.data.msg}`,
+                        });
+                    }
+                })
+                .catch((err) => {
+                    POP.$message.error("请求异常");
+                    console.log(err);
+                });
         }
     }
 
@@ -230,9 +238,9 @@ class User {
     }
 
     // 获取用户资产
-    getAsset(){
-        if(!this.isLogin()){
-            return new Promise((resolve,reject)=>{
+    getAsset() {
+        if (!this.isLogin()) {
+            return new Promise((resolve, reject) => {
                 // 空资产
                 resolve({
                     was_vip: 0,
@@ -246,22 +254,25 @@ class User {
                     namespace_card_count: 0,
                     box_coin: 0,
                     points: 0,
+                });
+            });
+        } else {
+            return axios
+                .get(__pay + "api/vip/i")
+                .then((res) => {
+                    if (!res.data.code) {
+                        return res.data.data;
+                    } else {
+                        POP.$notify.error({
+                            title: "错误",
+                            message: `[${res.data.code}]${res.data.msg}`,
+                        });
+                    }
                 })
-            })
-        }else{
-            return axios.get(__pay + "api/vip/i").then((res) => {
-                if (!res.data.code) {
-                    return res.data.data
-                } else {
-                    POP.$notify.error({
-                        title: '错误',
-                        message: `[${res.data.code}]${res.data.msg}`
-                    });
-                }
-            }).catch((err) => {
-                POP.$message.error('请求异常');
-                console.log(err)
-            })
+                .catch((err) => {
+                    POP.$message.error("请求异常");
+                    console.log(err);
+                });
         }
     }
 }

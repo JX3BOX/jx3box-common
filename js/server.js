@@ -1,6 +1,5 @@
-import axios from "axios";
 import { __server } from "../data/jx3box.json";
-import { installInterceptors } from "./axios";
+import { axios, installInterceptors } from "./axios";
 const $server = axios.create({
     withCredentials: true,
     baseURL: __server,

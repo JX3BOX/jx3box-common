@@ -1,5 +1,5 @@
-import { __server } from "./jx3box.json";
-import oauth from "./oauth.json";
+import { __server } from "../data/jx3box.json";
+import oauth from "../data/oauth.json";
 const connect = {
     github: `${oauth.github.authorize_uri}?client_id=${oauth.github.id}&redirect_uri=${__server}${oauth.github.callback}`,
     qq: `${oauth.qq.authorize_uri}?client_id=${oauth.qq.id}&redirect_uri=${__server}${oauth.qq.callback}&response_type=code&scope=get_user_info&state=jx3box`,
