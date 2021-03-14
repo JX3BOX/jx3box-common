@@ -162,8 +162,6 @@ module.exports = {
             let url = __Root + "rank/race/" + event_id;
             if (achieve_id) url += "#/rank/" + achieve_id;
             return url;
-        } else if (type == "namespace") {
-            return __jx3 + id;
         } else {
             return __Root + `${type}/${id}`;
         }
