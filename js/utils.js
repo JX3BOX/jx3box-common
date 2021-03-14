@@ -60,7 +60,7 @@ module.exports = {
             l: "?x-oss-process=style/avatar_l",
         };
 
-        if (styleMap["size"]) {
+        if (styleMap[size]) {
             // 预设样式
             avatar += styleMap[size];
         } else {

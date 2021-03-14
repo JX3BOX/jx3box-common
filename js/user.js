@@ -258,7 +258,7 @@ class User {
             });
         } else {
             return axios
-                .get(__pay + "api/vip/i")
+                .get("/api/vip/i")
                 .then((res) => {
                     if (!res.data.code) {
                         return res.data.data;

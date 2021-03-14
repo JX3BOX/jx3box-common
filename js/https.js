@@ -24,7 +24,7 @@ const server_map = {
     spider: __spider,
     next: __next,
     pay: __pay,
-    helper: __helper,
+    helper: __helperUrl,
 };
 const interceptor_map = {
     'helper' : installHelperInterceptors,
@@ -34,7 +34,9 @@ const interceptor_map = {
 
 // 不带鉴权的请求
 function $https(server, options) {
-    let config = {};
+    let config = {
+        headers : {}
+    };
 
     // Helper指定请求头
     if (server == "helper") {
@@ -43,8 +45,9 @@ function $https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if(options && options.proxy){
-        config.baseURL =
-        process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+    }else{
+        config.baseURL = server_map[server]
     }
 
     // 创建实例
@@ -52,9 +55,9 @@ function $https(server, options) {
 
     // 指定拦截器
     if(options.interceptor){
-        interceptor_map[options.interceptor](ins)
+        interceptor_map[options.interceptor](ins,options)
     }else{
-        installInterceptors(ins)
+        installInterceptors(ins,options)
     }
 
     return ins;
@@ -64,9 +67,7 @@ function $https(server, options) {
 function $_https(server, options) {
     // 如果前端已经退出不发起请求
     if (!User.isLogin()) {
-        return new Promise((resolve, reject) => {
-            reject(new Error("请先登录"));
-        });
+        return Promise.reject('请先登录');
     }
 
     let config = {
@@ -76,7 +77,7 @@ function $_https(server, options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "$_https common request",
         },
-        baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/",
+        baseURL : process.env.NODE_ENV === "production" ? server_map[server] : "/",
         headers: {},
     };
 
@@ -85,14 +86,21 @@ function $_https(server, options) {
         config.headers.Accept = "application/prs.helper.v2+json";
     }
 
+    // 是否需要开启本地代理作为测试
+    if(!options || options.proxy || options.proxy === undefined){
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+    }else{
+        config.baseURL = server_map[server]
+    }
+
     // 创建实例
     const ins = axios.create(config)
 
     // 指定拦截器
     if(options.interceptor){
-        interceptor_map[options.interceptor](ins)
+        interceptor_map[options.interceptor](ins,options)
     }else{
-        installInterceptors(ins)
+        installInterceptors(ins,options)
     }
 
     return ins;

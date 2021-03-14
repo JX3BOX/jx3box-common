@@ -1,6 +1,10 @@
 import qs from "qs";
-import { $_https } from "./https";
-const $helper = $_https("helper", {
+import { $https,$_https } from "./https";
+const $helper = $https("helper", {
+    proxy: false,
+    interceptor: "helper",
+});
+const $_helper = $_https("helper", {
     proxy: false,
     interceptor: "helper",
 });
@@ -51,7 +55,7 @@ let WikiPost = {
 
     // 创建/更新攻略
     save(params) {
-        return $helper({
+        return $_helper({
             method: "POST",
             url: `/api/wiki/post`,
             headers: { Accept: "application/prs.helper.v2+json" },
@@ -61,7 +65,7 @@ let WikiPost = {
 
     // 我的百科攻略列表
     myList(params) {
-        return $helper({
+        return $_helper({
             method: "GET",
             url: `/api/my/wiki/posts`,
             headers: { Accept: "application/prs.helper.v2+json" },
@@ -72,7 +76,7 @@ let WikiPost = {
     // 删除我的百科攻略
     myRemove(post_id) {
         if (!post_id) return null;
-        return $helper({
+        return $_helper({
             method: "PUT",
             url: `/api/my/wiki/post/${post_id}/remove`,
             headers: { Accept: "application/prs.helper.v2+json" },
@@ -95,7 +99,7 @@ let WikiComment = {
 
     // 创建百科评论
     save(params) {
-        return $helper({
+        return $_helper({
             method: "POST",
             url: `/api/wiki/comment`,
             headers: { Accept: "application/prs.helper.v2+json" },
@@ -105,7 +109,7 @@ let WikiComment = {
 
     // 我的百科评论列表
     myList(params) {
-        return $helper({
+        return $_helper({
             method: "GET",
             url: `/api/my/wiki/comments`,
             headers: { Accept: "application/prs.helper.v2+json" },
@@ -116,7 +120,7 @@ let WikiComment = {
     // 删除我的百科评论
     myRemove(comment_id) {
         if (!comment_id) return null;
-        return $helper({
+        return $_helper({
             method: "PUT",
             url: `/api/my/wiki/comment/${comment_id}/remove`,
             headers: { Accept: "application/prs.helper.v2+json" },

@@ -32,7 +32,8 @@ import { $https, $_https } from "@jx3box/jx3box-common/js/https.js";
     - `default`:installInterceptors
     - `next` :installNextInterceptors
     - `helper` :installHelperInterceptors
-
+- `mute`: 出错错误时，是否出现POP报错（默认为true），显示设置为false时，报错将静默
+- `popType`: 默认使用message，可选值：message,alert,notify
 
 ## 示例
 ### 立即调用
