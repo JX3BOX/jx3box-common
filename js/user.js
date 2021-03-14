@@ -1,7 +1,11 @@
 import { showAvatar } from "./utils";
-import { __Links, default_avatar,__server } from "../data/jx3box.json";
-import { $pay, hasVIP, hasPRO } from "./pay";
+import { __Links, default_avatar,__server,__pay } from "../data/jx3box.json";
 import axios from axios;
+const $pay = axios.create({
+    withCredentials: true,
+    baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
+});
+import POP from './pop'
 
 class User {
     constructor() {
@@ -107,12 +111,6 @@ class User {
         location.href = __Links.account.login + "?redirect=" + url;
     }
 
-    // 获取用户基础缓存信息
-    getInfo() {
-        this.check();
-        return this.profile;
-    }
-
     // 获取本地令牌
     getToken() {
         return localStorage.getItem("token");
@@ -158,6 +156,27 @@ class User {
         return localStorage.getItem("bind_wx");
     }
 
+    // VIP身份判断
+    _isVIP(asset) {
+        let isPRE = asset.was_vip;
+        if (isPRE) {
+            let isExpired = new Date(asset.expire_date) - new Date() > 0;
+            return isExpired;
+        } else {
+            return false;
+        }
+    }
+    // PRO身份判断
+    _isPRO(asset) {
+        let isPRO = asset.was_pro;
+        if (isPRO) {
+            let isExpired = new Date(asset.pro_expire_date) - new Date() > 0;
+            return isExpired;
+        } else {
+            return false;
+        }
+    }
+
     // 判断是否为VIP
     isVIP() {
         if(!this.isLogin()){
@@ -167,11 +186,17 @@ class User {
         }else{
             return $pay.get("api/vip/i").then((res) => {
                 if (!res.data.code) {
-                    return hasPRO(res.data.data) || hasVIP(res.data.data);
+                    return this._isPRO(res.data.data) || this._isVIP(res.data.data);
                 } else {
-                    reject(res.data.msg);
+                    POP.$notify.error({
+                        title: '错误',
+                        message: `[${res.data.code}]${res.data.msg}`
+                    });
                 }
-            });
+            }).catch((err) => {
+                POP.$message.error('请求异常');
+                console.log(err)
+            })
         }
     }
 
@@ -184,11 +209,59 @@ class User {
         }else{
             return $pay.get("api/vip/i").then((res) => {
                 if (!res.data.code) {
-                    return hasPRO(res.data.data);
+                    return this._isPRO(res.data.data);
                 } else {
-                    reject(res.data.msg);
+                    POP.$notify.error({
+                        title: '错误',
+                        message: `[${res.data.code}]${res.data.msg}`
+                    });
                 }
-            });
+            }).catch((err) => {
+                POP.$message.error('请求异常');
+                console.log(err)
+            })
+        }
+    }
+
+    // 获取用户基础缓存信息
+    getInfo() {
+        this.check();
+        return this.profile;
+    }
+
+    // 获取用户资产
+    getAsset(){
+        if(!this.isLogin()){
+            return new Promise((resolve,reject)=>{
+                // 空资产
+                resolve({
+                    was_vip: 0,
+                    expire_date: "1970-02-02T16:00:00.000Z",
+                    total_day: 0,
+                    was_pro: 0,
+                    pro_expire_date: "1970-02-02T16:00:00.000Z",
+                    pro_total_day: 0,
+                    rename_card_count: 0,
+                    had_renamed: 0,
+                    namespace_card_count: 0,
+                    box_coin: 0,
+                    points: 0,
+                })
+            })
+        }else{
+            return axios.get(__pay + "api/vip/i").then((res) => {
+                if (!res.data.code) {
+                    return res.data.data
+                } else {
+                    POP.$notify.error({
+                        title: '错误',
+                        message: `[${res.data.code}]${res.data.msg}`
+                    });
+                }
+            }).catch((err) => {
+                POP.$message.error('请求异常');
+                console.log(err)
+            })
         }
     }
 }
