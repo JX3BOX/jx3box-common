@@ -1,6 +1,6 @@
 import { showAvatar } from "./utils";
 import { __Links, default_avatar } from "./jx3box.json";
-import { $pay,hasVIP,hasPRO } from "./pay";
+import { $pay, hasVIP, hasPRO } from "./pay";
 import { $server } from "./server";
 
 class User {
@@ -161,25 +161,37 @@ class User {
 
     // 判断是否为VIP
     isVIP() {
-        return $pay.get("api/vip/i").then((res) => {
-            if (!res.data.code) {
-                return hasPRO(res.data.data) || hasVIP(res.data.data) 
-            } else {
-                reject(res.data.msg);
-            }
-        });
+        if(!this.isLogin()){
+            return new Promise((resolve,reject)=>{
+                resolve(false)
+            })
+        }else{
+            return $pay.get("api/vip/i").then((res) => {
+                if (!res.data.code) {
+                    return hasPRO(res.data.data) || hasVIP(res.data.data);
+                } else {
+                    reject(res.data.msg);
+                }
+            });
+        }
     }
 
     // 判断是否为PRO
-    isPRO(){
-        return $pay.get("api/vip/i").then((res) => {
-            if (!res.data.code) {
-                return hasPRO(res.data.data)
-            } else {
-                reject(res.data.msg);
-            }
-        });
+    isPRO() {
+        if(!this.isLogin()){
+            return new Promise((resolve,reject)=>{
+                resolve(false)
+            })
+        }else{
+            return $pay.get("api/vip/i").then((res) => {
+                if (!res.data.code) {
+                    return hasPRO(res.data.data);
+                } else {
+                    reject(res.data.msg);
+                }
+            });
+        }
     }
 }
 
-export default new User()
+export default new User();

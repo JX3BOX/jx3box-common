@@ -1,6 +1,6 @@
 # Utils
 
-```
+```javascript
 import Utils from '@jx3box/jx3box-common/js/utils.js
 或
 import {__showAvatar} from '@jx3box/jx3box-common/js/utils.js'

@@ -17,4 +17,5 @@ import User from "@jx3box/jx3box-common/js/user.js";
 
 ## Js & Data Docs
 
-[Utils](./docs/Utils.md) 常用工具函数&过滤器等（获取落地页链接、图像处理等）
+[utils](./docs/utils.md) 常用工具函数&过滤器等（获取落地页链接、图像处理等）
+[user](./docs/user.md) 获取用户本地缓存信息（头像，用户名，用户组，是否登录等）
