@@ -7,7 +7,7 @@ import {__showAvatar} from '@jx3box/jx3box-common/js/utils.js'
 ```
 
 ## 图片处理函数
-### [showAvatar]('../js/utils#L40') 头像图片处理
+### [showAvatar]('../js/utils#L40')(url,size) 头像图片处理
 - 为空时会返回默认头像，并做对应处理
 - 可指定字符串预设样式s,m,l或指定一个数字,总是返回方形
 ```javascript
@@ -24,12 +24,12 @@ showAvatar(url,100,false)
 // => https://oss.jx3box.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
 ```
 
-### [getThumbnail]('../js/utils#L95') 图片OSS通用处理
+### [getThumbnail]('../js/utils#L95')(url,size) 图片OSS通用处理
 - 为空时不会处理，会返回空字符串（没有默认头像、需自行本地处理为空时返回值）
 - 默认使用88*88方形，可返回方形(传递单数字)或者指定任意居中剪裁尺寸(传递数组)或指定任意预设样式(传递字符串)
 ```javascript
 // 1.设置一个指定数字方形 
-showAvatar(url,100) 
+getThumbnail(url,100) 
 // => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
 
 // 2.设置指定宽高长方形（等比缩放后居中剪裁）
