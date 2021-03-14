@@ -1,15 +1,17 @@
 import { showAvatar } from "./utils";
-import { __Links, default_avatar, __server, __pay } from "../data/jx3box.json";
-import { axios, POP } from "./axios";
-const $pay = axios.create({
-    withCredentials: true,
-    baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
+import { __Links, default_avatar, __server } from "../data/jx3box.json";
+import { tokenExpires } from "../data/conf.json";
+import { $_https } from "./https";
+const $pay = $_https("pay", {
+    proxy: true,
+    interceptor: "next",
+    popType: "notify",
 });
 
 class User {
     constructor() {
         // TOKEN有效期
-        this.expires = 2592000000;
+        this.expires = tokenExpires;
         this.created_at = 0;
         // 登录状态
         this.logged_in = false;
@@ -183,25 +185,9 @@ class User {
                 resolve(false);
             });
         } else {
-            return $pay
-                .get("api/vip/i")
-                .then((res) => {
-                    if (!res.data.code) {
-                        return (
-                            this._isPRO(res.data.data) ||
-                            this._isVIP(res.data.data)
-                        );
-                    } else {
-                        POP.$notify.error({
-                            title: "错误",
-                            message: `[${res.data.code}]${res.data.msg}`,
-                        });
-                    }
-                })
-                .catch((err) => {
-                    POP.$message.error("请求异常");
-                    console.log(err);
-                });
+            return $pay.get("/api/vip/i").then((res) => {
+                return this._isPRO(res.data.data) || this._isVIP(res.data.data);
+            });
         }
     }
 
@@ -212,22 +198,9 @@ class User {
                 resolve(false);
             });
         } else {
-            return $pay
-                .get("api/vip/i")
-                .then((res) => {
-                    if (!res.data.code) {
-                        return this._isPRO(res.data.data);
-                    } else {
-                        POP.$notify.error({
-                            title: "错误",
-                            message: `[${res.data.code}]${res.data.msg}`,
-                        });
-                    }
-                })
-                .catch((err) => {
-                    POP.$message.error("请求异常");
-                    console.log(err);
-                });
+            return $pay.get("/api/vip/i").then((res) => {
+                return this._isPRO(res.data.data);
+            });
         }
     }
 
@@ -257,22 +230,9 @@ class User {
                 });
             });
         } else {
-            return axios
-                .get("/api/vip/i")
-                .then((res) => {
-                    if (!res.data.code) {
-                        return res.data.data;
-                    } else {
-                        POP.$notify.error({
-                            title: "错误",
-                            message: `[${res.data.code}]${res.data.msg}`,
-                        });
-                    }
-                })
-                .catch((err) => {
-                    POP.$message.error("请求异常");
-                    console.log(err);
-                });
+            return $pay.get("/api/vip/i").then((res) => {
+                return res.data.data;
+            });
         }
     }
 }
