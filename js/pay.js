@@ -1,11 +1,5 @@
 import axios from "axios";
-import Vue from "vue";
-import { Message, Notification } from "element-ui";
-Vue.prototype.$notify = Notification;
-Vue.prototype.$message = Message;
-const broadcast = new Vue();
-import { __pay } from "./jx3box.json";
-// import User from './user'
+import { __pay } from "../data/jx3box.json";
 
 // $pay
 function installNextInterceptors(target) {

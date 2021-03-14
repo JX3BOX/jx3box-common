@@ -1,7 +1,7 @@
 import { showAvatar } from "./utils";
-import { __Links, default_avatar } from "./jx3box.json";
+import { __Links, default_avatar,__server } from "../data/jx3box.json";
 import { $pay, hasVIP, hasPRO } from "./pay";
-import { $server } from "./server";
+import axios from axios;
 
 class User {
     constructor() {
@@ -94,12 +94,11 @@ class User {
 
     // 销毁登录状态
     destroy() {
-        return $server.post("account/logout").then((res) => {
+        return axios.post(__server + "account/logout").finally(() => {
             localStorage.removeItem("created_at");
             localStorage.setItem("logged_in", "false");
             localStorage.removeItem("token");
-            return res;
-        });
+        })
     }
 
     // 跳转至登录
