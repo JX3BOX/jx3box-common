@@ -26,7 +26,7 @@ function getStat(type, id) {
 
 // 获取统计
 function getStatRank(type, action = "views", limit = 10, sort = "7days") {
-    return $next.get("/api/summary/visit/rank", {
+    return axios.get("/api/summary/visit/rank", {
         params: {
             postType: type,
             postAction: action,
