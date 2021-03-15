@@ -2,11 +2,6 @@ import { showAvatar } from "./utils";
 import { __Links, default_avatar, __server } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 import { $_https } from "./https";
-const $pay = $_https("pay", {
-    proxy: true,
-    interceptor: "next",
-    popType: "notify",
-});
 
 class User {
     constructor() {
@@ -27,6 +22,9 @@ class User {
             avatar: showAvatar(null, "s"),
             avatar_origin: default_avatar,
         };
+
+        // 资产缓存
+        this.asset = ''
     }
 
     // 检查当前状态
@@ -97,6 +95,13 @@ class User {
         });
     }
 
+    // 获取用户基础缓存信息
+    getInfo() {
+        this.check();
+        return this.profile;
+    }
+
+
     // 销毁登录状态
     destroy() {
         return axios.post(__server + "account/logout").finally(() => {
@@ -157,7 +162,7 @@ class User {
         return localStorage.getItem("bind_wx");
     }
 
-    // VIP身份判断
+    // PRE身份判断
     _isVIP(asset) {
         let isPRE = asset.was_vip;
         if (isPRE) {
@@ -180,42 +185,35 @@ class User {
 
     // 判断是否为VIP
     isVIP() {
-        if (!this.isLogin()) {
-            return new Promise((resolve, reject) => {
-                resolve(false);
-            });
-        } else {
-            return $pay.get("/api/vip/i").then((res) => {
-                return this._isPRO(res.data.data) || this._isVIP(res.data.data);
-            });
+        if(this.asset){
+            return new Promise((resolve,reject)=>{
+                resolve(this._isPRO(this.asset) || this._isVIP(this.asset))
+            })
+        }else{
+            return this.getAsset().then((asset) => {
+                return this._isPRO(asset) || this._isVIP(asset)
+            })
         }
     }
 
     // 判断是否为PRO
     isPRO() {
-        if (!this.isLogin()) {
-            return new Promise((resolve, reject) => {
-                resolve(false);
-            });
-        } else {
-            return $pay.get("/api/vip/i").then((res) => {
-                return this._isPRO(res.data.data);
-            });
+        if(this.asset){
+            return new Promise((resolve,reject)=>{
+                resolve(this._isPRO(this.asset))
+            })
+        }else{
+            return this.getAsset().then((asset) => {
+                return this._isPRO(asset)
+            })
         }
     }
-
-    // 获取用户基础缓存信息
-    getInfo() {
-        this.check();
-        return this.profile;
-    }
-
+    
     // 获取用户资产
     getAsset() {
         if (!this.isLogin()) {
             return new Promise((resolve, reject) => {
-                // 空资产
-                resolve({
+                let asset = {
                     was_vip: 0,
                     expire_date: "1970-02-02T16:00:00.000Z",
                     total_day: 0,
@@ -227,11 +225,20 @@ class User {
                     namespace_card_count: 0,
                     box_coin: 0,
                     points: 0,
-                });
+                }
+                this.asset = asset
+                // 空资产
+                resolve(asset);
             });
         } else {
-            return $pay.get("/api/vip/i").then((res) => {
-                return res.data.data;
+            return $_https("pay", {
+                proxy: true,
+                interceptor: "next",
+                popType: "notify",
+            }).get("/api/vip/i").then((res) => {
+                let asset = res.data.data
+                this.asset = asset
+                return asset;
             });
         }
     }
