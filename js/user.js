@@ -104,7 +104,11 @@ class User {
 
     // 销毁登录状态
     destroy() {
-        return axios.post(__server + "account/logout").finally(() => {
+        return $_https("server", {
+            proxy: true,
+            interceptor: "next",
+            popType: "notify",
+        }).post("/account/logout").finally(() => {
             localStorage.removeItem("created_at");
             localStorage.setItem("logged_in", "false");
             localStorage.removeItem("token");
