@@ -3,7 +3,6 @@ import qs from "qs";
 import { installInterceptors } from "./axios";
 const $helper = axios.create({
     withCredentials: true,
-    baseURL: process.env.NODE_ENV === "production" ? __next : "/",
 });
 installInterceptors($helper);
 
