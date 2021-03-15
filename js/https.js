@@ -62,7 +62,7 @@ function $https(server, options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    if (options.interceptor) {
+    if (options && options.interceptor) {
         interceptor_map[options.interceptor](ins, options);
     } else {
         installInterceptors(ins, options);
@@ -107,7 +107,7 @@ function $_https(server, options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    if (options.interceptor) {
+    if (options && options.interceptor) {
         interceptor_map[options.interceptor](ins, options);
     } else {
         installInterceptors(ins, options);
