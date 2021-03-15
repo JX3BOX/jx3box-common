@@ -1,8 +1,10 @@
 import axios from 'axios'
 import qs from "qs";
+import { __helperUrl } from "@jx3box/jx3box-common/data/jx3box.json";
 import { installInterceptors } from "./axios";
 const $helper = axios.create({
     withCredentials: true,
+    baseURL:__helperUrl
 });
 installInterceptors($helper);
 
@@ -127,7 +129,7 @@ let WikiComment = {
 
 // 面包屑
 function getBread(channel) {
-    return $helper.get("api/breadcrumb/" + channel, {
+    return $helper.get("/api/breadcrumb/" + channel, {
         headers: { Accept: "application/prs.helper.v2+json" },
     });
 }
