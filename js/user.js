@@ -105,7 +105,7 @@ class User {
     // 销毁登录状态
     destroy() {
         return $_https("server", {
-            proxy: true,
+            proxy: false,
             interceptor: "next",
             popType: "notify",
         }).post("/account/logout").finally(() => {
