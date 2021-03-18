@@ -27,7 +27,7 @@ function loadPop(msg,popType='message'){
 
 import axios from "axios";
 function PopNextworkError(err){
-    console.log(err);
+    console.log(err.response);
     return Promise.reject(err);
 }
 function installInterceptors(target,options) {
@@ -62,7 +62,7 @@ function installNextInterceptors(target,options) {
         },
         function (err) {
             if(!options || !options.mute){
-                loadPop('网络请求异常',popType);
+                loadPop('接口异常',popType);
             }
             return PopNextworkError(err)
         }
