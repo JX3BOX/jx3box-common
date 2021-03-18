@@ -62,7 +62,7 @@ function installNextInterceptors(target,options) {
         },
         function (err) {
             if(!options || !options.mute){
-                loadPop('网络请求异常',popType);
+                loadPop('网络请求异常或服务器内部错误',popType);
             }
             return PopNextworkError(err)
         }
