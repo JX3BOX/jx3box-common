@@ -100,7 +100,7 @@
         "href": "/tool",
         "img": "/box/tool.svg",
         "hover": "/box/tool_on.svg",
-        "name": "工具教程",
+        "name": "教程工具",
         "abbr": "工具",
         "hasMark": false,
         "markcls": "ishot",

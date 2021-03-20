@@ -143,4 +143,33 @@ function $cms(options) {
     return ins;
 }
 
-export { $https, $_https, $cms };
+// helper通用请求接口
+function $helper(options) {
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "helper common request",
+        },
+        baseURL: __helperUrl,
+        headers: {
+            Accept = "application/prs.helper.v2+json";
+        },
+    };
+
+    // 是否需要开启本地代理作为测试
+    if (options && options.proxy) {
+        config.baseURL = process.env.NODE_ENV === "production" ? __helperUrl : "/";
+    }
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installHelperInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $https, $_https, $cms,$helper };
