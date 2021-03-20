@@ -154,7 +154,7 @@ function $helper(options) {
         },
         baseURL: __helperUrl,
         headers: {
-            Accept = "application/prs.helper.v2+json";
+            Accept : "application/prs.helper.v2+json",
         },
     };
 
