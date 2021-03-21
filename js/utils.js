@@ -162,8 +162,8 @@ module.exports = {
             let url = __Root + "rank/race/" + event_id;
             if (achieve_id) url += "#/rank/" + achieve_id;
             return url;
-        } else {
-            return __Root + `${type}/${id}`;
+        }else{
+            return ''
         }
     },
 
