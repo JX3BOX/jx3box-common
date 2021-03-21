@@ -13,6 +13,7 @@ import {
     __next,
     __pay,
     __helperUrl,
+    __team
 } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 function isLogin() {
@@ -31,6 +32,7 @@ const server_map = {
     spider: __spider,
     next: __next,
     pay: __pay,
+    team: __team,
     helper: __helperUrl,
 };
 const interceptor_map = {
@@ -195,4 +197,26 @@ function $next(options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next };
+// team通用请求接口
+function $team(options) {
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "team common request",
+        },
+        baseURL: process.env.NODE_ENV === "production" ? __team : "/",
+        headers: {},
+    };
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installNextInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $https, $_https, $cms, $helper, $next ,$team};
