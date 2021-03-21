@@ -24,7 +24,7 @@ class User {
         };
 
         // 资产缓存
-        this.asset = ''
+        this.asset = "";
     }
 
     // 检查当前状态
@@ -101,18 +101,19 @@ class User {
         return this.profile;
     }
 
-
     // 销毁登录状态
     destroy() {
         return $_https("server", {
             proxy: false,
             interceptor: "next",
             popType: "notify",
-        }).post("/account/logout").finally(() => {
-            localStorage.removeItem("created_at");
-            localStorage.setItem("logged_in", "false");
-            localStorage.removeItem("token");
-        });
+        })
+            .post("/account/logout")
+            .finally(() => {
+                localStorage.removeItem("created_at");
+                localStorage.setItem("logged_in", "false");
+                localStorage.removeItem("token");
+            });
     }
 
     // 跳转至登录
@@ -189,30 +190,30 @@ class User {
 
     // 判断是否为VIP
     isVIP() {
-        if(this.asset){
-            return new Promise((resolve,reject)=>{
-                resolve(this._isPRO(this.asset) || this._isVIP(this.asset))
-            })
-        }else{
+        if (this.asset) {
+            return new Promise((resolve, reject) => {
+                resolve(this._isPRO(this.asset) || this._isVIP(this.asset));
+            });
+        } else {
             return this.getAsset().then((asset) => {
-                return this._isPRO(asset) || this._isVIP(asset)
-            })
+                return this._isPRO(asset) || this._isVIP(asset);
+            });
         }
     }
 
     // 判断是否为PRO
     isPRO() {
-        if(this.asset){
-            return new Promise((resolve,reject)=>{
-                resolve(this._isPRO(this.asset))
-            })
-        }else{
+        if (this.asset) {
+            return new Promise((resolve, reject) => {
+                resolve(this._isPRO(this.asset));
+            });
+        } else {
             return this.getAsset().then((asset) => {
-                return this._isPRO(asset)
-            })
+                return this._isPRO(asset);
+            });
         }
     }
-    
+
     // 获取用户资产
     getAsset() {
         if (!this.isLogin()) {
@@ -229,8 +230,8 @@ class User {
                     namespace_card_count: 0,
                     box_coin: 0,
                     points: 0,
-                }
-                this.asset = asset
+                };
+                this.asset = asset;
                 // 空资产
                 resolve(asset);
             });
@@ -239,11 +240,13 @@ class User {
                 proxy: true,
                 interceptor: "next",
                 popType: "notify",
-            }).get("/api/vip/i").then((res) => {
-                let asset = res.data.data
-                this.asset = asset
-                return asset;
-            });
+            })
+                .get("/api/vip/i")
+                .then((res) => {
+                    let asset = res.data.data;
+                    this.asset = asset;
+                    return asset;
+                });
         }
     }
 }
