@@ -159,8 +159,8 @@ module.exports = {
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
-            let url = __Root + "rank/race/" + event_id;
-            if (achieve_id) url += "#/rank/" + achieve_id;
+            let url = __Root + "rank/race/#/" + event_id;
+            if (achieve_id) url += "?aid=" + achieve_id;
             return url;
         }else{
             return ''
