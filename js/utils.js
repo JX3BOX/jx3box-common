@@ -1,6 +1,5 @@
 const {
     default_avatar,
-    __Root,
     __sourceType,
     __postType,
     __otherType,
@@ -123,30 +122,30 @@ module.exports = {
     },
 
     editLink: function (type, id) {
-        return __Root + "dashboard/publish/#/" + type + "/" + id;
+        return "/dashboard/publish/#/" + type + "/" + id;
     },
 
     publishLink: function (type) {
-        return __Root + "dashboard/publish/#/" + type;
+        return "/dashboard/publish/#/" + type;
     },
 
     postLink: function (type, pid) {
-        return __Root + type + "/" + pid;
+        return '/' + type + "/" + pid;
     },
 
     getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
-            return __Root + type + "/" + id;
+            return '/' + type + "/" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
-            if (type === "item_plan") return __Root + "item/#/plan_view/" + id;
+            if (type === "item_plan") return "/item/#/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
-            return __Root + type + "/#/view/" + id;
+            return '/' + type + "/#/view/" + id;
         } else if (__sourceType.exam_types.includes(type)) {
-            return __Root + "exam" + "/#/" + type + "/" + id;
+            return '/' + "exam" + "/#/" + type + "/" + id;
         } else if (__sourceType.db_types.includes(type)) {
             return (
-                __Root +
+                '/' +
                 "app/database/?type=" +
                 type +
                 "&query=" +
@@ -155,11 +154,11 @@ module.exports = {
                 level
             );
         } else if (__sourceType.team_types.includes(type)) {
-            return __Root + "team/" + type + "/" + id;
+            return '/' + "team/" + type + "/" + id;
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
-            let url = __Root + "rank/race/#/" + event_id;
+            let url = '/' + "rank/race/#/" + event_id;
             if (achieve_id) url += "?aid=" + achieve_id;
             return url;
         }else{
@@ -168,7 +167,7 @@ module.exports = {
     },
 
     authorLink: function (uid) {
-        return __Root + "author" + "/" + uid;
+        return '/' + "author" + "/" + uid;
     },
 
     tvLink: function (tv_type, tv_id) {
