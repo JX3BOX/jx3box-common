@@ -148,18 +148,21 @@ class User {
     }
 
     // 判断是否为管理员|编辑
-    isAdmin() {
+    isEditor() {
         return this.isLogin() && this.profile.group >= 64;
     }
 
     // 判断是否为管理员|运营
-    isSuperAdmin() {
+    isAdmin() {
         return this.isLogin() && this.profile.group >= 128;
     }
 
     // 判断是否为管理员|开发
-    isSystemAdmin() {
+    isDeveloper() {
         return this.isLogin() && this.profile.group >= 256;
+    }
+    isSuperAdmin() {
+        return this.isLogin() && this.profile.group >= 512;
     }
 
     // 是否绑定微信
