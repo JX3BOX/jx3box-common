@@ -1,7 +1,9 @@
 {
     "__Domain": "www.jx3box.com",
+    "__Origin": "origin.jx3box.com",
 
     "__Root": "https://www.jx3box.com/",
+    "__OriginRoot": "https://origin.jx3box.com/",
     "__v2": "https://v2.jx3box.com/",
     "__Github": "https://github.jx3box.com/",
 
