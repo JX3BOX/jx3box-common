@@ -54,3 +54,11 @@ const $helper = $https('helper',{
 })
 $helper.get(path,...)
 ```
+
+### 快捷方式
+```javascript
+$helper()       //使用苦瓜自己的后端包装模式
+$cms()          //使用浮烟+小胡统一的后端包装模式
+$next()         //使用浮烟+小胡统一的后端包装模式
+$team()         //使用浮烟+小胡统一的后端包装模式
+```
