@@ -1,0 +1,137 @@
+{
+    "__Domain": "www.jx3box.com",
+    "__Origin": "origin.jx3box.com",
+
+    "__Root": "https://www.jx3box.com/",
+    "__OriginRoot": "https://origin.jx3box.com/",
+    "__v2": "https://v2.jx3box.com/",
+    "__Github": "https://github.jx3box.com/",
+
+    "__server": "https://server.jx3box.com/",
+    "__uc": "https://uc.jx3box.com/",
+    "__cms": "https://cms.jx3box.com/",
+    "__node": "https://node.jx3box.com/",
+    "__spider": "https://spider.jx3box.com/",
+    "__proxy": "https://proxy.jx3box.com/",
+
+    "__next": "https://next.jx3box.com/",
+    "__pay": "https://pay.jx3box.com/",
+    "__api": "https://api.jx3box.com/",
+    "__team": "https://team.api.jx3box.com/",
+    "__git": "https://git.jx3box.com/",
+    "__hub": "https://hub.jx3box.com/",
+
+    "__helperUrl": "https://helper.jx3box.com/",
+    "__os": "https://os.jx3box.com/",
+
+    "__jx3":"https://xn--3-4g8a959k.com/",
+
+    "__ossRoot": "https://oss.jx3box.com/",
+    "__ossMirror": "https://console.cnyixun.com/",
+
+    "__staticPath": {
+        "origin": "https://oss.jx3box.com/static/",
+        "github": "https://jx3box.github.io/",
+        "jsdelivr": "https://cdn.jsdelivr.net/gh/JX3BOX/",
+        "mirror": "https://console.cnyixun.com/static/"
+    },
+
+    "__dataPath": "https://data.jx3box.com/",
+    "__imgPath": "https://img.jx3box.com/",
+    "__iconPath": "https://icon.jx3box.com/",
+    "__luaPath": "https://lua.jx3box.com/",
+
+    "__postType": {
+        "macro": "剑三宏库",
+        "jx3dat": "插件数据",
+        "fb": "副本攻略",
+        "bps": "职业攻略",
+        "tool": "教程工具",
+        "house": "家园分享",
+        "share": "捏脸分享",
+        "bbs": "茶馆交流"
+    },
+
+    "__otherType": {
+        "cj": "成就百科",
+        "achievement": "成就百科",
+        "item": "物品百科",
+        "item_plan": "物品清单",
+        "knowledge": "通识百科",
+        "question": "剑三题目",
+        "paper": "剑三试卷",
+        "collection": "剑三小册",
+        "quest": "任务百科"
+    },
+
+    "__wikiType": {
+        "achievement": "成就",
+        "item": "物品",
+        "knowledge": "通识",
+        "quest": "任务"
+    },
+
+    "__sourceType": {
+        "cms_types": [
+            "macro",
+            "jx3dat",
+            "fb",
+            "bps",
+            "tool",
+            "house",
+            "share",
+            "bbs"
+        ],
+        "wiki_types": [
+            "cj",
+            "achievement",
+            "item",
+            "item_plan",
+            "collection",
+            "wiki",
+            "knowledge",
+            "quest"
+        ],
+        "exam_types": ["question", "paper"],
+        "db_types": ["skill", "buff", "npc", "doodad"],
+        "team_types": ["org", "role"]
+    },
+
+    "__userGroup": {
+        "0": "游客",
+        "1": "正式成员",
+        "8": "正式成员",
+        "16": "正式成员",
+        "32": "签约作者",
+        "64": "编辑",
+        "128": "管理员",
+        "256": "开发组",
+        "512": "超级管理"
+    },
+
+    "__userLevel": {
+        "1": "稻香萌新"
+    },
+
+    "__Links": {
+        "account": {
+            "login": "/account/login",
+            "register": "/account/register",
+            "email_verify": "/account/email_verify",
+            "login_callback": "/account/login_callback"
+        },
+        "dashboard": {
+            "home": "/dashboard",
+            "work": "/dashboard/#/work",
+            "msg": "/dashboard/#/msg",
+            "feed": "/dashboard/#/feed",
+            "fav": "/dashboard/#/fav",
+            "profile": "/dashboard/#/profile",
+            "connect": "/dashboard/#/connect",
+            "publish": "/dashboard/publish"
+        }
+    },
+
+    "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
+    "feedback": "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"
+}
