@@ -68,6 +68,26 @@ function installNextInterceptors(target,options) {
         }
     );
 }
+function installCmsInterceptors(target,options) {
+    let popType = options && options.popType || 'message'
+    target["interceptors"]["response"].use(
+        function (response) {
+            if (response.data.code) {
+                if(!options || !options.mute){
+                    response.data.msg && loadPop(`[${response.data.code}]${response.data.msg}`,popType);
+                }
+                return Promise.reject(response);
+            }
+            return response;
+        },
+        function (err) {
+            if(!options || !options.mute){
+                loadPop(`[${err.response.data.statusCode}]${err.response.data.message}`,popType);
+            }
+            return PopNextworkError(err)
+        }
+    );
+}
 function installHelperInterceptors(target,options) {
     let popType = options && options.popType || 'message'
     target["interceptors"]["response"].use(
@@ -96,4 +116,5 @@ export {
     installInterceptors,
     installNextInterceptors,
     installHelperInterceptors,
+    installCmsInterceptors
 };

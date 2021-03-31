@@ -3,6 +3,7 @@ import {
     installInterceptors,
     installNextInterceptors,
     installHelperInterceptors,
+    installCmsInterceptors
 } from "./axios";
 import {
     __server,
@@ -39,6 +40,7 @@ const interceptor_map = {
     helper: installHelperInterceptors,
     next: installNextInterceptors,
     default: installInterceptors,
+    cms : installCmsInterceptors,
 };
 
 // 不带鉴权的请求
@@ -140,7 +142,7 @@ function $cms(options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    installNextInterceptors(ins, options);
+    installCmsInterceptors(ins, options);
 
     return ins;
 }

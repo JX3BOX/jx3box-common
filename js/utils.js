@@ -122,11 +122,11 @@ module.exports = {
     },
 
     editLink: function (type, id) {
-        return "/dashboard/publish/#/" + type + "/" + id;
+        return "/publish/#/" + type + "/" + id;
     },
 
     publishLink: function (type) {
-        return "/dashboard/publish/#/" + type;
+        return "/publish/#/" + type;
     },
 
     postLink: function (type, pid) {
