@@ -122,13 +122,13 @@
         },
         "dashboard": {
             "home": "/dashboard",
-            "work": "/dashboard/#/work",
             "msg": "/dashboard/#/msg",
             "feed": "/dashboard/#/feed",
             "fav": "/dashboard/#/fav",
             "profile": "/dashboard/#/profile",
             "connect": "/dashboard/#/connect",
-            "publish": "/dashboard/publish"
+            "work": "/publish",
+            "publish": "/publish"
         }
     },
 
