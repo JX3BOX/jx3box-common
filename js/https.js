@@ -129,14 +129,9 @@ function $cms(options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "cms common request",
         },
-        baseURL: __cms,
+        baseURL: process.env.NODE_ENV === "production" ? __cms : "/",
         headers: {},
     };
-
-    // 是否需要开启本地代理作为测试
-    if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? __cms : "/";
-    }
 
     // 创建实例
     const ins = axios.create(config);
