@@ -216,4 +216,26 @@ function $team(options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next ,$team};
+// pay通用请求接口
+function $pay(options) {
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "pay common request",
+        },
+        baseURL: process.env.NODE_ENV === "production" ? __pay : "/",
+        headers: {},
+    };
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installNextInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $https, $_https, $cms, $helper, $next ,$team,$pay};
