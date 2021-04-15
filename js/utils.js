@@ -144,15 +144,9 @@ module.exports = {
         } else if (__sourceType.exam_types.includes(type)) {
             return '/' + "exam" + "/#/" + type + "/" + id;
         } else if (__sourceType.db_types.includes(type)) {
-            return (
-                '/' +
-                "app/database/?type=" +
-                type +
-                "&query=" +
-                id +
-                "&level=" +
-                level
-            );
+            let link = '/' + `app/database/?type=${type}&query=${id}`
+            if(level) link += `&level=${level}`
+            return link;
         } else if (__sourceType.team_types.includes(type)) {
             return '/' + "team/" + type + "/" + id;
         } else if (type == "rank") {
