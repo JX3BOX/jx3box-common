@@ -155,6 +155,8 @@ module.exports = {
             let url = '/' + "rank/race/#/" + event_id;
             if (achieve_id) url += "?aid=" + achieve_id;
             return url;
+        }else if(__sourceType.pvx_types.includes(type)){
+            return '/' + `bbs/#/${type}/${id}`
         }else{
             return ''
         }
