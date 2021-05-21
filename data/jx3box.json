@@ -81,8 +81,7 @@
             "tool",
             "house",
             "share",
-            "bbs",
-            "joke"
+            "bbs"
         ],
         "wiki_types": [
             "cj",
@@ -96,7 +95,8 @@
         ],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "team_types": ["org", "role"]
+        "team_types": ["org", "role"],
+        "pvx_types": ["joke", "emotion"]
     },
 
     "__visibleMap":{
