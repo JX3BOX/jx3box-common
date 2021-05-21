@@ -49,7 +49,8 @@
         "tool": "教程工具",
         "house": "家园分享",
         "share": "捏脸分享",
-        "bbs": "茶馆交流"
+        "bbs": "茶馆交流",
+        "joke":"剑三骚话"
     },
 
     "__otherType": {
@@ -80,7 +81,8 @@
             "tool",
             "house",
             "share",
-            "bbs"
+            "bbs",
+            "joke"
         ],
         "wiki_types": [
             "cj",
@@ -94,8 +96,7 @@
         ],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "team_types": ["org", "role"],
-        "pvx_types":["joke","emotion"]
+        "team_types": ["org", "role"]
     },
 
     "__visibleMap":{
