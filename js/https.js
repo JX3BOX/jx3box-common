@@ -247,8 +247,6 @@ function $node(options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "node common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? __node : "/",
-        headers: {},
     };
 
     // 创建实例
