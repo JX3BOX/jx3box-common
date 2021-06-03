@@ -3,7 +3,7 @@ import {
     installInterceptors,
     installNextInterceptors,
     installHelperInterceptors,
-    installCmsInterceptors
+    installCmsInterceptors,
 } from "./axios";
 import {
     __server,
@@ -14,7 +14,7 @@ import {
     __next,
     __pay,
     __helperUrl,
-    __team
+    __team,
 } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 function isLogin() {
@@ -40,7 +40,7 @@ const interceptor_map = {
     helper: installHelperInterceptors,
     next: installNextInterceptors,
     default: installInterceptors,
-    cms : installCmsInterceptors,
+    cms: installCmsInterceptors,
 };
 
 // 不带鉴权的请求
@@ -238,4 +238,26 @@ function $pay(options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next ,$team,$pay};
+// node
+function $node(options) {
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "node common request",
+        },
+        baseURL: process.env.NODE_ENV === "production" ? __node : "/",
+        headers: {},
+    };
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $https, $_https, $cms, $helper, $next, $team, $pay, $node };
