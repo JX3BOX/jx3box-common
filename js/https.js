@@ -247,6 +247,7 @@ function $node(options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "node common request",
         },
+        baseURL: __node,
     };
 
     // 创建实例
