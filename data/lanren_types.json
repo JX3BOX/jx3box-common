@@ -1,0 +1,11 @@
+{
+  "lanren_types": {
+    "dungeon": "副本数据",
+    "custom": "自定义数据",
+    "corner": "边角数据",
+    "timeline": "时间轴数据",
+    "npc": "关注列表npc数据",
+    "doodad": "关注列表doodad数据",
+    "deal": "交易辅助物品收藏数据"
+  }
+}
