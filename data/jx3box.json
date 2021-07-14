@@ -15,6 +15,7 @@
     "__proxy": "https://proxy.jx3box.com/",
 
     "__next": "https://next.jx3box.com/",
+    "__next2": "https://next2.jx3box.com/",
     "__pay": "https://pay.jx3box.com/",
     "__api": "https://api.jx3box.com/",
     "__team": "https://team.api.jx3box.com/",
@@ -24,7 +25,7 @@
     "__helperUrl": "https://helper.jx3box.com/",
     "__os": "https://os.jx3box.com/",
 
-    "__jx3":"https://xn--3-4g8a959k.com/",
+    "__jx3": "https://xn--3-4g8a959k.com/",
 
     "__ossRoot": "https://oss.jx3box.com/",
     "__ossMirror": "https://console.cnyixun.com/",
@@ -50,7 +51,7 @@
         "house": "家园分享",
         "share": "捏脸分享",
         "bbs": "茶馆交流",
-        "joke":"剑三骚话"
+        "joke": "剑三骚话"
     },
 
     "__otherType": {
@@ -73,39 +74,21 @@
     },
 
     "__sourceType": {
-        "cms_types": [
-            "macro",
-            "jx3dat",
-            "fb",
-            "bps",
-            "tool",
-            "house",
-            "share",
-            "bbs"
-        ],
-        "wiki_types": [
-            "cj",
-            "achievement",
-            "item",
-            "item_plan",
-            "collection",
-            "wiki",
-            "knowledge",
-            "quest"
-        ],
+        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs"],
+        "wiki_types": ["cj", "achievement", "item", "item_plan", "collection", "wiki", "knowledge", "quest"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "team_types": ["org", "role"],
+        "team_types": ["org", "role", "raid"],
         "pvx_types": ["joke", "emotion"]
     },
 
-    "__visibleMap":{
-        "0":"公开",
-        "1":"仅自己可见",
-        "2":"仅亲友可见",
-        "3":"密码可见",
-        "4":"付费可见",
-        "5":"粉丝可见"
+    "__visibleMap": {
+        "0": "公开",
+        "1": "仅自己可见",
+        "2": "仅亲友可见",
+        "3": "密码可见",
+        "4": "付费可见",
+        "5": "粉丝可见"
     },
 
     "__userGroup": {

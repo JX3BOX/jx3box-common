@@ -1,12 +1,4 @@
-const {
-    default_avatar,
-    __sourceType,
-    __postType,
-    __otherType,
-    __imgPath,
-    __iconPath,
-    __jx3,
-} = require("../data/jx3box");
+const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __jx3 } = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {
@@ -25,10 +17,7 @@ module.exports = {
         jq.length &&
             jq.one("error", function () {
                 var img_url = $(this).attr("src");
-                var fix_url = img_url.replace(
-                    /console\.cnyixun\.com/g,
-                    "oss.jx3box.com"
-                );
+                var fix_url = img_url.replace(/console\.cnyixun\.com/g, "oss.jx3box.com");
                 $(this).attr("src", fix_url);
             });
     },
@@ -43,10 +32,7 @@ module.exports = {
             // QQ头像协议问题
             avatar = avatar.replace(/http:/g, "https:");
             if (replace) {
-                avatar = url.replace(
-                    /oss\.jx3box\.com/g,
-                    "console.cnyixun.com"
-                );
+                avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
             }
         } else {
             avatar = default_avatar;
@@ -130,40 +116,40 @@ module.exports = {
     },
 
     postLink: function (type, pid) {
-        return '/' + type + "/" + pid;
+        return "/" + type + "/" + pid;
     },
 
     getLink: function (type, id, level) {
         if (__sourceType.cms_types.includes(type)) {
-            return '/' + type + "/" + id;
+            return "/" + type + "/" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === "item_plan") return "/item/#/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
-            return '/' + type + "/#/view/" + id;
+            return "/" + type + "/#/view/" + id;
         } else if (__sourceType.exam_types.includes(type)) {
-            return '/' + "exam" + "/#/" + type + "/" + id;
+            return "/" + "exam" + "/#/" + type + "/" + id;
         } else if (__sourceType.db_types.includes(type)) {
-            let link = '/' + `app/database/?type=${type}&query=${id}`
-            if(level) link += `&level=${level}`
+            let link = "/" + `app/database/?type=${type}&query=${id}`;
+            if (level) link += `&level=${level}`;
             return link;
         } else if (__sourceType.team_types.includes(type)) {
-            return '/' + "team/" + type + "/" + id;
+            return "/" + "team/" + type + "/" + id;
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
-            let url = '/' + "rank/race/#/" + event_id;
+            let url = "/" + "rank/race/#/" + event_id;
             if (achieve_id) url += "?aid=" + achieve_id;
             return url;
-        }else if(__sourceType.pvx_types.includes(type)){
-            return '/' + `bbs/#/${type}/${id}`
-        }else{
-            return ''
+        } else if (__sourceType.pvx_types.includes(type)) {
+            return "/" + `bbs/#/${type}/${id}`;
+        } else {
+            return "";
         }
     },
 
     authorLink: function (uid) {
-        return '/' + "author" + "/" + uid;
+        return "/" + "author" + "/" + uid;
     },
 
     tvLink: function (tv_type, tv_id) {
@@ -229,11 +215,7 @@ module.exports = {
         let year = dt.getFullYear();
         let month = dt.getMonth() + 1;
         let date = dt.getDate();
-        let str = opt.polished
-            ? `${year}${opt.separator}${polish(month)}${opt.separator}${polish(
-                  date
-              )}`
-            : `${year}${opt.separator}${month}${opt.separator}${date}`;
+        let str = opt.polished ? `${year}${opt.separator}${polish(month)}${opt.separator}${polish(date)}` : `${year}${opt.separator}${month}${opt.separator}${date}`;
         return str;
 
         function polish(val) {
