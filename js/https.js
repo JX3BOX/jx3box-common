@@ -157,6 +157,11 @@ function $helper(options) {
         },
     };
 
+    // 附加headers
+    if(options && options.headers){
+        config.headers = Object.assign(config.headers,options.headers)
+    }
+
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
         config.baseURL =
