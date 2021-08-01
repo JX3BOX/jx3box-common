@@ -142,11 +142,6 @@ class User {
         return this.isLogin() && this.profile.group >= 16;
     }
 
-    // 判断是否为签约作者
-    isSuperAuthor() {
-        return this.isLogin() && this.profile.group >= 32;
-    }
-
     // 判断是否为管理员|编辑
     isEditor() {
         return this.isLogin() && this.profile.group >= 64;
@@ -161,7 +156,30 @@ class User {
     isDeveloper() {
         return this.isLogin() && this.profile.group >= 256;
     }
+
+    // 判断是否为超管
     isSuperAdmin() {
+        return this.isLogin() && this.profile.group >= 512;
+    }
+
+    // 判断是否为签约作者
+    isSuperAuthor() {
+        if(this.isLogin()){
+            return $_https("cms", {
+                proxy: true,
+                interceptor: "next",
+                popType: "notify",
+            })
+                .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
+                .then((res) => {
+                    return res.data.data;
+                });
+        }else{
+            return new Promise((resolve, reject) => {
+                resolve(false);
+            });
+        }
+        
         return this.isLogin() && this.profile.group >= 512;
     }
 
