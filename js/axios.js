@@ -62,7 +62,11 @@ function installNextInterceptors(target,options) {
         },
         function (err) {
             if(!options || !options.mute){
-                loadPop('接口异常',popType);
+                if(err.response && err.response.data && err.response.data.msg){
+                    loadPop(err.response.data.msg,popType);
+                }else{
+                    loadPop('接口异常',popType);
+                }
             }
             return PopNextworkError(err)
         }
