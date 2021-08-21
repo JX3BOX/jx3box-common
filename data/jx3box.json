@@ -51,7 +51,9 @@
         "house": "家园分享",
         "share": "捏脸分享",
         "bbs": "茶馆交流",
-        "joke": "剑三骚话"
+        "joke": "剑三骚话",
+        "ac": "公告资讯",
+        "feedback": "反馈建议"
     },
 
     "__otherType": {
@@ -79,7 +81,7 @@
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
-        "pvx_types": ["joke", "emotion"]
+        "bbs_types": ["joke", "emotion", "ac", "feedback"]
     },
 
     "__visibleMap": {
