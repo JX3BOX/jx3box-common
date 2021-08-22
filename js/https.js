@@ -31,7 +31,7 @@ const server_map = {
     cms: __cms,
     node: __node,
     spider: __spider,
-    next: __next,
+    next: __next2,
     pay: __pay,
     team: __team,
     helper: __helperUrl,
