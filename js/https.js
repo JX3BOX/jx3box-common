@@ -11,7 +11,7 @@ import {
     __cms,
     __node,
     __spider,
-    __next,
+    __next2,
     __pay,
     __helperUrl,
     __team,
@@ -186,7 +186,7 @@ function $next(options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "next common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? __next : "/",
+        baseURL: process.env.NODE_ENV === "production" ? __next2 : "/",
         headers: {},
     };
 
