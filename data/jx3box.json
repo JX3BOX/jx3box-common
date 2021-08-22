@@ -52,8 +52,8 @@
         "share": "捏脸分享",
         "bbs": "茶馆交流",
         "joke": "剑三骚话",
-        "emotion":"剑三表情",
-        "ac": "公告资讯",
+        "emotion": "剑三表情",
+        "notice": "公告资讯",
         "feedback": "反馈建议"
     },
 
@@ -77,12 +77,12 @@
     },
 
     "__sourceType": {
-        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs"],
+        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs", "notice"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "collection", "wiki", "knowledge", "quest"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
-        "bbs_types": ["joke", "emotion", "ac", "feedback"]
+        "bbs_types": ["joke", "emotion", "feedback"]
     },
 
     "__visibleMap": {
