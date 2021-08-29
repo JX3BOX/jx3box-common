@@ -222,4 +222,9 @@ module.exports = {
             return val < 10 ? "0" + val : val;
         }
     },
+
+    // 剑三
+    jx3ClientType() {
+        return location.hostname.includes('origin') ? 2 : 1;
+    }
 };

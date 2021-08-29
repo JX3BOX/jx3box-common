@@ -17,6 +17,7 @@ import {
     __team,
 } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
+import {jx3ClientType} from "./utils";
 function isLogin() {
     let created_at = !localStorage.getItem("created_at")
         ? -Infinity
@@ -154,6 +155,7 @@ function $helper(options) {
         baseURL: __helperUrl,
         headers: {
             Accept: "application/prs.helper.v2+json",
+            'JX3-Client-Type': jx3ClientType()
         },
     };
 
