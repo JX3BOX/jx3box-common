@@ -266,4 +266,4 @@ function $node(options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next, $team, $pay, $node };
+export { $https, $_https, $cms, $helper, $next, $team, $pay, $node,axios };
