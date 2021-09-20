@@ -144,6 +144,8 @@ module.exports = {
             return url;
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
+        }else if(__sourceType.app_types.includes(type)){
+            return '/' + `${type}/#/view/${id}`
         } else {
             return "";
         }
