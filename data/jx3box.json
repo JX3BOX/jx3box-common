@@ -67,7 +67,7 @@
         "paper": "剑三试卷",
         "collection": "剑三小册",
         "quest": "任务百科",
-        "pz":"剑三配装"
+        "j3pz":"剑三配装"
     },
 
     "__wikiType": {
@@ -84,7 +84,7 @@
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
         "bbs_types": ["joke", "emotion", "feedback"],
-        "app_types":["pz"]
+        "app_types":["j3pz"]
     },
 
     "__visibleMap": {
