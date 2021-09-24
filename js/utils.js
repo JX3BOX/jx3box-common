@@ -1,5 +1,6 @@
 const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __jx3 } = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
+const { __imgPath } = require("../data/jx3box.json");
 
 module.exports = {
     // 图片处理函数
@@ -99,13 +100,17 @@ module.exports = {
 
     // 快捷过滤器（根据应用类型+ID获取对应帖子着陆页或链接）
 
-    iconLink(icon_id,client = 'std') {
+    iconLink(icon_id, client = "std") {
         if (!icon_id || isNaN(parseInt(icon_id))) {
             return `${__imgPath}image/common/nullicon.png`;
         } else {
-            let iconpath = client =='origin' ? 'origin_icon' : 'icon'
+            let iconpath = client == "origin" ? "origin_icon" : "icon";
             return `${__iconPath}${iconpath}/${icon_id}.png`;
         }
+    },
+
+    getAppIcon(key) {
+        return __imgPath + "image/box/" + key + ".svg";
     },
 
     editLink: function (type, id) {
@@ -144,8 +149,8 @@ module.exports = {
             return url;
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
-        }else if(__sourceType.app_types.includes(type)){
-            return '/' + `${type}/#/view/${id}`
+        } else if (__sourceType.app_types.includes(type)) {
+            return "/" + `${type}/#/view/${id}`;
         } else {
             return "";
         }
@@ -228,6 +233,6 @@ module.exports = {
 
     // 剑三
     jx3ClientType() {
-        return location.hostname.includes('origin') ? 2 : 1;
-    }
+        return location.hostname.includes("origin") ? 2 : 1;
+    },
 };
