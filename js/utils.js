@@ -1,6 +1,5 @@
 const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __jx3 } = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
-const { __imgPath } = require("../data/jx3box.json");
 
 module.exports = {
     // 图片处理函数
