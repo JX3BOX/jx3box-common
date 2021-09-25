@@ -155,7 +155,7 @@ function $helper(options) {
         baseURL: __helperUrl,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            'JX3-Client-Type': jx3ClientType()
+            'JX3-Client-Type': (options && options.client_id) || jx3ClientType()
         },
     };
 
