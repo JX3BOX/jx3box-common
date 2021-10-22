@@ -144,7 +144,7 @@ module.exports = {
             let event_id = id;
             let achieve_id = level;
             let url = "/" + "rank/race/#/" + event_id;
-            if (achieve_id) url += "?aid=" + achieve_id;
+            if (achieve_id) url += "/rank?aid=" + achieve_id;
             return url;
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
