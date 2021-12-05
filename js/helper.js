@@ -33,11 +33,12 @@ let WikiPost = {
     },
 
     // 获取指定攻略
-    view(post_id) {
+    view(post_id, params = {}) {
         if (!post_id) return null;
         return $helper()({
             method: "GET",
             url: `/api/wiki/post/${post_id}`,
+            params: params,
         });
     },
 
