@@ -1,27 +1,9 @@
-import {
-    axios,
-    installInterceptors,
-    installNextInterceptors,
-    installHelperInterceptors,
-    installCmsInterceptors,
-} from "./axios";
-import {
-    __server,
-    __uc,
-    __cms,
-    __node,
-    __spider,
-    __next2,
-    __pay,
-    __helperUrl,
-    __team,
-} from "../data/jx3box.json";
+import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
+import { __server, __uc, __cms, __node, __spider, __next2, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
-import {jx3ClientType} from "./utils";
+import { jx3ClientType } from "./utils";
 function isLogin() {
-    let created_at = !localStorage.getItem("created_at")
-        ? -Infinity
-        : localStorage.getItem("created_at");
+    let created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
     let logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
     return logged_in && Date.now() - created_at < tokenExpires;
 }
@@ -57,8 +39,7 @@ function $https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL =
-            process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
         config.baseURL = server_map[server];
     }
@@ -90,8 +71,7 @@ function $_https(server, options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "$_https common request",
         },
-        baseURL:
-            process.env.NODE_ENV === "production" ? server_map[server] : "/",
+        baseURL: process.env.NODE_ENV === "production" ? server_map[server] : "/",
         headers: {},
     };
 
@@ -102,8 +82,7 @@ function $_https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (!options || options.proxy || options.proxy === undefined) {
-        config.baseURL =
-            process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
         config.baseURL = server_map[server];
     }
@@ -155,19 +134,18 @@ function $helper(options) {
         baseURL: __helperUrl,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            'JX3-Client-Type': (options && options.client_id) || jx3ClientType()
+            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
         },
     };
 
     // 附加headers
-    if(options && options.headers){
-        config.headers = Object.assign(config.headers,options.headers)
+    if (options && options.headers) {
+        config.headers = Object.assign(config.headers, options.headers);
     }
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL =
-            process.env.NODE_ENV === "production" ? __helperUrl : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? __helperUrl : "/";
     }
 
     // 创建实例
@@ -266,4 +244,26 @@ function $node(options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next, $team, $pay, $node,axios };
+// lua通用请求接口
+function $lua(options) {
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "lua common request",
+        },
+        baseURL: process.env.NODE_ENV === "production" ? __lua : "/",
+        headers: {},
+    };
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installNextInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios };
