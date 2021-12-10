@@ -125,6 +125,7 @@ module.exports = {
     },
 
     getLink: function (type, id, level) {
+        id = id || ''
         if (__sourceType.cms_types.includes(type)) {
             return "/" + type + "/" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
