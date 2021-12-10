@@ -53,10 +53,7 @@
         "house": "家园分享",
         "share": "捏脸分享",
         "bbs": "茶馆交流",
-        "joke": "剑三骚话",
-        "emotion": "剑三表情",
-        "notice": "公告资讯",
-        "feedback": "反馈建议"
+        "notice": "公告资讯"
     },
 
     "__otherType": {
@@ -69,7 +66,9 @@
         "paper": "剑三试卷",
         "collection": "剑三小册",
         "quest": "任务百科",
-        "pz": "剑三配装"
+        "pz": "剑三配装",
+        "joke": "剑三骚话",
+        "emotion": "剑三表情"
     },
 
     "__wikiType": {
