@@ -125,7 +125,7 @@ module.exports = {
     },
 
     getLink: function (type, id, level) {
-        id = id || ''
+        id = id || "";
         if (__sourceType.cms_types.includes(type)) {
             return "/" + type + "/" + id;
         } else if (__sourceType.wiki_types.includes(type)) {
@@ -237,23 +237,23 @@ module.exports = {
     },
 
     // 游戏内TEXT文本格式化
-    extractTextContent(str){
+    extractTextContent(str) {
         // 匹配分段
-        const regex = /<Text>text=(.*?)font=(\d+).*?<\/text>/mgsiy
+        const regex = /<Text>text=(.*?)font=(\d+).*?<\/text>/gimsy;
         let matches = [];
         let match;
-        while (match = regex.exec(str)) {
+        while ((match = regex.exec(str))) {
             matches.push(match);
         }
-    
+
         // 格式化分段
-        let result = []
-        for(let group of matches){
+        let result = [];
+        for (let group of matches) {
             result.push({
-                font : ~~group[2],
-                text : group[1].slice(1,-2).replace(/[\\n]/g,'')
-            })
+                font: ~~group[2],
+                text: group[1].slice(1, -2).replace(/[\\n]/g, ""),
+            });
         }
-        return result
-    }
+        return result;
+    },
 };

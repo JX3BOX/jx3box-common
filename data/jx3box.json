@@ -64,7 +64,6 @@
         "joke": "剑三骚话",
         "emotion": "剑三表情",
         "pz": "剑三配装",
-        "item_plan": "物品清单",
         "question": "剑三题目",
         "paper": "剑三试卷"
     },
@@ -78,11 +77,11 @@
 
     "__sourceType": {
         "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs", "notice"],
-        "wiki_types": ["cj", "achievement", "item", "item_plan", "collection", "wiki", "knowledge", "quest"],
+        "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
-        "bbs_types": ["joke", "emotion", "feedback"],
+        "bbs_types": ["joke", "emotion", "collection", "feedback"],
         "app_types": ["pz"]
     },
 
