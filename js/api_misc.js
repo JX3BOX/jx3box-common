@@ -1,3 +1,5 @@
+import {$helper} from './https'
+
 // 面包屑
 function getBreadcrumb(key) {
     return $helper()
