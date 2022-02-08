@@ -4,12 +4,11 @@
 
 ```javascript
 import {
-    axios,
-    POP,
     installInterceptors,
     installNextInterceptors,
     installHelperInterceptors,
-} from "@jx3box/jx3box-common/js/axios";
+    installCmsInterceptors,
+} from "@jx3box/jx3box-common/js/interceptors.js";
 ```
 
 - cms+uc+next使用installNextInterceptors

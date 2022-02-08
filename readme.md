@@ -22,7 +22,3 @@ import User from "@jx3box/jx3box-common/js/user.js";
 - [stat](./docs/stat.md) 统计
 - [axios](./docs/axios.md) 拦截器
 - [https](./docs/https.md) 请求封装
-
-
-# Todo
-rank_event.json 文件可以删了吗？
