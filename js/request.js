@@ -10,6 +10,7 @@ import { __cms, __node, __spider, __next, __pay, __team, __lua, __helperUrl, __s
 
 // cms通用请求接口
 function $cms(options) {
+    let domain = options.domain || __cms;
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -17,7 +18,7 @@ function $cms(options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "cms common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? __cms : "/",
+        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
         headers: {},
     };
 
@@ -70,7 +71,7 @@ function $helper(options) {
 
 // next 通用请求接口
 function $next(options) {
-    let domain = options.domain || __next2;
+    let domain = options.domain || __next;
 
     let config = {
         // 同时发送cookie和basic auth

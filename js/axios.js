@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vue from "vue";
 import { Message, Notification,MessageBox } from "element-ui";
 Vue.prototype.$notify = Notification;
@@ -25,11 +26,11 @@ function loadPop(msg,popType='message'){
     }
 }
 
-import axios from "axios";
 function PopNextworkError(err){
     console.log(err.response);
     return Promise.reject(err);
 }
+
 function installInterceptors(target,options) {
     let popType = options && options.popType || 'message'
     target["interceptors"]["response"].use(
