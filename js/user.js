@@ -1,7 +1,7 @@
 import { showAvatar } from "./utils";
 import { __Links, default_avatar, __server } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
-import { $_https } from "./https";
+import { $pay, $cms } from "./request";
 
 class User {
     constructor() {
@@ -31,16 +31,11 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group =
-                (localStorage && localStorage.getItem("group")) || 1;
+            this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
             this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status =
-                localStorage && localStorage.getItem("status");
-            this.profile.bind_wx =
-                localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin =
-                (localStorage && localStorage.getItem("avatar")) ||
-                default_avatar;
+            this.profile.status = localStorage && localStorage.getItem("status");
+            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
         } else {
             this.profile = this.anonymous;
@@ -55,11 +50,8 @@ class User {
 
     // 判断是否已登录
     isLogin() {
-        this.created_at = !localStorage.getItem("created_at")
-            ? -Infinity
-            : localStorage.getItem("created_at");
-        this.logged_in =
-            localStorage.getItem("logged_in") == "true" ? true : false;
+        this.created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
+        this.logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
@@ -83,7 +75,7 @@ class User {
                 this._save(data);
                 resolve(this);
             } catch (err) {
-                //如果localstorage不存在或已满
+                //如果localStorage不存在或已满
                 if (localStorage) {
                     localStorage.clear();
                     this._save(data);
@@ -103,10 +95,8 @@ class User {
 
     // 销毁登录状态
     destroy() {
-        return $_https("server", {
-            proxy: false,
-            interceptor: "next",
-            popType: "notify",
+        return $cms({
+            domain: __server,
         })
             .post("/account/logout")
             .finally(() => {
@@ -164,23 +154,17 @@ class User {
 
     // 判断是否为签约作者
     isSuperAuthor() {
-        if(this.isLogin()){
-            return $_https("cms", {
-                proxy: true,
-                interceptor: "next",
-                popType: "notify",
-            })
+        if (this.isLogin()) {
+            return $cms()
                 .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
                 .then((res) => {
                     return res.data.data;
                 });
-        }else{
+        } else {
             return new Promise((resolve, reject) => {
                 resolve(false);
             });
         }
-        
-        return this.isLogin() && this.profile.group >= 512;
     }
 
     // 是否绑定微信
@@ -257,11 +241,7 @@ class User {
                 resolve(asset);
             });
         } else {
-            return $_https("pay", {
-                proxy: true,
-                interceptor: "next",
-                popType: "notify",
-            })
+            return $pay()
                 .get("/api/vip/i")
                 .then((res) => {
                     let asset = res.data.data;

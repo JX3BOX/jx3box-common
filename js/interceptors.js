@@ -1,5 +1,3 @@
-import { loadPop } from "@jx3box/jx3box-ui-pop";
-
 function throwError(err) {
     console.log(err.response);
     return Promise.reject(err);
@@ -12,19 +10,11 @@ function throwError(err) {
  * @param {*} options
  */
 function installInterceptors(target, options) {
-    let popOptions = options && options.pop;
     target["interceptors"]["response"].use(
         function (response) {
             return response;
         },
         function (err) {
-            if (!options || !options.mute) {
-                if (err.response && err.response.data && err.response.data.msg) {
-                    (popOptions && loadPop(popOptions)) || loadPop(err.response.data.msg);
-                } else {
-                    loadPop("网络请求异常");
-                }
-            }
             return throwError(err);
         }
     );
@@ -37,25 +27,14 @@ function installInterceptors(target, options) {
  * @param {*} options
  */
 function installNextInterceptors(target, options) {
-    let popOptions = options && options.pop;
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code) {
-                if (!options || !options.mute) {
-                    (popOptions && loadPop(popOptions)) || loadPop(`[${response.data.code}]${response.data.msg}`);
-                }
                 return Promise.reject(response);
             }
             return response;
         },
         function (err) {
-            if (!options || !options.mute) {
-                if (err.response && err.response.data && err.response.data.msg) {
-                    loadPop(err.response.data.msg);
-                } else {
-                    loadPop("网络请求异常");
-                }
-            }
             return throwError(err);
         }
     );
@@ -68,21 +47,14 @@ function installNextInterceptors(target, options) {
  * @param {*} options
  */
 function installCmsInterceptors(target, options) {
-    let popOptions = options && options.pop;
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code) {
-                if (!options || !options.mute) {
-                    (popOptions && loadPop(popOptions)) || loadPop(`[${response.data.code}]${response.data.msg}`);
-                }
                 return Promise.reject(response);
             }
             return response;
         },
         function (err) {
-            if (!options || !options.mute) {
-                loadPop(`[${err.response.data.statusCode}]${err.response.data.message}`);
-            }
             return throwError(err);
         }
     );
@@ -95,22 +67,14 @@ function installCmsInterceptors(target, options) {
  * @param {*} options
  */
 function installHelperInterceptors(target, options) {
-    let popOptions = options && options.pop;
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code == 200 || !response.data.code) {
                 return response;
-            } else {
-                if (!options || !options.mute) {
-                    (popOptions && loadPop(popOptions)) || loadPop(`[${response.data.code}]${response.data.message}`);
-                }
-                return Promise.reject(response);
             }
+            return Promise.reject(response);
         },
         function (err) {
-            if (!options || !options.mute) {
-                loadPop("网络请求异常");
-            }
             return throwError(err);
         }
     );

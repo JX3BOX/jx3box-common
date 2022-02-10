@@ -7,10 +7,9 @@ import { installInterceptors, installNextInterceptors, installHelperInterceptors
 // 域名映射
 import { __cms, __node, __spider, __next, __pay, __team, __lua, __helperUrl, __server, __sso } from "../data/jx3box.json";
 
-
 // cms通用请求接口
 function $cms(options) {
-    let domain = options.domain || __cms;
+    let domain = (options && options.domain) || __cms;
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -34,7 +33,7 @@ function $cms(options) {
 // helper通用请求接口
 import { jx3ClientType } from "./utils";
 function $helper(options) {
-    let domain = options.domain || __helperUrl;
+    let domain = (options && options.domain) || __helperUrl;
 
     let config = {
         // 同时发送cookie和basic auth
@@ -71,7 +70,7 @@ function $helper(options) {
 
 // next 通用请求接口
 function $next(options) {
-    let domain = options.domain || __next;
+    let domain = (options && options.domain) || __next;
 
     let config = {
         // 同时发送cookie和basic auth
@@ -94,23 +93,23 @@ function $next(options) {
 }
 
 function $team(options) {
-    let _options = Object.assign(options, { domain: __team });
+    let _options = options && Object.assign(options, { domain: __team });
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = Object.assign(options, { domain: __pay });
+    let _options = options && Object.assign(options, { domain: __pay });
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = Object.assign(options, { domain: __lua });
+    let _options = options && Object.assign(options, { domain: __lua });
     return $next(_options);
 }
 
 // node 通用请求接口
 function $node(options) {
-    let domain = options.domain || __node;
+    let domain = (options && options.domain) || __node;
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -135,4 +134,27 @@ function $node(options) {
     return ins;
 }
 
-export { $cms, $next, $helper, $node, $team, $pay, $lua, axios };
+// 默认请求
+function $http(options) {
+    let domain = typeof options == "string" ? options : options.domain;
+    let config = {
+        // 同时发送cookie和basic auth
+        withCredentials: true,
+        auth: {
+            username: (localStorage && localStorage.getItem("token")) || "",
+            password: "common request",
+        },
+        baseURL: domain,
+        headers: Object.assign({}, options.headers || {}),
+    };
+
+    // 创建实例
+    const ins = axios.create(config);
+
+    // 指定拦截器
+    installNextInterceptors(ins, options);
+
+    return ins;
+}
+
+export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios };
