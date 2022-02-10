@@ -1,6 +1,6 @@
 import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
 
-import { __server, __uc, __cms, __node, __spider, __next2, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
+import { __server, __uc, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
 
 
 // cms通用请求接口
