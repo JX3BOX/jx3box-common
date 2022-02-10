@@ -93,17 +93,17 @@ function $next(options) {
 }
 
 function $team(options) {
-    let _options = options && Object.assign(options, { domain: __team });
+    let _options = options && Object.assign(options, { domain: __team }) || { domain: __team };
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = options && Object.assign(options, { domain: __pay });
+    let _options = options && Object.assign(options, { domain: __pay }) || { domain: __pay };
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = options && Object.assign(options, { domain: __lua });
+    let _options = options && Object.assign(options, { domain: __lua }) || { domain: __lua };
     return $next(_options);
 }
 
