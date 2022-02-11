@@ -256,4 +256,16 @@ module.exports = {
         }
         return result;
     },
+
+    // 游戏内图标
+    // school_id : 数字、中文名称
+    showSchoolIcon(school_id){
+        return __imgPath + 'image/school/' + school_id + '.png'
+    },
+    showForceIcon(force_id){   //另一套门派ID
+        return __imgPath + 'image/force/' + force_id + '.png'
+    },
+    showMountIcon(mount_id){
+        return __imgPath + 'image/xf/' + mount_id + '.png'
+    }
 };
