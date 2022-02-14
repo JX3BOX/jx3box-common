@@ -12,19 +12,6 @@ const server_map = {
     helper: __helperUrl,
 };
 
-const server_map = {
-    server: __server,
-    uc: __uc,
-    cms: __cms,
-    node: __node,
-    spider: __spider,
-    next: __next2,
-    pay: __pay,
-    team: __team,
-    helper: __helperUrl,
-};
-
-
 // cms通用请求接口
 function $cms(options) {
     let domain = options && options.domain || __cms;
