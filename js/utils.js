@@ -1,4 +1,4 @@
-const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __jx3 } = require("../data/jx3box");
+const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __clients} = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {
@@ -267,5 +267,8 @@ module.exports = {
     },
     showMountIcon(mount_id){
         return __imgPath + 'image/xf/' + mount_id + '.png'
+    },
+    showClientLabel(client){
+        return __clients[client]
     }
 };

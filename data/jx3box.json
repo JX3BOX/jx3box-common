@@ -40,6 +40,12 @@
     "__iconPath": "https://icon.jx3box.com/",
     "__luaPath": "https://lua.jx3box.com/",
 
+    "__clients" : {
+        "std":"正式服",
+        "origin":"怀旧服",
+        "all":"双端"
+    },
+
     "__postType": {
         "macro": "剑三宏库",
         "jx3dat": "插件数据",

@@ -1,0 +1,14 @@
+
+// 客户端类型
+.i-client-all{
+    border: 1px solid #a26ef7;
+    color: #a26ef7;
+}
+.i-client-std{
+    border: 1px solid #f0b400;
+    color: #f0b400;
+}
+.i-client-origin{
+    border: 1px solid #0eb7ce;
+    color: #0eb7ce;
+}
