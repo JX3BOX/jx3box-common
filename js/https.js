@@ -2,6 +2,18 @@ import { axios, installInterceptors, installNextInterceptors, installHelperInter
 
 import { __server, __uc, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
 
+const server_map = {
+    server: __server,
+    uc: __uc,
+    cms: __cms,
+    node: __node,
+    spider: __spider,
+    next: __next2,
+    pay: __pay,
+    team: __team,
+    helper: __helperUrl,
+};
+
 
 // cms通用请求接口
 function $cms(options) {
@@ -149,9 +161,9 @@ function $https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? __server : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
-        config.baseURL = __server;
+        config.baseURL = server_map[server];
     }
 
     // 创建实例
@@ -181,7 +193,7 @@ function $_https(server, options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "$_https common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? __server : "/",
+        baseURL: process.env.NODE_ENV === "production" ? server_map[server] : "/",
         headers: {},
     };
 
@@ -192,9 +204,9 @@ function $_https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (!options || options.proxy || options.proxy === undefined) {
-        config.baseURL = process.env.NODE_ENV === "production" ? __server : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
-        config.baseURL = __server;
+        config.baseURL = server_map[server];
     }
 
     // 创建实例
