@@ -149,9 +149,9 @@ function $https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? __server : "/";
     } else {
-        config.baseURL = server_map[server];
+        config.baseURL = __server;
     }
 
     // 创建实例
@@ -181,7 +181,7 @@ function $_https(server, options) {
             username: (localStorage && localStorage.getItem("token")) || "",
             password: "$_https common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? server_map[server] : "/",
+        baseURL: process.env.NODE_ENV === "production" ? __server : "/",
         headers: {},
     };
 
@@ -192,9 +192,9 @@ function $_https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (!options || options.proxy || options.proxy === undefined) {
-        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL = process.env.NODE_ENV === "production" ? __server : "/";
     } else {
-        config.baseURL = server_map[server];
+        config.baseURL = __server;
     }
 
     // 创建实例
