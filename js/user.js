@@ -32,6 +32,7 @@ class User {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
             this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
+            this.profile.token = localStorage && localStorage.getItem("token");
             this.profile.name = localStorage && localStorage.getItem("name");
             this.profile.status = localStorage && localStorage.getItem("status");
             this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
@@ -114,7 +115,7 @@ class User {
 
     // 获取本地令牌
     getToken() {
-        return localStorage.getItem("token");
+        return this.getInfo().token;
     }
 
     // 获取UUID
@@ -124,32 +125,32 @@ class User {
 
     // 判断是否邮箱验证
     isEmailMember() {
-        return this.isLogin() && this.profile.group >= 8;
+        return this.getInfo().group >= 8;
     }
 
     // 判断是否绑定手机
     isPhoneMember() {
-        return this.isLogin() && this.profile.group >= 16;
+        return this.getInfo().group >= 16;
     }
 
     // 判断是否为管理员|编辑
     isEditor() {
-        return this.isLogin() && this.profile.group >= 64;
+        return this.getInfo().group >= 64;
     }
 
     // 判断是否为管理员|运营
     isAdmin() {
-        return this.isLogin() && this.profile.group >= 128;
+        return this.getInfo().group >= 128;
     }
 
     // 判断是否为管理员|开发
     isDeveloper() {
-        return this.isLogin() && this.profile.group >= 256;
+        return this.getInfo().group >= 256;
     }
 
     // 判断是否为超管
     isSuperAdmin() {
-        return this.isLogin() && this.profile.group >= 512;
+        return this.getInfo().group >= 512;
     }
 
     // 判断是否为签约作者
@@ -169,7 +170,7 @@ class User {
 
     // 是否绑定微信
     hasBindwx() {
-        return localStorage.getItem("bind_wx");
+        return this.getInfo().bind_wx;
     }
 
     // PRE身份判断
