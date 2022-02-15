@@ -126,31 +126,44 @@ module.exports = {
 
     getLink: function (type, id, level) {
         id = id || "";
-        if (__sourceType.cms_types.includes(type)) {
+
+        // 核心作品
+        if (__sourceType.cms_types.includes(type) || __sourceType.pvx_types.includes(type)) {
             return "/" + type + "/" + id;
+
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === "item_plan") return "/item/#/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
             return "/" + type + "/#/view/" + id;
-        } else if (__sourceType.exam_types.includes(type)) {
-            return "/" + "exam" + "/#/" + type + "/" + id;
+
+        // 应用类型
+        } else if (__sourceType.app_types.includes(type)) {
+            return "/" + `${type}/#/view/${id}`;
+
         } else if (__sourceType.db_types.includes(type)) {
             let link = "/" + `app/database/?type=${type}&query=${id}`;
             if (level) link += `&level=${level}`;
             return link;
+
+        // 团队活动
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
+
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
             let url = "/" + "rank/race/#/" + event_id;
             if (achieve_id) url += "/rank?aid=" + achieve_id;
             return url;
+
+        // 其它杂项
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
-        } else if (__sourceType.app_types.includes(type)) {
-            return "/" + `${type}/#/view/${id}`;
+
+        } else if (__sourceType.exam_types.includes(type)) {
+            return "/" + "exam" + "/#/" + type + "/" + id;
+
         } else {
             return "";
         }
