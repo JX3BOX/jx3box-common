@@ -4,12 +4,12 @@ import { $helper } from "./https";
 // 百科攻略
 let WikiPost = {
     // 获取最新攻略
-    newest(type, id, supply = 1) {
+    newest(type, id, supply = 1, client = "std") {
         if (!id) return;
         return $helper()({
             method: "GET",
             url: `/api/wiki/post`,
-            params: { type: type, source_id: id, supply: supply },
+            params: { type: type, source_id: id, supply: supply, client },
         });
     },
 
