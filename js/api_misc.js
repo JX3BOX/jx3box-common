@@ -9,4 +9,11 @@ function getBreadcrumb(key) {
         });
 }
 
-export { getBreadcrumb };
+// 菜单
+function getMenu(key){
+    return $helper().get(`/api/menu_group/${key}`).then((res) => {
+        return res.data.data.menu_group.menus || []
+    })
+}
+
+export { getBreadcrumb,getMenu };

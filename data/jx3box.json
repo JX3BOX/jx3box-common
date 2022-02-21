@@ -85,7 +85,7 @@
         "team_types": ["org", "role", "raid"],
         "bbs_types": ["joke", "emotion", "collection", "feedback"],
         "app_types": ["pz","battle","dbm"],
-        "pvx_types":["pet","adventure","furniture"]
+        "pvx_types":["pet","adventure","furniture","exterior"]
     },
 
     "__visibleMap": {
