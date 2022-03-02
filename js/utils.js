@@ -30,10 +30,7 @@ module.exports = {
         let avatar = "";
         if (url) {
             // QQ头像协议问题
-            avatar = avatar.replace(/http:/g, "https:");
-            if (replace) {
-                avatar = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
-            }
+            avatar = url.replace(/http:/g, "https:");
         } else {
             avatar = default_avatar;
         }
@@ -52,6 +49,11 @@ module.exports = {
             // 指定尺寸
             let suffix = `?x-oss-process=image/auto-orient,1/resize,m_fill,w_${size},h_${size}/quality,Q_100`;
             avatar += suffix;
+        }
+
+        // CDN
+        if (replace) {
+            avatar = avatar.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
         }
 
         return avatar;
