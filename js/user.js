@@ -1,5 +1,5 @@
 import { showAvatar } from "./utils";
-import { __Links, default_avatar, __server } from "../data/jx3box.json";
+import { __Links, default_avatar, __server,__userLevel } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 import { $pay, $cms } from "./request";
 
@@ -249,6 +249,16 @@ class User {
                     this.asset = asset;
                     return asset;
                 });
+        }
+    }
+
+    // 获取用户等级
+    getLevel(exp){
+        for(let level in __userLevel){
+            let range = __userLevel[level]
+            if(exp >= range[0] && exp < range[1]){
+                return ~~level
+            }
         }
     }
 }
