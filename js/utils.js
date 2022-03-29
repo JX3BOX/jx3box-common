@@ -1,4 +1,4 @@
-const { default_avatar, __sourceType, __postType, __otherType, __imgPath, __iconPath, __clients,__ossMirror} = require("../data/jx3box");
+const { default_avatar, __sourceType, __postType, __wikiType, __appType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {
@@ -132,26 +132,23 @@ module.exports = {
         // 核心作品
         if (__sourceType.cms_types.includes(type) || __sourceType.pvx_types.includes(type)) {
             return "/" + type + "/" + id;
-
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === "item_plan") return "/item/#/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
             return "/" + type + "/#/view/" + id;
 
-        // 应用类型
+            // 应用类型
         } else if (__sourceType.app_types.includes(type)) {
             return "/" + `${type}/#/view/${id}`;
-
         } else if (__sourceType.db_types.includes(type)) {
             let link = "/" + `app/database/?type=${type}&query=${id}`;
             if (level) link += `&level=${level}`;
             return link;
 
-        // 团队活动
+            // 团队活动
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
-
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
@@ -159,13 +156,11 @@ module.exports = {
             if (achieve_id) url += "/rank?aid=" + achieve_id;
             return url;
 
-        // 其它杂项
+            // 其它杂项
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
-
         } else if (__sourceType.exam_types.includes(type)) {
             return "/" + "exam" + "/#/" + type + "/" + id;
-
         } else {
             return "";
         }
@@ -223,9 +218,8 @@ module.exports = {
 
     // 其它工具函数
     getTypeLabel: function (type) {
-        if (__postType[type]) return __postType[type];
-        if (__otherType[type]) return __otherType[type];
-        return type;
+        let types = Object.assign({}, __postType, __wikiType, __appType);
+        return types[type] || "未知";
     },
 
     buildTarget: function (edge = 1025) {
@@ -274,19 +268,17 @@ module.exports = {
 
     // 游戏内图标
     // school_id : 数字、中文名称
-    showSchoolIcon(school_id){
-        return __imgPath + 'image/school/' + school_id + '.png'
+    showSchoolIcon(school_id) {
+        return __imgPath + "image/school/" + school_id + ".png";
     },
-    showForceIcon(force_id){   //另一套门派ID
-        return __imgPath + 'image/force/' + force_id + '.png'
+    showForceIcon(force_id) {
+        //另一套门派ID
+        return __imgPath + "image/force/" + force_id + ".png";
     },
-    showMountIcon(mount_id){
-        return __imgPath + 'image/xf/' + mount_id + '.png'
+    showMountIcon(mount_id) {
+        return __imgPath + "image/xf/" + mount_id + ".png";
     },
-    showClientLabel(client){
-        return __clients[client]
+    showClientLabel(client) {
+        return __clients[client];
     },
-    showGamePic(path){
-        return __ossMirror + 'game/' + path
-    }
 };

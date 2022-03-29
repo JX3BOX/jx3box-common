@@ -9,7 +9,7 @@
 
     "__server": "https://server.jx3box.com/",
     "__sso": "https://sso.jx3box.com/",
-    
+
     "__cms": "https://cms.jx3box.com/",
     "__node": "https://node.jx3box.com/",
     "__spider": "https://spider.jx3box.com/",
@@ -40,21 +40,21 @@
     "__iconPath": "https://icon.jx3box.com/",
     "__luaPath": "https://lua.jx3box.com/",
 
-    "__clients" : {
-        "std":"正式服",
-        "origin":"怀旧服",
-        "all":"双端"
+    "__clients": {
+        "std": "正式服",
+        "origin": "怀旧服",
+        "all": "双端"
     },
 
     "__postType": {
-        "macro": "剑三宏库",
-        "jx3dat": "插件数据",
-        "fb": "副本攻略",
-        "bps": "职业攻略",
-        "tool": "教程工具",
-        "share": "捏脸分享",
-        "bbs": "茶馆交流",
-        "notice": "公告资讯"
+        "macro": "宏库",
+        "jx3dat": "插件",
+        "fb": "副本",
+        "bps": "职业",
+        "tool": "教程",
+        "share": "捏脸",
+        "bbs": "茶馆",
+        "notice": "公告"
     },
 
     "__wikiType": {
@@ -65,14 +65,14 @@
     },
 
     "__appType": {
-        "pz": "剑三配装",
-        "joke": "剑三骚话",
-        "emotion": "剑三表情",
-        "collection": "剑三小册",
-        "item_plan": "物品清单",
-        "question": "剑三题目",
-        "paper": "剑三试卷",
-        "calendar": "剑三日历"
+        "pz": "配装",
+        "joke": "骚话",
+        "emotion": "表情",
+        "collection": "小册",
+        "item_plan": "清单",
+        "question": "题目",
+        "paper": "试卷",
+        "calendar": "日历"
     },
 
     "__sourceType": {
@@ -82,8 +82,8 @@
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
         "bbs_types": ["joke", "emotion", "collection", "feedback"],
-        "app_types": ["pz","battle","dbm"],
-        "pvx_types":["pet","adventure","furniture","exterior"]
+        "app_types": ["pz", "battle", "dbm"],
+        "pvx_types": ["pet", "adventure", "furniture", "exterior"]
     },
 
     "__visibleMap": {
@@ -108,12 +108,12 @@
     },
 
     "__userLevel": {
-        "1": [0,600],
-        "2": [600,900],
-        "3": [900,1800],
-        "4": [1800,3600],
-        "5": [3600,7200],
-        "6": [7200,999999]
+        "1": [0, 600],
+        "2": [600, 900],
+        "3": [900, 1800],
+        "4": [1800, 3600],
+        "5": [3600, 7200],
+        "6": [7200, 999999]
     },
 
     "__Links": {
