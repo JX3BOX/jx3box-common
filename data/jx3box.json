@@ -57,24 +57,22 @@
         "notice": "公告资讯"
     },
 
-    "__otherType": {
-        "cj": "成就百科",
-        "item": "物品百科",
-        "knowledge": "通识百科",
-        "quest": "任务百科",
-        "collection": "剑三小册",
-        "joke": "剑三骚话",
-        "emotion": "剑三表情",
-        "pz": "剑三配装",
-        "question": "剑三题目",
-        "paper": "剑三试卷"
-    },
-
     "__wikiType": {
         "achievement": "成就",
         "item": "物品",
         "knowledge": "通识",
         "quest": "任务"
+    },
+
+    "__appType": {
+        "pz": "剑三配装",
+        "joke": "剑三骚话",
+        "emotion": "剑三表情",
+        "collection": "剑三小册",
+        "item_plan": "物品清单",
+        "question": "剑三题目",
+        "paper": "剑三试卷",
+        "calendar": "剑三日历"
     },
 
     "__sourceType": {
