@@ -1,4 +1,4 @@
-const { default_avatar, __sourceType, __postType, __wikiType, __appType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box");
+const { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {
@@ -218,7 +218,7 @@ module.exports = {
 
     // 其它工具函数
     getTypeLabel: function (type) {
-        let types = Object.assign({}, __postType, __wikiType, __appType);
+        let types = Object.assign({}, __postType, __wikiType, __appType, __gameType);
         return types[type] || "未知";
     },
 
