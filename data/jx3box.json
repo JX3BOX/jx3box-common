@@ -75,6 +75,12 @@
         "calendar": "日历"
     },
 
+    "__gameType": {
+        "pet": "宠物",
+        "adventure": "奇遇",
+        "furniture": "家具"
+    },
+
     "__sourceType": {
         "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs", "notice"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
