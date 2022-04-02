@@ -88,7 +88,7 @@
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid"],
         "bbs_types": ["joke", "emotion", "collection", "feedback"],
-        "app_types": ["pz", "battle", "dbm"],
+        "app_types": ["pz", "calendar", "battle", "dbm"],
         "pvx_types": ["pet", "adventure", "furniture", "exterior"]
     },
 
