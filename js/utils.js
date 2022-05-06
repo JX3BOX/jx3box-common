@@ -1,4 +1,4 @@
-const { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box");
+const { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box.json");
 const tvmap = require("../data/tvmap.json");
 
 module.exports = {
