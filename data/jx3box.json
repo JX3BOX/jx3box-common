@@ -78,7 +78,10 @@
     "__gameType": {
         "pet": "宠物",
         "adventure": "奇遇",
-        "furniture": "家具"
+        "furniture": "家具",
+        "horse": "坐骑",
+        "book": "书籍",
+        "exterior": "外观"
     },
 
     "__sourceType": {
@@ -89,7 +92,7 @@
         "team_types": ["org", "role", "raid"],
         "bbs_types": ["joke", "emotion", "collection", "feedback"],
         "app_types": ["pz", "calendar", "battle", "dbm"],
-        "pvx_types": ["pet", "adventure", "furniture", "exterior"]
+        "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior"]
     },
 
     "__visibleMap": {
@@ -120,6 +123,17 @@
         "4": [1800, 3600],
         "5": [3600, 7200],
         "6": [7200, 999999]
+    },
+
+    "__userLevelColor":{
+        "1":"#32d3c4",
+        "2":"#86c0fb",
+        "3":"#33d9ff",
+        "4":"#ffdb2a",
+        "5":"#ffa739",
+        "6":"#ff70b2",
+        "7":"#ff3399",
+        "8":"#f93c3c"
     },
 
     "__Links": {
