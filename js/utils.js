@@ -150,7 +150,7 @@ module.exports = {
             if (level) link += `&level=${level}`;
             return link;
 
-        // 团队活动
+        // 团队
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
         
