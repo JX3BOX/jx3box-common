@@ -287,4 +287,8 @@ module.exports = {
     showClientLabel(client) {
         return __clients[client];
     },
+    // 获取勋章对应链接
+    getMedalLink(event_id, subtype) {
+        return `/rank/race/#/${event_id}/${subtype}`
+    }
 };
