@@ -166,7 +166,7 @@ module.exports = {
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
         } else if (__sourceType.exam_types.includes(type)) {
-            return "/" + "exam" + "/#/" + type + "/" + id;
+            return "/" + "exam" + "/" + type + "/" + id;
         } else {
             return "";
         }
