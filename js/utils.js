@@ -150,7 +150,7 @@ module.exports = {
             if (level) link += `&level=${level}`;
             return link;
 
-        // 团队活动
+        // 团队
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
         
@@ -166,7 +166,7 @@ module.exports = {
         } else if (__sourceType.bbs_types.includes(type)) {
             return "/" + `bbs/#/${type}/${id}`;
         } else if (__sourceType.exam_types.includes(type)) {
-            return "/" + "exam" + "/#/" + type + "/" + id;
+            return "/" + "exam" + "/" + type + "/" + id;
         } else {
             return "";
         }
@@ -287,4 +287,8 @@ module.exports = {
     showClientLabel(client) {
         return __clients[client];
     },
+    // 获取勋章对应链接
+    getMedalLink(event_id, subtype) {
+        return `/rank/race/#/${event_id}/${subtype}`
+    }
 };
