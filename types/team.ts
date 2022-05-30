@@ -326,3 +326,42 @@ export interface Jx3boxTeamAuthority {
 export interface Jx3boxTeamDetail extends Jx3boxTeam {
   super_info: Pick<Jx3boxUserinfo, "display_name" | "user_avatar">;
 }
+
+export interface Jx3boxTeamManageApply {
+  relation: Jx3boxRelation;
+  role: Jx3boxRole;
+  team: Jx3boxTeam;
+}
+
+export interface Jx3boxTeamManageRole {
+  relation: Jx3boxRelation;
+  role: Jx3boxRole;
+  user: Pick<Jx3boxUserinfo, "display_name" | "user_avatar">;
+}
+
+interface Jx3boxTeamManageMemberUserinfo
+  extends Pick<Jx3boxUserinfo, "display_name" | "user_avatar_frame"> {
+  id: number;
+  avatar: string;
+  wechat_unionid?: string;
+}
+
+export interface Jx3boxTeamManageMember {
+  uid: number;
+  isAdmin: boolean;
+  roles: Array<{
+    relation: Jx3boxRelation;
+    roleInfo: Jx3boxRole;
+  }>;
+  user_info: Jx3boxTeamManageMemberUserinfo;
+}
+
+export interface Jx3boxMyTeamRoleItem {
+  info: Jx3boxRole;
+  relation: Jx3boxRelation;
+}
+
+export interface Jx3boxMyTeamAllRoles {
+  roles: Array<Jx3boxMyTeamRoleItem>;
+  team_info: Jx3boxTeam;
+}
