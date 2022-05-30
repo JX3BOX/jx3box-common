@@ -1,4 +1,5 @@
 import { Jx3boxTeam } from "./team";
+import { Jx3boxUserinfo } from "./user";
 
 export interface Jx3boxRaid {
   /**
@@ -136,6 +137,13 @@ export interface Jx3boxRaid {
    */
   title: string;
   /**
+   * 最后修改人员的id
+   *
+   * @type {number}
+   * @memberof Jx3boxRaid
+   */
+  last_edit?: number;
+  /**
    * 活动时间相关
    *
    * @type {string}
@@ -144,7 +152,6 @@ export interface Jx3boxRaid {
   created_at: string;
   updated_at: string;
   deleted_at?: string;
-  last_edit?: number;
 }
 
 export interface Jx3boxRaidMember {
@@ -253,4 +260,96 @@ export interface Jx3boxRaidMember {
 
 export interface Jx3boxRaidDetail extends Jx3boxRaid {
   team_info: Pick<Jx3boxTeam, "ID" | "banner" | "logo" | "name" | "status">;
+}
+
+export interface Jx3boxJoinRaid {
+  /**
+   * 参加活动的唯一标识
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  id: number;
+  is_member_request: number;
+  /**
+   * 是否验证 1验证 0未验证
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  is_valid: number;
+  mount: number;
+  /**
+   * 排序规则
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  order: number;
+  /**
+   * 活动id
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  raid_id: number;
+  /**
+   * 所属团队id
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  team_id: number;
+  /**
+   * 创建活动人id
+   *
+   * @type {number}
+   * @memberof Jx3boxJoinRaid
+   */
+  user_id: number;
+  name: string;
+  remark: string;
+  server: string;
+  type: string;
+  role_id?: number;
+  raid_info: Jx3boxRaid;
+  raid_team_info: Jx3boxTeam;
+  updated_at: string;
+  created_at: string;
+  deleted_at: string;
+}
+
+export interface Jx3boxPresetRaid {
+  /**
+   * 预设活动id
+   *
+   * @type {number}
+   * @memberof Jx3boxPresetRaid
+   */
+  id: number;
+  /**
+   * 预设活动名称
+   *
+   * @type {string}
+   * @memberof Jx3boxPresetRaid
+   */
+  name: string;
+  map_id: number;
+  col: number;
+  row: number;
+  count: number;
+}
+
+/**
+ * 修改活动的权限人员类型
+ *
+ * @type {Jx3boxRaidManageAdmin}
+ */
+type Jx3boxRaidManageAdmin = Pick<
+  Jx3boxUserinfo,
+  "ID" | "display_name" | "user_avatar" | "user_avatar_frame"
+>;
+export interface Jx3boxRaidManage extends Jx3boxRaid {
+  raid_creator_info: Jx3boxRaidManageAdmin;
+  raid_editor_info?: Jx3boxRaidManageAdmin;
 }
