@@ -365,3 +365,51 @@ export interface Jx3boxMyTeamAllRoles {
   roles: Array<Jx3boxMyTeamRoleItem>;
   team_info: Jx3boxTeam;
 }
+
+export interface Jx3boxTeamVerifyLog {
+  /**
+   * 认证日志唯一标识
+   *
+   * @type {number}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  ID: number;
+  /**
+   * 团队认证状态
+   * 0 待审核
+   * 1 认证通过
+   * 2 认证失败
+   * @type {number}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  status: number;
+  /**
+   * 认证的团队id
+   *
+   * @type {number}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  team_id: number;
+  /**
+   * 认证的用户id
+   *
+   * @type {number}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  user_id: number;
+  created_at: string;
+  /**
+   * QQ号
+   *
+   * @type {string}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  proposer: string;
+  /**
+   * 团队名称
+   *
+   * @type {string}
+   * @memberof Jx3boxTeamVerifyLog
+   */
+  team_name: string;
+}
