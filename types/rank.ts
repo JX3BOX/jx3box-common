@@ -1,3 +1,6 @@
+import { Jx3boxTeam } from "./team";
+import { Jx3boxUserinfo } from "./user";
+
 export interface Jx3boxBoss {
   /**
    * Boss唯一标识
@@ -117,6 +120,114 @@ export interface Jx3boxRankEvent {
    * @memberof Jx3boxRankEvent
    */
   vote_note: string;
+  /**
+   * 赛事活动的展示权限
+   *
+   * @type {(Array<
+   *     "info" | "rank" | "dps" | "superstar" | "vote" | "video" | "stat"
+   *   >)}
+   * @memberof Jx3boxRankEvent
+   */
+  blocks: Array<
+    "info" | "rank" | "dps" | "superstar" | "vote" | "video" | "stat"
+  >;
+}
+
+export interface Jx3boxRankDpsItem {
+  created: number;
+  /**
+   * 总伤害
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  damage: number;
+  /**
+   * 秒伤
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  dps: number;
+  /**
+   * 战斗时间
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  fight_time: number;
+  /**
+   * 每秒治疗
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  hps: number;
+  /**
+   * 所属团队id
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  team_id: number;
+  /**
+   *
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  therapy: number;
+  /**
+   * 所属用户id
+   *
+   * @type {number}
+   * @memberof Jx3boxRankDpsItem
+   */
+  uid: number;
+  /**
+   * 体型
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  body_type: string;
+  /**
+   * 指挥
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  leader: string;
+  /**
+   * 心法id
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  mount: string;
+  /**
+   * 角色名称
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  role: string;
+  /**
+   * 所属服务器
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  server: string;
+  /**
+   *
+   *
+   * @type {string}
+   * @memberof Jx3boxRankDpsItem
+   */
+  teammate: string;
+  team_info: Pick<Jx3boxTeam, "name" | "logo">;
+  user_info: Pick<Jx3boxUserinfo, "display_name" | "user_avatar">;
 }
 
 /**
