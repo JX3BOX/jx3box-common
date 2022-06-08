@@ -129,8 +129,15 @@ export interface Jx3boxRankEvent {
    * @memberof Jx3boxRankEvent
    */
   blocks: Array<
-    "info" | "rank" | "dps" | "superstar" | "vote" | "video" | "stat"
+    "info" | "rank" | "dps" | "superstar" | "vote" | "video" | "stat" | "lucky"
   >;
+  /**
+   * 晚会回看内容
+   *
+   * @type {string}
+   * @memberof Jx3boxRankEvent
+   */
+  gifts?: string;
 }
 
 export interface Jx3boxRankDpsItem {
