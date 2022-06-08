@@ -14,21 +14,21 @@ let WikiPost = {
     },
 
     // 获取最新攻略列表
-    newests(type) {
+    newests(type, client = "std") {
         return $helper()({
             method: "GET",
             url: `/api/wiki/posts/newest`,
-            params: { type: type },
+            params: { type: type, client },
         });
     },
 
     // 获取历史版本
-    versions(type, id) {
+    versions(type, id, client = "std") {
         if (!id) return;
         return $helper()({
             method: "GET",
             url: `/api/wiki/post/versions`,
-            params: { type: type, source_id: id },
+            params: { type: type, source_id: id, client },
         });
     },
 
@@ -73,21 +73,21 @@ let WikiPost = {
 // 百科评论
 let WikiComment = {
     // 百科评论列表
-    list(type, id) {
+    list(type, id, client = "std") {
         if (!id) return;
         return $helper()({
             method: "GET",
             url: `/api/wiki/comments`,
-            params: { type: type, source_id: id },
+            params: { type: type, source_id: id, client },
         });
     },
 
     // 创建百科评论
-    save(params) {
+    save(params, client = "std") {
         return $helper()({
             method: "POST",
             url: `/api/wiki/comment`,
-            data: qs.stringify({ comment: params }),
+            data: qs.stringify({ comment: params, client }),
         });
     },
 
