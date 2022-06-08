@@ -43,11 +43,11 @@ let WikiPost = {
     },
 
     // 创建/更新攻略
-    save(params) {
+    save(params, client = "std") {
         return $helper()({
             method: "POST",
             url: `/api/wiki/post`,
-            data: qs.stringify({ post: params }),
+            data: qs.stringify({ post: params, client }),
         });
     },
 
