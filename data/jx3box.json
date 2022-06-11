@@ -145,11 +145,11 @@
         },
         "dashboard": {
             "home": "/dashboard",
-            "msg": "/dashboard/#/msg",
-            "feed": "/dashboard/#/feed",
-            "fav": "/dashboard/#/fav",
-            "profile": "/dashboard/#/profile",
-            "connect": "/dashboard/#/connect",
+            "msg": "/dashboard/msg",
+            "feed": "/dashboard/feed",
+            "fav": "/dashboard/fav",
+            "profile": "/dashboard/profile",
+            "connect": "/dashboard/connect",
             "work": "/publish",
             "publish": "/publish"
         }
