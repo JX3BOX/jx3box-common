@@ -90,6 +90,7 @@ const wiki = {
                     console.log("兼容：获取重制攻略");
                     return this.get({ type: source_type, id: source_id }, {client: 'std', ...params}).then(res => {
                         post = res.data.data.post;
+                        if (!source) source = res.data.data.source
                         post && (isEmpty = false);
                         compatible = true;
                         return { post, source, isEmpty, compatible };
