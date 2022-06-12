@@ -65,43 +65,41 @@ const wiki = {
         return $helper().put(`/api/my/wiki/post/${post_id}/remove`)
     },
     // 获取兼容攻略
-    handleMix(source_type, source_id, client, params) {
+    async handleMix(source_type, source_id, client, params) {
         let post = '';
         let source = '';
         let isEmpty = true;
         let compatible = false;
         if (client === 'std') {
-            return this.get({ type: source_type, id: source_id }, {client, ...params}).then(res => {
-                post = res.data.data.post;
-                source = res.data.data.source;
-                post && (isEmpty = false);
-                console.log("获取重制攻略");
-                return { post, source, isEmpty, compatible };
-            })
+            const res = await this.get({ type: source_type, id: source_id }, { client, ...params });
+            post = res.data.data.post;
+            source = res.data.data.source;
+            post && (isEmpty = false);
+            console.log("获取重制攻略");
+            return { post, source, isEmpty, compatible };
         } else {
-            return this.get({ type: source_type, id: source_id }, {client, ...params}).then(res => {
-                source = res.data.data.source;
-                post = res.data.data.post;
-                post && (isEmpty = false);
-                console.log("获取缘起攻略");
-                return !!res.data.data.post;
-            }).then(data => {
-                if (!data) {
-                    console.log("兼容：获取重制攻略");
-                    return this.get({ type: source_type, id: source_id }, {client: 'std', ...params}).then(res => {
-                        post = res.data.data.post;
-                        if (!source) source = res.data.data.source
-                        post && (isEmpty = false);
-                        compatible = true;
-                        return { post, source, isEmpty, compatible };
-                    })
-                }
-                return { post, source, isEmpty, compatible };
-            })
+            const res_1 = await this.get({ type: source_type, id: source_id }, { client, ...params });
+            source = res_1.data.data.source;
+            post = res_1.data.data.post;
+            post && (isEmpty = false);
+            console.log("获取缘起攻略");
+            const data = !!res_1.data.data.post;
+            if (!data) {
+                console.log("兼容：获取重制攻略");
+                return this.get({ type: source_type, id: source_id }, { client: 'std', ...params }).then(res_2 => {
+                    post = res_2.data.data.post;
+                    if (!source)
+                        source = res_2.data.data.source;
+                    post && (isEmpty = false);
+                    compatible = true;
+                    return { post, source, isEmpty, compatible };
+                });
+            }
+            return { post, source, isEmpty, compatible };
         }
     },
     // 兼容怀旧服
-    mix({ type, id, client }, params) {
+    async mix({ type, id, client }, params) {
         let source_type = '';
         let source_id = '';
         if (type === 'cj') {
@@ -115,11 +113,10 @@ const wiki = {
         if (id) {
             source_id = id;
             if (type === 'pet') {
-                getPet(id, { client }).then(res => {
-                    let pet = res.data;
-                    let source_id = pet.ItemTabType + "_" + pet.ItemTabIndex;
-                    return this.handleMix(source_type, source_id, client, params);
-                })
+                const res = await getPet(id, { client });
+                let pet = res.data;
+                let source_id = pet.ItemTabType + "_" + pet.ItemTabIndex;
+                return this.handleMix(source_type, source_id, client, params);
             } else {
                 return this.handleMix(source_type, source_id, client, params);
             }
