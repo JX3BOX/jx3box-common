@@ -137,10 +137,9 @@ const wikiComment = {
     },
     post({ data }, params) {
         return $helper().post(`/api/wiki/comment`, {
-            data: {
-                ...data,
-            },
-            params: params,
+            data
+        }, {
+            params
         })
     },
     // 删除我的百科评论
