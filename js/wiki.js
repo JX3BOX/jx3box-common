@@ -33,13 +33,15 @@ const wiki = {
         })
     },
     // 创建/更新攻略
-    post({ type, data }, params) {
+    post({ type, data, client }, params) {
         return $helper().post(`/api/wiki/post`, {
-            data: {
+            post: {
                 ...data,
                 type,
             },
-            params: params,
+            client
+        }, {
+            params: params
         })
     },
     // 获取历史版本
