@@ -137,7 +137,7 @@ const wikiComment = {
     },
     post({ data }, params) {
         return $helper().post(`/api/wiki/comment`, {
-            data
+            ...data
         }, {
             params
         })
