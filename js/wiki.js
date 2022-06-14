@@ -76,7 +76,7 @@ const wiki = {
             source = res.data.data.source;
             post && (isEmpty = false);
             console.log("获取重制攻略");
-            return { post, source, isEmpty, compatible };
+            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
         } else {
             const res_1 = await this.get({ type: source_type, id: source_id }, { client, ...params });
             source = res_1.data.data.source;
@@ -92,10 +92,10 @@ const wiki = {
                         source = res_2.data.data.source;
                     post && (isEmpty = false);
                     compatible = true;
-                    return { post, source, isEmpty, compatible };
+                    return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
                 });
             }
-            return { post, source, isEmpty, compatible };
+            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
         }
     },
     // 兼容怀旧服
