@@ -70,17 +70,20 @@ const wiki = {
         let source = '';
         let isEmpty = true;
         let compatible = false;
+        let users = [];
         if (client === 'std') {
             const res = await this.get({ type: source_type, id: source_id }, { client, ...params });
             post = res.data.data.post;
             source = res.data.data.source;
+            users = res.data.data.users;
             post && (isEmpty = false);
             console.log("获取重制攻略");
-            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
+            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id, users };
         } else {
             const res_1 = await this.get({ type: source_type, id: source_id }, { client, ...params });
             source = res_1.data.data.source;
             post = res_1.data.data.post;
+            users = res_1.data.data.users;
             post && (isEmpty = false);
             console.log("获取缘起攻略");
             const data = !!res_1.data.data.post;
@@ -91,11 +94,12 @@ const wiki = {
                     if (!source)
                         source = res_2.data.data.source;
                     post && (isEmpty = false);
+                    users = res_2.data.data.users;
                     compatible = true;
-                    return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
+                    return { post, source, isEmpty, compatible, type: source_type, source_id: source_id, users };
                 });
             }
-            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id };
+            return { post, source, isEmpty, compatible, type: source_type, source_id: source_id, users };
         }
     },
     // 兼容怀旧服
