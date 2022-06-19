@@ -158,9 +158,4 @@ const wikiComment = {
     }
 }
 
-// 面包屑
-function getBread(channel) {
-    return $helper().get(`/api/breadcrumb/${channel}`);
-}
-
-export { wiki, getBread, wikiComment };
+export { wiki, wikiComment };
