@@ -1,4 +1,4 @@
-import {$helper} from './https'
+import { $helper, $cms } from './https'
 
 // 面包屑
 function getBreadcrumb(key) {
@@ -10,10 +10,19 @@ function getBreadcrumb(key) {
 }
 
 // 菜单
-function getMenu(key){
+function getMenu(key) {
     return $helper().get(`/api/menu_group/${key}`).then((res) => {
         return res.data.data.menu_group.menus || []
     })
 }
 
-export { getBreadcrumb,getMenu };
+function getArticle(id) {
+    return $cms()
+        .get(`/api/cms/post/${id}`)
+        .then((res) => {
+            return res.data.data.post_content;
+        });
+}
+
+
+export { getBreadcrumb, getMenu, getArticle };
