@@ -28,6 +28,8 @@ function getArticle(id) {
 function getMenus(params) {
     return $helper().get(`/api/menu_groups/`, {
         params: params
+    }).then((res) => {
+        return res.data.data.data;
     })
 }
 
