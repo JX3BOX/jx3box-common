@@ -24,5 +24,12 @@ function getArticle(id) {
         });
 }
 
+// 公共菜单
+function getMenus(params) {
+    return $helper().get(`/api/menu_groups/`, {
+        params: params
+    })
+}
 
-export { getBreadcrumb, getMenu, getArticle };
+
+export { getBreadcrumb, getMenu, getArticle, getMenus };
