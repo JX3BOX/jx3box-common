@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "7.3.10",
+    "version": "7.3.11",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
