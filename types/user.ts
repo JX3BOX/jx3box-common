@@ -7,6 +7,13 @@ export interface Jx3boxUserinfo {
    */
   ID: number;
   /**
+   * 小程序权限标识
+   *
+   * @type {string}
+   * @memberof Jx3boxUserinfo
+   */
+  token: string;
+  /**
    * 用户是否删除
    *
    * @type {number}
