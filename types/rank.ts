@@ -140,7 +140,7 @@ export interface Jx3boxRankEvent {
   gifts?: string;
 }
 
-export interface Jx3boxRankDpsItem {
+interface IJx3bossRankListBase {
   created: number;
   /**
    * 总伤害
@@ -171,13 +171,6 @@ export interface Jx3boxRankDpsItem {
    */
   hps: number;
   /**
-   * 所属团队id
-   *
-   * @type {number}
-   * @memberof Jx3boxRankDpsItem
-   */
-  team_id: number;
-  /**
    *
    *
    * @type {number}
@@ -206,13 +199,6 @@ export interface Jx3boxRankDpsItem {
    */
   leader: string;
   /**
-   * 心法id
-   *
-   * @type {string}
-   * @memberof Jx3boxRankDpsItem
-   */
-  mount: string;
-  /**
    * 角色名称
    *
    * @type {string}
@@ -233,9 +219,102 @@ export interface Jx3boxRankDpsItem {
    * @memberof Jx3boxRankDpsItem
    */
   teammate: string;
+}
+
+export interface Jx3boxRankTopListItem extends IJx3bossRankListBase {
+  ID: number;
+  /**
+   * 赛事id
+   *
+   * @type {number}
+   * @memberof Jx3boxRankTeamListItem
+   */
+  achieve_id: number;
+  /**
+   * 推倒时间
+   *
+   * @type {number}
+   * @memberof Jx3boxRankTeamListItem
+   */
+  finish_time: number;
+  start_time: number;
+  superstar: number;
+  superstar_type: number;
+  team_id: number;
+  /**
+   * 是否认证
+   *
+   * @type {number}
+   * @memberof Jx3boxRankTeamListItem
+   */
+  verified: number;
+  re_guid: number;
+  re_ip: number;
+  re_uid: number;
+  might_superstar: number;
+  battleId: string;
+  date_str: string;
+  guid: string;
+  lang: string;
+  mount: string;
+  remark: string;
+  team_logo: string;
+  team_name: string;
+  is_leader: boolean;
+}
+
+export interface Jx3boxRankMixDpsItem {
+  created: number;
+  damage: number;
+  dps: number;
+  fight_time: number;
+  hps: number;
+  therapy: number;
+  uid: number;
+  body_type: string;
+  leader: string;
+  role: string;
+  server: string;
+  teammate: string;
+  team_id: number;
+  mount: string;
   team_info: Pick<Jx3boxTeam, "name" | "logo">;
   user_info: Pick<Jx3boxUserinfo, "display_name" | "user_avatar">;
 }
+
+export interface Jx3boxRankDpsItem extends IJx3bossRankListBase {
+  team_id: number;
+  mount: string;
+  team_info: Pick<Jx3boxTeam, "name" | "logo">;
+  user_info: Pick<Jx3boxUserinfo, "display_name" | "user_avatar">;
+}
+
+export interface Jx3boxRankVoteTeamListItem {
+  ID: number;
+  count: number;
+  event_id: number;
+  guess: number;
+  guess_no_game_role: number;
+  status: number;
+  team_id: number;
+  uid: number;
+  votes: number;
+  client: string;
+  created_at: string;
+  leader: string;
+  logo: string;
+  name: string;
+  prize: string;
+  server: string;
+  slogan: string;
+  updated_at: string;
+}
+
+export type Jx3boxRankTeamListItem = Jx3boxRankTopListItem;
+
+export type Jx3boxRankBossProcess = {
+  [key: number]: number;
+};
 
 /**
  * @number 服务器数量
@@ -243,6 +322,7 @@ export interface Jx3boxRankDpsItem {
  * @type {Jx3boxServerAnalysisItem}
  */
 type Jx3boxServerAnalysisItem = [number, string];
+
 interface Jx3boxBarServerAnalysis {
   data: Array<Jx3boxServerAnalysisItem>;
   /**
@@ -253,6 +333,7 @@ interface Jx3boxBarServerAnalysis {
    */
   servers: Array<string>;
 }
+
 export interface Jx3boxAnalysisBar {
   [name: string]: Jx3boxBarServerAnalysis;
 }
@@ -261,6 +342,7 @@ interface Jx3boxAnalysisPieItem {
   name: string;
   value: number;
 }
+
 export interface Jx3boxAnalysisPie {
   [name: string]: Array<Jx3boxAnalysisPieItem>;
 }
