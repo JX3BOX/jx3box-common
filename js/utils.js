@@ -129,16 +129,16 @@ module.exports = {
     getLink: function (type, id, level) {
         id = id || "";
 
-        // 核心作品、休闲应数据
+        // 核心作品、休闲数据
         if (__sourceType.cms_types.includes(type) || __sourceType.pvx_types.includes(type)) {
             return "/" + type + "/" + id;
 
         // 百科类型
         } else if (__sourceType.wiki_types.includes(type)) {
-            if (type === "item_plan") return "/item/#/plan_view/" + id;
+            if (type === "item_plan") return "/item/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
-            return "/" + type + "/#/view/" + id;
+            return "/" + `${type}/view/${id}`;
 
         // 应用类型
         } else if (__sourceType.app_types.includes(type)) {
