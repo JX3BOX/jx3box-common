@@ -85,12 +85,11 @@
     },
 
     "__sourceType": {
-        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "house", "share", "bbs", "notice","feedback"],
+        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
         "team_types": ["org", "role", "raid", "apply"],
-        "bbs_types": ["joke", "emotion", "collection"],
         "app_types": ["pz", "calendar", "battle", "dbm"],
         "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior"]
     },
