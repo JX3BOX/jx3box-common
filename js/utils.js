@@ -163,8 +163,6 @@ module.exports = {
             return url;
 
         // 其它杂项
-        } else if (__sourceType.bbs_types.includes(type)) {
-            return "/" + `bbs/#/${type}/${id}`;
         } else if (__sourceType.exam_types.includes(type)) {
             return "/" + "exam" + "/" + type + "/" + id;
         } else {
