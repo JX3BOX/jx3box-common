@@ -1,5 +1,6 @@
 const { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } = require("../data/jx3box.json");
 const tvmap = require("../data/tvmap.json");
+const cheerio = require('cheerio');
 
 module.exports = {
     // 图片处理函数
@@ -100,7 +101,6 @@ module.exports = {
     },
 
     // 快捷过滤器（根据应用类型+ID获取对应帖子着陆页或链接）
-
     iconLink(icon_id, client = "std") {
         if (!icon_id || isNaN(parseInt(icon_id))) {
             return `${__imgPath}image/common/nullicon.png`;
@@ -133,28 +133,28 @@ module.exports = {
         if (__sourceType.cms_types.includes(type) || __sourceType.pvx_types.includes(type)) {
             return "/" + type + "/" + id;
 
-        // 百科类型
+            // 百科类型
         } else if (__sourceType.wiki_types.includes(type)) {
             if (type === "item_plan") return "/item/plan_view/" + id;
             if (type === "achievement") type = "cj";
             if (type === "wiki") type = "knowledge";
             return "/" + `${type}/view/${id}`;
 
-        // 应用类型
+            // 应用类型
         } else if (__sourceType.app_types.includes(type)) {
             return "/" + `${type}/view/${id}`;
 
-        // 数据库
+            // 数据库
         } else if (__sourceType.db_types.includes(type)) {
             let link = "/" + `app/database/?type=${type}&query=${id}`;
             if (level) link += `&level=${level}`;
             return link;
 
-        // 团队
+            // 团队
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
-        
-        // 百强榜
+
+            // 百强榜
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
@@ -162,7 +162,7 @@ module.exports = {
             if (achieve_id) url += "/rank?aid=" + achieve_id;
             return url;
 
-        // 其它杂项
+            // 其它杂项
         } else if (__sourceType.exam_types.includes(type)) {
             return "/" + "exam" + "/" + type + "/" + id;
         } else {
@@ -249,24 +249,20 @@ module.exports = {
         return location.hostname.includes("origin") ? 2 : 1;
     },
 
-    // 游戏内TEXT文本格式化
+    /**
+     * 将游戏内的形如`<Text>text="****" font="**" **=***</text>`的字符串进行解析
+     * 返回一个包含font、text等属性的对象，方便进行进一步的渲染或者其他处理。
+     * @param {String} str 
+     */
     extractTextContent(str) {
-        // 匹配分段
-        const regex = /<Text>text=(.*?)font=(\d+).*?<\/text>/gimsy;
-        let matches = [];
-        let match;
-        while ((match = regex.exec(str))) {
-            matches.push(match);
-        }
-
-        // 格式化分段
+        if (!str || typeof str !== "string") return [];
         let result = [];
-        for (let group of matches) {
-            result.push({
-                font: ~~group[2],
-                text: group[1].slice(1, -2).replace(/[\\n]/g, ""),
-            });
-        }
+        const innerHTML = str.replace(/<Text>(.*?)<\/text>/gimsy, `<span $1></span>`);
+        let $ = cheerio.load(`<div>${innerHTML}</div>`);
+        let spans = $('span');
+        if (!spans.length) return [];
+        for (let span of spans)
+            result.push(Object.assign({}, span.attribs));
         return result;
     },
 
