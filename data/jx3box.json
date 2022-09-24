@@ -52,7 +52,6 @@
         "fb": "副本",
         "bps": "职业",
         "tool": "工具",
-        "share": "捏脸",
         "bbs": "茶馆",
         "notice": "公告"
     },
@@ -65,6 +64,7 @@
     },
 
     "__appType": {
+        "face": "捏脸",
         "pz": "配装",
         "joke": "骚话",
         "emotion": "表情",
@@ -85,7 +85,7 @@
     },
 
     "__sourceType": {
-        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection"],
+        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection", "face"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
