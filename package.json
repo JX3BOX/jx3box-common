@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "7.4.3",
+    "version": "7.4.4",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -14,5 +14,8 @@
         "localforage": "^1.7.3",
         "moment": "^2.29.1",
         "vue": "^2.6.12"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.23"
     }
 }
