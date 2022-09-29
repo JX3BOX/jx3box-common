@@ -89,10 +89,10 @@ export class Logger implements ILogger, ICoreLogger {
     return this.doLog(buildLogEntity(LOG_LEVEL.ERROR, this._tags, params));
   }
 
-  tags = (...tags: string[]): ILogger => {
-    this._tags.concat(tags);
+  tags(...tags: string[]): ILogger {
+    this._tags = this._tags.concat(tags);
     return this;
-  };
+  }
 
   doLog(logEntity: LogEntity = new LogEntity()) {
     if (!this._isLogEnabled(logEntity)) return;
