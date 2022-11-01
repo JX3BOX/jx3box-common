@@ -360,3 +360,31 @@ export interface Jx3boxAnalysis {
   pie_tank_xf_ratio: Jx3boxAnalysisPie;
   pie_xf_ratio: Jx3boxAnalysisPie;
 }
+
+export interface Jx3boxAnalysisRow<AnalysisItemType = string> {
+  [key: string]: Jx3boxAnalysisRowItem<AnalysisItemType>;
+}
+
+export interface Jx3boxAnalysisRowItem<AnalysisItemType> {
+  item: Array<AnalysisItemType>;
+  value: Array<number>;
+}
+export interface Jx3boxAnalysisV2 {
+  dps_count: Jx3boxAnalysisRow<number>;
+  flight_time_mean: Jx3boxAnalysisRow<number>;
+  force_attendance_count: Jx3boxAnalysisRow<number>;
+  hps_attendance_count: Jx3boxAnalysisRow<number>;
+  hps_count: Jx3boxAnalysisRow<number>;
+  mount_attendance_count: Jx3boxAnalysisRow<number>;
+  rank_mount_damage: Jx3boxAnalysisRow<number>;
+  rank_mount_dps: Jx3boxAnalysisRow<number>;
+  rank_mount_hps: Jx3boxAnalysisRow<number>;
+  rank_mount_therapy: Jx3boxAnalysisRow<number>;
+  tank_attendance_count: Jx3boxAnalysisRow<number>;
+  tank_count: Jx3boxAnalysisRow<number>;
+  leader_mount_type_count: Jx3boxAnalysisRow;
+  mount_type_attendance_count: Jx3boxAnalysisRow;
+  server_rank_team_count: Jx3boxAnalysisRow;
+  top10_achieve_team_count: Jx3boxAnalysisRow;
+  top100_achieve_team_count: Jx3boxAnalysisRow;
+}
