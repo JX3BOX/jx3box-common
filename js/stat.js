@@ -1,6 +1,6 @@
 import axios from "axios";
-import { __sourceType,__next } from "../data/jx3box.json";
-const { cms_types } = __sourceType;
+import { __postType,__next } from "../data/jx3box.json";
+const cms_types = Object.keys(__postType);
 const $next = axios.create({
     baseURL: process.env.NODE_ENV === "production" ? __next : "/",
 });
