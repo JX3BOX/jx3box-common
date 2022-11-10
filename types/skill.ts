@@ -1,6 +1,6 @@
 type Jx3boxNullableAttr<T> = T | null;
 
-interface Jx3boxSkill {
+export interface Jx3boxSkill {
   //魔盒数据库唯一辨识ID
   IdKey: number;
   //技能ID
@@ -131,4 +131,29 @@ interface Jx3boxSkill {
   IsMentalPassiveSkill: Jx3boxNullableAttr<string>;
 }
 
-export { Jx3boxSkill };
+export interface Jx3boxTalentConfigCode {
+  sq: string;
+  xf: string;
+  version: string;
+}
+
+export interface Jx3boxTalentConfigPZCode {
+  id: number;
+  icon: number;
+  name: string;
+}
+
+export interface Jx3boxTalentConfig {
+  id: number;
+  user_id: number;
+  client: string;
+  type: string;
+  mount: number;
+  version: string;
+  name: string;
+  code: Jx3boxTalentConfigCode;
+  pzcode: Jx3boxTalentConfigPZCode[];
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string;
+}
