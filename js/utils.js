@@ -102,7 +102,7 @@ module.exports = {
 
     // 快捷过滤器（根据应用类型+ID获取对应帖子着陆页或链接）
     iconLink(icon_id, client = "std") {
-        if (!icon_id || isNaN(parseInt(icon_id))) {
+        if (!icon_id || isNaN(parseInt(icon_id)) || icon_id == -1) {
             return `${__imgPath}image/common/nullicon.png`;
         } else {
             let iconpath = client == "origin" ? "origin_icon" : "icon";
