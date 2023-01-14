@@ -13,11 +13,11 @@ import {__showAvatar} from '@jx3box/jx3box-common/js/utils.js'
 ```javascript
 // 1.使用指定尺寸头像
 showAvatar(url,100)
-// => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
+// => https://cdn.jx3box.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
 
 // 2.使用预设尺寸头像 
 showAvatar(url,'s') 
-// => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=style/avatar_s
+// => https://cdn.jx3box.com/path/to/pic.jpg?x-oss-process=style/avatar_s
 
 // 3.当不希望使用中转CDN时，显式设置第3个参数为false
 showAvatar(url,100,false)
@@ -30,15 +30,15 @@ showAvatar(url,100,false)
 ```javascript
 // 1.设置一个指定数字方形 
 getThumbnail(url,100) 
-// => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
+// => https://cdn.jx3box.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
 
 // 2.设置指定宽高长方形（等比缩放后居中剪裁）
 getThumbnail(url,[180,100])
-// => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_180,h_100/quality,Q_100
+// => https://cdn.jx3box.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_180,h_100/quality,Q_100
 
 // 3.设置指定预设oss样式（cms通用栏目目前预设为mini_banner:168*88)
 getThumbnail(url,'mini_banner')
-// => https://console.cnyixun.com/path/to/pic.jpg?x-oss-process=style/mini_banner
+// => https://cdn.jx3box.com/path/to/pic.jpg?x-oss-process=style/mini_banner
 
 // 4.当不希望使用中转CDN时，显式设置第3个参数为false
 getThumbnail(url,100,false)

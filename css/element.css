@@ -28,8 +28,8 @@
 }
 @font-face {
     font-family: element-icons;
-    src: url(https://console.cnyixun.com/static/fonts/element-icons.woff) format("woff"),
-        url(https://console.cnyixun.com/static/fonts/element-icons.ttf) format("truetype");
+    src: url(https://cdn.jx3box.com/static/fonts/element-icons.woff) format("woff"),
+        url(https://cdn.jx3box.com/static/fonts/element-icons.ttf) format("truetype");
     font-weight: 400;
     font-display: "auto";
     font-style: normal;

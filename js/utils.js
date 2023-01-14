@@ -6,7 +6,7 @@ module.exports = {
     // 图片处理函数
     resolveImagePath: function (str) {
         if (str && str.length) {
-            str = str.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            str = str.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
             str = str.replace(/http:/g, "https:");
             return str;
         } else {
@@ -54,7 +54,7 @@ module.exports = {
 
         // CDN
         if (replace) {
-            avatar = avatar.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            avatar = avatar.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
         }
 
         return avatar;
@@ -69,7 +69,7 @@ module.exports = {
         url = url.replace(/http:/g, "https:");
 
         if (replace) {
-            url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            url = url.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
         }
 
         url += `?x-oss-process=style/${style}`;
@@ -86,7 +86,7 @@ module.exports = {
         url = url.replace(/http:/g, "https:");
 
         if (replace) {
-            url = url.replace(/oss\.jx3box\.com/g, "console.cnyixun.com");
+            url = url.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
         }
 
         if (Array.isArray(size)) {
