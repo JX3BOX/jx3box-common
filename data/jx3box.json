@@ -27,13 +27,13 @@
     "__jx3": "https://xn--3-4g8a959k.com/",
 
     "__ossRoot": "https://oss.jx3box.com/",
-    "__ossMirror": "https://console.cnyixun.com/",
+    "__ossMirror": "https://cdn.jx3box.com/",
 
     "__staticPath": {
         "origin": "https://oss.jx3box.com/static/",
         "github": "https://jx3box.github.io/",
         "jsdelivr": "https://cdn.jsdelivr.net/gh/JX3BOX/",
-        "mirror": "https://console.cnyixun.com/static/"
+        "mirror": "https://cdn.jx3box.com/static/"
     },
 
     "__dataPath": "https://data.jx3box.com/",
@@ -83,17 +83,18 @@
         "furniture": "家具",
         "horse": "坐骑",
         "book": "书籍",
-        "exterior": "外观"
+        "exterior": "外观",
+        "reputation":"声望"
     },
 
     "__sourceType": {
         "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection", "face"],
+        "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior","reputation"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
+        "app_types": ["pz", "calendar", "battle", "dbm"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "team_types": ["org", "role", "raid", "apply"],
-        "app_types": ["pz", "calendar", "battle", "dbm"],
-        "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior"]
+        "team_types": ["org", "role", "raid", "apply"]
     },
 
     "__visibleMap": {
@@ -156,6 +157,6 @@
         }
     },
 
-    "default_avatar": "https://console.cnyixun.com/image/common/avatar.png",
+    "default_avatar": "https://cdn.jx3box.com/image/common/avatar.png",
     "feedback": "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8LHzsrN48nbkMHM243AzM4"
 }
