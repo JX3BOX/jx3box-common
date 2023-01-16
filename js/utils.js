@@ -18,7 +18,7 @@ module.exports = {
         jq.length &&
             jq.one("error", function () {
                 var img_url = $(this).attr("src");
-                var fix_url = img_url.replace(/console\.cnyixun\.com/g, "cdn.jx3box.com");
+                var fix_url = img_url.replace(/cdn\.jx3box\.com/g, "oss.jx3box.com");
                 $(this).attr("src", fix_url);
             });
     },
