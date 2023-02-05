@@ -110,8 +110,8 @@ module.exports = {
         }
     },
 
-    getAppIcon(key) {
-        return __imgPath + "image/box/" + key + ".svg";
+    getAppIcon(key, colorful = false) {
+        return __imgPath + colorful ? 'image/box-color' : "image/box/" + key + ".svg";
     },
 
     editLink: function (type, id) {
