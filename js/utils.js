@@ -111,7 +111,7 @@ module.exports = {
     },
 
     getAppIcon(key, colorful = false) {
-        return __imgPath + colorful ? 'image/box-color' : "image/box/" + key + ".svg";
+        return __imgPath + (colorful ? 'image/box-colorful/' : "image/box/") + key + ".svg";
     },
 
     editLink: function (type, id) {
