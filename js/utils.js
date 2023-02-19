@@ -165,8 +165,10 @@ module.exports = {
             // 其它杂项
         } else if (__sourceType.exam_types.includes(type)) {
             return "/" + "exam" + "/" + type + "/" + id;
+        } else if (type && id) {
+            return "/" + type + "/" + id;
         } else {
-            return "";
+            return "/";
         }
     },
 
