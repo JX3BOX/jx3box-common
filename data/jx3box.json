@@ -85,17 +85,18 @@
         "horse": "坐骑",
         "book": "书籍",
         "exterior": "外观",
-        "reputation":"声望"
+        "reputation": "声望"
     },
 
     "__sourceType": {
         "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection", "face"],
-        "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior","reputation"],
+        "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior", "reputation"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
         "app_types": ["pz", "calendar", "battle", "dbm"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "team_types": ["org", "role", "raid", "apply"]
+        "team_types": ["org", "role", "raid", "apply"],
+        "vip_types": ["mall"]
     },
 
     "__visibleMap": {
