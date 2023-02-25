@@ -1,8 +1,9 @@
 import { showAvatar } from "./utils";
 import jx3box from "../data/jx3box.json";
-import { tokenExpires } from "../data/conf.json";
-import { $pay, $cms } from "./request";
 let { __Links, default_avatar, __server, __userLevel } = jx3box;
+import conf from "../data/conf.json";
+let { tokenExpires } = conf;
+import { $pay, $cms } from "./request";
 class User {
     constructor() {
         // TOKEN有效期
