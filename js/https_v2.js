@@ -1,20 +1,13 @@
 // 默认请求
 import axios from "axios";
-
-// 拦截器
-import {
-    installInterceptors,
-    installNextInterceptors,
-    installHelperInterceptors,
-    installCmsInterceptors,
-} from "./interceptors.js";
-
 // 域名映射
 import domains from "../data/jx3box.json";
+// 错误组件
+import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 
 // cms通用请求接口
 function $cms(options) {
-    let domain = (options && options.domain) || domains.domains.__cms;
+    let domain = (options && options.domain) || domains.__cms;
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -30,7 +23,7 @@ function $cms(options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    installCmsInterceptors(ins, options);
+    installStandardInterceptors(ins, options);
 
     return ins;
 }
@@ -38,7 +31,7 @@ function $cms(options) {
 // helper通用请求接口
 import { jx3ClientType } from "./utils";
 function $helper(options) {
-    let domain = (options && options.domain) || domains.domains.__helperUrl;
+    let domain = (options && options.domain) || domains.__helperUrl;
 
     let config = {
         // 同时发送cookie和basic auth
@@ -93,7 +86,7 @@ function $next(options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    installNextInterceptors(ins, options);
+    installStandardInterceptors(ins, options);
 
     return ins;
 }
@@ -167,9 +160,126 @@ function $http(options) {
     const ins = axios.create(config);
 
     // 指定拦截器
-    installNextInterceptors(ins, options);
+    installStandardInterceptors(ins, options);
 
     return ins;
+}
+
+function loadPop(msg, popType = "message") {
+    switch (popType) {
+        case "message":
+            ElMessage({
+                message: msg,
+                type: "error",
+            });
+            break;
+        case "alert":
+            ElMessageBox.alert(msg, "错误");
+            break;
+        case "notify":
+            ElNotification({
+                title: "错误",
+                message: msg,
+                duration: 3000,
+            });
+            break;
+        default:
+            break;
+    }
+}
+
+function throwError(err) {
+    console.log(err.response);
+    return Promise.reject(err);
+}
+
+function loadDefaultRequestErrorPop(err, popType = 'message'){
+    loadPop(`[${err.response.status}]${err.response.statusText}`, popType);
+}
+
+/**
+ * 无包装器的拦截器
+ *
+ * @param {*} target
+ * @param {*} options
+ */
+function installInterceptors(target, options) {
+    let popType = options && options.popType || 'message'
+    target["interceptors"]["response"].use(
+        function (response) {
+            return response;
+        },
+        function (err) {
+            if (!options || !options.mute) {
+                if (err.response && err.response.data) {
+                    err.response.data.msg && loadPop(err.response.data.msg, popType);
+                } else {
+                    loadDefaultRequestErrorPop(err)
+                }
+            }
+            return throwError(err);
+        }
+    );
+}
+
+/**
+ * 标准统一包装模式
+ * go/nodejs server
+ * @param {*} target
+ * @param {*} options
+ */
+function installStandardInterceptors(target, options) {
+    let popType = options && options.popType || 'message'
+    target["interceptors"]["response"].use(
+        function (response) {
+            if (response.data.code) {
+                if (!options || !options.mute) {
+                    response.data.msg && loadPop(`[${response.data.code}]${response.data.msg}`, popType);
+                }
+                return Promise.reject(response);
+            }
+            return response;
+        },
+        function (err) {
+            if (!options || !options.mute) {
+                console.log(err.response)
+                if (err.response && err.response.data && err.response.data.msg) {
+                    loadPop(err.response.data.msg, popType);
+                } else {
+                    loadDefaultRequestErrorPop(err)
+                }
+            }
+            return throwError(err)
+        }
+    );
+}
+
+/**
+ * Helper统一包装模式
+ * php server
+ * @param {*} target
+ * @param {*} options
+ */
+function installHelperInterceptors(target, options) {
+    let popType = options && options.popType || 'message'
+    target["interceptors"]["response"].use(
+        function (response) {
+            if (response.data.code == 200 || !response.data.code) {
+                return response;
+            } else {
+                if (!options || !options.mute) {
+                    loadPop(`[${response.data.code}]${response.data.message}`, popType);
+                }
+                return Promise.reject(response);
+            }
+        },
+        function (err) {
+            if (!options || !options.mute) {
+                loadDefaultRequestErrorPop(err)
+            }
+            return throwError(err)
+        }
+    );
 }
 
 export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios };
