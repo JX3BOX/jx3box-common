@@ -14,7 +14,7 @@ import domains from "../data/jx3box.json";
 
 // cms通用请求接口
 function $cms(options) {
-    let domain = (options && options.domain) || domains.domains.__cms;
+    let domain = (options && options.domain) || domains..__cms;
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -38,7 +38,7 @@ function $cms(options) {
 // helper通用请求接口
 import { jx3ClientType } from "./utils";
 function $helper(options) {
-    let domain = (options && options.domain) || domains.domains.__helperUrl;
+    let domain = (options && options.domain) || domains..__helperUrl;
 
     let config = {
         // 同时发送cookie和basic auth
