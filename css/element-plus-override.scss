@@ -1,0 +1,9 @@
+// https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/src/common/var.scss
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #0366d6,
+    ),
+  ),
+);
+@use "element-plus/theme-chalk/src/index.scss" as *;
