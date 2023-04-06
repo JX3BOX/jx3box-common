@@ -4,13 +4,13 @@
         "advanced": "进阶推荐",
         "recommended": "编辑精选",
         "geek": "骨灰必备",
-        "resolved": "已解决"
+        "fallacy": "存在误导性内容"
     },
     "colors": {
         "newbie": "#6f42c1",
         "advanced": "#6f42c1",
         "recommended": "#6f42c1",
         "geek": "#6f42c1",
-        "resolved": "#49c10f"
+        "resolved": "#c00"
     }
 }
