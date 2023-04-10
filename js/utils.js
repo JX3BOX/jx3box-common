@@ -158,8 +158,13 @@ module.exports = {
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
-            let url = "/" + "rank/race/#/" + event_id;
-            if (achieve_id) url += "/rank?aid=" + achieve_id;
+            let url = '';
+            if (id > 6) {
+                url = `/jdt/${id}th/rank`
+            } else {
+                url = "/rank/race/#/" + event_id;
+            }
+            if (achieve_id) url += `?aid=${achieve_id}`;
             return url;
 
             // 其它杂项
