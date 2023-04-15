@@ -50,13 +50,13 @@
 
     "__postType": {
         "macro": "宏库",
-        "jx3dat": "插件",
-        "fb": "副本",
         "bps": "职业",
+        "pvp": "竞技",
+        "fb": "副本",
         "tool": "工具",
         "bbs": "茶馆",
         "notice": "公告",
-        "pvp": "竞技"
+        "jx3dat": "插件"
     },
 
     "__wikiType": {
@@ -76,7 +76,8 @@
         "question": "题目",
         "paper": "试卷",
         "calendar": "日历",
-        "battle": "战斗"
+        "battle": "战斗",
+        "dbm": "DBM"
     },
 
     "__gameType": {
