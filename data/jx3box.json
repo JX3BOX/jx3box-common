@@ -20,7 +20,7 @@
     "__team": "https://team.api.jx3box.com/",
     "__lua": "https://lua.jx3box.com/",
     "__down": "https://down.jx3box.com/",
-    "_dbm": "https://dbm.jx3box.com/",
+    "__dbm": "https://dbm.jx3box.com/",
 
     "__helperUrl": "https://helper.jx3box.com/",
     "__os": "https://os.jx3box.com/",
