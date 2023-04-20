@@ -54,5 +54,5 @@ jobs:
       - run: ossutil cp -rf data oss://jx3box/data/global
       - run: ossutil cp -rf js oss://jx3box/static/jx3box-common/js
       - run: ossutil cp -rf css oss://jx3box/static/jx3box-common/css
-      - run: ossutil cp -rf css oss://jx3box-www/jx3box-common/css
+      # - run: ossutil cp -rf css oss://jx3box-www/jx3box-common/css
       - run: ossutil cp -rf fonts oss://jx3box/static/fonts
