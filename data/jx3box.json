@@ -4,7 +4,6 @@
 
     "__Root": "https://www.jx3box.com/",
     "__OriginRoot": "https://origin.jx3box.com/",
-    "__v2": "https://v2.jx3box.com/",
     "__Github": "https://github.jx3box.com/",
 
     "__server": "https://server.jx3box.com/",
@@ -13,7 +12,7 @@
     "__cms": "https://cms.jx3box.com/",
     "__node": "https://node.jx3box.com/",
     "__spider": "https://spider.jx3box.com/",
-    "__proxy": "https://proxy.jx3box.com/",
+    "__spider2": "https://spider2.jx3box.com/",
 
     "__next": "https://next2.jx3box.com/",
     "__pay": "https://pay.jx3box.com/",
