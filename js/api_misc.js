@@ -1,18 +1,18 @@
-import { $helper, $cms } from './https'
+import { $cms } from './https'
 
 // 面包屑
 function getBreadcrumb(key) {
-    return $helper()
-        .get(`/api/breadcrumb/${key}`)
+    return $cms()
+        .get(`/api/cms/breadcrumb/${key}`)
         .then((res) => {
-            return res.data.data.breadcrumb.html || "";
+            return res.data.data.html || "";
         });
 }
 
 // 菜单
 function getMenu(key) {
-    return $helper().get(`/api/menu_group/${key}`).then((res) => {
-        return res.data.data.menu_group.menus || []
+    return $cms().get(`/api/cms/menu-group/${key}`).then((res) => {
+        return res.data.data.menus || []
     })
 }
 
@@ -26,10 +26,10 @@ function getArticle(id) {
 
 // 公共菜单
 function getMenus(params) {
-    return $helper().get(`/api/menu_groups/`, {
+    return $cms().get(`/api/cms/menu-group`, {
         params: params
     }).then((res) => {
-        return res.data.data.data;
+        return res.data.data;
     })
 }
 
