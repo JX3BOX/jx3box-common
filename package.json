@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "7.9.6",
+    "version": "7.9.7",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -8,7 +8,7 @@
         "url": "git+https://github.com/JX3BOX/jx3box-common.git"
     },
     "dependencies": {
-        "@jx3box/reporter": "^0.0.4",
+        "@jx3box/reporter": "^0.0.5",
         "axios": "^0.20.0",
         "cheerio": "1.0.0-rc.10",
         "element-ui": "^2.13.2",
