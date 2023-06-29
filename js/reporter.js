@@ -109,19 +109,19 @@ const reporter = {
     installVue3(app) {
         app.directive("reporter", {
             mounted(el, binding) {
-                el.clickHandler = function () {
-                    const {
-                        user_id,
-                        use_query = false,
-                        caller,
-                        data
-                    } = binding.value;
+                const {
+                    user_id,
+                    use_query = false,
+                    caller,
+                    data
+                } = binding.value;
 
-                    const R = new Reporter({
-                        caller,
-                        use_query, // 上报当前页面中url中的参数 默认false
-                        userId: user_id // 当前登录用户id
-                    });
+                const R = new Reporter({
+                    caller,
+                    use_query, // 上报当前页面中url中的参数 默认false
+                    userId: user_id // 当前登录用户id
+                });
+                el.clickHandler = function () {
 
                     R.p({ uuid: getUUID(), ...data })
                 };
