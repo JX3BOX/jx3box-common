@@ -73,20 +73,19 @@ const reporter = {
     install(Vue) {
         Vue.directive("reporter", {
             bind: function (el, binding) {
+                const {
+                    user_id,
+                    use_query = false,
+                    caller,
+                    data
+                } = binding.value;
+
+                const R = new Reporter({
+                    caller,
+                    use_query, // 上报当前页面中url中的参数 默认false
+                    useId: user_id // 当前登录用户id
+                });
                 el.clickHandler = function () {
-                    const {
-                        user_id,
-                        use_query = false,
-                        caller,
-                        data
-                    } = binding.value;
-
-                    const R = new Reporter({
-                        caller,
-                        use_query, // 上报当前页面中url中的参数 默认false
-                        useId: user_id // 当前登录用户id
-                    });
-
                     R.p({ uuid: getUUID(), ...data })
                 };
 

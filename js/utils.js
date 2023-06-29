@@ -297,5 +297,19 @@ module.exports = {
     // 获取勋章对应链接
     getMedalLink(event_id, subtype) {
         return `/rank/race/#/${event_id}/${subtype}`
+    },
+    convertUrlToProtocol(url) {
+        const pattern = /https?:\/\/([^/.]+)\.jx3box\.com\/(.*)/;
+        const match = url.match(pattern);
+
+        if (match) {
+            const protocol = match[1];
+            const path = match[2];
+            const convertedUrl = `${protocol}:/${path}`;
+
+            return convertedUrl;
+        }
+
+        return url;
     }
 };
