@@ -83,7 +83,7 @@ const reporter = {
                 const R = new Reporter({
                     caller,
                     use_query, // 上报当前页面中url中的参数 默认false
-                    useId: user_id // 当前登录用户id
+                    userId: user_id // 当前登录用户id
                 });
                 el.clickHandler = function () {
                     R.p({ uuid: getUUID(), ...data })
