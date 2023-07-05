@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "7.9.11",
+    "version": "7.9.12",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -14,6 +14,7 @@
         "element-ui": "^2.13.2",
         "localforage": "^1.7.3",
         "moment": "^2.29.1",
+        "uuid": "^9.0.0",
         "vue": "^2.6.12"
     },
     "devDependencies": {

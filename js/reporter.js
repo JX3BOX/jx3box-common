@@ -2,6 +2,7 @@ import {
     Reporter
 } from "@jx3box/reporter"
 import { __Domain } from "../data/jx3box.json"
+import { v4 as uuidv4 } from "uuid";
 
 /**
      * 16进制转int
@@ -49,6 +50,17 @@ function getUUID(domain = __Domain) {
     return crc;
 }
 
+function getCookies() {
+    const cookies = localStorage.getItem("reporter_cookies");
+    if (cookies) {
+        return cookies;
+    } else {
+        const uuid = uuidv4();
+        localStorage.setItem("reporter_cookies", uuid);
+        return uuid;
+    }
+}
+
 /**
  * 统计指令
  *
@@ -86,7 +98,7 @@ const reporter = {
                     userId: user_id // 当前登录用户id
                 });
                 el.clickHandler = function () {
-                    R.p({ uuid: getUUID(), ...data })
+                    R.p({ uuid: getUUID(), cookies: getCookies(), ...data })
                 };
 
                 el.addEventListener("click", el.clickHandler);
