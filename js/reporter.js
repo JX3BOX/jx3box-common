@@ -3,6 +3,7 @@ import {
 } from "@jx3box/reporter"
 import { __Domain } from "../data/jx3box.json"
 import { v4 as uuidv4 } from "uuid";
+import User from "./user"
 
 /**
      * 16进制转int
@@ -33,7 +34,7 @@ function bin2hex(str) {
 function getUUID(domain = __Domain) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
-    const txt =  domain;
+    const txt = domain;
     ctx.textBaseline = "top";
     ctx.font = "14px 'Arial'";
     ctx.textBaseline = "alphabetic";
@@ -61,6 +62,17 @@ function getCookies() {
     }
 }
 
+// 立即上报，不通过指令
+export function reportNow(binding) {
+    const { use_query = false, caller, data } = binding;
+    const R = new Reporter({
+        caller,
+        userId: User.getInfo().uid,
+        use_query: use_query,
+    });
+    R.p({ uuid: getUUID(), cookies: getCookies(), ...data })
+}
+
 /**
  * 统计指令
  *
@@ -77,7 +89,6 @@ const reporter = {
 
     /**
      * 上报指令 vue2
-     * @param {string} user_id 用户id 使用User.getInfo().uid获取
      * @param {boolean} use_query 是否上报当前页面中url中的参数 默认false
      * @param {string} caller 上报来源
      * @param {object} data 上报数据
@@ -86,7 +97,6 @@ const reporter = {
         Vue.directive("reporter", {
             bind: function (el, binding) {
                 const {
-                    user_id,
                     use_query = false,
                     caller,
                     data
@@ -95,7 +105,7 @@ const reporter = {
                 const R = new Reporter({
                     caller,
                     use_query, // 上报当前页面中url中的参数 默认false
-                    userId: user_id // 当前登录用户id
+                    userId: User.getInfo().uid // 当前登录用户id
                 });
                 el.clickHandler = function () {
                     R.p({ uuid: getUUID(), cookies: getCookies(), ...data })
