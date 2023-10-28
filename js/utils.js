@@ -144,6 +144,10 @@ module.exports = {
         } else if (__sourceType.app_types.includes(type)) {
             return "/" + `${type}/view/${id}`;
 
+            // DBM
+        } else if (__sourceType.dbm_types.includes(type)) {
+            return "/dbm/" + `${type}/${id}`;
+
             // 数据库
         } else if (__sourceType.db_types.includes(type)) {
             let link = "/" + `app/database/?type=${type}&query=${id}`;

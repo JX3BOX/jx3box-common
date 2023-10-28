@@ -96,7 +96,7 @@
         "app_types": ["pz", "calendar", "battle"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "dbm_types": ["vpk"],
+        "dbm_types": ["pkg","item","vpk"],
         "team_types": ["org", "role", "raid", "apply"],
         "vip_types": ["mall"]
     },
