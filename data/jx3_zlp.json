@@ -1,5 +1,132 @@
 {
-    "std": ["万灵当歌", "群侠万变","横刀断浪", "江湖无限", "北天药宗", "白帝风云", "其它"],
+    "std": ["万灵当歌", "群侠万变", "横刀断浪", "江湖无限", "北天药宗", "白帝风云", "其它"],
     "origin": ["安史之乱", "日月明尊", "剑湖神宫", "巴蜀风云", "五毒现世", "圣殿云起", "藏剑山庄", "物华天宝", "其它"],
-    "all": ["万灵当歌", "群侠万变", "安史之乱", "日月明尊", "横刀断浪", "剑湖神宫", "巴蜀风云", "江湖无限", "五毒现世", "圣殿云起", "北天药宗", "白帝风云", "藏剑山庄", "物华天宝", "其它"]
+    "all": ["万灵当歌", "群侠万变", "安史之乱", "日月明尊", "横刀断浪", "剑湖神宫", "巴蜀风云", "江湖无限", "五毒现世", "圣殿云起", "北天药宗", "白帝风云", "藏剑山庄", "物华天宝", "其它"],
+    "std_map": [{
+            "label": "万灵当歌",
+            "value": "wanlingdangge"
+        },
+        {
+            "label": "群侠万变",
+            "value": "qunxiawanbian"
+        },
+        {
+            "label": "横刀断浪",
+            "value": "hengdaoduanlang"
+        },
+        {
+            "label": "江湖无限",
+            "value": "jianghuwuxian"
+        },
+        {
+            "label": "北天药宗",
+            "value": "beitianyaozong"
+        },
+        {
+            "label": "白帝风云",
+            "value": "baidifengyun"
+        },
+        {
+            "label": "其它",
+            "value": "other"
+        }
+    ],
+    "origin_map": [{
+            "label": "安史之乱",
+            "value": "anshizhiluan"
+        },
+        {
+            "label": "日月明尊",
+            "value": "riyuemingzun"
+        },
+        {
+            "label": "剑湖神宫",
+            "value": "jianhushenggong"
+        },
+        {
+            "label": "巴蜀风云",
+            "value": "bashufengyun"
+        },
+        {
+            "label": "五毒现世",
+            "value": "wuduxianshi"
+        },
+        {
+            "label": "圣殿云起",
+            "value": "shengdianyunqi"
+        },
+        {
+            "label": "藏剑山庄",
+            "value": "cangjianshanzhuang"
+        },
+        {
+            "label": "物华天宝",
+            "value": "wuhuatianbao"
+        },
+        {
+            "label": "其它",
+            "value": "other"
+        }
+    ],
+    "all_map": [{
+            "label": "万灵当歌",
+            "value": "wanlingdangge"
+        },
+        {
+            "label": "群侠万变",
+            "value": "qunxiawanbian"
+        },
+        {
+            "label": "安史之乱",
+            "value": "anshizhiluan"
+        },
+        {
+            "label": "日月明尊",
+            "value": "riyuemingzun"
+        },
+        {
+            "label": "横刀断浪",
+            "value": "hengdaoduanlang"
+        },
+        {
+            "label": "剑湖神宫",
+            "value": "jianhushenggong"
+        },
+        {
+            "label": "巴蜀风云",
+            "value": "bashufengyun"
+        },
+        {
+            "label": "江湖无限",
+            "value": "jianghuwuxian"
+        },
+        {
+            "label": "五毒现世",
+            "value": "wuduxianshi"
+        },
+        {
+            "label": "圣殿云起",
+            "value": "shengdianyunqi"
+        },
+        {
+            "label": "北天药宗",
+            "value": "beitianyaozong"
+        },
+        {
+            "label": "白帝风云",
+            "value": "baidifengyun"
+        },
+        {
+            "label": "藏剑山庄",
+            "value": "cangjianshanzhuang"
+        },
+        {
+            "label": "物华天宝",
+            "value": "wuhuatianbao"
+        },
+        {
+            "label": "其它",
+            "value": "other"
+        }
+    ]
 }
