@@ -154,10 +154,6 @@ module.exports = {
             if (level) link += `&level=${level}`;
             return link;
 
-            // 数据类型
-        } else if (__sourceType.dbm_types.includes(type)) {
-            return "/" + "dbm/" + `${type}/${id}`;
-
             // 团队
         } else if (__sourceType.team_types.includes(type)) {
             return "/" + "team/" + type + "/" + id;
