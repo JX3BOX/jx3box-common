@@ -67,7 +67,10 @@
 
     "__appType": {
         "face": "捏脸",
+        "body": "体型",
         "pz": "配装",
+        "pkg": "数据包",
+        "vpk": "语音包",
         "joke": "骚话",
         "emotion": "表情",
         "collection": "小册",
