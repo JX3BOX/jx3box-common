@@ -50,6 +50,15 @@ export const wiki = {
     getById(post_id) {
         return $cms().get(`/api/cms/wiki/post/id/${post_id}`)
     },
+    // 获取历史版本
+    versions({ type, id }, params) {
+        return $cms().get(`/api/cms/wiki/post/type/${type}/source/${id}/versions`, {
+            params: {
+                client,
+                ...params,
+            }
+        })
+    },
     // 获取兼容攻略
     async handleMix(source_type, source_id, client, params) {
         let post = '';
