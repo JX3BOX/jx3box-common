@@ -19,6 +19,12 @@ export const wiki = {
             }
         })
     },
+    // 我的
+    mine(params) {
+        return $cms().get(`/api/cms/wiki/post/mine`, {
+            params
+        })
+    },
     // 统计
     counter({ type }, params) {
         return $cms().get(`/api/cms/wiki/post/counter`, {
@@ -49,6 +55,15 @@ export const wiki = {
     },
     getById(post_id) {
         return $cms().get(`/api/cms/wiki/post/id/${post_id}`)
+    },
+    post(data) {
+        return $cms().post(`/api/cms/wiki/post`, data)
+    },
+    update(post_id, data) {
+        return $cms().put(`/api/cms/wiki/post/${post_id}`, data)
+    },
+    remove(post_id) {
+        return $cms().delete(`/api/cms/wiki/post/${post_id}`)
     },
     // 获取历史版本
     versions({ type, id }, params) {
