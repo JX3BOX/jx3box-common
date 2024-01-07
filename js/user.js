@@ -32,17 +32,12 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group =
-                (localStorage && localStorage.getItem("group")) || 1;
+            this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
             this.profile.token = localStorage && localStorage.getItem("token");
             this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status =
-                localStorage && localStorage.getItem("status");
-            this.profile.bind_wx =
-                localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin =
-                (localStorage && localStorage.getItem("avatar")) ||
-                default_avatar;
+            this.profile.status = localStorage && localStorage.getItem("status");
+            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
         } else {
             this.profile = this.anonymous;
@@ -57,11 +52,8 @@ class User {
 
     // 判断是否已登录
     isLogin() {
-        this.created_at = !localStorage.getItem("created_at")
-            ? -Infinity
-            : localStorage.getItem("created_at");
-        this.logged_in =
-            localStorage.getItem("logged_in") == "true" ? true : false;
+        this.created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
+        this.logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
@@ -167,7 +159,7 @@ class User {
         if (this.isLogin()) {
             return $cms()
                 .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
-                .then(res => {
+                .then((res) => {
                     return res.data.data;
                 });
         } else {
@@ -210,7 +202,7 @@ class User {
                 resolve(this._isPRO(this.asset) || this._isVIP(this.asset));
             });
         } else {
-            return this.getAsset().then(asset => {
+            return this.getAsset().then((asset) => {
                 return this._isPRO(asset) || this._isVIP(asset);
             });
         }
@@ -223,7 +215,7 @@ class User {
                 resolve(this._isPRO(this.asset));
             });
         } else {
-            return this.getAsset().then(asset => {
+            return this.getAsset().then((asset) => {
                 return this._isPRO(asset);
             });
         }
@@ -253,7 +245,7 @@ class User {
         } else {
             return $pay()
                 .get("/api/vip/i")
-                .then(res => {
+                .then((res) => {
                     let asset = res.data.data;
                     this.asset = asset;
                     return asset;

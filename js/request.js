@@ -2,12 +2,7 @@
 import axios from "axios";
 
 // 拦截器
-import {
-    installInterceptors,
-    installNextInterceptors,
-    installHelperInterceptors,
-    installCmsInterceptors,
-} from "./interceptors.js";
+import { installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./interceptors.js";
 
 // 域名映射
 import domains from "../data/jx3box.json";
@@ -50,8 +45,7 @@ function $helper(options) {
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type":
-                (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -134,10 +128,7 @@ function $node(options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL =
-            process.env.NODE_ENV === "production"
-                ? domain
-                : `http://localhost:${options.port}`;
+        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
     }
 
     // 创建实例

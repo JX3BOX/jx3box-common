@@ -1,4 +1,6 @@
-import { $cms } from './https'
+import {
+    $cms
+} from './https'
 
 // 面包屑
 function getBreadcrumb(key) {
@@ -34,4 +36,9 @@ function getMenus(params) {
 }
 
 
-export { getBreadcrumb, getMenu, getArticle, getMenus };
+export {
+    getBreadcrumb,
+    getMenu,
+    getArticle,
+    getMenus
+};

@@ -43,8 +43,7 @@ function $helper(options) {
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type":
-                (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -127,10 +126,7 @@ function $node(options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL =
-            process.env.NODE_ENV === "production"
-                ? domain
-                : `http://localhost:${options.port}`;
+        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
     }
 
     // 创建实例
@@ -193,7 +189,7 @@ function throwError(err) {
     return Promise.reject(err);
 }
 
-function loadDefaultRequestErrorPop(err, popType = 'message'){
+function loadDefaultRequestErrorPop(err, popType = "message") {
     loadPop(`[${err.response.status}]${err.response.statusText}`, popType);
 }
 
@@ -204,7 +200,7 @@ function loadDefaultRequestErrorPop(err, popType = 'message'){
  * @param {*} options
  */
 function installInterceptors(target, options) {
-    let popType = options && options.popType || 'message'
+    let popType = (options && options.popType) || "message";
     target["interceptors"]["response"].use(
         function (response) {
             return response;
@@ -214,7 +210,7 @@ function installInterceptors(target, options) {
                 if (err.response && err.response.data) {
                     err.response.data.msg && loadPop(err.response.data.msg, popType);
                 } else {
-                    loadDefaultRequestErrorPop(err)
+                    loadDefaultRequestErrorPop(err);
                 }
             }
             return throwError(err);
@@ -229,7 +225,7 @@ function installInterceptors(target, options) {
  * @param {*} options
  */
 function installStandardInterceptors(target, options) {
-    let popType = options && options.popType || 'message'
+    let popType = (options && options.popType) || "message";
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code) {
@@ -242,14 +238,14 @@ function installStandardInterceptors(target, options) {
         },
         function (err) {
             if (!options || !options.mute) {
-                console.log(err.response)
+                console.log(err.response);
                 if (err.response && err.response.data && err.response.data.msg) {
                     loadPop(err.response.data.msg, popType);
                 } else {
-                    loadDefaultRequestErrorPop(err)
+                    loadDefaultRequestErrorPop(err);
                 }
             }
-            return throwError(err)
+            return throwError(err);
         }
     );
 }
@@ -261,7 +257,7 @@ function installStandardInterceptors(target, options) {
  * @param {*} options
  */
 function installHelperInterceptors(target, options) {
-    let popType = options && options.popType || 'message'
+    let popType = (options && options.popType) || "message";
     target["interceptors"]["response"].use(
         function (response) {
             if (response.data.code == 200 || !response.data.code) {
@@ -275,9 +271,9 @@ function installHelperInterceptors(target, options) {
         },
         function (err) {
             if (!options || !options.mute) {
-                loadDefaultRequestErrorPop(err)
+                loadDefaultRequestErrorPop(err);
             }
-            return throwError(err)
+            return throwError(err);
         }
     );
 }

@@ -1,15 +1,13 @@
-import {
-    Reporter
-} from "@jx3box/reporter"
-import { __Domain } from "../data/jx3box.json"
+import { Reporter } from "@jx3box/reporter";
+import { __Domain } from "../data/jx3box.json";
 import { v4 as uuidv4 } from "uuid";
-import User from "./user"
+import User from "./user";
 
 /**
-     * 16进制转int
-     * @param {string} str
-     * @returns
-    */
+ * 16进制转int
+ * @param {string} str
+ * @returns
+ */
 function int162hex(str) {
     let hex = str.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
@@ -70,7 +68,7 @@ export function reportNow(binding) {
         userId: User.getInfo().uid,
         use_query: use_query,
     });
-    R.p({ uuid: getUUID(), cookies: getCookies(), ...data })
+    R.p({ uuid: getUUID(), cookies: getCookies(), ...data });
 }
 
 /**
@@ -86,7 +84,6 @@ export function reportNow(binding) {
  *  data: 上报数据
  */
 const reporter = {
-
     /**
      * 上报指令 vue2
      * @param {boolean} use_query 是否上报当前页面中url中的参数 默认false
@@ -96,19 +93,15 @@ const reporter = {
     install(Vue) {
         Vue.directive("reporter", {
             bind: function (el, binding) {
-                const {
-                    use_query = false,
-                    caller,
-                    data
-                } = binding.value;
+                const { use_query = false, caller, data } = binding.value;
 
                 const R = new Reporter({
                     caller,
                     use_query, // 上报当前页面中url中的参数 默认false
-                    userId: User.getInfo().uid // 当前登录用户id
+                    userId: User.getInfo().uid, // 当前登录用户id
                 });
                 el.clickHandler = function () {
-                    R.p({ uuid: getUUID(), cookies: getCookies(), ...data })
+                    R.p({ uuid: getUUID(), cookies: getCookies(), ...data });
                 };
 
                 el.addEventListener("click", el.clickHandler);
@@ -116,7 +109,7 @@ const reporter = {
             unbind: function (el) {
                 el.removeEventListener("click", el.clickHandler);
                 el.clickHandler = null;
-            }
+            },
         });
     },
 
@@ -130,21 +123,15 @@ const reporter = {
     installVue3(app) {
         app.directive("reporter", {
             mounted(el, binding) {
-                const {
-                    user_id,
-                    use_query = false,
-                    caller,
-                    data
-                } = binding.value;
+                const { user_id, use_query = false, caller, data } = binding.value;
 
                 const R = new Reporter({
                     caller,
                     use_query, // 上报当前页面中url中的参数 默认false
-                    userId: user_id // 当前登录用户id
+                    userId: user_id, // 当前登录用户id
                 });
                 el.clickHandler = function () {
-
-                    R.p({ uuid: getUUID(), ...data })
+                    R.p({ uuid: getUUID(), ...data });
                 };
 
                 el.addEventListener("click", el.clickHandler);
@@ -152,9 +139,9 @@ const reporter = {
             unmounted(el) {
                 el.removeEventListener("click", el.clickHandler);
                 el.clickHandler = null;
-            }
+            },
         });
-    }
-}
+    },
+};
 
 export default reporter;
