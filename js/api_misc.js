@@ -6,7 +6,7 @@ function getBreadcrumb(key) {
         .get(`/api/cms/breadcrumb/${key}`)
         .then((res) => {
             return res.data.data.html || "";
-        });
+        })
 }
 
 // 菜单
