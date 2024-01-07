@@ -17,7 +17,7 @@ function getConfig(key) {
         } else {
             return _config;
         }
-    });
+    })
 }
 
 function getArticle(id) {
