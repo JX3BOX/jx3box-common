@@ -45,8 +45,8 @@
     "__clients": {
         "std": "重制",
         "origin": "缘起",
-        "all": "双端",
-        "wujie": "无界"
+        "wujie": "无界",
+        "all": "双端"
     },
 
     "__postType": {
