@@ -77,7 +77,7 @@ const wiki = {
             source = res.data.data.source;
             users = res.data.data.users;
             post && (isEmpty = false);
-            console.log("获取重制攻略");
+            console.log("获取旗舰攻略");
             return { post, source, isEmpty, compatible, type: source_type, source_id: source_id, users };
         } else {
             const res_1 = await this.get({ type: source_type, id: source_id }, { client, ...params });
@@ -88,7 +88,7 @@ const wiki = {
             console.log("获取缘起攻略");
             const data = !!res_1.data.data.post;
             if (!data) {
-                console.log("兼容：获取重制攻略");
+                console.log("兼容：获取旗舰攻略");
                 return this.get({ type: source_type, id: source_id }, { client: 'std', ...params }).then(res_2 => {
                     post = res_2.data.data.post;
                     if (!source)
