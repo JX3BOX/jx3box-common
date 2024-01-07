@@ -1,6 +1,6 @@
 {
-    "name": "@jx3box/j3box-common",
-    "version": "8.1.8",
+    "name": "@jx3box/jx3box-common",
+    "version": "8.1.9",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
