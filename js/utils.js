@@ -296,7 +296,7 @@ module.exports = {
     },
     // 获取勋章对应链接
     getMedalLink(event_id, subtype) {
-        if(subtype === 'rank') return `/rank/race/#/${event_id}/${subtype}`;
+        if(subtype === 'rank'|| subtype === 'superstar') return `/rank/race/#/${event_id}/${subtype}`;
         return `${subtype}/${event_id}`
     },
     convertUrlToProtocol(url) {
