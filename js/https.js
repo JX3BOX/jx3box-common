@@ -1,5 +1,5 @@
 import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
-
+import { SSE } from "./sse"
 import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
 
 const server_map = {
@@ -218,4 +218,6 @@ function $_https(server, options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios };
+
+
+export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios, SSE };
