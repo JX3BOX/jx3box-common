@@ -79,7 +79,8 @@
         "question": "题目",
         "paper": "试卷",
         "calendar": "日历",
-        "battle": "战斗"
+        "battle": "战斗",
+        "community": "论坛"
     },
 
     "__gameType": {
@@ -88,13 +89,13 @@
         "furniture": "家具",
         "horse": "坐骑",
         "book": "书籍",
-        "exterior": "外观",
-        "reputation": "声望"
+        "reputation": "声望",
+        "exterior": "外观"
     },
 
     "__bbsSubtype": {
         "strategy": {
-            "label":"攻略心得",
+            "label": "攻略心得",
             "value": 1
         },
         "guide": {
@@ -102,23 +103,23 @@
             "value": 2
         },
         "news": {
-            "label":"江湖异闻",
+            "label": "江湖异闻",
             "value": 3
         },
         "fiction": {
-            "label":"同人作品",
+            "label": "同人作品",
             "value": 4
         }
     },
 
     "__sourceType": {
-        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection", "face"],
+        "cms_types": ["macro", "jx3dat", "fb", "bps", "tool", "bbs", "notice", "house", "share", "joke", "emotion", "feedback", "collection", "face", "community"],
         "pvx_types": ["pet", "adventure", "furniture", "horse", "book", "exterior", "reputation"],
         "wiki_types": ["cj", "achievement", "item", "item_plan", "wiki", "knowledge", "quest"],
         "app_types": ["pz", "calendar", "battle"],
         "exam_types": ["question", "paper"],
         "db_types": ["skill", "buff", "npc", "doodad"],
-        "dbm_types": ["pkg","item","vpk"],
+        "dbm_types": ["pkg", "item", "vpk"],
         "team_types": ["org", "role", "raid", "apply"],
         "vip_types": ["mall"]
     },
