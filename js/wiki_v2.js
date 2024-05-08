@@ -137,3 +137,27 @@ export const wiki = {
         }
     },
 }
+
+export const wikiComment = {
+    // 百科评论列表
+    list({ type, id }, params) {
+        return $cms().get(`/api/cms/wiki/comment`, {
+            params: {
+                ...params,
+                type,
+                source_id: id,
+            }
+        })
+    },
+    post(data) {
+        return $cms().post(`/api/cms/wiki/comment`, data)
+    },
+    delete(comment_id) {
+        return $cms().delete(`/api/cms/wiki/comment/${comment_id}`)
+    },
+    myList(params) {
+        return $cms().get(`/api/cms/wiki/comment/mine`, {
+            params
+        })
+    }
+}

@@ -162,12 +162,7 @@ module.exports = {
         } else if (type == "rank") {
             let event_id = id;
             let achieve_id = level;
-            let url = '';
-            if (id > 6) {
-                url = `/jdt/${id}th/rank`
-            } else {
-                url = "/rank/race/#/" + event_id;
-            }
+            let url = "/rank/race/#/" + event_id;
             if (achieve_id) url += `?aid=${achieve_id}`;
             return url;
 
@@ -296,7 +291,8 @@ module.exports = {
     },
     // 获取勋章对应链接
     getMedalLink(event_id, subtype) {
-        return `/rank/race/#/${event_id}/${subtype}`
+        if(subtype === 'rank'|| subtype === 'superstar') return `/rank/race/#/${event_id}/${subtype}`;
+        return `${subtype}/${event_id}`
     },
     convertUrlToProtocol(url) {
         const pattern = /https?:\/\/([^/.]+)\.jx3box\.com\/(.*)/;

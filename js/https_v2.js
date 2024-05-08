@@ -4,6 +4,7 @@ import axios from "axios";
 import domains from "../data/jx3box.json";
 // 错误组件
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
+import { SSE } from "./sse"
 
 // cms通用请求接口
 function $cms(options) {
@@ -278,4 +279,4 @@ function installHelperInterceptors(target, options) {
     );
 }
 
-export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios };
+export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios, SSE };
