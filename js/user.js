@@ -40,6 +40,7 @@ class User {
             this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
             this.profile.permission = localStorage && localStorage.getItem("permission");
+            this.profile.is_teammate = localStorage && localStorage.getItem("is_teammate");
         } else {
             this.profile = this.anonymous;
         }
@@ -70,6 +71,7 @@ class User {
         localStorage.setItem("bind_wx", data.bind_wx);
         localStorage.setItem("avatar", data.avatar);
         localStorage.setItem("permission", data.permission);
+        localStorage.setItem("is_teammate", data.is_teammate);
     }
 
     // 更新用户资料
@@ -170,6 +172,11 @@ class User {
                 resolve(false);
             });
         }
+    }
+
+    // 判断是否为团队成员
+    isTeammate() {
+        return this.getInfo().is_teammate;
     }
 
     // 是否绑定微信
