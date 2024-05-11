@@ -176,7 +176,7 @@ class User {
 
     // 判断是否为团队成员
     isTeammate() {
-        return this.getInfo().is_teammate;
+        return this.getInfo().is_teammate == 'true';
     }
 
     // 是否绑定微信
