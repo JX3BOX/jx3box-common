@@ -39,7 +39,7 @@ class User {
             this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
             this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
-            this.profile.permission = localStorage && localStorage.getItem("permission");
+            this.profile.permission = localStorage && localStorage.getItem("jx3box_permission");
             this.profile.is_teammate = localStorage && localStorage.getItem("is_teammate");
         } else {
             this.profile = this.anonymous;
@@ -70,8 +70,6 @@ class User {
         localStorage.setItem("status", data.status);
         localStorage.setItem("bind_wx", data.bind_wx);
         localStorage.setItem("avatar", data.avatar);
-        localStorage.setItem("permission", data.permission);
-        localStorage.setItem("is_teammate", data.is_teammate);
     }
 
     // 更新用户资料
@@ -272,13 +270,14 @@ class User {
             }
         }
     }
-    
+
     // 用户是否有权限
     hasPermission(permission) {
         if (this.profile.group >= 512) return true;
         let userPermission = this.getInfo().permission;
         if (userPermission) {
-            return userPermission.includes(permission);
+            const permissions = userPermission.split(",");
+            return permissions.includes(permission);
         } else {
             return false;
         }
