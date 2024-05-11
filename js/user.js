@@ -107,7 +107,7 @@ class User {
                 localStorage.removeItem("created_at");
                 localStorage.setItem("logged_in", "false");
                 localStorage.removeItem("token");
-                localStorage.removeItem("permission");
+                localStorage.removeItem("jx3box_permission");
             });
     }
 
