@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "8.2.21",
+    "version": "8.2.22",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -9,8 +9,8 @@
     },
     "dependencies": {
         "@jx3box/reporter": "^0.0.5",
-        "axios": "^1.6.1",
-        "cheerio": "1.0.0-rc.10",
+        "axios": "^1.6.8",
+        "cheerio": "1.0.0-rc.12",
         "dayjs": "^1.11.10",
         "element-ui": "^2.13.2",
         "localforage": "^1.7.3",
