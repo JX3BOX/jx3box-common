@@ -394,4 +394,30 @@ export function convertUrlToProtocol(url) {
     return url;
 }
 
-export * as default from "module";
+export default {
+    resolveImagePath,
+    checkImageLoad,
+    showAvatar,
+    showBanner,
+    showBanner,
+    getThumbnail,
+    iconLink,
+    getAppIcon,
+    editLink,
+    publishLink,
+    postLink,
+    getLink,
+    authorLink,
+    tvLink,
+    getRewrite,
+    getPID,
+    getAppID,
+    getAppType,
+    getQuery,
+    getTypeLabel,
+    buildTarget,
+    ts2str,
+    jx3ClientType,
+    extractTextContent,
+    convertUrlToProtocol,
+};
