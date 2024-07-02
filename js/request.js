@@ -2,7 +2,12 @@
 import axios from "axios";
 
 // 拦截器
-import { installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./interceptors.js";
+import {
+    installInterceptors,
+    installNextInterceptors,
+    installHelperInterceptors,
+    installCmsInterceptors,
+} from "./interceptors.js";
 
 // 域名映射
 import domains from "../data/jx3box.json";
@@ -31,7 +36,9 @@ function $cms(options) {
 }
 
 // helper通用请求接口
-import { jx3ClientType } from "./utils";
+import utilModule from "./utils";
+const { jx3ClientType } = utilModule;
+
 function $helper(options) {
     let domain = (options && options.domain) || domains.__helperUrl;
 
@@ -45,7 +52,8 @@ function $helper(options) {
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type":
+                (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -93,21 +101,24 @@ function $next(options) {
 }
 
 function $team(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__team })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__team })) || {
         domain: domains.__team,
     };
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__pay })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__pay })) || {
         domain: domains.__pay,
     };
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__lua })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__lua })) || {
         domain: domains.__lua,
     };
     return $next(_options);
@@ -128,7 +139,10 @@ function $node(options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
+        config.baseURL =
+            process.env.NODE_ENV === "production"
+                ? domain
+                : `http://localhost:${options.port}`;
     }
 
     // 创建实例

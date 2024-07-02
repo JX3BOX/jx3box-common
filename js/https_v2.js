@@ -4,7 +4,8 @@ import axios from "axios";
 import domains from "../data/jx3box.json";
 // 错误组件
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
-import { SSE } from "./sse"
+
+import { SSE } from "./sse";
 
 // cms通用请求接口
 function $cms(options) {
@@ -30,7 +31,8 @@ function $cms(options) {
 }
 
 // helper通用请求接口
-import { jx3ClientType } from "./utils";
+import utilModule from "./utils";
+const { jx3ClientType } = utilModule;
 function $helper(options) {
     let domain = (options && options.domain) || domains.__helperUrl;
 
@@ -44,7 +46,8 @@ function $helper(options) {
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type":
+                (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -92,21 +95,24 @@ function $next(options) {
 }
 
 function $team(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__team })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__team })) || {
         domain: domains.__team,
     };
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__pay })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__pay })) || {
         domain: domains.__pay,
     };
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = (options && Object.assign(options, { domain: domains.__lua })) || {
+    let _options = (options &&
+        Object.assign(options, { domain: domains.__lua })) || {
         domain: domains.__lua,
     };
     return $next(_options);
@@ -127,7 +133,10 @@ function $node(options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
+        config.baseURL =
+            process.env.NODE_ENV === "production"
+                ? domain
+                : `http://localhost:${options.port}`;
     }
 
     // 创建实例
@@ -209,7 +218,8 @@ function installInterceptors(target, options) {
         function (err) {
             if (!options || !options.mute) {
                 if (err.response && err.response.data) {
-                    err.response.data.msg && loadPop(err.response.data.msg, popType);
+                    err.response.data.msg &&
+                        loadPop(err.response.data.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err);
                 }
@@ -231,7 +241,11 @@ function installStandardInterceptors(target, options) {
         function (response) {
             if (response.data.code) {
                 if (!options || !options.mute) {
-                    response.data.msg && loadPop(`[${response.data.code}]${response.data.msg}`, popType);
+                    response.data.msg &&
+                        loadPop(
+                            `[${response.data.code}]${response.data.msg}`,
+                            popType
+                        );
                 }
                 return Promise.reject(response);
             }
@@ -240,7 +254,11 @@ function installStandardInterceptors(target, options) {
         function (err) {
             if (!options || !options.mute) {
                 console.log(err.response);
-                if (err.response && err.response.data && err.response.data.msg) {
+                if (
+                    err.response &&
+                    err.response.data &&
+                    err.response.data.msg
+                ) {
                     loadPop(err.response.data.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err);
@@ -265,7 +283,10 @@ function installHelperInterceptors(target, options) {
                 return response;
             } else {
                 if (!options || !options.mute) {
-                    loadPop(`[${response.data.code}]${response.data.message}`, popType);
+                    loadPop(
+                        `[${response.data.code}]${response.data.message}`,
+                        popType
+                    );
                 }
                 return Promise.reject(response);
             }

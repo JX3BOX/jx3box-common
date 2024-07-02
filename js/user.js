@@ -1,8 +1,12 @@
-import { showAvatar } from "./utils";
+import utilModule from "./utils";
+const { showAvatar } = utilModule;
+
 import jx3box from "../data/jx3box.json";
 let { __Links, default_avatar, __server, __userLevel } = jx3box;
+
 import conf from "../data/conf.json";
 let { tokenExpires } = conf;
+
 import { $pay, $cms } from "./request";
 class User {
     constructor() {
@@ -32,15 +36,22 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
+            this.profile.group =
+                (localStorage && localStorage.getItem("group")) || 1;
             this.profile.token = localStorage && localStorage.getItem("token");
             this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status = localStorage && localStorage.getItem("status");
-            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
+            this.profile.status =
+                localStorage && localStorage.getItem("status");
+            this.profile.bind_wx =
+                localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin =
+                (localStorage && localStorage.getItem("avatar")) ||
+                default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
-            this.profile.permission = localStorage && localStorage.getItem("jx3box_permission");
-            this.profile.is_teammate = localStorage && localStorage.getItem("is_teammate");
+            this.profile.permission =
+                localStorage && localStorage.getItem("jx3box_permission");
+            this.profile.is_teammate =
+                localStorage && localStorage.getItem("is_teammate");
         } else {
             this.profile = this.anonymous;
         }
@@ -54,8 +65,11 @@ class User {
 
     // 判断是否已登录
     isLogin() {
-        this.created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
-        this.logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
+        this.created_at = !localStorage.getItem("created_at")
+            ? -Infinity
+            : localStorage.getItem("created_at");
+        this.logged_in =
+            localStorage.getItem("logged_in") == "true" ? true : false;
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
@@ -162,7 +176,7 @@ class User {
         if (this.isLogin()) {
             return $cms()
                 .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
-                .then((res) => {
+                .then(res => {
                     return res.data.data;
                 });
         } else {
@@ -174,7 +188,7 @@ class User {
 
     // 判断是否为团队成员
     isTeammate() {
-        return this.getInfo().is_teammate == 'true';
+        return this.getInfo().is_teammate == "true";
     }
 
     // 是否绑定微信
@@ -210,7 +224,7 @@ class User {
                 resolve(this._isPRO(this.asset) || this._isVIP(this.asset));
             });
         } else {
-            return this.getAsset().then((asset) => {
+            return this.getAsset().then(asset => {
                 return this._isPRO(asset) || this._isVIP(asset);
             });
         }
@@ -223,7 +237,7 @@ class User {
                 resolve(this._isPRO(this.asset));
             });
         } else {
-            return this.getAsset().then((asset) => {
+            return this.getAsset().then(asset => {
                 return this._isPRO(asset);
             });
         }
@@ -253,7 +267,7 @@ class User {
         } else {
             return $pay()
                 .get("/api/vip/i")
-                .then((res) => {
+                .then(res => {
                     let asset = res.data.data;
                     this.asset = asset;
                     return asset;

@@ -1,12 +1,12 @@
 /**
  * 服务器主动推送工具类
- * 
+ *
  * @property {string} url
  * @property {EventSource} eventSource
  */
-class SSE {
+export class SSE {
     /**
-     * @param {string} url 
+     * @param {string} url
      */
     constructor(url) {
         this.url = url;
@@ -15,7 +15,7 @@ class SSE {
 
     /**
      * 连接服务器
-     * 
+     *
      * @returns {void}
      */
     connect() {
@@ -25,7 +25,7 @@ class SSE {
 
     /**
      * 断开服务器
-     * 
+     *
      * @returns {void}
      */
     disconnect() {
@@ -34,9 +34,9 @@ class SSE {
 
     /**
      * 绑定事件
-     * 
-     * @param {string} event 
-     * @param {EventListenerOrEventListenerObject} callback 
+     *
+     * @param {string} event
+     * @param {EventListenerOrEventListenerObject} callback
      */
     on(event, callback) {
         this.eventSource.addEventListener(event, callback);
@@ -44,13 +44,11 @@ class SSE {
 
     /**
      * 取消绑定事件
-     * 
-     * @param {string} event 
-     * @param {EventListenerOrEventListenerObject} callback 
+     *
+     * @param {string} event
+     * @param {EventListenerOrEventListenerObject} callback
      */
     off(event, callback) {
         this.eventSource.removeEventListener(event, callback);
     }
 }
-
-module.exports = { SSE }

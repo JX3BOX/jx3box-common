@@ -36,7 +36,8 @@ function $cms(options) {
 }
 
 // helper通用请求接口
-import { jx3ClientType } from "./utils";
+import utilModule from "./utils";
+const { jx3ClientType } = utilModule;
 function $helper(options) {
     let domain = (options && options.domain) || __helperUrl;
     let config = {
