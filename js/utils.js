@@ -11,7 +11,6 @@ import {
     __ossMirror,
 } from "../data/jx3box.json";
 import tvmap from "../data/tvmap.json";
-import * as cheerio from "cheerio";
 
 export function resolveImagePath(str) {
     if (str && str.length) {
@@ -335,15 +334,24 @@ export function jx3ClientType() {
  */
 export function extractTextContent(str) {
     if (!str || typeof str !== "string") return [];
-    let result = [];
     const innerHTML = str.replace(
         /<Text>(.*?)<\/text>/gimsy,
         `<span $1></span>`
     );
-    let $ = cheerio.load(`<div>${innerHTML}</div>`);
-    let spans = $("span");
-    if (!spans.length) return [];
-    for (let span of spans) result.push(Object.assign({}, span.attribs));
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(innerHTML, "text/html");
+    const spans = doc.querySelectorAll("span");
+    const result = [];
+    if (!spans.length) {
+        return result;
+    }
+    for (const span of spans) {
+        const spanAttr = {};
+        for (const attr of span.attributes) {
+            spanAttr[attr.name] = attr.value;
+        }
+        result.push(spanAttr);
+    }
     return result;
 }
 
@@ -419,5 +427,10 @@ export default {
     ts2str,
     jx3ClientType,
     extractTextContent,
+    showSchoolIcon,
+    showForceIcon,
+    showMountIcon,
+    showClientLabel,
+    getMedalLink,
     convertUrlToProtocol,
 };
