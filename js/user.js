@@ -287,7 +287,7 @@ class User {
 
     // 用户是否有权限
     hasPermission(permission) {
-        if (this.profile.group >= 512) return true;
+        if (this.getInfo().group >= 512) return true;
         let userPermission = this.getInfo().permission;
         if (userPermission) {
             const permissions = userPermission.split(",");
