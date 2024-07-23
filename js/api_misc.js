@@ -14,7 +14,7 @@ function getBreadcrumb(key) {
 // 菜单
 function getMenu(key) {
     return $cms().get(`/api/cms/menu-group/${key}`).then((res) => {
-        return res.data.data.menus || []
+        return res.data.data?.menus || []
     })
 }
 
@@ -31,7 +31,7 @@ function getMenus(params) {
     return $cms().get(`/api/cms/menu-group`, {
         params: params
     }).then((res) => {
-        return res.data.data;
+        return res.data?.data || [];
     })
 }
 
