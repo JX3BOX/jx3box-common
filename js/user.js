@@ -1,13 +1,13 @@
-import utilModule from "./utils";
-const { showAvatar } = utilModule;
-
-import jx3box from "../data/jx3box.json";
-let { __Links, default_avatar, __server, __userLevel } = jx3box;
-
-import conf from "../data/conf.json";
-let { tokenExpires } = conf;
-
+import { showAvatar } from "./utils";
 import { $pay, $cms } from "./request";
+import {
+    __Links,
+    default_avatar,
+    __server,
+    __userLevel,
+} from "../data/jx3box.json";
+import { tokenExpires } from "../data/conf.json";
+
 class User {
     constructor() {
         // TOKEN有效期
