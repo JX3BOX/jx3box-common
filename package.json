@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "8.3.1",
+    "version": "8.3.2",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -13,6 +13,7 @@
         "cheerio": "1.0.0-rc.12",
         "dayjs": "^1.11.10",
         "element-ui": "^2.13.2",
+        "fingerprintjs2": "^2.1.4",
         "localforage": "^1.7.3",
         "uuid": "^9.0.0",
         "vue": "^2.6.12"

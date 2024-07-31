@@ -7,6 +7,7 @@ import {
     __userLevel,
 } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
+import Fingerprint2 from "fingerprintjs2";
 
 class User {
     constructor() {
@@ -295,6 +296,26 @@ class User {
         } else {
             return false;
         }
+    }
+
+    // 生成设备指纹
+    generateFingerprint(callback) {
+        const cache = localStorage.getItem("jx3box_fingerprint");
+        if (cache) {
+            return cache;
+        }
+        Fingerprint2.get(function (components) {
+            const values = components.map((component) => component.value);
+            const murmur = Fingerprint2.x64hash128(values.join(""), 31);
+
+            localStorage.setItem("jx3box_fingerprint", murmur);
+            callback(murmur);
+        });
+    }
+
+    // 获取设备指纹
+    getDeviceFingerprint() {
+        return localStorage.getItem("jx3box_fingerprint");
     }
 }
 
