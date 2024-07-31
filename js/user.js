@@ -113,11 +113,9 @@ class User {
     }
 
     // 销毁登录状态
-    destroy() {
-        return $cms({
-            domain: __server,
-        })
-            .post("/account/logout")
+    async destroy() {
+        return $cms()
+            .post("api/cms/user/account/email/logout")
             .finally(() => {
                 localStorage.removeItem("created_at");
                 localStorage.setItem("logged_in", "false");
