@@ -74,6 +74,11 @@ class User {
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
+    // 判断是否已过期
+    isExpired() {
+        return Date.now() - this.created_at > this.expires;
+    }
+
     // 保存用户资料
     _save(data) {
         localStorage.setItem("created_at", Date.now());
