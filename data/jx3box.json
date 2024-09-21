@@ -55,7 +55,6 @@
         "pvp": "竞技",
         "fb": "副本",
         "tool": "工具",
-        "bbs": "茶馆",
         "notice": "公告"
     },
 
@@ -91,25 +90,6 @@
         "book": "书籍",
         "reputation": "声望",
         "exterior": "外观"
-    },
-
-    "__bbsSubtype": {
-        "strategy": {
-            "label": "攻略心得",
-            "value": 1
-        },
-        "guide": {
-            "label": "萌新指南",
-            "value": 2
-        },
-        "news": {
-            "label": "江湖异闻",
-            "value": 3
-        },
-        "fiction": {
-            "label": "同人作品",
-            "value": 4
-        }
     },
 
     "__sourceType": {
