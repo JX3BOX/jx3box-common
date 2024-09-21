@@ -35,10 +35,17 @@ function getMenus(params) {
     })
 }
 
+// 获取全局设定项
+function getConfig(params) {
+    return $cms().get(`/api/cms/config` ,{
+        params
+    })
+}
 
 export {
     getBreadcrumb,
     getMenu,
     getArticle,
-    getMenus
+    getMenus,
+    getConfig
 };
