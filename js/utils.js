@@ -409,6 +409,36 @@ export function isMiniProgram() {
     return navigator.userAgent.toLowerCase().includes("miniprogram");
 }
 
+export function miniprogramHack() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // 检查 html 标签是否有 wechat-miniprogram 类
+        if (document.documentElement.classList.contains('wechat-miniprogram')) {
+            // 获取所有的 a 标签
+            var links = document.getElementsByTagName('a');
+            
+            // 为每个链接添加点击事件监听器
+            Array.from(links).forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    var href = this.getAttribute('href');
+                    
+                    // 检查是否是相对链接
+                    var isRelative = !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('//');
+                    
+                    // 检查是否是jx3box.com域名
+                    var isJx3boxDomain = /jx3box\.com/.test(href);
+                    
+                    // 如果不是相对链接且不是jx3box.com域名
+                    if (!isRelative && !isJx3boxDomain) {
+                        // 阻止默认行为
+                        event.preventDefault();
+                    }
+                });
+            });
+        }
+    });
+    
+}
+
 export default {
     resolveImagePath,
     checkImageLoad,
