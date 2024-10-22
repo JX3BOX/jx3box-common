@@ -413,20 +413,18 @@ export function miniprogramHack() {
     document.addEventListener('DOMContentLoaded', function() {
         // 检查 html 标签是否有 wechat-miniprogram 类
         if (document.documentElement.classList.contains('wechat-miniprogram')) {
-            // 获取所有的 a 标签
-            var links = document.getElementsByTagName('a');
-            
-            // 为每个链接添加点击事件监听器
-            Array.from(links).forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    var href = this.getAttribute('href');
+            // 为整个 document 添加一个点击事件监听器
+            document.addEventListener('click', function(event) {
+                // 检查被点击的元素是否是一个链接
+                if (event.target.tagName === 'A') {
+                    var href = event.target.getAttribute('href');
                     
                     // 检查是否是相对链接
                     var isRelative = !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('//');
                     
                     // 检查是否是jx3box.com域名
                     var isJx3boxDomain = /jx3box\.com/.test(href);
-
+                    
                     // 检查是否是jx3.xoyo.com域名
                     var isJx3Domain = /jx3\.xoyo\.com/.test(href);
                     
@@ -435,12 +433,12 @@ export function miniprogramHack() {
                         // 阻止默认行为
                         event.preventDefault();
                     }
-                });
+                }
             });
         }
     });
-    
 }
+
 
 export default {
     resolveImagePath,
