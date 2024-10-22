@@ -402,6 +402,13 @@ export function convertUrlToProtocol(url) {
     return url;
 }
 
+/**
+ * 判断当前网页是否在小程序环境打开
+ */
+export function isMiniProgram() {
+    return navigator.userAgent.toLowerCase().includes("miniprogram");
+}
+
 export default {
     resolveImagePath,
     checkImageLoad,
