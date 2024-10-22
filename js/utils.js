@@ -426,9 +426,12 @@ export function miniprogramHack() {
                     
                     // 检查是否是jx3box.com域名
                     var isJx3boxDomain = /jx3box\.com/.test(href);
+
+                    // 检查是否是jx3.xoyo.com域名
+                    var isJx3Domain = /jx3\.xoyo\.com/.test(href);
                     
                     // 如果不是相对链接且不是jx3box.com域名
-                    if (!isRelative && !isJx3boxDomain) {
+                    if (!isRelative && !isJx3boxDomain && !isJx3Domain) {
                         // 阻止默认行为
                         event.preventDefault();
                     }
