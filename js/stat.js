@@ -1,5 +1,6 @@
 import axios from "axios";
 import JX3BOX from "../data/jx3box.json";
+import { $next as $next2 } from "./https";
 
 const { __postType, __next } = JX3BOX;
 const cms_types = Object.keys(__postType);
@@ -43,11 +44,11 @@ function getStatRank(type, action = "views", limit = 10, sort = "7days") {
  * @param {*} data.source_type 例如：macro,community
  * @param {*} data.source_id 例如：文章id，帖子id
  * @param {*} data.link 例如：文章链接，帖子链接
- * @param {*} data.authorId 例如：作者id
+ * @param {*} data.title 例如：文章标题，帖子标题
  * @returns 
  */
 function postHistory(data) {
-    return $next.post("/api/next2/userdata/visit-history/item", data);
+    return $next2({mute: true}).post("/api/next2/userdata/visit-history/item", data);
 }
 
 export { getStat, postStat, getStatRank, postHistory };
