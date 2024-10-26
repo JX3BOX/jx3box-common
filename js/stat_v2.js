@@ -1,6 +1,6 @@
 import axios from "axios";
 import JX3BOX from "../data/jx3box.json";
-import { $next as $next2 } from "./https";
+import { $next as $next2 } from "./https_v2";
 
 const { __postType, __next } = JX3BOX;
 const cms_types = Object.keys(__postType);
