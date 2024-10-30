@@ -140,12 +140,13 @@ export const getWikiRank = ({type, params}) => {
 /**
  * 订阅作者
  * @param {string} id 作者id
+ * @param {Object} data 请求参数body
  * @returns {Object} 返回包含订阅结果的对象
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeAuthor = ({id}) => {
-    return $next().post(`/api/next2/rss/subscribe/author/${id}`);
+export const subscribeAuthor = ({id, data}) => {
+    return $next().post(`/api/next2/rss/subscribe/author/${id}`, data);
 }
 
 /**
@@ -162,12 +163,13 @@ export const unsubscribeAuthor = ({id}) => {
 /**
  * 订阅论坛帖子
  * @param {string} id 帖子id
+ * @returns {Object} data 请求参数body
  * @returns {Object} 返回包含订阅结果的对象
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeCommunity = ({id}) => {
-    return $next().post(`/api/next2/rss/subscribe/community/${id}`);
+export const subscribeCommunity = ({id, data}) => {
+    return $next().post(`/api/next2/rss/subscribe/community/${id}`, data);
 }
 
 /**
@@ -185,12 +187,13 @@ export const unsubscribeCommunity = ({id}) => {
  * 订阅文章
  * @param {string} type 文章类型
  * @param {string} id 文章id
+ * @returns {Object} data 请求参数body
  * @returns {Object} 返回包含订阅结果的对象
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribePost = ({type, id}) => {
-    return $next().post(`/api/next2/rss/subscribe/posts/${type}/${id}`);
+export const subscribePost = ({type, id, data}) => {
+    return $next().post(`/api/next2/rss/subscribe/posts/${type}/${id}`, data);
 }
 
 /**
@@ -209,12 +212,13 @@ export const unsubscribePost = ({type, id}) => {
  * 订阅百科
  * @param {string} type 百科类型
  * @param {string} id 百科id
+ * @returns {Object} data 请求参数body
  * @returns {Object} 返回包含订阅结果的对象
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeWiki = ({type, id}) => {
-    return $next().post(`/api/next2/rss/subscribe/wiki/${type}/${id}`);
+export const subscribeWiki = ({type, id, data}) => {
+    return $next().post(`/api/next2/rss/subscribe/wiki/${type}/${id}`, data);
 }
 
 /**
