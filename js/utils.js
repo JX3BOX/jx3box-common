@@ -114,6 +114,9 @@ export function getThumbnail(url, size = 88, replace = true) {
         url = url.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
     }
 
+    // gif不做处理
+    if (url.endsWith(".gif")) return url;
+
     if (Array.isArray(size)) {
         url += `?x-oss-process=image/auto-orient,1/resize,m_fill,w_${size[0]},h_${size[1]}/quality,Q_100`;
     } else if (isNaN(size)) {
