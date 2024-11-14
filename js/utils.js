@@ -91,6 +91,9 @@ export function showBanner(url, style = "mini_banner", replace = true) {
         url = url.replace(/oss\.jx3box\.com/g, "cdn.jx3box.com");
     }
 
+    // gif不做处理
+    if (url.endsWith(".gif")) return url;
+
     url += `?x-oss-process=style/${style}`;
 
     return url;
