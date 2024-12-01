@@ -42,6 +42,7 @@ getThumbnail(url,'mini_banner')
 
 // 4.当不希望使用中转CDN时，显式设置第3个参数为false
 getThumbnail(url,100,false)
+// 弃用
 // => https://oss.jx3box.com/path/to/pic.jpg?x-oss-process=image/auto-orient,1/resize,m_fill,w_100,h_100/quality,Q_100
 ```
 

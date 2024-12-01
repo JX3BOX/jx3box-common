@@ -28,11 +28,11 @@
     "__jx3": "https://xn--3-4g8a959k.com/",
 
     "__cdn": "https://cdn.jx3box.com/",
-    "__ossRoot": "https://oss.jx3box.com/",
+    "__ossRoot": "https://cdn.jx3box.com/",
     "__ossMirror": "https://cdn.jx3box.com/",
 
     "__staticPath": {
-        "origin": "https://oss.jx3box.com/static/",
+        "origin": "https://cdn.jx3box.com/static/",
         "github": "https://jx3box.github.io/",
         "jsdelivr": "https://cdn.jsdelivr.net/gh/JX3BOX/",
         "mirror": "https://cdn.jx3box.com/static/"
