@@ -15,11 +15,13 @@ const server_map = {
 // cms通用请求接口
 function $cms(options) {
     let domain = (options && options.domain) || __cms;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "cms common request",
         },
         baseURL: process.env.NODE_ENV === "production" ? domain : "/",
@@ -76,11 +78,13 @@ function $helper(options) {
 // next通用请求接口
 function $next(options) {
     let domain = (options && options.domain) || __next;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "next common request",
         },
         baseURL: process.env.NODE_ENV === "production" ? domain : "/",
@@ -114,11 +118,13 @@ function $lua(options) {
 // node
 function $node(options) {
     let domain = (options && options.domain) || __node;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "node common request",
         },
         baseURL: domain,
@@ -183,11 +189,14 @@ function $_https(server, options) {
         return Promise.reject("请先登录");
     }
 
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
+
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "$_https common request",
         },
         baseURL: process.env.NODE_ENV === "production" ? server_map[server] : "/",
@@ -219,6 +228,13 @@ function $_https(server, options) {
     return ins;
 }
 
+
+// 从url中获取参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    return r ? decodeURIComponent(r[2]) : null;
+}
 
 
 export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios, SSE };

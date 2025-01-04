@@ -10,11 +10,13 @@ import { SSE } from "./sse";
 // cms通用请求接口
 function $cms(options) {
     let domain = (options && options.domain) || domains.__cms;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "cms common request",
         },
         baseURL: process.env.NODE_ENV === "production" ? domain : "/",
@@ -73,12 +75,13 @@ function $helper(options) {
 // next 通用请求接口
 function $next(options) {
     let domain = (options && options.domain) || domains.__next;
-
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "next common request",
         },
         baseURL: process.env.NODE_ENV === "production" ? domain : "/",
@@ -121,11 +124,13 @@ function $lua(options) {
 // node 通用请求接口
 function $node(options) {
     let domain = (options && options.domain) || domains.__node;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "node common request",
         },
         baseURL: domain,
@@ -151,11 +156,13 @@ function $node(options) {
 // 默认请求
 function $http(options) {
     let domain = typeof options == "string" ? options : options.domain;
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "common request",
         },
         baseURL: domain,
@@ -298,6 +305,13 @@ function installHelperInterceptors(target, options) {
             return throwError(err);
         }
     );
+}
+
+// 从url中获取参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    return r ? decodeURIComponent(r[2]) : null;
 }
 
 export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios, SSE };
