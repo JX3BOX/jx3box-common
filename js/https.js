@@ -16,7 +16,7 @@ const server_map = {
 function $cms(options) {
     let domain = (options && options.domain) || __cms;
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -46,7 +46,7 @@ function $helper(options) {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: (localStorage && localStorage.getItem("__token") || localStorage.getItem("token")) || "",
             password: "helper common request",
         },
         baseURL: domain,
@@ -79,7 +79,7 @@ function $helper(options) {
 function $next(options) {
     let domain = (options && options.domain) || __next;
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -119,7 +119,7 @@ function $lua(options) {
 function $node(options) {
     let domain = (options && options.domain) || __node;
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -190,7 +190,7 @@ function $_https(server, options) {
     }
 
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
 
     let config = {
         // 同时发送cookie和basic auth
