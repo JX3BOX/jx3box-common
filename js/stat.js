@@ -51,4 +51,20 @@ function postHistory(data) {
     return $next2({mute: true}).post("/api/next2/userdata/visit-history/item", data);
 }
 
-export { getStat, postStat, getStatRank, postHistory };
+// 阅读记录
+/**
+ * 添加阅读记录
+ * @param {*} data 
+ * @param {*} data.id 例如：文章id，帖子id
+ * @param {*} data.category 例如：文章，帖子
+ * @param {*} data.subcategory 例如：文章类型，帖子类型
+ * @param {*} data.visible_type 例如：2亲友可见 3密码可见 4付费可见 5粉丝可见
+ * @returns 
+ */
+function postReadHistory(data) {
+    const {id, category, subcategory, visible_type} = data;
+    if (visible_type < 2) return Promise.resolve();
+    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type});
+}
+
+export { getStat, postStat, getStatRank, postHistory, postReadHistory };
