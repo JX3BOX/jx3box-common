@@ -45,6 +45,8 @@ function getStatRank(type, action = "views", limit = 10, sort = "7days") {
  * @param {*} data.source_id 例如：文章id，帖子id
  * @param {*} data.link 例如：文章链接，帖子链接
  * @param {*} data.title 例如：文章标题，帖子标题
+ * @param {*} data.author_id 例如：作者id
+ * @param {*} data.banner 例如：文章封面，帖子封面
  * @returns 
  */
 function postHistory(data) {
@@ -59,12 +61,14 @@ function postHistory(data) {
  * @param {*} data.category 例如：文章，帖子
  * @param {*} data.subcategory 例如：文章类型，帖子类型
  * @param {*} data.visible_type 例如：2亲友可见 3密码可见 4付费可见 5粉丝可见
+ * @param {*} data.author_id 例如：作者id
+ * @param {*} data.banner 例如：文章封面，帖子封面
  * @returns 
  */
 function postReadHistory(data) {
-    const {id, category, subcategory, visible_type} = data;
+    const {id, category, subcategory, visible_type, author_id, banner} = data;
     if (visible_type < 2) return Promise.resolve();
-    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type});
+    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});
 }
 
 export { getStat, postStat, getStatRank, postHistory, postReadHistory };
