@@ -12,10 +12,11 @@ function $cms(options = {}, axiosConfig = {}) {
     // 解构options并设置默认值
     let { interceptor = true, domain, progress } = options;
 
+    let requestDomain = "";
     if (domain) {
-        domain = domain;
+        requestDomain = domain;
     } else {
-        domain = process.env.VUE_APP_CMS_API || domains.__cms;
+        requestDomain = process.env.VUE_APP_CMS_API || domains.__cms;
     }
 
     let token = getUrlParam("__token");
@@ -27,7 +28,7 @@ function $cms(options = {}, axiosConfig = {}) {
             username: token || "",
             password: "cms common request",
         },
-        baseURL: domain,
+        baseURL: requestDomain,
         headers: {},
     };
 
@@ -86,10 +87,11 @@ function $next(options = {}, axiosConfig = {}) {
     // 解构options并设置默认值
     let { interceptor = true, domain, progress } = options;
 
+    let requestDomain = "";
     if (domain) {
-        domain = domain;
+        requestDomain = domain;
     } else {
-        domain = process.env.VUE_APP_NEXT_API || domains.__next;
+        requestDomain = process.env.VUE_APP_NEXT_API || domains.__next;
     }
 
     let token = getUrlParam("__token");
@@ -101,7 +103,7 @@ function $next(options = {}, axiosConfig = {}) {
             username: token || "",
             password: "next common request",
         },
-        baseURL: domain,
+        baseURL: requestDomain,
         headers: {},
     };
 
@@ -116,46 +118,49 @@ function $next(options = {}, axiosConfig = {}) {
     return ins;
 }
 
-function $team(options) {
+function $team(options = {}) {
     let { domain } = options;
 
+    let requestDomain = "";
     if (domain) {
-        domain = domain;
+        requestDomain = domain;
     } else {
-        domain = process.env.VUE_APP_TEAM_API || domains.__team;
+        requestDomain = process.env.VUE_APP_TEAM_API || domains.__team;
     }
 
-    let _options = (options && Object.assign(options, { domain })) || {
-        domain,
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
     };
     return $next(_options);
 }
 
-function $pay(options) {
+function $pay(options = {}) {
     let { domain } = options;
 
+    let requestDomain = "";
     if (domain) {
-        domain = domain;
+        requestDomain = domain;
     } else {
-        domain = process.env.VUE_APP_PAY_API || domains.__pay;
+        requestDomain = process.env.VUE_APP_PAY_API || domains.__pay;
     }
 
-    let _options = (options && Object.assign(options, { domain })) || {
-        domain,
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
     };
     return $next(_options);
 }
 
-function $lua(options) {
+function $lua(options = {}) {
     let { domain } = options;
 
+    let requestDomain = "";
     if (domain) {
-        domain = domain;
+        requestDomain = domain;
     } else {
-        domain = process.env.VUE_APP_LUA_API || domains.__lua;
+        requestDomain = process.env.VUE_APP_LUA_API || domains.__lua;
     }
-    let _options = (options && Object.assign(options, { domain })) || {
-        domain,
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
     };
     return $next(_options);
 }
