@@ -1,7 +1,7 @@
 # HTTPS 通用请求模块
 
 ```javascript
-import { $next,$cms,$node,$helper } from "@jx3box/jx3box-common/js/request.js";
+import { $next,$cms,$node,$helper } from "@jx3box/jx3box-common/js/https.js";
 ```
 
 ## 参数说明

@@ -8,10 +8,18 @@ import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 import { SSE } from "./sse";
 
 // cms通用请求接口
-function $cms(options) {
-    let domain = (options && options.domain) || domains.__cms;
+function $cms(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    let { interceptor = true, domain, progress } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_CMS_API || domains.__cms;
+    }
+
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -19,15 +27,17 @@ function $cms(options) {
             username: token || "",
             password: "cms common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: domain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installStandardInterceptors(ins, options);
+    interceptor && installStandardInterceptors(ins, options);
 
     return ins;
 }
@@ -42,14 +52,13 @@ function $helper(options) {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("__token") || localStorage.getItem("token")) || "",
+            username: (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token") || "",
             password: "helper common request",
         },
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type":
-                (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -73,10 +82,18 @@ function $helper(options) {
 }
 
 // next 通用请求接口
-function $next(options) {
-    let domain = (options && options.domain) || domains.__next;
+function $next(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    let { interceptor = true, domain, progress } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_NEXT_API || domains.__next;
+    }
+
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -84,39 +101,61 @@ function $next(options) {
             username: token || "",
             password: "next common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: domain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installStandardInterceptors(ins, options);
+    interceptor && installStandardInterceptors(ins, options);
 
     return ins;
 }
 
 function $team(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__team })) || {
-        domain: domains.__team,
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_TEAM_API || domains.__team;
+    }
+
+    let _options = (options && Object.assign(options, { domain })) || {
+        domain,
     };
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__pay })) || {
-        domain: domains.__pay,
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_PAY_API || domains.__pay;
+    }
+
+    let _options = (options && Object.assign(options, { domain })) || {
+        domain,
     };
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__lua })) || {
-        domain: domains.__lua,
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_LUA_API || domains.__lua;
+    }
+    let _options = (options && Object.assign(options, { domain })) || {
+        domain,
     };
     return $next(_options);
 }
@@ -125,7 +164,7 @@ function $lua(options) {
 function $node(options) {
     let domain = (options && options.domain) || domains.__node;
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -138,10 +177,7 @@ function $node(options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL =
-            process.env.NODE_ENV === "production"
-                ? domain
-                : `http://localhost:${options.port}`;
+        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
     }
 
     // 创建实例
@@ -157,7 +193,7 @@ function $node(options) {
 function $http(options) {
     let domain = typeof options == "string" ? options : options.domain;
     let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -225,8 +261,7 @@ function installInterceptors(target, options) {
         function (err) {
             if (!options || !options.mute) {
                 if (err.response && err.response.data) {
-                    err.response.data.msg &&
-                        loadPop(err.response.data.msg, popType);
+                    err.response.data.msg && loadPop(err.response.data.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err);
                 }
@@ -248,11 +283,7 @@ function installStandardInterceptors(target, options) {
         function (response) {
             if (response.data.code) {
                 if (!options || !options.mute) {
-                    response.data.msg &&
-                        loadPop(
-                            `[${response.data.code}]${response.data.msg}`,
-                            popType
-                        );
+                    response.data.msg && loadPop(`[${response.data.code}]${response.data.msg}`, popType);
                 }
                 return Promise.reject(response);
             }
@@ -261,11 +292,7 @@ function installStandardInterceptors(target, options) {
         function (err) {
             if (!options || !options.mute) {
                 console.log(err.response);
-                if (
-                    err.response &&
-                    err.response.data &&
-                    err.response.data.msg
-                ) {
+                if (err.response && err.response.data && err.response.data.msg) {
                     loadPop(err.response.data.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err);
@@ -290,10 +317,7 @@ function installHelperInterceptors(target, options) {
                 return response;
             } else {
                 if (!options || !options.mute) {
-                    loadPop(
-                        `[${response.data.code}]${response.data.message}`,
-                        popType
-                    );
+                    loadPop(`[${response.data.code}]${response.data.message}`, popType);
                 }
                 return Promise.reject(response);
             }

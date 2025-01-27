@@ -13,8 +13,16 @@ const server_map = {
 };
 
 // cms通用请求接口
-function $cms(options) {
-    let domain = (options && options.domain) || __cms;
+function $cms(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    let { interceptor = true, domain, progress } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_CMS_API || __cms;
+    }
+
     let token = getUrlParam("__token");
     token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
@@ -24,15 +32,17 @@ function $cms(options) {
             username: token || "",
             password: "cms common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: domain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installCmsInterceptors(ins, options);
+    interceptor && installCmsInterceptors(ins, options);
 
     return ins;
 }
@@ -76,8 +86,16 @@ function $helper(options) {
 }
 
 // next通用请求接口
-function $next(options) {
-    let domain = (options && options.domain) || __next;
+function $next(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    let { interceptor = true, domain, progress } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_NEXT_API || __next;
+    }
+
     let token = getUrlParam("__token");
     token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
@@ -87,31 +105,55 @@ function $next(options) {
             username: token || "",
             password: "next common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: domain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installNextInterceptors(ins, options);
+    interceptor && installNextInterceptors(ins, options);
 
     return ins;
 }
 
 function $team(options) {
-    let _options = (options && Object.assign(options, { domain: __team })) || { domain: __team };
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_TEAM_API || __team;
+    }
+    let _options = (options && Object.assign(options, { domain })) || { domain };
     return $next(_options);
 }
 
 function $pay(options) {
-    let _options = (options && Object.assign(options, { domain: __pay })) || { domain: __pay };
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_PAY_API || __pay;
+    }
+
+    let _options = (options && Object.assign(options, { domain })) || { domain: __pay };
     return $next(_options);
 }
 
 function $lua(options) {
-    let _options = (options && Object.assign(options, { domain: __lua })) || { domain: __lua };
+    let { domain } = options;
+
+    if (domain) {
+        domain = domain;
+    } else {
+        domain = process.env.VUE_APP_LUA_API || __lua;
+    }
+    let _options = (options && Object.assign(options, { domain })) || { domain };
     return $next(_options);
 }
 
