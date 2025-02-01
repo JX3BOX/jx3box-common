@@ -13,24 +13,37 @@ import {
 import domains from "../data/jx3box.json";
 
 // cms通用请求接口
-function $cms(options) {
-    let domain = (options && options.domain) || domains.__cms;
+function $cms(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    const { interceptor = true, domain, progress } = options;
+
+    let requestDomain = ''
+    if (domain) {
+        requestDomain = domain;
+    } else {
+        requestDomain = process.env.VUE_APP_CMS_API || __cms;
+    }
+
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "cms common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: requestDomain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installCmsInterceptors(ins, options);
+    interceptor && installCmsInterceptors(ins, options);
 
     return ins;
 }
@@ -76,51 +89,79 @@ function $helper(options) {
     return ins;
 }
 
-// next 通用请求接口
-function $next(options) {
-    let domain = (options && options.domain) || domains.__next;
+// next通用请求接口
+function $next(options = {}, axiosConfig = {}) {
+    // 解构options并设置默认值
+    const { interceptor = true, domain, progress } = options;
 
+    let requestDomain = ''
+    if (domain) {
+        requestDomain = domain;
+    } else {
+        requestDomain = process.env.VUE_APP_NEXT_API || __next;
+    }
+
+    let token = getUrlParam("__token");
+    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("token")) || "",
+            username: token || "",
             password: "next common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? domain : "/",
+        baseURL: requestDomain,
         headers: {},
     };
 
+    progress && (config.onUploadProgress = progress);
+
     // 创建实例
-    const ins = axios.create(config);
+    const ins = axios.create(Object.assign(axiosConfig, config));
 
     // 指定拦截器
-    installNextInterceptors(ins, options);
+    interceptor && installNextInterceptors(ins, options);
 
     return ins;
 }
 
-function $team(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__team })) || {
-        domain: domains.__team,
-    };
+function $team(options = {}) {
+    let { domain } = options;
+
+    let requestDomain = ''
+    if (domain) {
+        requestDomain = domain;
+    } else {
+        requestDomain = process.env.VUE_APP_TEAM_API || __team;
+    }
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
     return $next(_options);
 }
 
-function $pay(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__pay })) || {
-        domain: domains.__pay,
-    };
+function $pay(options = {}) {
+    let { domain } = options;
+
+    let requestDomain = ''
+    if (domain) {
+        requestDomain = domain;
+    } else {
+        requestDomain = process.env.VUE_APP_PAY_API || __pay;
+    }
+
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
     return $next(_options);
 }
 
-function $lua(options) {
-    let _options = (options &&
-        Object.assign(options, { domain: domains.__lua })) || {
-        domain: domains.__lua,
-    };
+function $lua(options = {}) {
+    let { domain } = options;
+
+    let requestDomain = ''
+    if (domain) {
+        requestDomain = domain;
+    } else {
+        requestDomain = process.env.VUE_APP_LUA_API || __lua;
+    }
+    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
     return $next(_options);
 }
 
