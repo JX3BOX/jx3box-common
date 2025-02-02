@@ -8,6 +8,7 @@ import {
     installHelperInterceptors,
     installCmsInterceptors,
 } from "./interceptors.js";
+import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
 
 // 域名映射
 import domains from "../data/jx3box.json";
