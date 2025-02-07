@@ -113,6 +113,11 @@ function $next(options = {}, axiosConfig = {}) {
 
     progress && (config.onUploadProgress = progress);
 
+   // 是否需要开启本地代理作为测试
+    if (options && options.proxy) {
+        config.baseURL = process.env.NODE_ENV === "production" ? domain : "/";
+    }
+
     // 创建实例
     const ins = axios.create(Object.assign(axiosConfig, config));
 
