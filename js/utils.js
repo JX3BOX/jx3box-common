@@ -445,6 +445,13 @@ export function miniprogramHack() {
     });
 }
 
+// 从url中获取参数
+export function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    return r ? decodeURIComponent(r[2]) : null;
+}
+
 
 export default {
     resolveImagePath,

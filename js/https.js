@@ -1,6 +1,7 @@
 import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
 import { SSE } from "./sse"
 import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
+import {getUrlParam} from "./utils";
 
 const server_map = {
     server: __server,
@@ -279,14 +280,5 @@ function $_https(server, options) {
 
     return ins;
 }
-
-
-// 从url中获取参数
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    return r ? decodeURIComponent(r[2]) : null;
-}
-
 
 export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios, SSE };

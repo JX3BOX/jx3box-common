@@ -6,6 +6,7 @@ import domains from "../data/jx3box.json";
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 
 import { SSE } from "./sse";
+import { getUrlParam } from "./utils";
 
 // cms通用请求接口
 function $cms(options = {}, axiosConfig = {}) {
@@ -336,11 +337,5 @@ function installHelperInterceptors(target, options) {
     );
 }
 
-// 从url中获取参数
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    return r ? decodeURIComponent(r[2]) : null;
-}
 
 export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios, SSE };
