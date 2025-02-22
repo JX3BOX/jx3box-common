@@ -8,7 +8,7 @@ import {
 } from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 import Fingerprint2 from "fingerprintjs2";
-import { getUrlParam } from "./utils";
+import { getTokenFromUrl } from "./utils";
 
 class User {
     constructor() {
@@ -67,7 +67,7 @@ class User {
 
     // 判断是否已登录
     isLogin() {
-        const token = getUrlParam("__token");
+        const token = getTokenFromUrl();
         if (token) {
             return true;
         }

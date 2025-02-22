@@ -6,7 +6,7 @@ import domains from "../data/jx3box.json";
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 
 import { SSE } from "./sse";
-import { getUrlParam } from "./utils";
+import { getTokenFromUrl } from "./utils";
 
 // cms通用请求接口
 function $cms(options = {}, axiosConfig = {}) {
@@ -20,7 +20,7 @@ function $cms(options = {}, axiosConfig = {}) {
         requestDomain = process.env.VUE_APP_CMS_API || domains.__cms;
     }
 
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
@@ -95,7 +95,7 @@ function $next(options = {}, axiosConfig = {}) {
         requestDomain = process.env.VUE_APP_NEXT_API || domains.__next;
     }
 
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
@@ -169,7 +169,7 @@ function $lua(options = {}) {
 // node 通用请求接口
 function $node(options) {
     let domain = (options && options.domain) || domains.__node;
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
@@ -198,7 +198,7 @@ function $node(options) {
 // 默认请求
 function $http(options) {
     let domain = typeof options == "string" ? options : options.domain;
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth

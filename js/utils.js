@@ -446,10 +446,25 @@ export function miniprogramHack() {
 }
 
 // 从url中获取参数
-export function getUrlParam(name) {
+function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     return r ? decodeURIComponent(r[2]) : null;
+}
+
+export function getTokenFromUrl() {
+    const token = sessionStorage.getItem("__token");
+
+    if (token) {
+        return token;
+    }
+
+    const __token = getUrlParam("__token");
+
+    if (__token) {
+        sessionStorage.setItem("__token", __token);
+        return __token;
+    }
 }
 
 

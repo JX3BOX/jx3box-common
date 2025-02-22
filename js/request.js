@@ -12,6 +12,7 @@ import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, 
 
 // 域名映射
 import domains from "../data/jx3box.json";
+import { getTokenFromUrl } from "./utils";
 
 // cms通用请求接口
 function $cms(options = {}, axiosConfig = {}) {
@@ -25,7 +26,7 @@ function $cms(options = {}, axiosConfig = {}) {
         requestDomain = process.env.VUE_APP_CMS_API || __cms;
     }
 
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
@@ -102,7 +103,7 @@ function $next(options = {}, axiosConfig = {}) {
         requestDomain = process.env.VUE_APP_NEXT_API || __next;
     }
 
-    let token = getUrlParam("__token");
+    let token = getTokenFromUrl()
     token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
     let config = {
         // 同时发送cookie和basic auth
@@ -217,13 +218,6 @@ function $http(options) {
     installNextInterceptors(ins, options);
 
     return ins;
-}
-
-// 从url中获取参数
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    return r ? decodeURIComponent(r[2]) : null;
 }
 
 export { $cms, $next, $helper, $node, $team, $pay, $lua, $http, axios };

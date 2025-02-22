@@ -1,7 +1,7 @@
 import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
-import { SSE } from "./sse"
+import { SSE } from "./sse";
 import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
-import {getUrlParam} from "./utils";
+import { getTokenFromUrl } from "./utils";
 
 const server_map = {
     server: __server,
@@ -18,15 +18,15 @@ function $cms(options = {}, axiosConfig = {}) {
     // 解构options并设置默认值
     const { interceptor = true, domain, progress } = options;
 
-    let requestDomain = ''
+    let requestDomain = "";
     if (domain) {
         requestDomain = domain;
     } else {
         requestDomain = process.env.VUE_APP_CMS_API || __cms;
     }
 
-    let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    let token = getTokenFromUrl();
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -58,7 +58,7 @@ function $helper(options) {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("__token") || localStorage.getItem("token")) || "",
+            username: (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token") || "",
             password: "helper common request",
         },
         baseURL: domain,
@@ -92,15 +92,15 @@ function $next(options = {}, axiosConfig = {}) {
     // 解构options并设置默认值
     const { interceptor = true, domain, progress } = options;
 
-    let requestDomain = ''
+    let requestDomain = "";
     if (domain) {
         requestDomain = domain;
     } else {
         requestDomain = process.env.VUE_APP_NEXT_API || __next;
     }
 
-    let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    let token = getTokenFromUrl();
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -114,7 +114,7 @@ function $next(options = {}, axiosConfig = {}) {
 
     progress && (config.onUploadProgress = progress);
 
-   // 是否需要开启本地代理作为测试
+    // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
         config.baseURL = process.env.NODE_ENV === "production" ? domain : "/";
     }
@@ -131,7 +131,7 @@ function $next(options = {}, axiosConfig = {}) {
 function $team(options = {}) {
     let { domain } = options;
 
-    let requestDomain = ''
+    let requestDomain = "";
     if (domain) {
         requestDomain = domain;
     } else {
@@ -144,7 +144,7 @@ function $team(options = {}) {
 function $pay(options = {}) {
     let { domain } = options;
 
-    let requestDomain = ''
+    let requestDomain = "";
     if (domain) {
         requestDomain = domain;
     } else {
@@ -158,7 +158,7 @@ function $pay(options = {}) {
 function $lua(options = {}) {
     let { domain } = options;
 
-    let requestDomain = ''
+    let requestDomain = "";
     if (domain) {
         requestDomain = domain;
     } else {
@@ -171,8 +171,8 @@ function $lua(options = {}) {
 // node
 function $node(options) {
     let domain = (options && options.domain) || __node;
-    let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    let token = getTokenFromUrl();
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -242,8 +242,8 @@ function $_https(server, options) {
         return Promise.reject("请先登录");
     }
 
-    let token = getUrlParam("__token");
-    token = token ? token : (localStorage && localStorage.getItem("__token") || localStorage.getItem("token"));
+    let token = getTokenFromUrl();
+    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
 
     let config = {
         // 同时发送cookie和basic auth
