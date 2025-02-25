@@ -68,7 +68,8 @@ function postHistory(data) {
 function postReadHistory(data) {
     const {id, category, subcategory, visible_type, author_id, banner} = data;
     if (visible_type < 2) return Promise.resolve();
-    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});
+    // return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});
+    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/content-meta/${contentMetaId}`, {visible_type, author_id, banner});
 }
 
 export { getStat, postStat, getStatRank, postHistory, postReadHistory };
