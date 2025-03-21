@@ -1,6 +1,22 @@
-import { axios, installInterceptors, installNextInterceptors, installHelperInterceptors, installCmsInterceptors } from "./axios";
+import {
+    axios,
+    installInterceptors,
+    installNextInterceptors,
+    installHelperInterceptors,
+    installCmsInterceptors,
+} from "./axios";
 import { SSE } from "./sse";
-import { __server, __cms, __node, __spider, __next, __pay, __helperUrl, __team, __lua } from "../data/jx3box.json";
+import {
+    __server,
+    __cms,
+    __node,
+    __spider,
+    __next,
+    __pay,
+    __helperUrl,
+    __team,
+    __lua,
+} from "../data/jx3box.json";
 import { getTokenFromUrl } from "./utils";
 
 const server_map = {
@@ -26,7 +42,10 @@ function $cms(options = {}, axiosConfig = {}) {
     }
 
     let token = getTokenFromUrl();
-    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
+    token = token
+        ? token
+        : (localStorage && localStorage.getItem("__token")) ||
+          localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -58,13 +77,17 @@ function $helper(options) {
         // 同时发送cookie和basic auth
         withCredentials: true,
         auth: {
-            username: (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token") || "",
+            username:
+                (localStorage && localStorage.getItem("__token")) ||
+                localStorage.getItem("token") ||
+                "",
             password: "helper common request",
         },
         baseURL: domain,
         headers: {
             Accept: "application/prs.helper.v2+json",
-            "JX3-Client-Type": (options && options.client_id) || jx3ClientType(),
+            "JX3-Client-Type":
+                (options && options.client_id) || jx3ClientType(),
         },
     };
 
@@ -100,7 +123,10 @@ function $next(options = {}, axiosConfig = {}) {
     }
 
     let token = getTokenFromUrl();
-    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
+    token = token
+        ? token
+        : (localStorage && localStorage.getItem("__token")) ||
+          localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -137,7 +163,10 @@ function $team(options = {}) {
     } else {
         requestDomain = process.env.VUE_APP_TEAM_API || __team;
     }
-    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
+    let _options = (options &&
+        Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
+    };
     return $next(_options);
 }
 
@@ -151,7 +180,10 @@ function $pay(options = {}) {
         requestDomain = process.env.VUE_APP_PAY_API || __pay;
     }
 
-    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
+    let _options = (options &&
+        Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
+    };
     return $next(_options);
 }
 
@@ -164,15 +196,24 @@ function $lua(options = {}) {
     } else {
         requestDomain = process.env.VUE_APP_LUA_API || __lua;
     }
-    let _options = (options && Object.assign(options, { domain: requestDomain })) || { domain: requestDomain };
+    let _options = (options &&
+        Object.assign(options, { domain: requestDomain })) || {
+        domain: requestDomain,
+    };
     return $next(_options);
 }
 
 // node
 function $node(options) {
-    let domain = (options && options.domain) || __node;
+    const domain = (options && options.domain);
+
+    const requestDomain = domain || process.env.VUE_APP_NODE_API || __node;
+
     let token = getTokenFromUrl();
-    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
+    token = token
+        ? token
+        : (localStorage && localStorage.getItem("__token")) ||
+          localStorage.getItem("token");
     let config = {
         // 同时发送cookie和basic auth
         withCredentials: true,
@@ -180,13 +221,8 @@ function $node(options) {
             username: token || "",
             password: "node common request",
         },
-        baseURL: domain,
+        baseURL: requestDomain,
     };
-
-    // 是否需要开启本地代理作为测试
-    if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? domain : `http://localhost:${options.port}`;
-    }
 
     // 创建实例
     const ins = axios.create(config);
@@ -199,7 +235,9 @@ function $node(options) {
 
 import { tokenExpires } from "../data/conf.json";
 function isLogin() {
-    let created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
+    let created_at = !localStorage.getItem("created_at")
+        ? -Infinity
+        : localStorage.getItem("created_at");
     let logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
     return logged_in && Date.now() - created_at < tokenExpires;
 }
@@ -217,7 +255,8 @@ function $https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (options && options.proxy) {
-        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL =
+            process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
         config.baseURL = server_map[server];
     }
@@ -243,7 +282,10 @@ function $_https(server, options) {
     }
 
     let token = getTokenFromUrl();
-    token = token ? token : (localStorage && localStorage.getItem("__token")) || localStorage.getItem("token");
+    token = token
+        ? token
+        : (localStorage && localStorage.getItem("__token")) ||
+          localStorage.getItem("token");
 
     let config = {
         // 同时发送cookie和basic auth
@@ -252,7 +294,8 @@ function $_https(server, options) {
             username: token || "",
             password: "$_https common request",
         },
-        baseURL: process.env.NODE_ENV === "production" ? server_map[server] : "/",
+        baseURL:
+            process.env.NODE_ENV === "production" ? server_map[server] : "/",
         headers: {},
     };
 
@@ -263,7 +306,8 @@ function $_https(server, options) {
 
     // 是否需要开启本地代理作为测试
     if (!options || options.proxy || options.proxy === undefined) {
-        config.baseURL = process.env.NODE_ENV === "production" ? server_map[server] : "/";
+        config.baseURL =
+            process.env.NODE_ENV === "production" ? server_map[server] : "/";
     } else {
         config.baseURL = server_map[server];
     }
@@ -281,4 +325,16 @@ function $_https(server, options) {
     return ins;
 }
 
-export { $https, $_https, $cms, $helper, $next, $team, $pay, $node, $lua, axios, SSE };
+export {
+    $https,
+    $_https,
+    $cms,
+    $helper,
+    $next,
+    $team,
+    $pay,
+    $node,
+    $lua,
+    axios,
+    SSE,
+};
