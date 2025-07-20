@@ -155,7 +155,13 @@ const wikiComment = {
         return $helper().get(`/api/my/wiki/comments`, {
             params
         })
-    }
+    },
+    star(comment_id, data) {
+        return $cms().put(`/api/cms/manage/wiki/comment/${comment_id}/star`, data)
+    },
+    top(comment_id, data) {
+        return $cms().put(`/api/cms/manage/wiki/comment/${comment_id}/top`, data)
+    },
 }
 
 export { wiki, wikiComment };
