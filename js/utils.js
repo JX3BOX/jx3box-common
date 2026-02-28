@@ -415,6 +415,15 @@ export function isMiniProgram() {
     return navigator.userAgent.toLowerCase().includes("miniprogram");
 }
 
+
+/**
+ * 判断当前环境是否为app
+ * 判断url是否包含__env=app
+ */
+export function isApp() {
+    return new URLSearchParams(window.location.search).get("__env") === "app";
+}
+
 export function miniprogramHack() {
     document.addEventListener('DOMContentLoaded', function() {
         // 检查 html 标签是否有 wechat-miniprogram 类
