@@ -1,15 +1,4 @@
-import {
-    default_avatar,
-    __sourceType,
-    __postType,
-    __wikiType,
-    __appType,
-    __gameType,
-    __imgPath,
-    __iconPath,
-    __clients,
-    __ossMirror,
-} from "../data/jx3box.json";
+import { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } from "../data/jx3box.json";
 import tvmap from "../data/tvmap.json";
 
 export function resolveImagePath(str) {
@@ -26,10 +15,7 @@ export function checkImageLoad(jq) {
     jq.length &&
         jq.one("error", function () {
             var img_url = $(this).attr("src");
-            var fix_url = img_url.replace(
-                /cdn\.jx3box\.com/g,
-                "oss.jx3box.com"
-            );
+            var fix_url = img_url.replace(/cdn\.jx3box\.com/g, "oss.jx3box.com");
             $(this).attr("src", fix_url);
         });
 }
@@ -150,12 +136,7 @@ export function iconLink(icon_id, client = "std") {
  * 获取应用图标
  */
 export function getAppIcon(key, colorful = false) {
-    return (
-        __imgPath +
-        (colorful ? "image/box-colorful/" : "image/box/") +
-        key +
-        ".svg"
-    );
+    return __imgPath + (colorful ? "image/box-colorful/" : "image/box/") + key + ".svg";
 }
 
 /**
@@ -189,10 +170,7 @@ export function getLink(type, id, level) {
     id = id || "";
 
     // 核心作品、休闲数据
-    if (
-        __sourceType.cms_types.includes(type) ||
-        __sourceType.pvx_types.includes(type)
-    ) {
+    if (__sourceType.cms_types.includes(type) || __sourceType.pvx_types.includes(type)) {
         return "/" + type + "/" + id;
 
         // 百科类型
@@ -290,13 +268,7 @@ export function getQuery(key) {
 }
 
 export function getTypeLabel(type) {
-    let types = Object.assign(
-        {},
-        __postType,
-        __wikiType,
-        __appType,
-        __gameType
-    );
+    let types = Object.assign({}, __postType, __wikiType, __appType, __gameType);
     return types[type] || "未知";
 }
 
@@ -316,11 +288,7 @@ export function ts2str(timestamp, opt = { polished: true, separator: "-" }) {
     let year = dt.getFullYear();
     let month = dt.getMonth() + 1;
     let date = dt.getDate();
-    let str = opt.polished
-        ? `${year}${opt.separator}${polish(month)}${opt.separator}${polish(
-              date
-          )}`
-        : `${year}${opt.separator}${month}${opt.separator}${date}`;
+    let str = opt.polished ? `${year}${opt.separator}${polish(month)}${opt.separator}${polish(date)}` : `${year}${opt.separator}${month}${opt.separator}${date}`;
     return str;
 
     function polish(val) {
@@ -340,10 +308,7 @@ export function jx3ClientType() {
  */
 export function extractTextContent(str) {
     if (!str || typeof str !== "string") return [];
-    const innerHTML = str.replace(
-        /<Text>(.*?)<\/text>/gimsy,
-        `<span $1></span>`
-    );
+    const innerHTML = str.replace(/<Text>(.*?)<\/text>/gimsy, `<span $1></span>`);
     const parser = new DOMParser();
     const doc = parser.parseFromString(innerHTML, "text/html");
     const spans = doc.querySelectorAll("span");
@@ -388,8 +353,7 @@ export function showClientLabel(client) {
 }
 
 export function getMedalLink(event_id, subtype) {
-    if (subtype === "rank" || subtype === "superstar")
-        return `/rank/race/#/${event_id}/${subtype}`;
+    if (subtype === "rank" || subtype === "superstar") return `/rank/race/#/${event_id}/${subtype}`;
     return `${subtype}/${event_id}`;
 }
 
@@ -415,34 +379,33 @@ export function isMiniProgram() {
     return navigator.userAgent.toLowerCase().includes("miniprogram");
 }
 
-
 /**
  * 判断当前环境是否为app
  * 判断url是否包含__env=app
  */
 export function isApp() {
-    return new URLSearchParams(window.location.search).get("__env") === "app";
+    return new URLSearchParams(window.location.search).get("__env") === "app" || localStorage.getItem("__env") === "app";
 }
 
 export function miniprogramHack() {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // 检查 html 标签是否有 wechat-miniprogram 类
-        if (document.documentElement.classList.contains('wechat-miniprogram')) {
+        if (document.documentElement.classList.contains("wechat-miniprogram")) {
             // 为整个 document 添加一个点击事件监听器
-            document.addEventListener('click', function(event) {
+            document.addEventListener("click", function (event) {
                 // 检查被点击的元素是否是一个链接
-                if (event.target.tagName === 'A') {
-                    var href = event.target.getAttribute('href');
-                    
+                if (event.target.tagName === "A") {
+                    var href = event.target.getAttribute("href");
+
                     // 检查是否是相对链接
-                    var isRelative = !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('//');
-                    
+                    var isRelative = !href.startsWith("http://") && !href.startsWith("https://") && !href.startsWith("//");
+
                     // 检查是否是jx3box.com域名
                     var isJx3boxDomain = /jx3box\.com/.test(href);
-                    
+
                     // 检查是否是jx3.xoyo.com域名
                     var isJx3Domain = /jx3\.xoyo\.com/.test(href);
-                    
+
                     // 如果不是相对链接且不是jx3box.com域名
                     if (!isRelative && !isJx3boxDomain && !isJx3Domain) {
                         // 阻止默认行为
@@ -475,7 +438,6 @@ export function getTokenFromUrl() {
         return __token;
     }
 }
-
 
 export default {
     resolveImagePath,
