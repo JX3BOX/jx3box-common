@@ -1,6 +1,11 @@
 import { showAvatar } from "./utils";
-import { $pay, $cms } from "./api";
-import { __Links, default_avatar, __userLevel } from "../data/jx3box.json";
+import { $pay, $cms } from "./request";
+import {
+    __Links,
+    default_avatar,
+    __server,
+    __userLevel,
+} from "../data/jx3box.json";
 import { tokenExpires } from "../data/conf.json";
 import Fingerprint2 from "fingerprintjs2";
 import { getTokenFromUrl } from "./utils";
@@ -33,15 +38,22 @@ class User {
     check() {
         if (this.isLogin()) {
             this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
+            this.profile.group =
+                (localStorage && localStorage.getItem("group")) || 1;
             this.profile.token = localStorage && localStorage.getItem("token");
             this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status = localStorage && localStorage.getItem("status");
-            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
+            this.profile.status =
+                localStorage && localStorage.getItem("status");
+            this.profile.bind_wx =
+                localStorage && localStorage.getItem("bind_wx");
+            this.profile.avatar_origin =
+                (localStorage && localStorage.getItem("avatar")) ||
+                default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
-            this.profile.permission = localStorage && localStorage.getItem("jx3box_permission");
-            this.profile.is_teammate = localStorage && localStorage.getItem("is_teammate");
+            this.profile.permission =
+                localStorage && localStorage.getItem("jx3box_permission");
+            this.profile.is_teammate =
+                localStorage && localStorage.getItem("is_teammate");
         } else {
             this.profile = this.anonymous;
         }
@@ -59,8 +71,11 @@ class User {
         if (token) {
             return true;
         }
-        this.created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
-        this.logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
+        this.created_at = !localStorage.getItem("created_at")
+            ? -Infinity
+            : localStorage.getItem("created_at");
+        this.logged_in =
+            localStorage.getItem("logged_in") == "true" ? true : false;
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
@@ -93,7 +108,7 @@ class User {
                 if (localStorage) {
                     localStorage.clear();
                     this._save(data);
-                    resolve(data);
+                    resolve(value);
                 } else {
                     reject(new Error("localStorage不可用"));
                 }
@@ -170,11 +185,13 @@ class User {
         if (this.isLogin()) {
             return $cms()
                 .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
-                .then((res) => {
+                .then(res => {
                     return res.data.data;
                 });
         } else {
-            return Promise.resolve(false);
+            return new Promise((resolve, reject) => {
+                resolve(false);
+            });
         }
     }
 
@@ -212,9 +229,11 @@ class User {
     // 判断是否为VIP
     isVIP() {
         if (this.asset) {
-            return Promise.resolve(this._isPRO(this.asset) || this._isVIP(this.asset));
+            return new Promise((resolve, reject) => {
+                resolve(this._isPRO(this.asset) || this._isVIP(this.asset));
+            });
         } else {
-            return this.getAsset().then((asset) => {
+            return this.getAsset().then(asset => {
                 return this._isPRO(asset) || this._isVIP(asset);
             });
         }
@@ -223,9 +242,11 @@ class User {
     // 判断是否为PRO
     isPRO() {
         if (this.asset) {
-            return Promise.resolve(this._isPRO(this.asset));
+            return new Promise((resolve, reject) => {
+                resolve(this._isPRO(this.asset));
+            });
         } else {
-            return this.getAsset().then((asset) => {
+            return this.getAsset().then(asset => {
                 return this._isPRO(asset);
             });
         }
@@ -234,26 +255,28 @@ class User {
     // 获取用户资产
     getAsset() {
         if (!this.isLogin()) {
-            const asset = {
-                was_vip: 0,
-                expire_date: "1970-02-02T16:00:00.000Z",
-                total_day: 0,
-                was_pro: 0,
-                pro_expire_date: "1970-02-02T16:00:00.000Z",
-                pro_total_day: 0,
-                rename_card_count: 0,
-                had_renamed: 0,
-                namespace_card_count: 0,
-                box_coin: 0,
-                points: 0,
-            };
-            this.asset = asset;
-            // 空资产
-            return Promise.resolve(asset);
+            return new Promise((resolve, reject) => {
+                let asset = {
+                    was_vip: 0,
+                    expire_date: "1970-02-02T16:00:00.000Z",
+                    total_day: 0,
+                    was_pro: 0,
+                    pro_expire_date: "1970-02-02T16:00:00.000Z",
+                    pro_total_day: 0,
+                    rename_card_count: 0,
+                    had_renamed: 0,
+                    namespace_card_count: 0,
+                    box_coin: 0,
+                    points: 0,
+                };
+                this.asset = asset;
+                // 空资产
+                resolve(asset);
+            });
         } else {
             return $pay()
                 .get("/api/vip/i")
-                .then((res) => {
+                .then(res => {
                     let asset = res.data.data;
                     this.asset = asset;
                     return asset;
