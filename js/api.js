@@ -13,33 +13,66 @@ function readAuthToken() {
     return (localStorage && (localStorage.getItem("__token") || localStorage.getItem("token"))) || "";
 }
 
+let __cachedClientEnv;
+function getClientEnv() {
+    if (__cachedClientEnv) return __cachedClientEnv;
+    const env = {};
+
+    // 运行时注入（推荐）：由宿主项目（Vue CLI / Vite / Nginx）注入
+    if (typeof globalThis !== "undefined" && globalThis.__ENV__ && typeof globalThis.__ENV__ === "object") {
+        Object.assign(env, globalThis.__ENV__);
+    }
+
+    // Vue CLI / webpack DefinePlugin 注入：在构建时把 process.env 替换为对象字面量
+    if (typeof process !== "undefined" && process.env && typeof process.env === "object") {
+        Object.assign(env, process.env);
+    }
+
+    __cachedClientEnv = env;
+    return env;
+}
+
+function isLocalLikeHost(hostname) {
+    const host = String(hostname || "").trim().toLowerCase();
+    if (!host) return false;
+    if (host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0") return true;
+    if (host.endsWith(".local")) return true;
+
+    // 简单覆盖常见内网 IP 段
+    if (host.startsWith("10.")) return true;
+    if (host.startsWith("192.168.")) return true;
+    const m = host.match(/^172\.(\d+)\./);
+    if (m) {
+        const seg = Number(m[1]);
+        if (seg >= 16 && seg <= 31) return true;
+    }
+    return false;
+}
+
 function readEnv(key) {
-    // webpack5：通过 DefinePlugin（或 dotenv-webpack 等）注入到 process.env
-    // 这里做运行时兜底，避免在非 webpack 环境直接引用 process 报错
-    if (typeof process !== "undefined" && process.env && Object.prototype.hasOwnProperty.call(process.env, key)) {
-        return process.env[key] ?? "";
-    }
-    // 可选：支持运行时注入（如 Nginx/容器替换），约定 globalThis.__ENV__
-    if (
-        typeof globalThis !== "undefined" &&
-        globalThis.__ENV__ &&
-        Object.prototype.hasOwnProperty.call(globalThis.__ENV__, key)
-    ) {
-        return globalThis.__ENV__[key] ?? "";
-    }
+    const env = getClientEnv();
+    if (Object.prototype.hasOwnProperty.call(env, key)) return env[key] ?? "";
     return "";
 }
 
 function localProxyEnabled(options) {
     const nodeEnv =
+        readEnv("NODE_ENV") ||
         (typeof process !== "undefined" && process.env && process.env.NODE_ENV) ||
         (typeof globalThis !== "undefined" && globalThis.__ENV__ && globalThis.__ENV__.NODE_ENV) ||
         "";
     if (nodeEnv && nodeEnv !== "development") return false;
     if (options && options.proxy === false) return false;
     if (options && options.proxy === true) return true;
+
     const raw = (readEnv("VUE_APP_PROXY_ENABLE") || "").toString().toLowerCase();
-    return raw === "1" || raw === "true" || raw === "yes" || raw === "on";
+    if (raw) return raw === "1" || raw === "true" || raw === "yes" || raw === "on";
+
+    // 宿主未注入 VUE_APP_PROXY_ENABLE 的情况下：本地开发默认启用（避免 CORS）
+    // 前提是 running on a local-like host；生产环境不会走到这里（上面已拦截）
+    if (typeof window !== "undefined" && isLocalLikeHost(window.location && window.location.hostname)) return true;
+
+    return false;
 }
 
 function localProxyBase(serviceKey) {
