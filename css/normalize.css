@@ -7,17 +7,6 @@ body {
     padding: 0;
     text-rendering: optimizelegibility;
 }
-/* 顶部回弹露出的颜色 */
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 50vh; /* 够大：回弹再狠也不露白 */
-    z-index: -1; /* 放到页面内容后面 */
-    pointer-events: none;
-}
 a {
     text-decoration: none;
 }
