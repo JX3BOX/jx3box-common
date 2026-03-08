@@ -1,14 +1,12 @@
-// 图片路径
-@root: "https://cdn.jx3box.com/";
-@url: "https://cdn.jx3box.com/img/";
-@image: "https://cdn.jx3box.com/image/";
-@font: "https://cdn.jx3box.com/img/font/";
-@pic: "https://cdn.jx3box.com/pic/";
-
+// 路径
 @img: "https://img.jx3box.com/";
 @cdn: "https://cdn.jx3box.com/";
+@img: "https://cdn.jx3box.com/img/";
+@image: "https://cdn.jx3box.com/image/";
+@pic: "https://cdn.jx3box.com/pic/";
+@font: "https://cdn.jx3box.com/img/font/";
 
-// 颜色
+// 配色·旧
 @color: #3d454d;
 @primary: #0366d6;
 @bg-black: #24292e;
@@ -24,14 +22,34 @@
 @border: #e4e7ed;
 @purple: #6f42c1;
 
-// 头部
-@header-height: 64px;
-@logo-size: 32px;
+// 配色·v4
+@v4primary: #4f46e5;
+@v4primary-bg: #7d86fb;
+@v4primary-dark: #4b3bed;
+@v4font: #4338ca;
+@v4primary500: #615fff;
+
+@v4border: #c7d2fe;
+@v4bg: #f2f5ff;
+
+@v4text: #4f667d;
+@v4tip: #989cb1;
+
+@v4focus: #efb23e;
+@v4orange: #ec9c0f;
+@v4yellow: #f5bd1e;
+
+// 布局（全局公共组件）
+@header-height: 60px;
+@header-logo-size: 32px;
+@header-bg: #242424;
 @bread-height: 48px;
-// 左侧边
+
 @aside-left: 320px;
-// 右侧边
 @aside-right: 280px;
+
+@footer-bg: #121827;
+
 // 适配
 @4k: 3840px;
 @2k: 2560px;
@@ -45,8 +63,4 @@
 @phone: 720px; //手机
 @ip5: 374px; //iphone5超小屏
 
-.underline(@color:@color-link) {
-    &:hover {
-        box-shadow: 0 1px 0 @color;
-    }
-}
+
