@@ -14,12 +14,28 @@ function readAuthToken() {
 }
 
 function readEnv(key) {
-    // 需要在 vite.config.js 配置 envPrefix 包含 VUE_APP_
-    return (import.meta && import.meta.env && import.meta.env[key]) || "";
+    // webpack5：通过 DefinePlugin（或 dotenv-webpack 等）注入到 process.env
+    // 这里做运行时兜底，避免在非 webpack 环境直接引用 process 报错
+    if (typeof process !== "undefined" && process.env && Object.prototype.hasOwnProperty.call(process.env, key)) {
+        return process.env[key] ?? "";
+    }
+    // 可选：支持运行时注入（如 Nginx/容器替换），约定 globalThis.__ENV__
+    if (
+        typeof globalThis !== "undefined" &&
+        globalThis.__ENV__ &&
+        Object.prototype.hasOwnProperty.call(globalThis.__ENV__, key)
+    ) {
+        return globalThis.__ENV__[key] ?? "";
+    }
+    return "";
 }
 
 function localProxyEnabled(options) {
-    if (!import.meta?.env?.DEV) return false;
+    const nodeEnv =
+        (typeof process !== "undefined" && process.env && process.env.NODE_ENV) ||
+        (typeof globalThis !== "undefined" && globalThis.__ENV__ && globalThis.__ENV__.NODE_ENV) ||
+        "";
+    if (nodeEnv && nodeEnv !== "development") return false;
     if (options && options.proxy === false) return false;
     if (options && options.proxy === true) return true;
     const raw = (readEnv("VUE_APP_PROXY_ENABLE") || "").toString().toLowerCase();
