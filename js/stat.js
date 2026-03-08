@@ -1,17 +1,15 @@
-import axios from "axios";
 import JX3BOX from "../data/jx3box.json";
 import { $next as $next2 } from "./api";
 
-const { __postType, __next } = JX3BOX;
+const { __postType } = JX3BOX;
 const cms_types = Object.keys(__postType);
-const $next = axios.create({
-    baseURL: process.env.NODE_ENV === "production" ? __next : "/",
-});
+const statRequest = $next2({ mute: true, interceptor: false });
+const userRequest = $next2({ mute: true });
 
 // 发送统计：同一个ip的同一篇文章的同一个动作10分钟内不重复统计
 function postStat(type, id, action = "views") {
     let api = cms_types.includes(type) ? "/api/summary-any/" + id : "/api/summary-any/" + type + "-" + id;
-    return $next.get(api, {
+    return statRequest.get(api, {
         params: {
             type: type,
             actions: action,
@@ -22,12 +20,12 @@ function postStat(type, id, action = "views") {
 // 30秒缓存
 function getStat(type, id) {
     let api = cms_types.includes(type) ? "/api/summary-any/" + id + "/stat" : "/api/summary-any/" + type + "-" + id + "/stat";
-    return $next.get(api);
+    return statRequest.get(api);
 }
 
 // 获取统计
 function getStatRank(type, action = "views", limit = 10, sort = "7days") {
-    return $next.get("/api/summary/visit/rank", {
+    return statRequest.get("/api/summary/visit/rank", {
         params: {
             postType: type,
             postAction: action,
@@ -50,7 +48,7 @@ function getStatRank(type, action = "views", limit = 10, sort = "7days") {
  * @returns 
  */
 function postHistory(data) {
-    return $next2({mute: true}).post("/api/next2/userdata/visit-history/item", data);
+    return userRequest.post("/api/next2/userdata/visit-history/item", data);
 }
 
 // 阅读记录
@@ -68,8 +66,8 @@ function postHistory(data) {
 function postReadHistory(data) {
     const {id, category, subcategory, visible_type, author_id, banner, contentMetaId} = data;
     if (visible_type < 2) return Promise.resolve();
-    // return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});
-    return $next2({mute: true}).post(`/api/next2/userdata/common-read-history/content-meta/${contentMetaId}`, {visible_type, author_id, banner});
+    // return userRequest.post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});
+    return userRequest.post(`/api/next2/userdata/common-read-history/content-meta/${contentMetaId}`, {visible_type, author_id, banner});
 }
 
 export { getStat, postStat, getStatRank, postHistory, postReadHistory };
