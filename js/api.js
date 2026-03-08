@@ -18,6 +18,25 @@ function getClientEnv() {
     if (__cachedClientEnv) return __cachedClientEnv;
     const env = {};
 
+    // Vue CLI / webpack DefinePlugin：把 process.env.X 替换为字符串字面量
+    // 注意：这里用 try/catch 避免在无 bundler 的纯浏览器环境直接引用 process 报错
+    try {
+        Object.assign(env, {
+            NODE_ENV: process.env.NODE_ENV,
+            VUE_APP_PROXY_ENABLE: process.env.VUE_APP_PROXY_ENABLE,
+            VUE_APP_PROXY_PREFIX: process.env.VUE_APP_PROXY_PREFIX,
+            VUE_APP_CMS_API: process.env.VUE_APP_CMS_API,
+            VUE_APP_NEXT_API: process.env.VUE_APP_NEXT_API,
+            VUE_APP_TEAM_API: process.env.VUE_APP_TEAM_API,
+            VUE_APP_PAY_API: process.env.VUE_APP_PAY_API,
+            VUE_APP_LUA_API: process.env.VUE_APP_LUA_API,
+            VUE_APP_NODE_API: process.env.VUE_APP_NODE_API,
+            VUE_APP_HELPER_API: process.env.VUE_APP_HELPER_API,
+        });
+    } catch (e) {
+        // noop
+    }
+
     // 运行时注入（推荐）：由宿主项目（Vue CLI / Vite / Nginx）注入
     if (typeof globalThis !== "undefined" && globalThis.__ENV__ && typeof globalThis.__ENV__ === "object") {
         Object.assign(env, globalThis.__ENV__);
@@ -56,12 +75,6 @@ function readEnv(key) {
 }
 
 function localProxyEnabled(options) {
-    const nodeEnv =
-        readEnv("NODE_ENV") ||
-        (typeof process !== "undefined" && process.env && process.env.NODE_ENV) ||
-        (typeof globalThis !== "undefined" && globalThis.__ENV__ && globalThis.__ENV__.NODE_ENV) ||
-        "";
-    if (nodeEnv && nodeEnv !== "development") return false;
     if (options && options.proxy === false) return false;
     if (options && options.proxy === true) return true;
 
@@ -69,7 +82,7 @@ function localProxyEnabled(options) {
     if (raw) return raw === "1" || raw === "true" || raw === "yes" || raw === "on";
 
     // 宿主未注入 VUE_APP_PROXY_ENABLE 的情况下：本地开发默认启用（避免 CORS）
-    // 前提是 running on a local-like host；生产环境不会走到这里（上面已拦截）
+    // 前提是 running on a local-like host；生产环境一般不会是本地 host
     if (typeof window !== "undefined" && isLocalLikeHost(window.location && window.location.hostname)) return true;
 
     return false;
