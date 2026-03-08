@@ -1,3 +1,4 @@
+// 文章编辑器缓存
 const localforage = require("localforage");
 class IDB {
     // 初始化数据库

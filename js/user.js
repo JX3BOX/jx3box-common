@@ -1,3 +1,4 @@
+// 用户信息调用基础模块
 import { showAvatar } from "./utils";
 import { $pay, $cms } from "./api";
 import { __Links, default_avatar, __userLevel } from "../data/jx3box.json";

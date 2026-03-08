@@ -1,4 +1,5 @@
-import { $next } from "./https";
+// 订阅相关接口封装
+import { $next } from "./api";
 
 /**
  * 获取我的订阅列表

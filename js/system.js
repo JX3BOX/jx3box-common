@@ -1,6 +1,5 @@
-import {
-    $cms
-} from './https'
+// 系统通用接口
+import { $cms } from './api'
 
 // 面包屑
 function getBreadcrumb(key) {
@@ -18,6 +17,7 @@ function getMenu(key) {
     })
 }
 
+// 文章详情
 function getArticle(id) {
     return $cms()
         .get(`/api/cms/post/${id}`)
@@ -37,7 +37,7 @@ function getMenus(params) {
 
 // 获取全局设定项
 function getConfig(params) {
-    return $cms().get(`/api/cms/config` ,{
+    return $cms().get(`/api/cms/config`, {
         params
     })
 }

@@ -1,5 +1,7 @@
+// 百科相关（比较旧的）
+// ❓可能会删
 import qs from "qs";
-import { $helper } from "./https";
+import { $helper } from "./api";
 
 // 百科攻略
 let WikiPost = {

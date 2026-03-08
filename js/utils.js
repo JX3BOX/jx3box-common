@@ -1,3 +1,4 @@
+// 通用的函数，包含路由处理与头像等
 import { default_avatar, __sourceType, __postType, __wikiType, __appType, __gameType, __imgPath, __iconPath, __clients, __ossMirror } from "../data/jx3box.json";
 import tvmap from "../data/tvmap.json";
 

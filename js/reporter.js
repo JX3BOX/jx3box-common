@@ -1,3 +1,5 @@
+// ❌统计上报
+// 已经废弃，使用matomo替代
 import { Reporter } from "@jx3box/reporter";
 import { __Domain } from "../data/jx3box.json";
 import { v4 as uuidv4 } from "uuid";

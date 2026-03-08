@@ -1,68 +1,80 @@
-import { $helper, $node } from "./https";
+// 百科栏目接口封装
+// 由于涉及公共库调用，有统一位置
+import { $cms, $node } from "./api";
 
-function getPet(petid, params) {
+const getPet = (petid, params) => {
     return $node().get(`/pet/${petid}`, {
         params
     });
 }
 
-const wiki = {
-    // 获取最新攻略
-    get({ type, id }, params) {
-        return $helper().get(`/api/wiki/post`, {
+const client = location.href.includes("origin") ? "origin" : "std";
+
+export const wiki = {
+    // 最新攻略
+    latest({ type }, params) {
+        return $cms().get(`/api/cms/wiki/post/latest`, {
             params: {
+                client,
                 ...params,
                 type,
-                source_id: id,
             }
         })
     },
-    // 根据post_id获取攻略
-    getById(post_id, params) {
-        return $helper().get(`/api/wiki/post/${post_id}`, {
+    // 我的
+    mine(params) {
+        return $cms().get(`/api/cms/wiki/post/mine`, {
             params
         })
     },
-    // 获取最新攻略列表
-    list({ type }, params) {
-        return $helper().get(`/api/wiki/posts/newest`, {
+    // 统计
+    counter({ type }, params) {
+        return $cms().get(`/api/cms/wiki/post/counter`, {
             params: {
+                client,
                 ...params,
                 type,
             }
         })
     },
-    // 创建/更新攻略
-    post({ type, data, client }, params) {
-        return $helper().post(`/api/wiki/post`, {
-            post: {
-                ...data,
-                type,
-            },
-            client
-        }, {
-            params: params
+    // 成就列表
+    achievements(params) {
+        return $node().get(`/achievement/list`, {
+            params: {
+                client,
+                ...params,
+            }
         })
+    },
+    // 详情
+    get({ type, id }, params) {
+        return $cms().get(`/api/cms/wiki/post/type/${type}/source/${id}`, {
+            params: {
+                client,
+                ...params,
+            }
+        })
+    },
+    getById(post_id) {
+        return $cms().get(`/api/cms/wiki/post/id/${post_id}`)
+    },
+    post(data) {
+        return $cms().post(`/api/cms/wiki/post`, data)
+    },
+    update(post_id, data) {
+        return $cms().put(`/api/cms/wiki/post/${post_id}`, data)
+    },
+    remove(post_id) {
+        return $cms().delete(`/api/cms/wiki/post/${post_id}`)
     },
     // 获取历史版本
     versions({ type, id }, params) {
-        return $helper().get(`/api/wiki/post/versions`, {
+        return $cms().get(`/api/cms/wiki/post/type/${type}/source/${id}/versions`, {
             params: {
+                client,
                 ...params,
-                type,
-                source_id: id,
             }
         })
-    },
-    // 获取我的百科攻略列表
-    myList(params) {
-        return $helper().get(`/api/my/wiki/posts`, {
-            params
-        })
-    },
-    // 删除我的百科攻略
-    delete(post_id) {
-        return $helper().put(`/api/my/wiki/post/${post_id}/remove`)
     },
     // 获取兼容攻略
     async handleMix(source_type, source_id, client, params) {
@@ -128,10 +140,10 @@ const wiki = {
     },
 }
 
-const wikiComment = {
+export const wikiComment = {
     // 百科评论列表
     list({ type, id }, params) {
-        return $helper().get(`/api/wiki/comments`, {
+        return $cms().get(`/api/cms/wiki/comment`, {
             params: {
                 ...params,
                 type,
@@ -139,20 +151,14 @@ const wikiComment = {
             }
         })
     },
-    post({ data }, params) {
-        return $helper().post(`/api/wiki/comment`, {
-            ...data
-        }, {
-            params
-        })
+    post(data) {
+        return $cms().post(`/api/cms/wiki/comment`, data)
     },
-    // 删除我的百科评论
     delete(comment_id) {
-        return $helper().put(`/api/my/wiki/comment/${comment_id}/remove`)
+        return $cms().delete(`/api/cms/wiki/comment/${comment_id}`)
     },
-    // 获取我的百科评论列表
     myList(params) {
-        return $helper().get(`/api/my/wiki/comments`, {
+        return $cms().get(`/api/cms/wiki/comment/mine`, {
             params
         })
     },
@@ -163,5 +169,3 @@ const wikiComment = {
         return $cms().put(`/api/cms/manage/wiki/comment/${comment_id}/top`, data)
     },
 }
-
-export { wiki, wikiComment };
