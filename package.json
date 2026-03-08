@@ -1,6 +1,6 @@
 {
     "name": "@jx3box/jx3box-common",
-    "version": "9.0.7",
+    "version": "9.0.8",
     "description": "JX3BOX公共基础模块",
     "main": "main.js",
     "repository": {
@@ -14,8 +14,10 @@
         "dayjs": "^1.11.10",
         "fingerprintjs2": "^2.1.4",
         "localforage": "^1.7.3",
-        "uuid": "^9.0.0",
-        "vue": "^2.6.12"
+        "uuid": "^9.0.0"
+    },
+    "peerDependencies": {
+        "vue": "^2.6.12 || ^3.0.0"
     },
     "devDependencies": {
         "@types/node": "^18.7.23"

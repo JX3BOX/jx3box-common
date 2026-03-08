@@ -1,9 +1,11 @@
 // ❌统计上报
 // 已经废弃，使用matomo替代
 import { Reporter } from "@jx3box/reporter";
-import { __Domain } from "../data/jx3box.json";
+import jx3boxData from "../data/jx3box.json";
 import { v4 as uuidv4 } from "uuid";
 import User from "./user";
+
+const { __Domain } = jx3boxData;
 
 /**
  * 16进制转int

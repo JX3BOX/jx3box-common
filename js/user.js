@@ -1,10 +1,13 @@
 // 用户信息调用基础模块
 import { showAvatar } from "./utils";
 import { $pay, $cms } from "./api";
-import { __Links, default_avatar, __userLevel } from "../data/jx3box.json";
-import { tokenExpires } from "../data/conf.json";
+import jx3boxData from "../data/jx3box.json";
+import confData from "../data/conf.json";
 import Fingerprint2 from "fingerprintjs2";
 import { getTokenFromUrl } from "./utils";
+
+const { __Links, default_avatar, __userLevel } = jx3boxData;
+const { tokenExpires } = confData;
 
 class User {
     constructor() {

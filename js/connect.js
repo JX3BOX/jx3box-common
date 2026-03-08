@@ -1,6 +1,9 @@
 // 第三方登录
-import { __server } from "../data/jx3box.json";
+import jx3boxData from "../data/jx3box.json";
 import oauth from "../data/oauth.json";
+
+const { __server } = jx3boxData;
+
 const connect = {
     github: `${oauth.github.authorize_uri}?client_id=${oauth.github.id}&redirect_uri=${__server}${oauth.github.callback}&state=login`,
     qq: `${oauth.qq.authorize_uri}?client_id=${oauth.qq.id}&redirect_uri=${__server}${oauth.qq.callback}&response_type=code&scope=get_user_info&state=login`,
