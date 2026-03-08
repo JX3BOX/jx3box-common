@@ -1,10 +1,22 @@
+html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, "Microsoft YaHei", Trebuchet MS, Calibri,
-        BlinkMacSystemFont, Segoe UI, Helvetica Neue, Helvetica, sans-serif;
     text-rendering: optimizelegibility;
-    background-color: #fff;
+}
+/* 顶部回弹露出的颜色 */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 50vh; /* 够大：回弹再狠也不露白 */
+    z-index: -1; /* 放到页面内容后面 */
+    pointer-events: none;
 }
 a {
     text-decoration: none;
