@@ -23,3 +23,8 @@ import User from "@jx3box/jx3box-common/js/user.js";
 - [axios](./docs/axios.md) 拦截器
 - [https](./docs/https.md) 请求封装
 - [types](./docs/types.md) 类型定义
+
+
+## 外部lib
++ font-awesome：`<link href="https://cdn.jx3box.com/lib/css/font-awesome/7.1.0/css/all.min.css" rel="stylesheet" />`
++ lucide：`<script src="https://cdn.jx3box.com/lib/lucide/0.577.0/lucide.min.js"></script>`

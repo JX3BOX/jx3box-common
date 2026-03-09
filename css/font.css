@@ -1,7 +1,7 @@
 /* Inter - Variable (normal) */
 @font-face {
     font-family: "Inter";
-    src: url("https://cdn.jx3box.com/static/jx3box-common/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+    src: url("https://cdn.jx3box.com/lib/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -10,7 +10,7 @@
 /* Inter - Variable (italic) */
 @font-face {
     font-family: "Inter";
-    src: url("https://cdn.jx3box.com/static/jx3box-common/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+    src: url("https://cdn.jx3box.com/lib/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
     font-weight: 100 900;
     font-style: italic;
     font-display: swap;
@@ -19,7 +19,7 @@
 /* Noto Sans SC - Variable (Chinese) */
 @font-face {
     font-family: "Noto Sans SC";
-    src: url("https://cdn.jx3box.com/static/jx3box-common/fonts/Noto_Sans_SC/NotoSansSC-VariableFont_wght.ttf") format("truetype");
+    src: url("https://cdn.jx3box.com/lib/fonts/Noto_Sans_SC/NotoSansSC-VariableFont_wght.ttf") format("truetype");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
