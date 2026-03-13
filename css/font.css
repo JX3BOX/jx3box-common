@@ -26,10 +26,15 @@
 }
 
 :root {
-    --ion-font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    --inter-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    --noto-font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    --apple-font-family: -apple-system, Microsoft YaHei, Trebuchet MS, Calibri, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
         Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 body {
-    font-family: var(--ion-font-family);
+    font-family: var(--apple-font-family);
 }
+

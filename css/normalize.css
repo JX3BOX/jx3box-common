@@ -1,9 +1,9 @@
 html {
-    -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
 }
 body {
     margin: 0;
+    -webkit-font-smoothing: antialiased;
     text-rendering: optimizelegibility;
 }
 a {
