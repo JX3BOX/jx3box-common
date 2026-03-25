@@ -52,7 +52,9 @@ function getClientEnv() {
 }
 
 function isLocalLikeHost(hostname) {
-    const host = String(hostname || "").trim().toLowerCase();
+    const host = String(hostname || "")
+        .trim()
+        .toLowerCase();
     if (!host) return false;
     if (host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0") return true;
     if (host.endsWith(".local")) return true;
@@ -135,7 +137,7 @@ function installInterceptors(target, options) {
                 }
             }
             return throwError(err);
-        }
+        },
     );
 }
 
@@ -160,7 +162,7 @@ function installStandardInterceptors(target, options) {
                 }
             }
             return throwError(err);
-        }
+        },
     );
 }
 
@@ -180,7 +182,7 @@ function installHelperInterceptors(target, options) {
                 loadDefaultRequestErrorPop(err, popType);
             }
             return throwError(err);
-        }
+        },
     );
 }
 
@@ -286,6 +288,11 @@ function $http(options) {
     return ins;
 }
 
+function $pull(options) {
+    const requestDomain = (options && options.domain) || readEnv("VUE_APP_PULL_API");
+    return $next(Object.assign({}, options, { domain: requestDomain, serviceKey: "pull" }));
+}
+
 export {
     axios,
     SSE,
@@ -297,6 +304,7 @@ export {
     $pay,
     $lua,
     $http,
+    $pull,
     // 兼容：少数脚本会直接用到拦截器
     installInterceptors,
     installStandardInterceptors,
