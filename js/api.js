@@ -32,6 +32,7 @@ function getClientEnv() {
             VUE_APP_LUA_API: process.env.VUE_APP_LUA_API,
             VUE_APP_NODE_API: process.env.VUE_APP_NODE_API,
             VUE_APP_HELPER_API: process.env.VUE_APP_HELPER_API,
+            VUE_APP_PULL_API: process.env.VUE_APP_PULL_API,
         });
     } catch (e) {
         // noop
@@ -289,7 +290,7 @@ function $http(options) {
 }
 
 function $pull(options) {
-    const requestDomain = (options && options.domain) || readEnv("VUE_APP_PULL_API");
+    const requestDomain = (options && options.domain) || readEnv("VUE_APP_PULL_API") || domains.__pull;
     return $next(Object.assign({}, options, { domain: requestDomain, serviceKey: "pull" }));
 }
 
