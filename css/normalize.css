@@ -4,6 +4,7 @@ html {
 body {
     margin: 0;
     text-rendering: optimizelegibility;
+    font-family:var(--apple-font-family);
 }
 a {
     text-decoration: none;
