@@ -277,7 +277,7 @@ export function getTypeLabel(type) {
 
 // 其它工具函数
 export function buildTarget(edge = 1025) {
-    return window.innerWidth < edge ? "_self" : "_blank";
+    return (typeof window !== "undefined" && window.innerWidth < edge) ? "_self" : "_blank";
 }
 
 /**
@@ -301,7 +301,7 @@ export function ts2str(timestamp, opt = { polished: true, separator: "-" }) {
 
 // 剑三
 export function jx3ClientType() {
-    return location.hostname.includes("origin") ? 2 : 1;
+    return (typeof location !== "undefined" && location.hostname.includes("origin")) ? 2 : 1;
 }
 
 /**
@@ -312,7 +312,8 @@ export function jx3ClientType() {
 export function extractTextContent(str) {
     if (!str || typeof str !== "string") return [];
     const innerHTML = str.replace(/<Text>(.*?)<\/text>/gimsy, `<span $1></span>`);
-    const parser = new DOMParser();
+    const parser = new (typeof DOMParser !== "undefined" ? DOMParser : Object)();
+    if (typeof parser.parseFromString !== "function") return [];
     const doc = parser.parseFromString(innerHTML, "text/html");
     const spans = doc.querySelectorAll("span");
     const result = [];
@@ -362,7 +363,7 @@ export function getMedalLink(event_id, subtype) {
 
 export function convertUrlToProtocol(url) {
     const pattern = /https?:\/\/([^/.]+)\.jx3box\.com\/(.*)/;
-    const match = url.match(pattern);
+    const match = url?.match(pattern);
 
     if (match) {
         const protocol = match[1];
@@ -379,7 +380,7 @@ export function convertUrlToProtocol(url) {
  * 判断当前网页是否在小程序环境打开
  */
 export function isMiniProgram() {
-    return navigator.userAgent.toLowerCase().includes("miniprogram");
+    return typeof navigator !== "undefined" && navigator.userAgent?.toLowerCase().includes("miniprogram");
 }
 
 /**
@@ -387,18 +388,21 @@ export function isMiniProgram() {
  * 判断url是否包含__env=app
  */
 export function isApp() {
-    return new URLSearchParams(window.location.search).get("__env") === "app" || localStorage.getItem("__env") === "app";
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).get("__env") === "app" || (typeof localStorage !== "undefined" && localStorage.getItem("__env") === "app");
 }
 
 export function miniprogramHack() {
+    if (typeof document === "undefined") return;
     document.addEventListener("DOMContentLoaded", function () {
         // 检查 html 标签是否有 wechat-miniprogram 类
-        if (document.documentElement.classList.contains("wechat-miniprogram")) {
+        if (document.documentElement?.classList.contains("wechat-miniprogram")) {
             // 为整个 document 添加一个点击事件监听器
             document.addEventListener("click", function (event) {
-                // 检查被点击的元素是否是一个链接
-                if (event.target.tagName === "A") {
-                    var href = event.target.getAttribute("href");
+                // 检查被点击元素或其父元素是否是一个链接
+                const target = event.target?.closest?.("a");
+                if (target) {
+                    var href = target.getAttribute("href") || "";
 
                     // 检查是否是相对链接
                     var isRelative = !href.startsWith("http://") && !href.startsWith("https://") && !href.startsWith("//");
@@ -422,13 +426,14 @@ export function miniprogramHack() {
 
 // 从url中获取参数
 function getUrlParam(name) {
+    if (typeof window === "undefined") return null;
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     return r ? decodeURIComponent(r[2]) : null;
 }
 
 export function getTokenFromUrl() {
-    const token = sessionStorage.getItem("__token");
+    const token = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("__token") : null;
 
     if (token) {
         return token;
@@ -436,7 +441,7 @@ export function getTokenFromUrl() {
 
     const __token = getUrlParam("__token");
 
-    if (__token) {
+    if (__token && typeof sessionStorage !== "undefined") {
         sessionStorage.setItem("__token", __token);
         return __token;
     }

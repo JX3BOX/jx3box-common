@@ -36,16 +36,16 @@ class User {
     // 检查当前状态
     check() {
         if (this.isLogin()) {
-            this.profile.uid = localStorage && localStorage.getItem("uid");
-            this.profile.group = (localStorage && localStorage.getItem("group")) || 1;
-            this.profile.token = localStorage && localStorage.getItem("token");
-            this.profile.name = localStorage && localStorage.getItem("name");
-            this.profile.status = localStorage && localStorage.getItem("status");
-            this.profile.bind_wx = localStorage && localStorage.getItem("bind_wx");
-            this.profile.avatar_origin = (localStorage && localStorage.getItem("avatar")) || default_avatar;
+            this.profile.uid = localStorage?.getItem("uid");
+            this.profile.group = localStorage?.getItem("group") || 1;
+            this.profile.token = localStorage?.getItem("token");
+            this.profile.name = localStorage?.getItem("name");
+            this.profile.status = localStorage?.getItem("status");
+            this.profile.bind_wx = localStorage?.getItem("bind_wx");
+            this.profile.avatar_origin = localStorage?.getItem("avatar") || default_avatar;
             this.profile.avatar = showAvatar(this.profile.avatar_origin, "s");
-            this.profile.permission = localStorage && localStorage.getItem("jx3box_permission");
-            this.profile.is_teammate = localStorage && localStorage.getItem("is_teammate");
+            this.profile.permission = localStorage?.getItem("jx3box_permission");
+            this.profile.is_teammate = localStorage?.getItem("is_teammate");
         } else {
             this.profile = this.anonymous;
         }
@@ -54,7 +54,7 @@ class User {
 
     // 更新指定缓存字段
     refresh(key, val) {
-        return localStorage.setItem(key, val);
+        return localStorage?.setItem(key, val);
     }
 
     // 判断是否已登录
@@ -63,8 +63,8 @@ class User {
         if (token) {
             return true;
         }
-        this.created_at = !localStorage.getItem("created_at") ? -Infinity : localStorage.getItem("created_at");
-        this.logged_in = localStorage.getItem("logged_in") == "true" ? true : false;
+        this.created_at = !localStorage?.getItem("created_at") ? -Infinity : localStorage?.getItem("created_at");
+        this.logged_in = localStorage?.getItem("logged_in") == "true" ? true : false;
         return this.logged_in && Date.now() - this.created_at < this.expires;
     }
 
@@ -75,15 +75,15 @@ class User {
 
     // 保存用户资料
     _save(data) {
-        localStorage.setItem("created_at", Date.now());
-        localStorage.setItem("logged_in", true);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("uid", data.uid);
-        localStorage.setItem("group", data.group);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("status", data.status);
-        localStorage.setItem("bind_wx", data.bind_wx);
-        localStorage.setItem("avatar", data.avatar);
+        localStorage?.setItem("created_at", Date.now());
+        localStorage?.setItem("logged_in", true);
+        localStorage?.setItem("token", data.token);
+        localStorage?.setItem("uid", data.uid);
+        localStorage?.setItem("group", data.group);
+        localStorage?.setItem("name", data.name);
+        localStorage?.setItem("status", data.status);
+        localStorage?.setItem("bind_wx", data.bind_wx);
+        localStorage?.setItem("avatar", data.avatar);
     }
 
     // 更新用户资料
@@ -95,7 +95,7 @@ class User {
             } catch (err) {
                 //如果localStorage不存在或已满
                 if (localStorage) {
-                    localStorage.clear();
+                    localStorage?.clear();
                     this._save(data);
                     resolve(data);
                 } else {
@@ -116,10 +116,10 @@ class User {
         return $cms()
             .post("api/cms/user/account/email/logout")
             .finally(() => {
-                localStorage.removeItem("created_at");
-                localStorage.setItem("logged_in", "false");
-                localStorage.removeItem("token");
-                localStorage.removeItem("jx3box_permission");
+                localStorage?.removeItem("created_at");
+                localStorage?.setItem("logged_in", "false");
+                localStorage?.removeItem("token");
+                localStorage?.removeItem("jx3box_permission");
             });
     }
 
@@ -131,51 +131,51 @@ class User {
 
     // 获取本地令牌
     getToken() {
-        return this.getInfo().token;
+        return this.getInfo()?.token;
     }
 
     // 获取UUID
     getUUID() {
-        return localStorage.getItem("device_id");
+        return localStorage?.getItem("device_id");
     }
 
     // 判断是否邮箱验证
     isEmailMember() {
-        return this.getInfo().group >= 8;
+        return this.getInfo()?.group >= 8;
     }
 
     // 判断是否绑定手机
     isPhoneMember() {
-        return this.getInfo().group >= 16;
+        return this.getInfo()?.group >= 16;
     }
 
     // 判断是否为管理员|编辑
     isEditor() {
-        return this.getInfo().group >= 64;
+        return this.getInfo()?.group >= 64;
     }
 
     // 判断是否为管理员|运营
     isAdmin() {
-        return this.getInfo().group >= 128;
+        return this.getInfo()?.group >= 128;
     }
 
     // 判断是否为管理员|开发
     isDeveloper() {
-        return this.getInfo().group >= 256;
+        return this.getInfo()?.group >= 256;
     }
 
     // 判断是否为超管
     isSuperAdmin() {
-        return this.getInfo().group >= 512;
+        return this.getInfo()?.group >= 512;
     }
 
     // 判断是否为签约作者
     isSuperAuthor() {
         if (this.isLogin()) {
             return $cms()
-                .get("/api/cms/user/is_super_author/" + this.getInfo().uid)
+                .get("/api/cms/user/is_super_author/" + this.getInfo()?.uid)
                 .then((res) => {
-                    return res.data.data;
+                    return res?.data?.data;
                 });
         } else {
             return Promise.resolve(false);
@@ -184,12 +184,12 @@ class User {
 
     // 判断是否为团队成员
     isTeammate() {
-        return this.getInfo().is_teammate == "true";
+        return this.getInfo()?.is_teammate == "true";
     }
 
     // 是否绑定微信
     hasBindwx() {
-        return this.getInfo().bind_wx;
+        return this.getInfo()?.bind_wx;
     }
 
     // PRE身份判断

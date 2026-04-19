@@ -132,7 +132,7 @@ function installInterceptors(target, options) {
         (err) => {
             if (!options || !options.mute) {
                 if (err?.response?.data?.msg) {
-                    loadPop(err.response.data.msg, popType);
+                    loadPop(err?.response?.data?.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err, popType);
                 }
@@ -157,7 +157,7 @@ function installStandardInterceptors(target, options) {
         (err) => {
             if (!options || !options.mute) {
                 if (err?.response?.data?.msg) {
-                    loadPop(err.response.data.msg, popType);
+                    loadPop(err?.response?.data?.msg, popType);
                 } else {
                     loadDefaultRequestErrorPop(err, popType);
                 }

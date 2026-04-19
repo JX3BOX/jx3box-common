@@ -63,7 +63,7 @@ function postHistory(data) {
  * @param {*} data.banner 例如：文章封面，帖子封面
  * @returns 
  */
-function postReadHistory(data) {
+function postReadHistory(data = {}) {
     const {id, category, subcategory, visible_type, author_id, banner, contentMetaId} = data;
     if (visible_type < 2) return Promise.resolve();
     // return userRequest.post(`/api/next2/userdata/common-read-history/${category}/${subcategory}/${id}`, {visible_type, author_id, banner});

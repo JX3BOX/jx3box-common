@@ -69,7 +69,7 @@ export function reportNow(binding) {
     const { use_query = false, caller, data } = binding;
     const R = new Reporter({
         caller,
-        userId: User.getInfo().uid,
+        userId: User.getInfo()?.uid,
         use_query: use_query,
     });
     R.p({ uuid: getUUID(), cookies: getCookies(), ...data });
@@ -102,7 +102,7 @@ const reporter = {
                 const R = new Reporter({
                     caller,
                     use_query, // 上报当前页面中url中的参数 默认false
-                    userId: User.getInfo().uid, // 当前登录用户id
+                    userId: User.getInfo()?.uid, // 当前登录用户id
                 });
                 el.clickHandler = function () {
                     R.p({ uuid: getUUID(), cookies: getCookies(), ...data });

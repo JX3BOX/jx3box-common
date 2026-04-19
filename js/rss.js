@@ -24,7 +24,7 @@ export const getRss = () => {
  * @returns {number} returns.data.total 订阅总数
  * @returns {string} returns.msg 响应消息
  */
-export const getAuthorRss = ({id}) => {
+export const getAuthorRss = ({id} = {}) => {
     return $next({mute: true}).get(`/api/next2/rss/overview/author/${id}`);
 }
 
@@ -38,7 +38,7 @@ export const getAuthorRss = ({id}) => {
  * @returns {number} returns.data.total 订阅总数
  * @returns {string} returns.msg 响应消息
  */
-export const getCommunityRss = ({id}) => {
+export const getCommunityRss = ({id} = {}) => {
     return $next({mute: true}).get(`/api/next2/rss/overview/community/${id}`);
 }
 
@@ -53,7 +53,7 @@ export const getCommunityRss = ({id}) => {
  * @returns {number} returns.data.total 订阅总数
  * @returns {string} returns.msg 响应消息
  */
-export const getPostRss = ({type, id}) => {
+export const getPostRss = ({type, id} = {}) => {
     return $next({mute: true}).get(`/api/next2/rss/overview/posts/${type}/${id}`);
 }
 
@@ -68,7 +68,7 @@ export const getPostRss = ({type, id}) => {
  * @returns {number} returns.data.total 订阅总数
  * @returns {string} returns.msg 响应消息
  */
-export const getWikiRss = ({type, id}) => {
+export const getWikiRss = ({type, id} = {}) => {
     return $next({mute: true}).get(`/api/next2/rss/overview/wiki/${type}/${id}`);
 }
 
@@ -82,7 +82,7 @@ export const getWikiRss = ({type, id}) => {
  * @returns {Array} returns.data.list 排行列表
  * @returns {string} returns.msg 响应消息
  */
-export const getAuthorRank = ({params}) => {
+export const getAuthorRank = ({params} = {}) => {
     return $next().get("/api/next2/rss/rank/author", {
         params
     });
@@ -98,7 +98,7 @@ export const getAuthorRank = ({params}) => {
  * @returns {Array} returns.data.list 排行列表
  * @returns {string} returns.msg 响应消息
  */
-export const getCommunityRank = ({params}) => {
+export const getCommunityRank = ({params} = {}) => {
     return $next().get("/api/next2/rss/rank/community", {
         params
     });
@@ -115,7 +115,7 @@ export const getCommunityRank = ({params}) => {
  * @returns {Array} returns.data.list 排行列表
  * @returns {string} returns.msg 响应消息
  */
-export const getPostRank = ({type, params}) => {
+export const getPostRank = ({type, params} = {}) => {
     return $next().get(`/api/next2/rss/rank/posts/${type}`, {
         params
     });
@@ -132,7 +132,7 @@ export const getPostRank = ({type, params}) => {
  * @returns {Array} returns.data.list 排行列表
  * @returns {string} returns.msg 响应消息
  */
-export const getWikiRank = ({type, params}) => {
+export const getWikiRank = ({type, params} = {}) => {
     return $next().get(`/api/next2/rss/rank/wiki/${type}`, {
         params
     });
@@ -146,7 +146,7 @@ export const getWikiRank = ({type, params}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeAuthor = ({id, data}) => {
+export const subscribeAuthor = ({id, data} = {}) => {
     return $next().post(`/api/next2/rss/subscribe/author/${id}`, data);
 }
 
@@ -157,7 +157,7 @@ export const subscribeAuthor = ({id, data}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const unsubscribeAuthor = ({id}) => {
+export const unsubscribeAuthor = ({id} = {}) => {
     return $next().delete(`/api/next2/rss/subscribe/author/${id}`);
 }
 
@@ -169,7 +169,7 @@ export const unsubscribeAuthor = ({id}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeCommunity = ({id, data}) => {
+export const subscribeCommunity = ({id, data} = {}) => {
     return $next().post(`/api/next2/rss/subscribe/community/${id}`, data);
 }
 
@@ -180,7 +180,7 @@ export const subscribeCommunity = ({id, data}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const unsubscribeCommunity = ({id}) => {
+export const unsubscribeCommunity = ({id} = {}) => {
     return $next().delete(`/api/next2/rss/subscribe/community/${id}`);
 }
 
@@ -193,7 +193,7 @@ export const unsubscribeCommunity = ({id}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribePost = ({type, id, data}) => {
+export const subscribePost = ({type, id, data} = {}) => {
     return $next().post(`/api/next2/rss/subscribe/posts/${type}/${id}`, data);
 }
 
@@ -205,7 +205,7 @@ export const subscribePost = ({type, id, data}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const unsubscribePost = ({type, id}) => {
+export const unsubscribePost = ({type, id} = {}) => {
     return $next().delete(`/api/next2/rss/subscribe/posts/${type}/${id}`);
 }
 
@@ -218,7 +218,7 @@ export const unsubscribePost = ({type, id}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const subscribeWiki = ({type, id, data}) => {
+export const subscribeWiki = ({type, id, data} = {}) => {
     return $next().post(`/api/next2/rss/subscribe/wiki/${type}/${id}`, data);
 }
 
@@ -230,6 +230,6 @@ export const subscribeWiki = ({type, id, data}) => {
  * @returns {number} returns.code 响应代码
  * @returns {string} returns.msg 响应消息
  */
-export const unsubscribeWiki = ({type, id}) => {
+export const unsubscribeWiki = ({type, id} = {}) => {
     return $next().delete(`/api/next2/rss/subscribe/wiki/${type}/${id}`);
 }
