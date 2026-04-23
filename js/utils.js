@@ -389,7 +389,14 @@ export function isMiniProgram() {
  */
 export function isApp() {
     if (typeof window === "undefined") return false;
-    return new URLSearchParams(window.location.search).get("__env") === "app" || (typeof localStorage !== "undefined" && localStorage.getItem("__env") === "app");
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const hash = window.location.hash || "";
+    const hashQueryIndex = hash.indexOf("?");
+    const hashSearch = hashQueryIndex > -1 ? hash.slice(hashQueryIndex) : "";
+    const hashParams = new URLSearchParams(hashSearch);
+
+    return searchParams.get("__env") === "app" || hashParams.get("__env") === "app" || (typeof localStorage !== "undefined" && localStorage.getItem("__env") === "app");
 }
 
 export function miniprogramHack() {
