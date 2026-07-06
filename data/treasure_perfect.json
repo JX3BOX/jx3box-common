@@ -65,7 +65,6 @@
             {
                 "id": 1,
                 "key": "sssh",
-                "zIndex": 1,
                 "image": "world/1.png",
                 "activeImage": "world/1_act.png",
                 "imageStyle": {
@@ -81,7 +80,6 @@
             {
                 "id": 90,
                 "key": "lnrh",
-                "zIndex": 2,
                 "image": "world/90.png",
                 "activeImage": "world/90_act.png",
                 "imageStyle": {
@@ -97,7 +95,6 @@
             {
                 "id": 135,
                 "key": "fgzm",
-                "zIndex": 3,
                 "image": "world/135.png",
                 "activeImage": "world/135_act.png",
                 "imageStyle": {
@@ -113,7 +110,6 @@
             {
                 "id": 111,
                 "key": "zhg",
-                "zIndex": 4,
                 "image": "world/111.png",
                 "activeImage": "world/111_act.png",
                 "imageStyle": {
@@ -129,7 +125,6 @@
             {
                 "id": 154,
                 "key": "gdsg",
-                "zIndex": 5,
                 "image": "world/154.png",
                 "activeImage": "world/154_act.png",
                 "imageStyle": {
@@ -145,7 +140,6 @@
             {
                 "id": 3,
                 "key": "yylj",
-                "zIndex": 6,
                 "image": "world/3.png",
                 "activeImage": "world/3_act.png",
                 "imageStyle": {
@@ -161,7 +155,6 @@
             {
                 "id": 21,
                 "key": "swbj",
-                "zIndex": 7,
                 "image": "world/21.png",
                 "activeImage": "world/21_act.png",
                 "imageStyle": {
@@ -177,7 +170,6 @@
             {
                 "id": 126,
                 "key": "swxf",
-                "zIndex": 8,
                 "image": "world/126.png",
                 "activeImage": "world/126_act.png",
                 "imageStyle": {
@@ -193,7 +185,6 @@
             {
                 "id": 88,
                 "key": "xxjt",
-                "zIndex": 9,
                 "image": "world/88.png",
                 "activeImage": "world/88_act.png",
                 "imageStyle": {
@@ -209,7 +200,6 @@
             {
                 "id": 142,
                 "key": "gsyj",
-                "zIndex": 10,
                 "image": "world/142.png",
                 "activeImage": "world/142_act.png",
                 "imageStyle": {
@@ -225,7 +215,6 @@
             {
                 "id": 136,
                 "key": "kwyh",
-                "zIndex": 11,
                 "image": "world/136.png",
                 "activeImage": "world/136_act.png",
                 "imageStyle": {
@@ -237,11 +226,24 @@
                     "top": 289,
                     "right": 168
                 }
+            },     {
+                "id": 163,
+                "key": "hrzx",
+                "image": "world/163.png",
+                "activeImage": "world/163_act.png",
+                "imageStyle": {
+                    "top": 235,
+                    "left": 427,
+                    "width": 146
+                },
+                "labelStyle": {
+                    "top": 210,
+                    "right": 204
+                }
             },
             {
                 "id": 106,
                 "key": "qqj",
-                "zIndex": 12,
                 "image": "world/106.png",
                 "activeImage": "world/106_act.png",
                 "imageStyle": {
@@ -257,7 +259,6 @@
             {
                 "id": 83,
                 "key": "zzwg",
-                "zIndex": 13,
                 "image": "world/83.png",
                 "activeImage": "world/83_act.png",
                 "imageStyle": {
@@ -273,7 +274,6 @@
             {
                 "id": 66,
                 "key": "jcs",
-                "zIndex": 14,
                 "image": "world/66.png",
                 "activeImage": "world/66_act.png",
                 "imageStyle": {
@@ -289,7 +289,6 @@
             {
                 "id": 2,
                 "key": "scqf",
-                "zIndex": 15,
                 "image": "world/2.png",
                 "activeImage": "world/2_act.png",
                 "imageStyle": {
@@ -305,7 +304,6 @@
             {
                 "id": 78,
                 "key": "tjh",
-                "zIndex": 16,
                 "image": "world/78.png",
                 "activeImage": "world/78_act.png",
                 "imageStyle": {
@@ -321,7 +319,6 @@
             {
                 "id": 121,
                 "key": "rjg",
-                "zIndex": 17,
                 "image": "world/121.png",
                 "activeImage": "world/121_act.png",
                 "imageStyle": {
@@ -337,7 +334,6 @@
             {
                 "id": 104,
                 "key": "wldg",
-                "zIndex": 18,
                 "image": "world/104.png",
                 "activeImage": "world/104_act.png",
                 "imageStyle": {
