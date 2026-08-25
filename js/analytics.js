@@ -1,0 +1,10 @@
+export { SCHEMA_VERSION, SDK_VERSION, createAnalytics } from "./analytics/client.js";
+export { createIdentity, normalizeInstanceId, resolveInstanceId } from "./analytics/identity.js";
+export { DEFAULT_SCROLL_THRESHOLDS, TRACK_META_KEY, getClickPosition, installAutoCapture } from "./analytics/heatmap.js";
+export { createPageRegistry, createRemotePageResolver, normalizePageDefinition } from "./analytics/registry.js";
+export { createEventQueue } from "./analytics/queue.js";
+export { createQueueStorage } from "./analytics/storage.js";
+export { createTransport } from "./analytics/transport.js";
+export { normalizeRoutePath as sanitizeRoutePath, sanitizeProperties, shouldIgnoreElement } from "./analytics/privacy.js";
+export { createUuid, normalizeSampleRate, shouldSample, stableSampleScore } from "./analytics/utils.js";
+export { createVue3AnalyticsPlugin } from "./analytics/vue3.js";

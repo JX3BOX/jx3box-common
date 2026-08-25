@@ -1,5 +1,7 @@
 /temp
 node_modules
 .github
+/test
+/tool
 other.md
 .gitignore
