@@ -1,4 +1,5 @@
 import { TRACK_META_KEY, installAutoCapture } from "./heatmap.js";
+import { installVueRouterAnalytics } from "./navigation.js";
 import { sanitizeKey } from "./privacy.js";
 import { clamp } from "./utils.js";
 
@@ -7,11 +8,12 @@ const EXPOSURE_STATE_KEY = "__jx3boxAnalyticsExposure__";
 function normalizeTrackValue(value) {
     if (typeof value === "string") return { name: value };
     if (!value || typeof value !== "object") return {};
+    const interactionTarget = value.interaction_target || value.interactionTarget || {};
     return {
         name: value.name || value.event_name,
-        id: value.id || value.target_key,
-        target_type: value.target_type,
-        target_id: value.target_id,
+        id: value.id || value.target_key || interactionTarget.key,
+        target_type: value.target_type || interactionTarget.type,
+        target_id: value.target_id || interactionTarget.id,
         props: value.props || value.properties,
     };
 }
@@ -197,17 +199,39 @@ function createVue3AnalyticsPlugin(client, options) {
     if (!client || typeof client.track !== "function") throw new Error("analytics client is required");
     const settings = options || {};
     const runtime = settings.runtime || (typeof window !== "undefined" ? window : {});
+    const routerHandle = settings.router
+        ? installVueRouterAnalytics(settings.navigationController || client, settings.router, Object.assign({}, settings, {
+            // Auto capture owns visibility/pagehide Beacon delivery. The Router
+            // still finalizes traffic first, avoiding a duplicate Beacon batch.
+            flushBeaconOnPagehide: false,
+            runtime,
+        }))
+        : null;
     const autoCapture = installAutoCapture(client, {
         runtime,
         scrollThresholds: settings.scrollThresholds,
     });
+
+    function isRouterMode() {
+        if (settings.routerMode === true || settings.navigationMode === "router" || settings.router) return true;
+        return typeof client.getNavigationOwner === "function" && client.getNavigationOwner() === "router";
+    }
+
+    function bindPageMetadata(element, page) {
+        if (typeof client.setPageMetadata === "function") client.setPageMetadata(element, page);
+    }
+
+    function unbindPageMetadata(element) {
+        if (typeof client.removePageMetadata === "function") client.removePageMetadata(element);
+    }
 
     const trackPageDirective = {
         mounted: function (element, binding) {
             const page = normalizePageValue(binding.value, runtime);
             element.__jx3boxAnalyticsPageSignature__ = pageSignature(page);
             element.__jx3boxAnalyticsPageKey__ = page.page_key;
-            client.enterPage(page);
+            if (isRouterMode()) bindPageMetadata(element, page);
+            else client.enterPage(page);
         },
         updated: function (element, binding) {
             const page = normalizePageValue(binding.value, runtime);
@@ -215,10 +239,12 @@ function createVue3AnalyticsPlugin(client, options) {
             if (signature === element.__jx3boxAnalyticsPageSignature__) return;
             element.__jx3boxAnalyticsPageSignature__ = signature;
             element.__jx3boxAnalyticsPageKey__ = page.page_key;
-            client.enterPage(page);
+            if (isRouterMode()) bindPageMetadata(element, page);
+            else client.enterPage(page);
         },
         beforeUnmount: function (element) {
-            client.leavePage(element.__jx3boxAnalyticsPageKey__);
+            if (isRouterMode()) unbindPageMetadata(element);
+            else client.leavePage(element.__jx3boxAnalyticsPageKey__);
             delete element.__jx3boxAnalyticsPageSignature__;
             delete element.__jx3boxAnalyticsPageKey__;
         },
@@ -284,6 +310,7 @@ function createVue3AnalyticsPlugin(client, options) {
             if (typeof app.provide === "function") app.provide("analytics", client);
         },
         destroy: function () {
+            if (routerHandle) routerHandle.destroy();
             autoCapture.destroy();
             client.destroy();
         },

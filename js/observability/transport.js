@@ -341,7 +341,7 @@ function createObservabilityTransport(options) {
         beaconBodyFactory: createJsonBlobFactory(settings),
     }));
 
-    async function send(items) {
+    async function send(items, context) {
         const input = Array.isArray(items) ? items : [];
         const groups = prepareGroups(input, kind, now());
         if (!groups.length) {
@@ -351,7 +351,7 @@ function createObservabilityTransport(options) {
         const groupResults = [];
         const confirmedEventIds = [];
         for (const group of groups) {
-            const rawResult = await baseTransport.send(group);
+            const rawResult = await baseTransport.send(group, context);
             const status = Number(rawResult && rawResult.status) || 0;
             const normalizedResult = status >= 200 && status < 300
                 ? rawResult

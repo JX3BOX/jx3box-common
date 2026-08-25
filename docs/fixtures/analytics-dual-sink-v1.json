@@ -1,0 +1,150 @@
+{
+    "fixture_version": "analytics-dual-sink-v1",
+    "privacy_assertions": {
+        "payload_fields_that_must_be_absent": [
+            "query",
+            "hash",
+            "full_url",
+            "fullPath",
+            "href",
+            "location"
+        ],
+        "route_context_is_template_or_sanitized_path_only": true
+    },
+    "canonical_event": {
+        "schema_version": 1,
+        "event_id": "canonical-page-view-0001",
+        "instance_id": "instance-fixture-0001",
+        "session_id": "session-fixture-0001",
+        "sequence_no": 1,
+        "page_view_id": "page-view-fixture-0001",
+        "occurred_at": "2026-08-26T01:20:30.000Z",
+        "timezone_offset": -480,
+        "event_type": "page_view",
+        "event_name": "page_view",
+        "page_key": "index.home",
+        "route_name": "index",
+        "route_pattern": "/index/:section?",
+        "route_path": "/index",
+        "navigation_type": "router",
+        "is_entry": true,
+        "layout_version": "index-2026-08",
+        "public_target": {
+            "key": "section",
+            "type": "section",
+            "id": "home"
+        },
+        "product": "jx3box",
+        "project": "index",
+        "client": "web",
+        "surface": "pc_web",
+        "game_client": "std",
+        "platform": "web",
+        "domain": "www.jx3box.com",
+        "referrer_domain": "ref.example",
+        "display_mode": "browser",
+        "sample_rate": 1
+    },
+    "traffic_finalization": {
+        "duration_ms": 32000,
+        "is_exit": true
+    },
+    "tracking": {
+        "request": {
+            "schema_version": 1,
+            "sdk_version": "1.1.0",
+            "events": [
+                {
+                    "schema_version": 1,
+                    "event_id": "canonical-page-view-0001",
+                    "instance_id": "instance-fixture-0001",
+                    "session_id": "session-fixture-0001",
+                    "sequence_no": 1,
+                    "page_view_id": "page-view-fixture-0001",
+                    "occurred_at": "2026-08-26T01:20:30.000Z",
+                    "timezone_offset": -480,
+                    "event_type": "page_view",
+                    "event_name": "page_view",
+                    "page_key": "index.home",
+                    "route_name": "index",
+                    "route_pattern": "/index/:section?",
+                    "route_path": "/index",
+                    "navigation_type": "router",
+                    "is_entry": true,
+                    "layout_version": "index-2026-08",
+                    "public_target": {
+                        "key": "section",
+                        "type": "section",
+                        "id": "home"
+                    },
+                    "product": "jx3box",
+                    "project": "index",
+                    "client": "web",
+                    "surface": "pc_web",
+                    "game_client": "std",
+                    "platform": "web",
+                    "domain": "www.jx3box.com",
+                    "referrer_domain": "ref.example",
+                    "display_mode": "browser",
+                    "sample_rate": 1
+                }
+            ]
+        },
+        "response": {
+            "code": 0,
+            "data": {
+                "items": [
+                    {
+                        "event_id": "canonical-page-view-0001",
+                        "status": "accepted"
+                    }
+                ],
+                "blocked": null,
+                "rule_version": "tracking-2026-08-26"
+            }
+        }
+    },
+    "traffic": {
+        "request": {
+            "instance_id": "instance-fixture-0001",
+            "session_id": "session-fixture-0001",
+            "surface": "pc_web",
+            "domain": "www.jx3box.com",
+            "game_client": "std",
+            "entry_source": {
+                "referrer": "https://ref.example/"
+            },
+            "events": [
+                {
+                    "event_id": "canonical-page-view-0001",
+                    "occurred_at": "2026-08-26T01:20:30.000Z",
+                    "project": "index",
+                    "path": "/index",
+                    "route_pattern": "/index/:section?",
+                    "page_key": "index.home",
+                    "target": {
+                        "type": "section",
+                        "id": "home"
+                    },
+                    "sequence": 1,
+                    "is_entry": true,
+                    "is_exit": true,
+                    "duration_ms": 32000
+                }
+            ]
+        },
+        "response": {
+            "code": 0,
+            "data": {
+                "items": [
+                    {
+                        "event_id": "canonical-page-view-0001",
+                        "status": "duplicate"
+                    }
+                ],
+                "blocked": null,
+                "rule_version": "traffic-2026-08-26"
+            }
+        }
+    }
+}

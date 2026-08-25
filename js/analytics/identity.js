@@ -2,9 +2,7 @@ import { createUuid, isUuid, safeStorage } from "./utils.js";
 
 const INSTANCE_KEY = "jx3box:device_id";
 const LEGACY_INSTANCE_KEY = "device_id";
-const SESSION_KEY = "jx3box:analytics:session_id";
-const SESSION_LAST_ACTIVE_KEY = "jx3box:analytics:last_active_at";
-const SESSION_SEQUENCE_KEY = "jx3box:analytics:sequence_no";
+const DEFAULT_SESSION_NAMESPACE = "analytics";
 
 function readUuid(storage, key) {
     if (!storage) return "";
@@ -72,24 +70,56 @@ function createIdentity(options) {
     const sessionTimeout = Math.max(Number(settings.sessionTimeoutMs) || 30 * 60 * 1000, 60 * 1000);
     const sessionStorage = safeStorage(runtime.sessionStorage);
     const instanceId = resolveInstanceId(runtime, settings.instanceId);
-    let sessionId = readUuid(sessionStorage, SESSION_KEY);
-    let sequence = readNumber(sessionStorage, SESSION_SEQUENCE_KEY);
-    let lastActiveAt = readNumber(sessionStorage, SESSION_LAST_ACTIVE_KEY);
+    const rawNamespace = String(settings.sessionNamespace || DEFAULT_SESSION_NAMESPACE).trim().toLowerCase();
+    const sessionNamespace = /^[a-z0-9_-]{1,32}$/.test(rawNamespace) ? rawNamespace : DEFAULT_SESSION_NAMESPACE;
+    const sessionKey = "jx3box:" + sessionNamespace + ":session_id";
+    const sessionLastActiveKey = "jx3box:" + sessionNamespace + ":last_active_at";
+    const sessionSequenceKey = "jx3box:" + sessionNamespace + ":sequence_no";
+    let sessionId = readUuid(sessionStorage, sessionKey);
+    let sequence = readNumber(sessionStorage, sessionSequenceKey);
+    let lastActiveAt = readNumber(sessionStorage, sessionLastActiveKey);
     let sessionRotated = false;
+
+    // Multiple public packages can resolve the same shared installation identity
+    // in one window (for example Analytics and the explicitly enabled Observer).
+    // Treat sessionStorage as the source of truth before every mutation so two
+    // in-memory identity handles cannot fork the session or reuse a sequence.
+    function syncSession() {
+        const storedSessionId = readUuid(sessionStorage, sessionKey);
+        const storedSequence = readNumber(sessionStorage, sessionSequenceKey);
+        const storedLastActiveAt = readNumber(sessionStorage, sessionLastActiveKey);
+        if (storedSessionId && storedSessionId !== sessionId) {
+            sessionId = storedSessionId;
+            sequence = storedSequence;
+            lastActiveAt = storedLastActiveAt;
+            // Another handle (for example the explicitly enabled Observer)
+            // may be the first caller after the shared session times out.
+            // The Analytics owner must still observe that rotation so its next
+            // business event can derive a canonical session-resume page view.
+            sessionRotated = true;
+            return;
+        }
+        if (storedSessionId) sessionId = storedSessionId;
+        sequence = Math.max(sequence, storedSequence);
+        lastActiveAt = Math.max(lastActiveAt, storedLastActiveAt);
+    }
 
     function resetSession() {
         sessionId = createUuid(runtime);
         sequence = 0;
+        lastActiveAt = now();
         sessionRotated = true;
-        writeValue(sessionStorage, SESSION_KEY, sessionId);
-        writeValue(sessionStorage, SESSION_SEQUENCE_KEY, sequence);
+        writeValue(sessionStorage, sessionKey, sessionId);
+        writeValue(sessionStorage, sessionSequenceKey, sequence);
+        writeValue(sessionStorage, sessionLastActiveKey, lastActiveAt);
     }
 
     function touch() {
+        syncSession();
         const current = now();
         if (!sessionId || !lastActiveAt || current - lastActiveAt > sessionTimeout) resetSession();
         lastActiveAt = current;
-        writeValue(sessionStorage, SESSION_LAST_ACTIVE_KEY, lastActiveAt);
+        writeValue(sessionStorage, sessionLastActiveKey, lastActiveAt);
         return sessionId;
     }
 
@@ -99,8 +129,11 @@ function createIdentity(options) {
 
     function nextEvent() {
         touch();
+        // `touch()` synchronizes the persisted sequence immediately before the
+        // increment. JavaScript mutations in one realm are synchronous, which
+        // keeps separately constructed handles monotonic without a second ID.
         sequence += 1;
-        writeValue(sessionStorage, SESSION_SEQUENCE_KEY, sequence);
+        writeValue(sessionStorage, sessionSequenceKey, sequence);
         const snapshot = {
             instance_id: instanceId,
             session_id: sessionId,

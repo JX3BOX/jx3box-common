@@ -48,12 +48,28 @@ const bytes = browserResult.metafile.outputs[path.join(tempDir, "analytics.brows
 const exportsObject = require(path.join(tempDir, "analytics.cjs"));
 [
     "createAnalytics",
+    "createAnalyticsCore",
+    "createCompositeRuleResolver",
+    "createEventQueue",
+    "createHttpSink",
+    "createIdentity",
+    "createNavigationController",
+    "createQueueStorage",
     "createRemotePageResolver",
+    "createRemoteRuleResolver",
+    "resolveCanonicalPath",
+    "sanitizeCanonicalPath",
+    "createTrackingSink",
+    "createTrafficSink",
     "createVue3AnalyticsPlugin",
+    "installVueRouterAnalytics",
     "stableSampleScore",
 ].forEach((name) => {
     if (typeof exportsObject[name] !== "function") throw new Error(`missing analytics export: ${name}`);
 });
+if (!exportsObject.DELIVERY_STATES || exportsObject.SDK_VERSION !== "1.1.0") {
+    throw new Error("missing analytics 1.1 Journal contract exports");
+}
 
 console.log(`[analytics] browser bundle validated: ${bytes} bytes`);
 console.log(`[analytics] exports validated: ${Object.keys(exportsObject).sort().join(", ")}`);

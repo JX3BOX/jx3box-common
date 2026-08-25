@@ -76,7 +76,7 @@ function createTransport(options) {
         return envelopeFactory(events);
     }
 
-    async function send(events) {
+    async function send(events, context) {
         if (!endpoint || typeof fetchImpl !== "function") {
             return { ok: false, retryable: true, status: 0, confirmedEventIds: [] };
         }
@@ -91,12 +91,14 @@ function createTransport(options) {
                     dynamicHeaders = {};
                 }
             }
-            const response = await fetchImpl.call(runtime, endpoint, {
+            const requestOptions = {
                 method: "POST",
                 headers: Object.assign({ "Content-Type": "application/json" }, dynamicHeaders),
                 credentials,
                 body: JSON.stringify(createEnvelope(events)),
-            });
+            };
+            if (context && context.signal) requestOptions.signal = context.signal;
+            const response = await fetchImpl.call(runtime, endpoint, requestOptions);
             const status = Number(response && response.status) || 0;
             if (response && response.ok) {
                 let payload = null;
@@ -116,12 +118,15 @@ function createTransport(options) {
                 });
                 return { ok: complete, retryable: !complete, status, confirmedEventIds };
             }
-            const retryable = status === 408 || status === 425 || status === 429 || status >= 500 || status === 0;
+            // A non-2xx response is never an acknowledgement, even when it is
+            // a permanent client error. The bounded queue/retry policy decides
+            // when to reject it locally; the transport must not invent ACKs.
+            const retryable = true;
             return {
                 ok: false,
                 retryable,
                 status,
-                confirmedEventIds: retryable ? [] : ids,
+                confirmedEventIds: [],
             };
         } catch (error) {
             return { ok: false, retryable: true, status: 0, confirmedEventIds: [], error };

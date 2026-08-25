@@ -1,6 +1,7 @@
 import { safeStorage, utf8ByteLength } from "./utils.js";
 
-const STORAGE_VERSION = 1;
+const STORAGE_VERSION = 2;
+const LEGACY_STORAGE_VERSION = 1;
 
 function createQueueStorage(options) {
     const settings = options || {};
@@ -22,7 +23,7 @@ function createQueueStorage(options) {
         if (!storage) return [];
         try {
             const parsed = JSON.parse(storage.getItem(key) || "null");
-            if (!parsed || parsed.version !== STORAGE_VERSION) return [];
+            if (!parsed || (parsed.version !== STORAGE_VERSION && parsed.version !== LEGACY_STORAGE_VERSION)) return [];
             return normalize(parsed.entries);
         } catch (error) {
             return [];

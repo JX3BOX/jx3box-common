@@ -55,6 +55,13 @@ test("privacy strips query/hash and rejects sensitive or nested properties", () 
     assert.equal(analytics.sanitizeProperties({ accessToken: "secret" }, ["accessToken"]), undefined);
 });
 
+test("route patterns retain optional params and reject regex, query, or hash syntax", () => {
+    assert.equal(analytics.sanitizeRoutePattern("/item/view/:item_id/:post_id?"), "/item/view/:item_id/:post_id?");
+    assert.equal(analytics.sanitizeRoutePattern("/item/:id(\\d+)"), "");
+    assert.equal(analytics.sanitizeRoutePattern("/item/:id?token=secret"), "");
+    assert.equal(analytics.sanitizeRoutePattern("/item/:id#private"), "");
+});
+
 test("page registry matches only explicitly registered normalized paths", () => {
     const registry = analytics.createPageRegistry([
         { page_key: "index.home", paths: ["/index", "/index/"], event_types: ["page_view", "click"] },
@@ -77,6 +84,21 @@ test("queue storage enforces ttl, count, and byte bounds", () => {
     assert.deepEqual(queueStorage.load().map((entry) => entry.event.event_id), ["b", "c"]);
     now = 200_000;
     assert.deepEqual(queueStorage.load(), []);
+});
+
+test("queue storage migrates v1 but writes v2 to prevent downgrade replay", () => {
+    const key = "jx3box:analytics:queue:v1";
+    const storage = createStorage({
+        [key]: JSON.stringify({
+            version: 1,
+            entries: [{ queued_at: 95_000, event: { event_id: "legacy" } }],
+        }),
+    });
+    const queueStorage = analytics.createQueueStorage({ storage, now: () => 100_000 });
+
+    assert.deepEqual(queueStorage.load().map((entry) => entry.event.event_id), ["legacy"]);
+    queueStorage.save(queueStorage.load());
+    assert.equal(JSON.parse(storage.getItem(key)).version, 2);
 });
 
 test("queue storage degrades to an in-memory queue when persistence is unavailable", () => {

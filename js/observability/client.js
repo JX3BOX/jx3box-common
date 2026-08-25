@@ -79,6 +79,10 @@ function createClientObserver(options) {
             now,
             instanceId: resolveOption(settings.instanceId || settings.instance_id, ""),
             sessionTimeoutMs: settings.sessionTimeoutMs,
+            // Observer shares the stable installation id only. Its background
+            // errors/metrics must not extend or rotate the business Analytics
+            // session used by canonical page paths.
+            sessionNamespace: "observability",
         });
         const errorTransport = settings.errorTransport || createObservabilityTransport({
             kind: "error",

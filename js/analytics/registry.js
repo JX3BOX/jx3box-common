@@ -67,13 +67,16 @@ function createRemotePageResolver(options) {
         const page = normalizePageDefinition(pageInput);
         if (!page.page_key || typeof fetchImpl !== "function") return null;
         const domain = runtime.location && runtime.location.hostname ? runtime.location.hostname : "";
-        const cacheKey = page.page_key + ":" + domain + ":" + page.route_path;
+        const safeRoutePattern = page.route_pattern || "/";
+        const cacheKey = page.page_key + ":" + domain + ":" + safeRoutePattern;
         const cached = cache.get(cacheKey);
         if (cached && cached.expires_at > now()) return cached.value;
 
         const query = [
             "page_key=" + encodeURIComponent(page.page_key),
-            "route_path=" + encodeURIComponent(page.route_path || "/"),
+            // Config lookup never needs the user's actual dynamic path. Keep the
+            // legacy parameter name, but send the registered route template.
+            "route_path=" + encodeURIComponent(safeRoutePattern),
             "domain=" + encodeURIComponent(domain),
         ].join("&");
 
@@ -98,7 +101,7 @@ function createRemotePageResolver(options) {
                 page_key: page.page_key,
                 route_name: page.route_name,
                 route_pattern: page.route_pattern,
-                route_path: page.route_path,
+                route_path: safeRoutePattern,
                 event_types: eventTypes,
                 property_keys: Array.isArray(raw.property_keys || raw.propertyKeys) ? (raw.property_keys || raw.propertyKeys) : [],
                 enabled: true,

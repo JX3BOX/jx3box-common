@@ -229,6 +229,26 @@ test("metric transport maps queue event_id to metric_id", async () => {
     assert.deepEqual(result.confirmedEventIds, ["metric-0001"]);
 });
 
+test("observability transport forwards queue cancellation signals", async () => {
+    const signal = { aborted: false };
+    let capturedSignal;
+    const transport = transportModule.createObservabilityTransport({
+        kind: "error",
+        endpoint: "/system/stat/errors/batch",
+        fetch: async (_url, options) => {
+            capturedSignal = options.signal;
+            return response({ data: { items: [{ event_id: "event-signal-0001", status: "accepted" }] } });
+        },
+    });
+    await transport.send([{
+        event_id: "event-signal-0001",
+        _metadata: metadata,
+        _session_id: "session-a",
+        event: validError("vue"),
+    }], { signal });
+    assert.equal(capturedSignal, signal);
+});
+
 test("transport enforces payload allowlists and retries non-ACK HTTP failures", async () => {
     const transport = transportModule.createObservabilityTransport({
         kind: "error",
