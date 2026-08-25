@@ -201,13 +201,14 @@ function createVue3AnalyticsPlugin(client, options) {
     const runtime = settings.runtime || (typeof window !== "undefined" ? window : {});
     const routerHandle = settings.router
         ? installVueRouterAnalytics(settings.navigationController || client, settings.router, Object.assign({}, settings, {
-            // Auto capture owns visibility/pagehide Beacon delivery. The Router
-            // still finalizes traffic first, avoiding a duplicate Beacon batch.
-            flushBeaconOnPagehide: false,
+            // Router owns pagehide finalization and its subsequent Beacon.
             runtime,
         }))
         : null;
     const autoCapture = installAutoCapture(client, {
+        // Keep visibilitychange fallback, but do not install a second pagehide
+        // listener when Router already owns finalization + Beacon ordering.
+        flushBeaconOnPagehide: !routerHandle,
         runtime,
         scrollThresholds: settings.scrollThresholds,
     });

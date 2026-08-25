@@ -401,7 +401,7 @@ false
 
 hook 抛错时失败关闭，事件仍留本地。
 
-Beacon 是同步补交通道，不能现场等待异步 `beforeFlush`。只要队列配置了全局 hook，`flushBeacon()` 就必须先取得同一 generation、同一 Journal revision 内最近一次 fetch flush 的成功授权；带 `beforeFlush` 的 sink 还必须取得该 sink 自己的成功授权。新一轮 guard 开始、`enqueue()` 新事件或 `finalize()` 修改 Traffic payload 时会先撤销旧授权，返回 `false`、抛错、`cancelInflight()`、`clear()`、`block()` 或 `unblock()` 也都会使授权失效；配置刷新应先调用 `cancelInflight("config_refresh")`。未配置任何 hook 的 legacy/Observer 队列仍可直接使用 Beacon。
+Beacon 是同步补交通道，不能现场等待异步 `beforeFlush`。只要队列配置了全局 hook，`flushBeacon()` 就必须先取得同一 generation、同一 Journal revision 内最近一次 fetch flush 的成功授权；带 `beforeFlush` 的 sink 还必须取得该 sink 自己的成功授权。新一轮 guard 开始、`enqueue()` 新事件或普通 `finalize()` 修改 Traffic payload 时会先撤销旧授权，返回 `false`、抛错、`cancelInflight()`、`clear()`、`block()` 或 `unblock()` 也都会使授权失效；配置刷新应先调用 `cancelInflight("config_refresh")`。唯一例外是 Router 在 `pagehide` 追加的 SDK 生成字段：Queue 只在调用方显式请求、且 patch 严格限于有界 `duration_ms/is_exit/finalize_reason` 时保留当前授权，使同一监听器能先 finalize 再补交 Traffic；普通调用或超出白名单的 patch 仍会撤销授权。未配置任何 hook 的 legacy/Observer 队列仍可直接使用 Beacon。
 
 Beacon 授权只控制是否允许补交，不改变 Journal delivery 状态，也不产生 ACK。
 

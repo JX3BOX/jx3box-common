@@ -141,7 +141,7 @@ function installAutoCapture(client, options) {
 
     documentObject.addEventListener("click", handleClick, true);
     runtime.addEventListener("scroll", handleScroll, { passive: true });
-    runtime.addEventListener("pagehide", flushBeacon);
+    if (settings.flushBeaconOnPagehide !== false) runtime.addEventListener("pagehide", flushBeacon);
     documentObject.addEventListener("visibilitychange", handleVisibility);
     const unsubscribe = client.onPageChange(resetScroll);
 
@@ -149,7 +149,7 @@ function installAutoCapture(client, options) {
         destroy: function () {
             documentObject.removeEventListener("click", handleClick, true);
             runtime.removeEventListener("scroll", handleScroll, { passive: true });
-            runtime.removeEventListener("pagehide", flushBeacon);
+            if (settings.flushBeaconOnPagehide !== false) runtime.removeEventListener("pagehide", flushBeacon);
             documentObject.removeEventListener("visibilitychange", handleVisibility);
             unsubscribe();
         },

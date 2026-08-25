@@ -121,6 +121,53 @@ test("invalid or unknown dynamic targets fail traffic closed without disabling t
     assert.equal(JSON.stringify(resolved).includes("../../private"), false);
 });
 
+test("traffic config cannot widen the tracking property allowlist", async () => {
+    const runtime = createRuntime();
+    const journal = createJournal();
+    const rule = {
+        enabled: true,
+        page_key: "index.home",
+        route_pattern: "/index",
+        sample_rate: 1,
+        event_types: ["page_view"],
+        rule_version: "rule-v1",
+    };
+    const client = analytics.createAnalyticsCore({
+        runtime,
+        queue: journal,
+        project: "index",
+        surface: "pc_web",
+        ruleResolver: analytics.createCompositeRuleResolver({
+            tracking: async () => ({
+                ...rule,
+                event_types: ["page_view", "click"],
+                property_keys: [],
+            }),
+            traffic: async () => ({
+                ...rule,
+                property_keys: ["traffic_only_module"],
+            }),
+        }),
+    });
+    const controller = analytics.createNavigationController({ client, runtime });
+    await controller.navigate({
+        name: "index",
+        meta: { analytics: { page_key: "index.home" } },
+        matched: [{ path: "/index" }],
+    }, null, { navigation_id: "property-allowlist" });
+
+    client.track("click", {
+        name: "index_click",
+        properties: { traffic_only_module: "must-stay-local" },
+    });
+    const click = journal.entries[1].event;
+    assert.equal(click.properties, undefined);
+    assert.equal(analytics.projectTrackingEvent(click).properties, undefined);
+    assert.equal(JSON.stringify(journal.entries).includes("must-stay-local"), false);
+    controller.destroy();
+    client.destroy();
+});
+
 test("router owns navigation, v-track-page adds metadata, and one canonical page view serves two sinks", async () => {
     const runtime = createRuntime();
     const journal = createJournal();
@@ -206,6 +253,55 @@ test("router owns navigation, v-track-page adds metadata, and one canonical page
     directives["track-page"].beforeUnmount(root);
     assert.equal(journal.entries.length, 3);
     controller.destroy();
+    plugin.destroy();
+});
+
+test("router pagehide finalizes Traffic before the single lifecycle Beacon", async () => {
+    const runtime = createRuntime();
+    const journal = createJournal();
+    const beaconCalls = [];
+    journal.flushBeacon = function (options) {
+        beaconCalls.push(options);
+        return true;
+    };
+    let afterEach;
+    const router = {
+        afterEach(handler) {
+            afterEach = handler;
+            return function () {};
+        },
+    };
+    const client = analytics.createAnalyticsCore({
+        runtime,
+        queue: journal,
+        project: "index",
+        surface: "pc_web",
+        ruleResolver: createRules([]),
+    });
+    const plugin = analytics.createVue3AnalyticsPlugin(client, {
+        runtime,
+        router,
+        captureInitial: false,
+    });
+    plugin.install({
+        config: { globalProperties: {} },
+        directive() {},
+        provide() {},
+    });
+    afterEach({
+        name: "post-view",
+        meta: { analytics: { page_key: "post.view" } },
+        params: { id: "918273" },
+        query: { id: "42" },
+        matched: [{ path: "/post/:id" }],
+    }, null, null);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    assert.equal(journal.entries.length, 1);
+    runtime.__windowListeners.pagehide();
+    assert.equal(journal.finalizations.length, 1);
+    assert.equal(journal.finalizations[0].patch.is_exit, true);
+    assert.equal(journal.finalizations[0].patch.finalize_reason, "pagehide");
+    assert.deepEqual(beaconCalls, [{ reason: "pagehide" }]);
     plugin.destroy();
 });
 

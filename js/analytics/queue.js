@@ -87,6 +87,30 @@ function normalizeBlock(value) {
     };
 }
 
+function normalizeSafeBeaconFinalizationPatch(value, sinkKey) {
+    if (!isObject(value)) return null;
+    const keys = Object.keys(value);
+    if (sinkKey !== "traffic"
+        || keys.length !== 3
+        || keys.indexOf("duration_ms") < 0
+        || keys.indexOf("is_exit") < 0
+        || keys.indexOf("finalize_reason") < 0) return null;
+    // Read caller-controlled getters exactly once, then validate and return a
+    // primitive-only copy. Re-reading after validation would create a TOCTOU
+    // path for a getter/Proxy to swap the Beacon payload.
+    const durationMs = value.duration_ms;
+    const isExit = value.is_exit;
+    const finalizeReason = value.finalize_reason;
+    if (typeof durationMs !== "number"
+        || !Number.isFinite(durationMs)
+        || durationMs < 0
+        || durationMs > 86400000
+        || Math.floor(durationMs) !== durationMs
+        || isExit !== true
+        || finalizeReason !== "pagehide") return null;
+    return { duration_ms: durationMs, is_exit: true, finalize_reason: "pagehide" };
+}
+
 function createAbortController(runtime) {
     const source = runtime || {};
     const AbortControllerConstructor = source.AbortController
@@ -344,18 +368,30 @@ function createEventQueue(options) {
         return true;
     }
 
-    function finalize(eventId, sinkKey, patch) {
+    function finalize(eventId, sinkKey, patch, optionsForFinalize) {
         const normalizedKey = String(sinkKey || "");
         if (destroyed || blocked || !sinkByKey.has(normalizedKey)) return false;
         const entry = entries.find(function (item) { return item.event.event_id === eventId; });
         if (!entry || !entry.deliveries[normalizedKey]) return false;
         const delivery = entry.deliveries[normalizedKey];
         if (TERMINAL_STATES.has(delivery.state)) return false;
-        delivery.patch = Object.assign({}, delivery.patch || {}, isObject(patch) ? patch : {});
+        const safeBeaconPatch = optionsForFinalize
+            && optionsForFinalize.preserveBeaconAuthorization === true
+            ? normalizeSafeBeaconFinalizationPatch(patch, normalizedKey)
+            : null;
+        const preserveBeaconAuthorization = !!safeBeaconPatch;
+        const normalizedPatch = safeBeaconPatch
+            ? safeBeaconPatch
+            : (isObject(patch) ? patch : {});
+        delivery.patch = Object.assign({}, delivery.patch || {}, normalizedPatch);
         delivery.state = DELIVERY_STATES.PENDING;
         delivery.retry_at = 0;
         delivery.updated_at = now();
-        markBeaconPayloadChanged();
+        // A pagehide finalization only appends SDK-generated bounded duration
+        // and exit fields. It may reuse the current config/robot authorization
+        // so the synchronous Traffic Beacon can carry the finalized delivery.
+        // Every other public finalize call still revokes authorization.
+        if (!preserveBeaconAuthorization) markBeaconPayloadChanged();
         persist();
         schedule(0);
         return true;

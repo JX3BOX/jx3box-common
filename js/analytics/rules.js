@@ -387,7 +387,10 @@ function normalizeSinkRule(key, raw, request) {
     if (!pageKey || (request.page_key && pageKey !== request.page_key)) return null;
     const ruleVersion = sanitizeKey(source.rule_version || source.ruleVersion, 64);
     if (!ruleVersion) return null;
-    const propertyKeys = Array.isArray(source.property_keys || source.propertyKeys)
+    // `properties` are part of the Tracking envelope only. A Traffic (or
+    // unknown) resolver must never be able to widen Tracking's allowlist by
+    // contributing keys to the shared canonical event.
+    const propertyKeys = key === "tracking" && Array.isArray(source.property_keys || source.propertyKeys)
         ? (source.property_keys || source.propertyKeys).map(function (item) { return sanitizeKey(item, 64); }).filter(Boolean)
         : [];
     const pathTarget = normalizePathTargetRule(source.target || source.public_target || source.publicTarget);

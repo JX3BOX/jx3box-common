@@ -293,6 +293,10 @@ function createAnalytics(options) {
                 duration_ms: Math.min(Math.round(duration), 24 * 60 * 60 * 1000),
                 is_exit: finalizeOptions.is_exit === true,
                 finalize_reason: sanitizeKey(finalizeOptions.reason || "navigation", 32),
+            }, {
+                // pagehide is synchronous: a strictly bounded SDK-generated
+                // finalization may retain the last successful guard grant.
+                preserveBeaconAuthorization: finalizeOptions.reason === "pagehide",
             });
         }
         page.finalized = true;

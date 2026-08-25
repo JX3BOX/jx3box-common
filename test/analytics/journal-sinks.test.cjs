@@ -556,6 +556,16 @@ test("Beacon authorization is revoked when Traffic finalization changes its payl
                 beaconEvents.push(...events);
                 return true;
             },
+        }, {
+            key: "tracking",
+            send(events) {
+                return Promise.resolve({
+                    deliveries: events.map((event) => ({ event_id: event.event_id, state: "retry" })),
+                });
+            },
+            sendBeacon() {
+                return true;
+            },
         }],
         ...noTimers,
     });
@@ -575,6 +585,104 @@ test("Beacon authorization is revoked when Traffic finalization changes its payl
     assert.equal(queue.flushBeacon(), true);
     assert.equal(beaconEvents[1].duration_ms, 4200);
     assert.equal(beaconEvents[1].is_exit, true);
+    queue.destroy();
+});
+
+test("bounded pagehide finalization preserves the current Beacon authorization", async () => {
+    const beaconEvents = [];
+    const queue = analytics.createEventQueue({
+        storage: memoryQueueStorage(),
+        beforeFlush: () => true,
+        maxRetries: 50,
+        sinks: [{
+            key: "traffic",
+            send(events) {
+                return Promise.resolve({
+                    deliveries: events.map((event) => ({ event_id: event.event_id, state: "retry" })),
+                });
+            },
+            sendBeacon(events) {
+                beaconEvents.push(...events);
+                return true;
+            },
+        }, {
+            key: "tracking",
+            send(events) {
+                return Promise.resolve({
+                    deliveries: events.map((event) => ({ event_id: event.event_id, state: "retry" })),
+                });
+            },
+            sendBeacon() {
+                return true;
+            },
+        }],
+        ...noTimers,
+    });
+
+    queue.enqueue({ event_id: "pagehide-traffic-event-0001", event_type: "page_view" });
+    await queue.flush();
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", {
+        duration_ms: 4200,
+        is_exit: true,
+        finalize_reason: "pagehide",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), true);
+    assert.equal(beaconEvents[0].duration_ms, 4200);
+    assert.equal(beaconEvents[0].is_exit, true);
+
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", {
+        duration_ms: 4300,
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+
+    await queue.flush();
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", {
+        duration_ms: 4300,
+        is_exit: true,
+        finalize_reason: "navigation",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+
+    await queue.flush();
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", {
+        duration_ms: 4300,
+        is_exit: false,
+        finalize_reason: "pagehide",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+
+    await queue.flush();
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "tracking", {
+        duration_ms: 4300,
+        is_exit: true,
+        finalize_reason: "pagehide",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+
+    await queue.flush();
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", {
+        duration_ms: { valueOf: function () { return 4400; } },
+        is_exit: true,
+        finalize_reason: "pagehide",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+
+    await queue.flush();
+    let durationReads = 0;
+    const changingGetterPatch = {
+        get duration_ms() {
+            durationReads += 1;
+            return durationReads === 1 ? 4500 : { unsafe: true };
+        },
+        is_exit: true,
+        finalize_reason: "pagehide",
+    };
+    assert.equal(queue.finalize("pagehide-traffic-event-0001", "traffic", changingGetterPatch, {
+        preserveBeaconAuthorization: true,
+    }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), true);
+    assert.equal(durationReads, 1);
+    assert.equal(beaconEvents[beaconEvents.length - 1].duration_ms, 4500);
     queue.destroy();
 });
 
