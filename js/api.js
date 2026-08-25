@@ -4,6 +4,7 @@ import domains from "../data/jx3box.json";
 import { SSE } from "./sse";
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus";
 import utilModule, { getTokenFromUrl } from "./utils";
+import { installHttpObserver, setHttpObserver } from "./observability/common-api.js";
 
 const { jx3ClientType } = utilModule;
 
@@ -201,6 +202,7 @@ function $cms(options = {}, axiosConfig = {}) {
     if (progress) config.onUploadProgress = progress;
 
     const ins = axios.create(Object.assign(axiosConfig, config));
+    installHttpObserver(ins, options, "cms", (response) => !response?.data?.code);
     interceptor && installStandardInterceptors(ins, options);
     return ins;
 }
@@ -224,6 +226,10 @@ function $helper(options = {}) {
     }
 
     const ins = axios.create(config);
+    installHttpObserver(ins, options, "helper", (response) => {
+        const code = response?.data?.code;
+        return code === 200 || !code;
+    });
     installHelperInterceptors(ins, options);
     return ins;
 }
@@ -243,6 +249,7 @@ function $next(options = {}, axiosConfig = {}) {
     if (progress) config.onUploadProgress = progress;
 
     const ins = axios.create(Object.assign(axiosConfig, config));
+    installHttpObserver(ins, options, serviceKey, (response) => !response?.data?.code);
     interceptor && installStandardInterceptors(ins, options);
     return ins;
 }
@@ -271,6 +278,7 @@ function $node(options = {}) {
         baseURL: localProxyEnabled(options) ? localProxyBase("node") : requestDomain,
     };
     const ins = axios.create(config);
+    installHttpObserver(ins, options, "node");
     installInterceptors(ins, options);
     return ins;
 }
@@ -285,6 +293,7 @@ function $http(options) {
         headers: Object.assign({}, (options && options.headers) || {}),
     };
     const ins = axios.create(config);
+    installHttpObserver(ins, options, "http", (response) => !response?.data?.code);
     installStandardInterceptors(ins, options);
     return ins;
 }
@@ -310,4 +319,6 @@ export {
     installInterceptors,
     installStandardInterceptors,
     installHelperInterceptors,
+    installHttpObserver,
+    setHttpObserver,
 };

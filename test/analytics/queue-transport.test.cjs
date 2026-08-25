@@ -103,6 +103,158 @@ test("transport ignores acknowledgement ids outside the active batch", async () 
     assert.deepEqual(result.confirmedEventIds, ["a"]);
 });
 
+test("transport keeps the default analytics envelope and beacon string body", async () => {
+    let requestBody = null;
+    let beaconBody = null;
+    const transport = analytics.createTransport({
+        endpoint: "/batch",
+        schemaVersion: 3,
+        sdkVersion: "3.0.0",
+        runtime: {},
+        navigator: {
+            sendBeacon(_url, body) {
+                beaconBody = body;
+                return true;
+            },
+        },
+        fetch: async (_url, options) => {
+            requestBody = options.body;
+            return {
+                ok: true,
+                status: 200,
+                json: async () => ({ acknowledged_event_ids: ["event-a"] }),
+            };
+        },
+    });
+    const events = [{ event_id: "event-a", event_type: "click" }];
+    const result = await transport.send(events);
+
+    assert.deepEqual(JSON.parse(requestBody), {
+        schema_version: 3,
+        sdk_version: "3.0.0",
+        events,
+    });
+    assert.equal(result.ok, true);
+    assert.deepEqual(result.confirmedEventIds, ["event-a"]);
+    assert.equal(transport.sendBeacon(events), true);
+    assert.equal(typeof beaconBody, "string");
+    assert.deepEqual(JSON.parse(beaconBody), {
+        schema_version: 3,
+        sdk_version: "3.0.0",
+        events,
+    });
+});
+
+test("transport hooks support metric envelopes, acknowledgements, and beacon bodies", async () => {
+    let requestBody = null;
+    let beaconBody = null;
+    const transport = analytics.createTransport({
+        endpoint: "/metrics",
+        runtime: {},
+        eventIdProvider: (metric) => metric.metric_id,
+        envelopeFactory: (metrics) => ({ project_key: "index", metrics }),
+        confirmationParser: (payload, fallbackIds) => payload.data.items
+            .filter((item) => fallbackIds.includes(item.metric_id) && ["accepted", "duplicate", "ignored_robot"].includes(item.status))
+            .map((item) => item.metric_id)
+            .concat("outside-batch"),
+        beaconBodyFactory: (envelope) => `metric:${JSON.stringify(envelope)}`,
+        navigator: {
+            sendBeacon(_url, body) {
+                beaconBody = body;
+                return true;
+            },
+        },
+        fetch: async (_url, options) => {
+            requestBody = options.body;
+            return {
+                ok: true,
+                status: 200,
+                json: async () => ({
+                    code: 0,
+                    data: {
+                        items: [
+                            { metric_id: "metric-a", status: "accepted" },
+                            { metric_id: "metric-b", status: "retry" },
+                        ],
+                    },
+                }),
+            };
+        },
+    });
+    const metrics = [
+        { metric_id: "metric-a", request_count: 2 },
+        { metric_id: "metric-b", request_count: 1 },
+    ];
+    const result = await transport.send(metrics);
+
+    assert.deepEqual(JSON.parse(requestBody), { project_key: "index", metrics });
+    assert.equal(result.ok, false);
+    assert.equal(result.retryable, true);
+    assert.deepEqual(result.confirmedEventIds, ["metric-a"]);
+    assert.equal(transport.sendBeacon(metrics), true);
+    assert.equal(beaconBody, `metric:${JSON.stringify({ project_key: "index", metrics })}`);
+});
+
+test("transport hook failures never confirm items or throw from beacon", async () => {
+    let fetchCalls = 0;
+    const response = {
+        ok: true,
+        status: 200,
+        json: async () => ({ acknowledged_event_ids: ["a"] }),
+    };
+    const idFailure = analytics.createTransport({
+        endpoint: "/batch",
+        runtime: {},
+        eventIdProvider: () => {
+            throw new Error("id hook failed");
+        },
+        fetch: async () => {
+            fetchCalls += 1;
+            return response;
+        },
+    });
+    const idResult = await idFailure.send([{ event_id: "a" }]);
+    assert.equal(fetchCalls, 0);
+    assert.equal(idResult.ok, false);
+    assert.equal(idResult.retryable, true);
+    assert.deepEqual(idResult.confirmedEventIds, []);
+
+    const envelopeFailure = analytics.createTransport({
+        endpoint: "/batch",
+        runtime: {},
+        envelopeFactory: () => {
+            throw new Error("envelope hook failed");
+        },
+        navigator: { sendBeacon: () => true },
+        fetch: async () => response,
+    });
+    assert.deepEqual((await envelopeFailure.send([{ event_id: "a" }])).confirmedEventIds, []);
+    assert.equal(envelopeFailure.sendBeacon([{ event_id: "a" }]), false);
+
+    const parserFailure = analytics.createTransport({
+        endpoint: "/batch",
+        runtime: {},
+        confirmationParser: () => {
+            throw new Error("parser hook failed");
+        },
+        fetch: async () => response,
+    });
+    const parserResult = await parserFailure.send([{ event_id: "a" }]);
+    assert.equal(parserResult.ok, false);
+    assert.equal(parserResult.retryable, true);
+    assert.deepEqual(parserResult.confirmedEventIds, []);
+
+    const beaconFailure = analytics.createTransport({
+        endpoint: "/batch",
+        runtime: {},
+        beaconBodyFactory: () => {
+            throw new Error("beacon hook failed");
+        },
+        navigator: { sendBeacon: () => true },
+    });
+    assert.equal(beaconFailure.sendBeacon([{ event_id: "a" }]), false);
+});
+
 test("queue only removes ids confirmed from the active batch", async () => {
     let resolveSend;
     const transport = {

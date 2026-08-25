@@ -49,24 +49,40 @@ function createTransport(options) {
     const schemaVersion = Number(settings.schemaVersion) || 1;
     const sdkVersion = settings.sdkVersion || "1.0.0";
     const headersProvider = settings.headersProvider;
+    const eventIdProvider = typeof settings.eventIdProvider === "function"
+        ? settings.eventIdProvider
+        : function (event) {
+            return event.event_id;
+        };
+    const envelopeFactory = typeof settings.envelopeFactory === "function"
+        ? settings.envelopeFactory
+        : function (events) {
+            return {
+                schema_version: schemaVersion,
+                sdk_version: sdkVersion,
+                events,
+            };
+        };
+    const confirmationParser = typeof settings.confirmationParser === "function"
+        ? settings.confirmationParser
+        : collectConfirmedIds;
+    const beaconBodyFactory = typeof settings.beaconBodyFactory === "function"
+        ? settings.beaconBodyFactory
+        : function (envelope) {
+            return JSON.stringify(envelope);
+        };
 
     function createEnvelope(events) {
-        return {
-            schema_version: schemaVersion,
-            sdk_version: sdkVersion,
-            events,
-        };
+        return envelopeFactory(events);
     }
 
     async function send(events) {
-        const ids = events.map(function (event) {
-            return event.event_id;
-        });
         if (!endpoint || typeof fetchImpl !== "function") {
             return { ok: false, retryable: true, status: 0, confirmedEventIds: [] };
         }
 
         try {
+            const ids = events.map(eventIdProvider);
             let dynamicHeaders = {};
             if (typeof headersProvider === "function") {
                 try {
@@ -89,7 +105,11 @@ function createTransport(options) {
                 } catch (error) {
                     payload = null;
                 }
-                const confirmedEventIds = collectConfirmedIds(payload, ids);
+                const parsedIds = confirmationParser(payload, ids);
+                const batchIds = new Set(ids);
+                const confirmedEventIds = unique(Array.isArray(parsedIds) ? parsedIds : []).filter(function (id) {
+                    return batchIds.has(id);
+                });
                 const confirmedSet = new Set(confirmedEventIds);
                 const complete = ids.every(function (id) {
                     return confirmedSet.has(id);
@@ -110,11 +130,11 @@ function createTransport(options) {
 
     function sendBeacon(events) {
         if (!endpoint || !events.length || typeof navigatorObject.sendBeacon !== "function") return false;
-        const text = JSON.stringify(createEnvelope(events));
         try {
-            // Use a plain string so cross-origin Beacon stays a simple request.
-            // The server must parse the versioned JSON body explicitly.
-            return navigatorObject.sendBeacon(endpoint, text) === true;
+            const body = beaconBodyFactory(createEnvelope(events));
+            // Analytics defaults to a plain string; protocol adapters may
+            // provide a JSON Blob when their server expects application/json.
+            return navigatorObject.sendBeacon(endpoint, body) === true;
         } catch (error) {
             return false;
         }

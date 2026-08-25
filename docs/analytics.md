@@ -1,6 +1,6 @@
 # Analytics 事件追踪 SDK
 
-`@jx3box/jx3box-common/js/analytics.js` 提供框架无关的事件队列、页面上下文、稳定采样、隐私过滤和 Web 发送能力；Vue 3 指令只是适配层。它不替代旧 `js/stat.js` 的内容计数，也不包含异常 Issue/Fingerprint 聚合。
+`@jx3box/jx3box-common/js/analytics.js` 提供框架无关的事件队列、页面上下文、稳定采样、隐私过滤和 Web 发送能力；Vue 3 指令只是适配层。它不替代旧 `js/stat.js` 的内容计数；异常与接口健康使用独立的 [`js/observability.js`](./observability.md) 入口和协议，不会因 Analytics 启用而自动采集。
 
 ## 1. 设计边界
 
