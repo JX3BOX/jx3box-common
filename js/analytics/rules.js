@@ -461,7 +461,7 @@ function createCompositeRuleResolver(options) {
         if (pageKeys.size !== 1) return null;
         const trafficRule = rules.traffic;
         const rawRoute = input && (input.route || input);
-        const canonicalPath = trafficRule
+        const validatedCanonicalPath = trafficRule
             ? resolveCanonicalPath(rawRoute && rawRoute.params, trafficRule.route_pattern, trafficRule.path_params)
             : "";
         const publicTarget = trafficRule
@@ -469,13 +469,18 @@ function createCompositeRuleResolver(options) {
                 ? resolvePathPublicTarget(rawRoute, trafficRule)
                 : resolvePublicTarget(rawRoute && (rawRoute.query || rawRoute.raw_query), trafficRule))
             : undefined;
-        if (trafficRule && (!canonicalPath || (trafficRule.require_public_target && !publicTarget))) {
+        if (trafficRule && (!validatedCanonicalPath || (trafficRule.require_public_target && !publicTarget))) {
             delete rules.traffic;
         }
         const finalSinkKeys = Object.keys(rules);
         if (!finalSinkKeys.length) return null;
         const trackingRule = rules.tracking;
         const primary = trackingRule || rules.traffic;
+        const trafficCanonicalPath = rules.traffic
+            && !rules.traffic.path_target
+            && !rules.traffic.query_targets.length
+            ? rules.traffic.route_pattern
+            : validatedCanonicalPath;
         const unionEventTypes = [];
         const unionPropertyKeys = [];
         finalSinkKeys.forEach(function (key) {
@@ -494,7 +499,12 @@ function createCompositeRuleResolver(options) {
             // A route template is the only pathname-like value allowed to enter
             // the canonical event. Actual dynamic segments never leave memory.
             route_path: primary.route_pattern || request.route_pattern,
-            canonical_path: rules.traffic ? canonicalPath : undefined,
+            // Pure page-only parameter rules validate locally but retain only
+            // the registered template. Their dynamic values (for example an
+            // author UID) never enter the canonical event, Journal or Traffic
+            // envelope. Target-bearing rules may keep only their explicitly
+            // validated public path dimensions.
+            canonical_path: rules.traffic ? trafficCanonicalPath : undefined,
             layout_version: primary.layout_version || request.layout_version,
             event_types: unionEventTypes,
             property_keys: unionPropertyKeys,

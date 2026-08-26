@@ -11,7 +11,7 @@
 - Tracking 与 Traffic 共享 canonical `page_view`，但由独立 sink 编码和逐 ID 确认；任何一方失败不会伪造另一方 ACK。
 - `previous_event_id` 只连接同 session 中上一条实际进入 Traffic Journal 的 page view；Tracking-only 页面不会覆盖它。`previous_canonical_event_id` 连接上一条任意 canonical 事件，供完整事件顺序排查。
 - `instance_id` 复用 heartbeat 的 `jx3box:device_id`；同一页面内即使构造多个 identity handle，也会同步同一 session 和单调 sequence。
-- 原始 query、hash、完整 URL、实际动态 pathname、DOM 文本、表单值、Cookie、Token 和任意未知动态 ID 不进入 Journal、配置请求或 envelope。只有服务端显式声明的 path param 经 named validator/固定 allowlist 通过后，SDK 才在本地重建 `canonical_path`。
+- 原始 query、hash、完整 URL、实际动态 pathname、DOM 文本、表单值、Cookie、Token 和任意未知动态 ID 不进入 Journal、配置请求或 envelope。纯 page-only 路由的参数只在本地按服务端 named validator/固定 allowlist 校验，`canonical_path` 始终保留模板；只有与显式公开 target 绑定的路径参数才能在本地重建后进入 `canonical_path`。
 - `interaction_target` 只描述热力/交互元素；`public_target` 只描述规则确认的公开业务对象。Traffic 永远不会把 DOM target 解释成访问目标。
 - fetch 是可确认主通道。Beacon 没有确认语义，成功入浏览器队列后仍保留原 `event_id`，等待后续 fetch 幂等确认。
 - 默认本地最多 200 条、256 KiB、7 天；单批最多 20 条、60 KiB；兼容 Chrome 76、Safari 12、Firefox 78。
@@ -61,7 +61,7 @@ const ruleResolver = createCompositeRuleResolver({
     }),
     traffic: createRemoteRuleResolver({
         runtime,
-        // 该规则接口需要 service-cms 第二阶段提供。
+        // service-cms 已提供独立、失败关闭的 Traffic Config。
         endpoint: "/api/cms/system/traffic/config",
     }),
 });
@@ -525,13 +525,13 @@ Tracking 与 Traffic 可以保留各自的数据表和 batch endpoint，但必�
 5. 409 表示实例尚未完成 heartbeat 注册，不能确认事件；429 同时返回 HTTP `Retry-After` 或 `data.retry_after_ms`；任何非 2xx 都不能携带可被当作 ACK 的语义。
 6. accepted、duplicate、永久 rejected 都是该 sink 的终态；retry 继续使用原 `event_id`。后端必须以 event ID 幂等。
 
-当前 service-cms Traffic batch 仍只有 count，没有 `items`，且尚无独立 Traffic client-config endpoint；在这两个字段补齐前，TrafficSink 会安全地保留事件重试，不能视为消费者已解锁。
+当前 service-cms 已提供独立 Traffic Config、逐 `event_id` 的 `items` ACK、409/429 重试语义、机器人持久阻断和 JSON/Beacon 共用的严格校验链路；9.5.2 消费端可按上述契约接入。9.5.2 进一步保证纯 page-only 动态参数只在设备内校验，Traffic payload 只携带注册模板。生产解锁仍必须以迁移已执行、heartbeat 返回显式 `traffic_allowed`、真实 Config/ACK 回读和灰度开关为准，不能只凭包版本判断。
 
 ## 10. 从 9.3/9.4 迁移
 
 - 旧 `createAnalytics()` 和无 Router 的 `v-track-page` 仍保留，适合现有单 Tracking 接入；它不自动启用 Traffic。
 - 新项目使用 `createAnalyticsCore()`、单一 Router owner 和显式 sink。不要在 `jx3box-ui`、业务入口和页面组件分别创建 client。
-- 先升级 common，再让 service-cms 增加 Traffic config 与逐 ID ACK，之后按 `jx3box-ui -> game -> mobile` 顺序接入；每个应用入口只安装一次 Router adapter。
+- 先升级到 common 9.5.2，再部署已实现 Traffic Config 与逐 ID ACK 的 service-cms，之后按 `jx3box-ui -> game -> mobile` 顺序接入；每个应用入口只安装一次 Router adapter。
 - 现有 index 若随后通过公共 UI 层启用 Traffic，必须复用同一个 Core，不能保留第二套首页 Analytics 实例。
 - 旧本地事件只投 Tracking；Observer 继续使用独立队列和默认关闭语义。
 - 9.4 `createTransport` 的 `eventIdProvider/envelopeFactory/confirmationParser/beaconBodyFactory` 仍兼容；同时修正为任何非 2xx 都不再虚构 ACK。

@@ -412,6 +412,50 @@ test("path targets rebuild only explicitly validated route params", async () => 
     assert.equal(rejected, null);
 });
 
+test("page-only path params validate locally but never leave the device", async () => {
+    const resolver = analytics.createCompositeRuleResolver({
+        traffic: async () => ({
+            enabled: true,
+            page_key: "uc.author.public",
+            route_pattern: "/author/:id",
+            sample_rate: 1,
+            event_types: ["page_view"],
+            rule_version: "traffic-page-only-v1",
+            require_public_target: false,
+            path_params: { id: { validator: "positive_integer" } },
+        }),
+    });
+    const resolved = await resolver.resolve({
+        project: "mobile",
+        surface: "app",
+        route: {
+            name: "author",
+            path: "/author/918273",
+            params: { id: "918273" },
+            matched: [{ path: "/author/:id" }],
+        },
+    });
+    assert.equal(resolved.canonical_path, "/author/:id");
+    assert.equal(JSON.stringify(resolved).includes("918273"), false);
+    assert.equal(analytics.projectTrafficEvent({
+        ...resolved,
+        event_id: "traffic-page-only-0001",
+        occurred_at: "2026-08-26T01:00:00.000Z",
+    }).path, "/author/:id");
+
+    const invalid = await resolver.resolve({
+        project: "mobile",
+        surface: "app",
+        route: {
+            name: "author",
+            path: "/author/private-name",
+            params: { id: "private-name" },
+            matched: [{ path: "/author/:id" }],
+        },
+    });
+    assert.equal(invalid, null);
+});
+
 test("composite rules reject incomplete or route-mismatched server registrations", async () => {
     const input = {
         page_key: "index.home",
