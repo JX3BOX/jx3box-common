@@ -216,7 +216,11 @@ function createAnalytics(options) {
         const resources = ensureResources();
         const sinkKeys = getEventSinkKeys(eventType, currentPage);
         if (!sinkKeys.length) return false;
-        const deferredSinkKeys = eventType === "page_view" && sinkKeys.indexOf("traffic") >= 0 ? ["traffic"] : [];
+        const deferredSinkKeys = settings.deferTrafficPageView !== false
+            && eventType === "page_view"
+            && sinkKeys.indexOf("traffic") >= 0
+            ? ["traffic"]
+            : [];
         if (!currentPage.sink_rules && !Array.isArray(settings.sinks)) {
             const legacyResult = resources.queue.enqueue(event);
             if (legacyResult === false) return false;

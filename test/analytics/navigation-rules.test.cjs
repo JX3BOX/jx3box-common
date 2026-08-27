@@ -71,6 +71,36 @@ function createRules(spy) {
     });
 }
 
+test("Traffic page views may use immediate delivery for short-lived WebViews", async () => {
+    const runtime = createRuntime();
+    const journal = createJournal();
+    const client = analytics.createAnalyticsCore({
+        runtime,
+        queue: journal,
+        ruleResolver: createRules([]),
+        deferTrafficPageView: false,
+        sampleSalt: "immediate-traffic-test",
+        product: "jx3box",
+        project: "game",
+        client: "pc_game",
+        surface: "pc_game",
+    });
+    const controller = analytics.createNavigationController({ client, runtime });
+    await controller.navigate({
+        name: "wiki",
+        meta: { analytics: { page_key: "game.wiki.detail" } },
+        params: { id: "1234" },
+        query: { id: "1234" },
+        matched: [{ path: "/wiki/:id" }],
+    }, null, { navigation_id: "immediate-traffic" });
+
+    assert.equal(journal.entries.length, 1);
+    assert.deepEqual(journal.entries[0].options.sinkKeys.sort(), ["tracking", "traffic"]);
+    assert.deepEqual(journal.entries[0].options.deferredSinkKeys, []);
+    controller.destroy();
+    client.destroy();
+});
+
 test("composite rules expose only a safe request and project a whitelisted public target", async () => {
     const requests = [];
     const resolver = createRules(requests);

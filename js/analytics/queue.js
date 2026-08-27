@@ -662,7 +662,16 @@ function createEventQueue(options) {
                 return state !== DELIVERY_STATES.DEFERRED && ACTIVE_STATES.has(state);
             });
         });
-        if (destroyed || blocked || !hasDeliverable) {
+        const hasDeferredAuthorizationCandidate = !!beforeFlush && entries.some(function (entry) {
+            return Object.keys(entry.deliveries).some(function (key) {
+                return entry.deliveries[key].state === DELIVERY_STATES.DEFERRED;
+            });
+        });
+        // Traffic page views remain deferred until navigation/pagehide so the
+        // final duration can be attached. An explicit flush must still run the
+        // async global guard now, otherwise pagehide has no cached authorization
+        // and the synchronous Beacon fails closed forever.
+        if (destroyed || blocked || (!hasDeliverable && !hasDeferredAuthorizationCandidate)) {
             return Promise.resolve({ sent: 0, pending: getState().pending, blocked, blockReason });
         }
         if (sending) return sending;

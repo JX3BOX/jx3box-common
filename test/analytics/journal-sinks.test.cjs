@@ -439,6 +439,45 @@ test("Beacon fails closed until the global beforeFlush guard succeeds", async ()
     queue.destroy();
 });
 
+test("deferred Traffic page view can pre-authorize its pagehide Beacon", async () => {
+    let guardCalls = 0;
+    let beaconCalls = 0;
+    const queue = analytics.createEventQueue({
+        storage: memoryQueueStorage(),
+        beforeFlush() {
+            guardCalls += 1;
+            return true;
+        },
+        sinks: [{
+            key: "traffic",
+            send() {
+                throw new Error("deferred event must not use async transport before finalization");
+            },
+            sendBeacon() {
+                beaconCalls += 1;
+                return true;
+            },
+        }],
+        ...noTimers,
+    });
+
+    queue.enqueue(
+        { event_id: "deferred-pagehide-event-0001", event_type: "page_view" },
+        { sinkKeys: ["traffic"], deferredSinkKeys: ["traffic"] },
+    );
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), false);
+    await queue.flush({ reason: "traffic_initial_capture" });
+    assert.equal(guardCalls, 1);
+    assert.equal(queue.finalize("deferred-pagehide-event-0001", "traffic", {
+        duration_ms: 1200,
+        is_exit: true,
+        finalize_reason: "pagehide",
+    }, { preserveBeaconAuthorization: true }), true);
+    assert.equal(queue.flushBeacon({ reason: "pagehide" }), true);
+    assert.equal(beaconCalls, 1);
+    queue.destroy();
+});
+
 test("Beacon requires per-sink guard authorization and cancelInflight revokes it", async () => {
     let sinkGuardResult = true;
     let beaconCalls = 0;
