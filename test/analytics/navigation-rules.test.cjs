@@ -734,3 +734,35 @@ test("Vue Router installation is singleton per router", () => {
     client.destroy();
     anotherClient.destroy();
 });
+
+test("Vue Router initial capture unwraps Vue 3 refs with a prototype value getter", async () => {
+    const runtime = createRuntime();
+    const navigations = [];
+    const route = { name: "wiki", path: "/wiki", matched: [{ path: "/wiki" }], query: { id: "331" } };
+    const currentRoute = Object.create({
+        get value() {
+            return route;
+        },
+    });
+    const controller = {
+        client: {},
+        navigate(nextRoute) {
+            navigations.push(nextRoute);
+            return Promise.resolve(null);
+        },
+        finalize() {},
+        destroy() {},
+    };
+    const router = {
+        currentRoute,
+        afterEach() {
+            return function () {};
+        },
+    };
+
+    const handle = analytics.installVueRouterAnalytics(controller, router, { runtime });
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    assert.equal(navigations.length, 1);
+    assert.equal(navigations[0], route);
+    handle.destroy();
+});

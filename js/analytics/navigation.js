@@ -137,7 +137,7 @@ function installVueRouterAnalytics(controllerOrClient, router, options) {
 
     function currentRoute() {
         const value = router.currentRoute;
-        return value && Object.prototype.hasOwnProperty.call(value, "value") ? value.value : value;
+        return value && "value" in value ? value.value : value;
     }
 
     if (settings.captureInitial !== false && router.currentRoute) {
