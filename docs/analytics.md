@@ -543,3 +543,10 @@ Tracking 与 Traffic 可以保留各自的数据表和 batch endpoint，但必�
 - 服务端再次校验页面注册、域名、事件类型、属性、采样、route pattern、公开 target、限流与机器人状态。
 - 原始事件不保存完整 IP、query/hash、DOM 文本、表单值、搜索词、Token 或完整 referrer。
 - iframe 热力底图只是管理端展示层，事件仍由被分析页面自身的 SDK 采集。
+
+
+### 9.5.7 外部搜索词
+
+Traffic 首入口（pc_web/mobile_web）从 document.referrer 本地提取受控搜索参数，通过 `entry_source.search_keyword` 发送；完整来源 path/query/hash 不进入 Journal 或请求。百度 wd/word，Bing/Google/360/神马 q，搜狗 query/keyword，仅匹配受控搜索引擎域名。词做 NFKC 和空白规范化，最长 128 单元，不转小写；无法提取时发送空串，旧 SDK 则不包含此字段。服务端仍验证来源和入口资格。Tracking payload 不包含关键词。
+
+发布要求：先部署支持该字段的 service-cms（含搜索词迁移和汇总 worker），再发布 common 9.5.7 并升级消费仓 lockfile/重新构建。旧后端不接受这个新增字段。新 SDK 已支持不代表源站构建已经使用新版；浏览器默认跨域来源通常只有 origin，不能保证拿到词。站内搜索和 App 入口不属于本次采集范围。

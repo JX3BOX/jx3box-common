@@ -1,3 +1,4 @@
+import { extractSearchKeyword } from "./search-source.js";
 import { createIdentity } from "./identity.js";
 import { getReferrerDomain, sanitizeEventDetails, sanitizeKey, sanitizePage, sanitizePublicTarget } from "./privacy.js";
 import { createEventQueue } from "./queue.js";
@@ -194,7 +195,12 @@ function createAnalytics(options) {
             app_build: sanitizeKey(resolveOption(settings.appBuild, ""), 128),
             web_version: sanitizeKey(resolveOption(settings.webVersion, ""), 128),
             referrer_domain: referrerDomain,
-            entry_source: referrerDomain ? { referrer_domain: referrerDomain } : undefined,
+            entry_source: referrerDomain ? {
+                referrer_domain: referrerDomain,
+                search_keyword: hasTrafficDelivery && !previousTrafficPageViewEventId
+                    && ["pc_web", "mobile_web"].indexOf(page.surface) >= 0
+                    ? extractSearchKeyword(documentObject.referrer) : undefined,
+            } : undefined,
             display_mode: sanitizeKey(resolveOption(settings.displayMode, "browser"), 32),
             sample_rate: page.sample_rate,
             properties: eventDetails.properties,

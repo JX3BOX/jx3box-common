@@ -1,3 +1,4 @@
+import { normalizeSearchKeyword, searchEngineForDomain } from "./search-source.js";
 import { normalizeRoutePattern } from "./privacy.js";
 
 const TERMINAL_ACK_STATES = new Set(["accepted", "duplicate", "rejected"]);
@@ -139,6 +140,9 @@ function sanitizeEntrySource(value, referrerDomain) {
     // sent. A raw referrer path, query or fragment is never forwarded.
     const domain = safeDomain(referrerDomain || source.referrer_domain);
     if (domain) output.referrer = "https://" + domain + "/";
+    if (searchEngineForDomain(domain) && typeof source.search_keyword === "string") {
+        output.search_keyword = normalizeSearchKeyword(source.search_keyword);
+    }
     return Object.keys(output).length ? output : undefined;
 }
 
