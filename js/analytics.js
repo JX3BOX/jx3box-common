@@ -1,3 +1,4 @@
+// 统计系统-访问分析
 export { SCHEMA_VERSION, SDK_VERSION, createAnalytics, createAnalyticsCore } from "./analytics/client.js";
 export { createIdentity, normalizeInstanceId, resolveInstanceId } from "./analytics/identity.js";
 export { DEFAULT_SCROLL_THRESHOLDS, TRACK_META_KEY, getClickPosition, installAutoCapture } from "./analytics/heatmap.js";

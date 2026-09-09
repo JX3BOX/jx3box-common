@@ -22,7 +22,7 @@ const noTimers = {
 };
 
 test("dual-sink contract fixture shares one canonical id and contains no raw navigation fields", () => {
-    const fixturePath = path.resolve(__dirname, "../../docs/fixtures/analytics-dual-sink-v1.json");
+    const fixturePath = path.resolve(__dirname, "../fixtures/analytics-dual-sink-v1.json");
     const fixture = JSON.parse(fs.readFileSync(fixturePath, "utf8"));
     const canonical = fixture.canonical_event;
     const trackingEvent = fixture.tracking.request.events[0];
