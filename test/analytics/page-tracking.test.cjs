@@ -112,7 +112,7 @@ function setup() {
         },
     };
 }
-test("正式/怀旧按域名区分，本地 query 模拟；PC/mobile 使用 1133px media query", async () => {
+test("任意域名均可解析页面范围，支持域名覆盖；PC/mobile 使用 1133px media query", async () => {
     const { resolvePageScope } = await load();
     const { runtime } = setup();
     runtime.location.search = "?client=origin";
@@ -132,7 +132,7 @@ test("正式/怀旧按域名区分，本地 query 模拟；PC/mobile 使用 1133
     runtime.location.pathname = "/";
     assert.equal(resolvePageScope(runtime).route_path, "/", "按真实地址查询，不擅自映射到首页");
     runtime.location.hostname = "unregistered.example";
-    assert.equal(resolvePageScope(runtime), null);
+    assert.equal(resolvePageScope(runtime).domain, "unregistered.example");
 });
 test("按地址获取注册配置，上报使用服务端页面标识；范围变化时隔离访问", async () => {
     const { createPageTracker } = await load();

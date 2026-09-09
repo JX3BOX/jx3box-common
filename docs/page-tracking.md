@@ -22,7 +22,7 @@ app.use(tracker);
 
 定向事件使用 `v-track:click="'index.posts.open'"`，仅后台启用的事件键被接收。页面访问、点击坐标和滚动深度由插件采集，事件批量上报；不采集输入框文本或表单值。
 
-当前保留现有 JX3BOX Web 范围：www.jx3box.com、origin.jx3box.com 和本地开发域名；使用 pathname（不是 hash 路由），移动断点 1133px。服务端仍须注册对应域名与路径。本地是否允许由后端控制。
+采集入口不限制域名，任意域名均可接入；使用 pathname（不是 hash 路由），移动断点 1133px。是否启用采集由服务端对应域名与路径的注册配置决定。本地是否允许由后端控制。
 
 管理端预览 flag `jx3box_analytics_preview=1` 下只运行预览桥接。此场景应直接创建 tracker，省略 identity，避免创建访问身份。首页项目已有此分支。
 

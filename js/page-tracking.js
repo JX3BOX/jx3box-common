@@ -8,11 +8,9 @@ export function isTrackingPreview(runtime = window) {
 }
 export function resolvePageScope(runtime = window, { layoutVersion = DEFAULT_LAYOUT_VERSION, domain = runtime.location.hostname } = {}) {
     const path = runtime.location.pathname.replace(/\/+$/, "") || "/";
-    const host = runtime.location.hostname;
     if (
         !/^\/(?:[a-zA-Z0-9_.~-]+(?:\/[a-zA-Z0-9_.~-]+)*)?$/.test(path) ||
-        path.length > 256 ||
-        !["www.jx3box.com", "origin.jx3box.com", ...LOCAL_HOSTS].includes(host)
+        path.length > 256
     )
         return null;
     const surface = runtime.matchMedia(INDEX_MOBILE_QUERY).matches ? "mobile_web" : "pc_web";
