@@ -378,7 +378,7 @@ test("应用入口与页面渲染使用同一布局版本，预览只监听文�
     const stop = installPreviewBridge(env.runtime, { isConnected: true }, { getLayoutVersion: () => version });
     env.listeners.get("message")({
         source: env.runtime.parent,
-        origin: "https://os.jx3box.com",
+        origin: "https://www.jx3box.com",
         data: { type: "jx3box:tracking-preview:hello" },
     });
     assert.equal(messages[0].layout_version, "index-home-v2");
@@ -388,19 +388,20 @@ test("应用入口与页面渲染使用同一布局版本，预览只监听文�
     version = "web-v1";
     env.listeners.get("message")({
         source: env.runtime.parent,
-        origin: "https://os.jx3box.com",
+        origin: "https://www.jx3box.com",
         data: { type: "jx3box:tracking-preview:hello" },
     });
     assert.equal(messages[1].layout_version, "web-v1");
     env.runtime.scrollY = 800;
     env.listeners.get("scroll")();
     assert.equal(messages[2].scroll_y, 800);
-    env.runtime.scrollTo = ({ top }) => {
+    env.runtime.scrollTo = ({ top, behavior }) => {
+        assert.equal(behavior, "instant", "预览滚动不得继承样例页面的 CSS smooth");
         env.runtime.scrollY = top;
     };
     const scrollRequest = {
         source: env.runtime.parent,
-        origin: "https://os.jx3box.com",
+        origin: "https://www.jx3box.com",
         data: { type: "jx3box:tracking-preview:scroll", top: 5000 },
     };
     env.listeners.get("message")({ ...scrollRequest, origin: "https://elsewhere.example" });

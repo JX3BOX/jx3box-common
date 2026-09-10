@@ -385,11 +385,12 @@ export function installPreviewBridge(runtime, element, { getLayoutVersion = () =
         } catch (_) {
             return;
         }
-        if (!(LOCAL_HOSTS.includes(origin.hostname) || origin.hostname === "os.jx3box.com")) return;
+        if (!(LOCAL_HOSTS.includes(origin.hostname) || origin.hostname === "www.jx3box.com")) return;
         if (event.data?.type === "jx3box:tracking-preview:scroll") {
             if (event.origin !== targetOrigin || !Number.isFinite(event.data.top)) return;
             const maxTop = Math.max(0, runtime.document.documentElement.scrollHeight - runtime.innerHeight);
-            runtime.scrollTo({ top: Math.max(0, Math.min(event.data.top, maxTop)), behavior: "auto" });
+            // 每帧目标必须即时生效，auto 会继承页面的 smooth 并反复重启滚动动画。
+            runtime.scrollTo({ top: Math.max(0, Math.min(event.data.top, maxTop)), behavior: "instant" });
             post();
             return;
         }
