@@ -16,8 +16,10 @@
     "__spider2": "https://spider2.jx3box.com/",
 
     "__next": "https://next2.jx3box.com/",
-    "__pull": "https://pull-gplugin.jx3box.com/",
-    "__push": "https://push-gplugin.jx3box.com/",
+    "__pull": "https://pull.jx3box.com/",
+    "__pull_game": "https://pull-gplugin.jx3box.com/",
+    "__push": "https://push.jx3box.com/",
+    "__push_game": "https://push-gplugin.jx3box.com/",
     "__pay": "https://pay.jx3box.com/",
     "__team": "https://team.jx3box.com/",
     "__lua": "https://lua.jx3box.com/",
