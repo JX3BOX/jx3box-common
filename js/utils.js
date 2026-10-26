@@ -226,7 +226,20 @@ export function authorLink(uid) {
 }
 
 export function tvLink(tv_type, tv_id) {
-    return tvmap[tv_type] + tv_id;
+    const value = String(tv_id == null ? "" : tv_id).trim();
+    if (!value || !Object.prototype.hasOwnProperty.call(tvmap, tv_type)) return "";
+    // 分享链接原样使用，仅允许可访问的 HTTP(S) 地址。
+    if (/^https?:\/\//i.test(value)) {
+        try {
+            const url = new URL(value);
+            return url.hostname && !url.username && !url.password ? url.href : "";
+        } catch (e) {
+            return "";
+        }
+    }
+    const prefix = tvmap[tv_type];
+    // 视频号、小红书及其他平台没有通用的房间号链接规则。
+    return prefix && /^[a-zA-Z0-9_-]+$/.test(value) ? prefix + value : "";
 }
 
 export function getRewrite(key) {

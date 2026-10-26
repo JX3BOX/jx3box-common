@@ -82,5 +82,9 @@ authorLink(id)
 ### tvLink 直播间地址
 ```javascript
 tvLink(type,id)
-// => https://www.$type.com/_room_path/$id
+// 支持 douyu、bilibili、huya、douyin、kuaishou 的房间号或完整 HTTP(S) 链接。
+// weixin（视频号）、xiaohongshu、other 只接受完整链接。
+// 无效输入返回空字符串。
+tvLink("douyin", "123") // https://live.douyin.com/123
+tvLink("other", "https://example.com/live") // https://example.com/live
 ```
